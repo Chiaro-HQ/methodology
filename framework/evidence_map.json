@@ -1,0 +1,369 @@
+{
+  "identity_provider": {
+    "name": "Identity Provider (Okta / Azure AD / Google Workspace)",
+    "what_to_provide": "Admin console: configured apps with SSO, MFA enforcement policy, user/group config, role assignments, recently deactivated users, service account list",
+    "controls_covered": [
+      "IAM-01",
+      "IAM-02",
+      "IAM-03",
+      "IAM-04",
+      "IAM-05",
+      "IAM-06",
+      "IAM-07",
+      "IAM-09"
+    ],
+    "objectives_covered": [
+      "OBJ-6.1.1",
+      "OBJ-6.1.2",
+      "OBJ-6.2.1",
+      "OBJ-6.2.2",
+      "OBJ-6.2.3",
+      "OBJ-6.3.1",
+      "OBJ-6.3.2",
+      "OBJ-6.6.2"
+    ],
+    "notes": "Highest-value evidence source. One well-configured IdP covers 7 controls and 8 objectives."
+  },
+  "hr_system_records": {
+    "name": "HR System / Records",
+    "what_to_provide": "Background check policy + sample records; offboarding checklist with access revocation timestamps; training completion records; performance review template; job descriptions; Code of Conduct acknowledgments; key person analysis; cross-training records",
+    "controls_covered": [
+      "PPL-01",
+      "PPL-02",
+      "PPL-03",
+      "PPL-04",
+      "PPL-05",
+      "GOV-01",
+      "IAM-04",
+      "PPL-06"
+    ],
+    "objectives_covered": [
+      "OBJ-1.4.1",
+      "OBJ-1.4.2",
+      "OBJ-1.4.3",
+      "OBJ-1.4.4",
+      "OBJ-1.4.5",
+      "OBJ-1.5.1",
+      "OBJ-1.5.2",
+      "OBJ-1.1.1",
+      "OBJ-6.2.2"
+    ],
+    "notes": "Covers all of People controls. Offboarding records overlap with IAM-04 (deprovisioning)."
+  },
+  "security_policy_library": {
+    "name": "Security Policy Library",
+    "what_to_provide": "Complete policy library: Access Control, Change Management, Incident Response, Data Protection, Acceptable Use, Vendor Management, Risk Management, Business Continuity. Plus procedures/runbooks. Version history, approval records, ownership matrix.",
+    "controls_covered": [
+      "POL-01",
+      "POL-02",
+      "GOV-01",
+      "RSK-02"
+    ],
+    "objectives_covered": [
+      "OBJ-5.3.1",
+      "OBJ-5.3.2",
+      "OBJ-5.3.3",
+      "OBJ-3.1.1",
+      "OBJ-2.2.1",
+      "OBJ-2.2.3",
+      "OBJ-1.1.1",
+      "OBJ-5.1.1"
+    ],
+    "notes": "Foundational evidence. CC5.3 is implicitly tested for every other control \u2014 if a process lacks a backing policy, that's a gap here."
+  },
+  "risk_assessment_document": {
+    "name": "Risk Assessment Document",
+    "what_to_provide": "Annual risk assessment: threats, vulnerabilities, likelihood/impact, risk responses, vendor risk section, fraud risk section, change impact assessment, risk-to-control mapping",
+    "controls_covered": [
+      "RSK-01",
+      "RSK-02"
+    ],
+    "objectives_covered": [
+      "OBJ-3.2.1",
+      "OBJ-3.2.2",
+      "OBJ-3.3.1",
+      "OBJ-3.4.1",
+      "OBJ-5.1.1",
+      "OBJ-5.1.2",
+      "OBJ-5.2.1"
+    ],
+    "notes": "One document covers 7 objectives across CC3 and CC5. Most impactful single document after policies."
+  },
+  "version_control_git": {
+    "name": "Version Control (Git) + CI/CD Pipeline",
+    "what_to_provide": "Sample PRs: description, code review, CI test results, approval, merge. Pipeline config: automated tests, deployment stages, branch protection rules.",
+    "controls_covered": [
+      "CHG-01",
+      "CHG-02",
+      "CHG-03",
+      "END-02",
+      "CHG-06",
+      "VUL-04",
+      "IAM-11"
+    ],
+    "objectives_covered": [
+      "OBJ-8.1.1",
+      "OBJ-8.1.2",
+      "OBJ-8.1.3",
+      "OBJ-6.8.2"
+    ],
+    "notes": "Git + CI/CD covers all of Change Management. A well-configured pipeline with branch protection is complete evidence for OBJ-8.1.1."
+  },
+  "cloud_provider_console": {
+    "name": "Cloud Provider Console (AWS / GCP / Azure)",
+    "what_to_provide": "VPC/network config; security group rules; encryption settings (RDS, S3, etc.); KMS keys; backup config; auto-scaling; multi-AZ/region setup; IAM policies; CloudTrail/audit log config",
+    "controls_covered": [
+      "NET-01",
+      "NET-02",
+      "DAT-01",
+      "BCP-02",
+      "AVL-01",
+      "MON-01",
+      "NET-04",
+      "MON-03",
+      "BCP-03",
+      "AVL-02"
+    ],
+    "objectives_covered": [
+      "OBJ-6.1.3",
+      "OBJ-6.1.4",
+      "OBJ-6.6.1",
+      "OBJ-6.7.1",
+      "OBJ-9.1.2",
+      "OBJ-A1.1.1",
+      "OBJ-A1.2.1",
+      "OBJ-7.1.3",
+      "OBJ-7.2.1"
+    ],
+    "notes": "Richest infrastructure evidence source. Covers network, encryption, backups, capacity, hardening, and logging."
+  },
+  "vulnerability_scanner": {
+    "name": "Vulnerability Scanner (Qualys / Nessus / etc.)",
+    "what_to_provide": "Recent scan reports; scan schedule; remediation tracking with SLA compliance; scanner coverage",
+    "controls_covered": [
+      "VUL-01",
+      "EVL-01"
+    ],
+    "objectives_covered": [
+      "OBJ-7.1.1",
+      "OBJ-7.1.3",
+      "OBJ-4.1.1",
+      "OBJ-4.1.2"
+    ],
+    "notes": "Scan reports serve dual purpose: vulnerability management and ongoing monitoring evidence."
+  },
+  "penetration_test_report": {
+    "name": "Penetration Test Report",
+    "what_to_provide": "Annual pen test report; remediation status for findings; re-test confirmation for critical/high findings",
+    "controls_covered": [
+      "VUL-02",
+      "EVL-01"
+    ],
+    "objectives_covered": [
+      "OBJ-7.1.2",
+      "OBJ-4.1.2"
+    ],
+    "notes": "Annual pen test: standalone evidence but heavily weighted by buyers. Also serves as 'separate evaluation' for CC4.1."
+  },
+  "siem_log_management": {
+    "name": "SIEM / Log Management (Datadog / Splunk / CloudTrail)",
+    "what_to_provide": "Dashboard showing log sources; sample alert rules; retention config; event triage process; on-call rotation; escalation records",
+    "controls_covered": [
+      "MON-01",
+      "MON-02",
+      "MON-03"
+    ],
+    "objectives_covered": [
+      "OBJ-7.2.1",
+      "OBJ-7.2.2",
+      "OBJ-7.3.1"
+    ],
+    "notes": "Covers all of CC7.2-7.3 (monitoring and event evaluation)."
+  },
+  "endpoint_management": {
+    "name": "Endpoint Management (MDM / EDR)",
+    "what_to_provide": "MDM dashboard: enrolled devices, compliance status, enforced policies (encryption, screen lock, updates). EDR: deployment coverage, threat detection records.",
+    "controls_covered": [
+      "END-01",
+      "END-02"
+    ],
+    "objectives_covered": [
+      "OBJ-6.1.5",
+      "OBJ-6.8.1",
+      "OBJ-6.8.2"
+    ],
+    "notes": "MDM/EDR dashboard is definitive evidence for endpoint security (CC6.1 partial, CC6.8)."
+  },
+  "incident_records": {
+    "name": "Incident Records",
+    "what_to_provide": "IR Plan document; IR team roster; tabletop exercise notes; incident tickets/reports (if any); post-mortems; control improvements post-incident",
+    "controls_covered": [
+      "INC-01",
+      "INC-02",
+      "INC-03",
+      "INC-04"
+    ],
+    "objectives_covered": [
+      "OBJ-7.4.1",
+      "OBJ-7.4.2",
+      "OBJ-7.4.3",
+      "OBJ-7.5.1"
+    ],
+    "notes": "If no incidents during period: IR plan + tabletop + roster are the evidence. If incidents occurred: include full documentation."
+  },
+  "vendor_documentation": {
+    "name": "Vendor Documentation",
+    "what_to_provide": "Vendor inventory with risk tiers; assessment questionnaires; contracts with security clauses; subservice org SOC 2 reports; CSOC documentation",
+    "controls_covered": [
+      "VND-01",
+      "VND-02",
+      "VND-04",
+      "AI-01"
+    ],
+    "objectives_covered": [
+      "OBJ-9.2.1",
+      "OBJ-9.2.2"
+    ],
+    "notes": "Subservice org SOC 2 reports (AWS, cloud providers) are the most critical items. Don't forget CSOC documentation."
+  },
+  "bcp_drp_backup_tests": {
+    "name": "BCP/DRP + Backup Tests",
+    "what_to_provide": "BCP/DRP document; RTO/RPO definitions; DR test results; backup restoration test results; backup monitoring dashboard; multi-region architecture evidence",
+    "controls_covered": [
+      "BCP-01",
+      "BCP-02",
+      "BCP-03"
+    ],
+    "objectives_covered": [
+      "OBJ-9.1.1",
+      "OBJ-9.1.2",
+      "OBJ-A1.2.1",
+      "OBJ-A1.3.1"
+    ],
+    "notes": "Covers CC9.1 and A1.2-A1.3 simultaneously. Key: TESTING evidence, not just the plan document."
+  },
+  "governance_org_documentation": {
+    "name": "Governance & Org Documentation",
+    "what_to_provide": "Org chart; leadership/board meeting minutes; security program review notes; governance charter; SoD analysis; RACI matrix",
+    "controls_covered": [
+      "GOV-02",
+      "GOV-03",
+      "GOV-04"
+    ],
+    "objectives_covered": [
+      "OBJ-1.2.1",
+      "OBJ-1.2.2",
+      "OBJ-1.3.1",
+      "OBJ-1.3.2"
+    ],
+    "notes": "Often simple to produce but frequently missing for startups. Meeting minutes are critical for CC1.2."
+  },
+  "customer_facing_documentation": {
+    "name": "Customer-Facing Documentation",
+    "what_to_provide": "Terms of service; SLAs; privacy policy; trust/security page; CUEC documentation; security@ contact; responsible disclosure policy; status page",
+    "controls_covered": [
+      "COM-01",
+      "COM-02",
+      "VND-04"
+    ],
+    "objectives_covered": [
+      "OBJ-2.3.1",
+      "OBJ-2.3.2",
+      "OBJ-2.3.3"
+    ],
+    "notes": "Usually already published online. Quick to collect and verify."
+  },
+  "deficiency_issue_tracking": {
+    "name": "Deficiency & Issue Tracking",
+    "what_to_provide": "Issue tracker: identified deficiencies, severity classification, assignments, remediation status, resolution dates, SLA compliance; management/board reporting on significant deficiencies",
+    "controls_covered": [
+      "EVL-01",
+      "EVL-02"
+    ],
+    "objectives_covered": [
+      "OBJ-4.1.1",
+      "OBJ-4.2.1",
+      "OBJ-4.2.2"
+    ],
+    "notes": "Can be a spreadsheet or Jira/Linear. Key: showing the identify-assign-track-resolve-report cycle."
+  },
+  "asset_data_management": {
+    "name": "Asset Inventory & Data Classification",
+    "what_to_provide": "Asset inventory: hardware, software, cloud services, data assets with owners. Data classification scheme with handling requirements. Data flow diagrams.",
+    "controls_covered": [
+      "AST-01",
+      "AST-02",
+      "DAT-02",
+      "DAT-03"
+    ],
+    "objectives_covered": [
+      "OBJ-2.1.1",
+      "OBJ-2.1.2",
+      "OBJ-6.5.1"
+    ],
+    "notes": "Asset inventory + data classification are foundational for CC2.1. Data disposal and retention are often documented in the data retention policy."
+  },
+  "secure_development_lifecycle": {
+    "name": "Secure Development Lifecycle (SDLC)",
+    "what_to_provide": "SDLC policy or documented process; code scanning (SAST/DAST) configs and results; dependency scanning (Dependabot, Snyk); security architecture reviews for significant changes.",
+    "controls_covered": [
+      "CHG-04",
+      "CHG-05"
+    ],
+    "objectives_covered": [
+      "OBJ-8.1.1"
+    ],
+    "notes": "CHG-04 (secure development) and CHG-05 (security architecture review) cover the security-specific aspects of change management."
+  },
+  "service_account_management": {
+    "name": "Service Account & API Key Inventory",
+    "what_to_provide": "Service account inventory: name, purpose, owner, permissions, creation date, last rotation date. API key inventory. Rotation compliance status.",
+    "controls_covered": [
+      "IAM-08"
+    ],
+    "objectives_covered": [
+      "OBJ-6.1.1",
+      "OBJ-6.3.1"
+    ],
+    "notes": "Often discovered during access reviews. Key finding: unrotated keys, overprivileged service accounts."
+  },
+  "privacy_documentation": {
+    "name": "Privacy Documentation (ROPA, DPAs, Consent)",
+    "what_to_provide": "Privacy policy, ROPA (record of processing activities), DPAs with processors, consent mechanisms, DSAR process, breach notification procedures, data subject rights implementation.",
+    "controls_covered": [
+      "PRI-01",
+      "PRI-02",
+      "PRI-03",
+      "PRI-04",
+      "PRI-05",
+      "PRI-06",
+      "PRI-07",
+      "PRI-08",
+      "PRI-09",
+      "PRI-10"
+    ],
+    "objectives_covered": [],
+    "notes": "Only applicable when Privacy TSC is in scope. All 10 privacy controls are covered by the combined privacy documentation package."
+  },
+  "physical_security": {
+    "name": "Physical Security (Offices / Data Centers)",
+    "what_to_provide": "Physical access controls: badge system logs, visitor logs, restricted area identification, termination physical access removal evidence.",
+    "controls_covered": [
+      "NET-03"
+    ],
+    "objectives_covered": [
+      "OBJ-6.4.1"
+    ],
+    "notes": "Usually N/A for cloud-only remote companies. For WeWork/shared offices, document the CSOC relationship."
+  },
+  "llm_provider_console": {
+    "name": "AI Model Provider Console (OpenAI / Anthropic / etc.)",
+    "what_to_provide": "Org-level data-controls settings showing training and retention posture, executed agreements or DPAs per provider, the provider inventory, and where prompts/outputs are logged.",
+    "controls_covered": [
+      "AI-01",
+      "AI-02",
+      "AI-03",
+      "AI-04"
+    ]
+  }
+}

@@ -1,0 +1,2714 @@
+{
+  "stack_slices": [
+    {
+      "slice_id": 1,
+      "name": "Infrastructure",
+      "question": "Where does your product run? Cloud provider, where customer data is stored?",
+      "listen_for": "Cloud platform, database, storage, edge hosting",
+      "example_systems": [
+        "AWS",
+        "GCP",
+        "Azure",
+        "Vercel",
+        "Fly",
+        "Railway",
+        "Render",
+        "Supabase",
+        "RDS",
+        "Mongo Atlas",
+        "Neon",
+        "PlanetScale"
+      ]
+    },
+    {
+      "slice_id": 2,
+      "name": "Identity and access",
+      "question": "How do your engineers log in to production? Okta, Entra, Google Workspace?",
+      "listen_for": "Identity provider, SSO, password manager, federation",
+      "example_systems": [
+        "Okta",
+        "Entra ID",
+        "Auth0",
+        "Google Workspace",
+        "AWS IAM",
+        "1Password",
+        "Clerk"
+      ]
+    },
+    {
+      "slice_id": 3,
+      "name": "Development and deployment",
+      "question": "How does code get from a laptop to production? Version control, CI/CD?",
+      "listen_for": "Source control, code review, pipelines, deploys",
+      "example_systems": [
+        "GitHub",
+        "GitLab",
+        "Bitbucket",
+        "GitHub Actions",
+        "CircleCI",
+        "Vercel deploys",
+        "Railway deploys"
+      ]
+    },
+    {
+      "slice_id": 4,
+      "name": "Endpoints",
+      "question": "What laptops do your engineers use? Any MDM or endpoint security tool?",
+      "listen_for": "Workforce devices, MDM, EDR, FDE",
+      "example_systems": [
+        "MacBooks",
+        "Jamf",
+        "Kandji",
+        "Intune",
+        "Mosyle",
+        "CrowdStrike",
+        "SentinelOne",
+        "Microsoft Defender"
+      ]
+    },
+    {
+      "slice_id": 5,
+      "name": "Observability",
+      "question": "How do you know when something breaks? Monitoring, logging, alerting, on-call?",
+      "listen_for": "Monitoring, logs, alerting, on-call rotation",
+      "example_systems": [
+        "Datadog",
+        "Sentry",
+        "Grafana",
+        "CloudWatch",
+        "New Relic",
+        "PagerDuty",
+        "Opsgenie"
+      ]
+    },
+    {
+      "slice_id": 6,
+      "name": "Third-party data processors",
+      "question": "What external services touch customer data? Payments, comms, analytics, AI, support?",
+      "listen_for": "Payments, email/SMS, analytics, AI inference, customer support",
+      "example_systems": [
+        "Stripe",
+        "Twilio",
+        "SendGrid",
+        "Resend",
+        "OpenAI",
+        "Anthropic",
+        "Mixpanel",
+        "Segment",
+        "Intercom",
+        "Zendesk"
+      ]
+    },
+    {
+      "slice_id": 7,
+      "name": "Customer-facing",
+      "question": "How do customers interact with your product and reach support?",
+      "listen_for": "The product itself, status page, support tools, customer comms",
+      "example_systems": [
+        "The app",
+        "statuspage.io",
+        "Intercom",
+        "Help Scout",
+        "Linear"
+      ]
+    },
+    {
+      "slice_id": 8,
+      "name": "Other",
+      "question": "Backup tools, secrets managers, HR systems, internal wiki, anything I haven't asked about?",
+      "listen_for": "Backups, secrets, HR, finance, internal docs, team chat",
+      "example_systems": [
+        "AWS Backup",
+        "HashiCorp Vault",
+        "HiBob",
+        "Rippling",
+        "Notion",
+        "Slack",
+        "Microsoft Teams"
+      ]
+    }
+  ],
+  "classification_rules": {
+    "cloud_platform_production": {
+      "system_type": "cloud_platform_production",
+      "common_vendors": [
+        "AWS",
+        "GCP",
+        "Azure",
+        "Vercel",
+        "Fly",
+        "Railway",
+        "Render"
+      ],
+      "tests": {
+        "customer_data_flow": "Y",
+        "commitment_risk": "Y",
+        "control_enforcer": "N"
+      },
+      "default_classification": "infrastructure_dependency",
+      "reasoning_template": "{name} hosts your production environment. Your service depends on their availability. We'll rely on their SOC 2 report and test how you configure their service."
+    },
+    "managed_database": {
+      "system_type": "managed_database",
+      "common_vendors": [
+        "Supabase",
+        "Neon",
+        "RDS",
+        "Aurora",
+        "Mongo Atlas",
+        "PlanetScale",
+        "CockroachDB",
+        "Firestore"
+      ],
+      "tests": {
+        "customer_data_flow": "Y",
+        "commitment_risk": "Y",
+        "control_enforcer": "P"
+      },
+      "default_classification": "infrastructure_dependency",
+      "reasoning_template": "{name} stores your customer data. We'll rely on their SOC 2 for storage and encryption controls, and test how you configure access and retention."
+    },
+    "ai_inference": {
+      "system_type": "ai_inference",
+      "common_vendors": [
+        "OpenAI",
+        "Anthropic",
+        "Together",
+        "Mistral",
+        "Cohere",
+        "Replicate",
+        "AWS Bedrock",
+        "Google Vertex AI"
+      ],
+      "tests": {
+        "customer_data_flow": "Y",
+        "commitment_risk": "Y",
+        "control_enforcer": "N"
+      },
+      "default_classification": "infrastructure_dependency",
+      "reasoning_template": "{name} processes inference requests (which often contain customer data). We'll rely on their SOC 2 or equivalent attestation, and review your DPA."
+    },
+    "payment_processor": {
+      "system_type": "payment_processor",
+      "common_vendors": [
+        "Stripe",
+        "Square",
+        "Paddle",
+        "Adyen",
+        "Braintree"
+      ],
+      "tests": {
+        "customer_data_flow": "Y",
+        "commitment_risk": "Y",
+        "control_enforcer": "N"
+      },
+      "default_classification": "infrastructure_dependency",
+      "reasoning_template": "{name} handles payment data on your behalf. We'll rely on their SOC 2 and PCI-DSS attestation."
+    },
+    "email_service": {
+      "system_type": "email_service",
+      "common_vendors": [
+        "SendGrid",
+        "Resend",
+        "Postmark",
+        "Mailgun",
+        "AWS SES"
+      ],
+      "tests": {
+        "customer_data_flow": "Y",
+        "commitment_risk": "P",
+        "control_enforcer": "N"
+      },
+      "default_classification": "infrastructure_dependency",
+      "reasoning_template": "{name} delivers your transactional email. We'll rely on their SOC 2."
+    },
+    "sms_voice": {
+      "system_type": "sms_voice",
+      "common_vendors": [
+        "Twilio",
+        "MessageBird",
+        "Vonage",
+        "Plivo"
+      ],
+      "tests": {
+        "customer_data_flow": "Y",
+        "commitment_risk": "P",
+        "control_enforcer": "N"
+      },
+      "default_classification": "infrastructure_dependency",
+      "reasoning_template": "{name} delivers SMS or voice for your product. We'll rely on their SOC 2."
+    },
+    "analytics": {
+      "system_type": "analytics",
+      "common_vendors": [
+        "Mixpanel",
+        "Segment",
+        "Amplitude",
+        "Heap",
+        "PostHog (cloud)"
+      ],
+      "tests": {
+        "customer_data_flow": "Y",
+        "commitment_risk": "N",
+        "control_enforcer": "N"
+      },
+      "default_classification": "infrastructure_dependency",
+      "reasoning_template": "{name} processes user analytics. We'll rely on their SOC 2 and verify your DPA covers their use."
+    },
+    "customer_support_tool": {
+      "system_type": "customer_support_tool",
+      "common_vendors": [
+        "Intercom",
+        "Zendesk",
+        "Help Scout",
+        "Front",
+        "Crisp"
+      ],
+      "tests": {
+        "customer_data_flow": "Y",
+        "commitment_risk": "N",
+        "control_enforcer": "N"
+      },
+      "default_classification": "infrastructure_dependency",
+      "reasoning_template": "{name} stores customer conversations. We'll rely on their SOC 2."
+    },
+    "dns": {
+      "system_type": "dns",
+      "common_vendors": [
+        "Cloudflare",
+        "Route 53",
+        "GoDaddy DNS",
+        "Google Cloud DNS"
+      ],
+      "tests": {
+        "customer_data_flow": "N",
+        "commitment_risk": "Y",
+        "control_enforcer": "N"
+      },
+      "default_classification": "infrastructure_dependency",
+      "reasoning_template": "{name} routes traffic to your service. We'll rely on their uptime guarantees and SOC 2 / ISO."
+    },
+    "cdn_waf": {
+      "system_type": "cdn_waf",
+      "common_vendors": [
+        "Cloudflare",
+        "Fastly",
+        "AWS CloudFront",
+        "Imperva"
+      ],
+      "tests": {
+        "customer_data_flow": "N",
+        "commitment_risk": "Y",
+        "control_enforcer": "P"
+      },
+      "default_classification": "infrastructure_dependency",
+      "reasoning_template": "{name} sits in front of your application. We'll rely on their SOC 2 for the platform, and test how you configure WAF rules."
+    },
+    "identity_provider": {
+      "system_type": "identity_provider",
+      "common_vendors": [
+        "Okta",
+        "Entra ID",
+        "Auth0",
+        "Google Workspace",
+        "AWS IAM",
+        "Clerk"
+      ],
+      "tests": {
+        "customer_data_flow": "P",
+        "commitment_risk": "Y",
+        "control_enforcer": "Y"
+      },
+      "default_classification": "in_scope_tool",
+      "reasoning_template": "{name} is where you control who can access your systems. We'll test how you configure access policies, MFA, and provisioning."
+    },
+    "code_repository": {
+      "system_type": "code_repository",
+      "common_vendors": [
+        "GitHub",
+        "GitLab",
+        "Bitbucket"
+      ],
+      "tests": {
+        "customer_data_flow": "N",
+        "commitment_risk": "Y",
+        "control_enforcer": "Y"
+      },
+      "default_classification": "in_scope_tool",
+      "reasoning_template": "{name} holds your code and gates production deploys. We'll test branch protection, code review, secret scanning."
+    },
+    "ci_cd_pipeline": {
+      "system_type": "ci_cd_pipeline",
+      "common_vendors": [
+        "GitHub Actions",
+        "CircleCI",
+        "Buildkite",
+        "Jenkins",
+        "Vercel deploys",
+        "Railway deploys"
+      ],
+      "tests": {
+        "customer_data_flow": "N",
+        "commitment_risk": "Y",
+        "control_enforcer": "Y"
+      },
+      "default_classification": "in_scope_tool",
+      "reasoning_template": "{name} ships code to production. We'll test how changes flow through it and how secrets are protected."
+    },
+    "monitoring_logging": {
+      "system_type": "monitoring_logging",
+      "common_vendors": [
+        "Datadog",
+        "Sentry",
+        "Grafana",
+        "CloudWatch",
+        "New Relic",
+        "Splunk",
+        "Logz.io"
+      ],
+      "tests": {
+        "customer_data_flow": "P",
+        "commitment_risk": "N",
+        "control_enforcer": "P"
+      },
+      "default_classification": "in_scope_tool",
+      "reasoning_template": "{name} watches your production environment. We'll test how alerts route and how long logs are retained."
+    },
+    "oncall_alerting": {
+      "system_type": "oncall_alerting",
+      "common_vendors": [
+        "PagerDuty",
+        "Opsgenie",
+        "Splunk On-Call",
+        "FireHydrant",
+        "incident.io"
+      ],
+      "tests": {
+        "customer_data_flow": "N",
+        "commitment_risk": "Y",
+        "control_enforcer": "P"
+      },
+      "default_classification": "in_scope_tool",
+      "reasoning_template": "{name} pages your on-call. We'll test alert routing and rotation."
+    },
+    "endpoint_mdm": {
+      "system_type": "endpoint_mdm",
+      "common_vendors": [
+        "Jamf",
+        "Kandji",
+        "Intune",
+        "Mosyle",
+        "Hexnode"
+      ],
+      "tests": {
+        "customer_data_flow": "N",
+        "commitment_risk": "N",
+        "control_enforcer": "Y"
+      },
+      "default_classification": "in_scope_tool",
+      "reasoning_template": "{name} manages your workforce laptops. We'll test device compliance for anyone with production access."
+    },
+    "endpoint_edr": {
+      "system_type": "endpoint_edr",
+      "common_vendors": [
+        "CrowdStrike",
+        "SentinelOne",
+        "Microsoft Defender for Endpoint",
+        "Sophos"
+      ],
+      "tests": {
+        "customer_data_flow": "N",
+        "commitment_risk": "N",
+        "control_enforcer": "Y"
+      },
+      "default_classification": "in_scope_tool",
+      "reasoning_template": "{name} protects your workforce devices. We'll test deployment coverage and alert handling."
+    },
+    "secrets_manager_workforce": {
+      "system_type": "secrets_manager_workforce",
+      "common_vendors": [
+        "1Password",
+        "Bitwarden",
+        "LastPass (Teams)"
+      ],
+      "tests": {
+        "customer_data_flow": "P",
+        "commitment_risk": "Y",
+        "control_enforcer": "Y"
+      },
+      "default_classification": "in_scope_tool",
+      "reasoning_template": "{name} stores workforce credentials. We'll test access policies and admin controls."
+    },
+    "secrets_manager_infra": {
+      "system_type": "secrets_manager_infra",
+      "common_vendors": [
+        "HashiCorp Vault",
+        "AWS Secrets Manager",
+        "Doppler",
+        "Infisical",
+        "GCP Secret Manager"
+      ],
+      "tests": {
+        "customer_data_flow": "P",
+        "commitment_risk": "Y",
+        "control_enforcer": "Y"
+      },
+      "default_classification": "in_scope_tool",
+      "reasoning_template": "{name} stores infrastructure credentials. We'll test rotation, access policies, and auditability."
+    },
+    "backup_service": {
+      "system_type": "backup_service",
+      "common_vendors": [
+        "AWS Backup",
+        "Veeam",
+        "Druva",
+        "Rubrik",
+        "native database backups"
+      ],
+      "tests": {
+        "customer_data_flow": "Y",
+        "commitment_risk": "Y",
+        "control_enforcer": "Y"
+      },
+      "default_classification": "in_scope_tool",
+      "reasoning_template": "{name} backs up your customer data. We'll test backup completeness, retention, and restore testing."
+    },
+    "hr_system": {
+      "system_type": "hr_system",
+      "common_vendors": [
+        "HiBob",
+        "Rippling",
+        "Gusto",
+        "BambooHR",
+        "Justworks",
+        "Deel",
+        "Sequoia"
+      ],
+      "tests": {
+        "customer_data_flow": "Y",
+        "commitment_risk": "N",
+        "control_enforcer": "Y"
+      },
+      "default_classification": "in_scope_tool",
+      "reasoning_template": "{name} drives employee onboarding and offboarding. We'll test how access provisioning ties to it."
+    },
+    "vulnerability_scanner": {
+      "system_type": "vulnerability_scanner",
+      "common_vendors": [
+        "Snyk",
+        "Dependabot",
+        "Wiz",
+        "Qualys",
+        "Tenable",
+        "Aikido",
+        "Semgrep",
+        "GitGuardian"
+      ],
+      "tests": {
+        "customer_data_flow": "N",
+        "commitment_risk": "N",
+        "control_enforcer": "Y"
+      },
+      "default_classification": "in_scope_tool",
+      "reasoning_template": "{name} finds vulnerabilities. We'll test scan coverage and remediation tracking."
+    },
+    "project_management": {
+      "system_type": "project_management",
+      "common_vendors": [
+        "Linear",
+        "Jira",
+        "Asana",
+        "Trello",
+        "ClickUp"
+      ],
+      "tests": {
+        "customer_data_flow": "N",
+        "commitment_risk": "N",
+        "control_enforcer": "N"
+      },
+      "default_classification": "vendor",
+      "reasoning_template": "{name} is internal team coordination. Not in audit scope unless you store customer data here."
+    },
+    "internal_wiki": {
+      "system_type": "internal_wiki",
+      "common_vendors": [
+        "Notion",
+        "Confluence",
+        "Slab",
+        "Slite"
+      ],
+      "tests": {
+        "customer_data_flow": "N",
+        "commitment_risk": "N",
+        "control_enforcer": "N"
+      },
+      "default_classification": "vendor",
+      "reasoning_template": "{name} is internal documentation. We may pull policy docs as evidence, but the tool itself isn't audited. Note: becomes in scope if you store customer data here."
+    },
+    "team_chat": {
+      "system_type": "team_chat",
+      "common_vendors": [
+        "Slack",
+        "Microsoft Teams",
+        "Discord",
+        "Mattermost"
+      ],
+      "tests": {
+        "customer_data_flow": "P",
+        "commitment_risk": "N",
+        "control_enforcer": "N"
+      },
+      "default_classification": "vendor",
+      "reasoning_template": "{name} is internal communication. We may pull incident response or change records as evidence. The tool itself isn't audited."
+    },
+    "finance_accounting": {
+      "system_type": "finance_accounting",
+      "common_vendors": [
+        "QuickBooks",
+        "Xero",
+        "Brex",
+        "Ramp",
+        "NetSuite"
+      ],
+      "tests": {
+        "customer_data_flow": "N",
+        "commitment_risk": "N",
+        "control_enforcer": "N"
+      },
+      "default_classification": "vendor",
+      "reasoning_template": "{name} is financial accounting. Not in SOC 2 scope unless it touches customer data."
+    },
+    "office_productivity": {
+      "system_type": "office_productivity",
+      "common_vendors": [
+        "Microsoft 365",
+        "Google Workspace (productivity side)",
+        "Dropbox Business"
+      ],
+      "tests": {
+        "customer_data_flow": "N",
+        "commitment_risk": "N",
+        "control_enforcer": "N"
+      },
+      "default_classification": "vendor",
+      "reasoning_template": "{name} is a productivity bundle (email, docs, file storage). Not in SOC 2 scope on its own. The in-scope pieces (Entra ID for production SSO, Intune for MDM, SharePoint if customer data lives there) are classified separately as their own systems. If the client confirms one of those is used for production, add it as a separate system."
+    },
+    "subprocessor_data_warehouse": {
+      "system_type": "subprocessor_data_warehouse",
+      "common_vendors": [
+        "Snowflake",
+        "BigQuery",
+        "Databricks",
+        "Redshift"
+      ],
+      "tests": {
+        "customer_data_flow": "Y",
+        "commitment_risk": "Y",
+        "control_enforcer": "P"
+      },
+      "default_classification": "infrastructure_dependency",
+      "reasoning_template": "{name} stores your data warehouse including customer data. We'll rely on their SOC 2 and test how you configure access."
+    },
+    "gpu_compute": {
+      "system_type": "gpu_compute",
+      "common_vendors": [
+        "Modal",
+        "RunPod",
+        "Lambda Labs",
+        "Coreweave",
+        "Replicate"
+      ],
+      "tests": {
+        "customer_data_flow": "Y",
+        "commitment_risk": "Y",
+        "control_enforcer": "N"
+      },
+      "default_classification": "infrastructure_dependency",
+      "reasoning_template": "{name} runs your AI workloads on managed GPU infrastructure. Customer inputs hit their machines. We'll rely on their SOC 2."
+    },
+    "vector_database": {
+      "system_type": "vector_database",
+      "common_vendors": [
+        "Pinecone",
+        "Weaviate",
+        "Qdrant",
+        "Chroma Cloud",
+        "Turbopuffer"
+      ],
+      "tests": {
+        "customer_data_flow": "Y",
+        "commitment_risk": "Y",
+        "control_enforcer": "P"
+      },
+      "default_classification": "infrastructure_dependency",
+      "reasoning_template": "{name} stores your embeddings, which often encode customer data. We'll rely on their SOC 2 and test how you configure access."
+    },
+    "llm_observability": {
+      "system_type": "llm_observability",
+      "common_vendors": [
+        "LangSmith",
+        "Helicone",
+        "Langfuse",
+        "Braintrust",
+        "Phoenix",
+        "Promptlayer"
+      ],
+      "tests": {
+        "customer_data_flow": "Y",
+        "commitment_risk": "N",
+        "control_enforcer": "N"
+      },
+      "default_classification": "infrastructure_dependency",
+      "reasoning_template": "{name} ingests your LLM prompt and response traces, which routinely contain customer data. We'll rely on their SOC 2 and review your DPA."
+    },
+    "ai_eval_platform": {
+      "system_type": "ai_eval_platform",
+      "common_vendors": [
+        "Braintrust (eval)",
+        "Promptfoo (cloud)",
+        "LangSmith Evals"
+      ],
+      "tests": {
+        "customer_data_flow": "Y",
+        "commitment_risk": "N",
+        "control_enforcer": "N"
+      },
+      "default_classification": "infrastructure_dependency",
+      "reasoning_template": "{name} runs evaluations on your model outputs, often against production data. We'll rely on their SOC 2."
+    },
+    "realtime_data_layer": {
+      "system_type": "realtime_data_layer",
+      "common_vendors": [
+        "Upstash",
+        "Convex",
+        "Liveblocks",
+        "Ably",
+        "Pusher"
+      ],
+      "tests": {
+        "customer_data_flow": "Y",
+        "commitment_risk": "Y",
+        "control_enforcer": "P"
+      },
+      "default_classification": "infrastructure_dependency",
+      "reasoning_template": "{name} is part of your live data path. Customer data flows through it. We'll rely on their SOC 2."
+    },
+    "booking_scheduling": {
+      "system_type": "booking_scheduling",
+      "common_vendors": [
+        "Cal.com (cloud)",
+        "Calendly",
+        "SavvyCal"
+      ],
+      "tests": {
+        "customer_data_flow": "P",
+        "commitment_risk": "N",
+        "control_enforcer": "N"
+      },
+      "default_classification": "vendor",
+      "reasoning_template": "{name} schedules meetings. Usually not in scope unless it stores customer-identifying info you committed to protect."
+    },
+    "crm": {
+      "system_type": "crm",
+      "common_vendors": [
+        "HubSpot",
+        "Salesforce",
+        "Attio",
+        "Pipedrive",
+        "Close"
+      ],
+      "tests": {
+        "customer_data_flow": "N",
+        "commitment_risk": "N",
+        "control_enforcer": "N"
+      },
+      "default_classification": "vendor",
+      "reasoning_template": "{name} is a sales/CRM tool holding prospect and business-contact data, not your product's customer data. Out of SOC 2 scope on its own. If product or support data syncs into {name} (in-app events, support history, customer records), tell us, since that changes its role."
+    },
+    "builder_tool": {
+      "system_type": "builder_tool",
+      "common_vendors": [
+        "Cursor",
+        "GitHub Copilot",
+        "Claude Code",
+        "Bolt.new",
+        "v0"
+      ],
+      "tests": {
+        "customer_data_flow": "N",
+        "commitment_risk": "N",
+        "control_enforcer": "N"
+      },
+      "default_classification": "vendor",
+      "reasoning_template": "{name} is an AI coding/builder tool your team develops with. Not a SOC 2 system on its own. How code reaches production (repository, review, CI/CD) is covered under change management. Reclassify if engineers run it against customer data or production assets live in it."
+    },
+    "corporate_email": {
+      "system_type": "corporate_email",
+      "common_vendors": [
+        "Outlook",
+        "Gmail"
+      ],
+      "tests": {
+        "customer_data_flow": "N",
+        "commitment_risk": "N",
+        "control_enforcer": "N"
+      },
+      "default_classification": "vendor",
+      "reasoning_template": "{name} is your team's email client. The bundle it belongs to (Microsoft 365, Google Workspace) stays a vendor; the in-scope pieces (SSO, device management, storage holding customer data) are separate systems."
+    }
+  },
+  "subservice_verification": {
+    "cloud_platform_production": [
+      {
+        "question_number": 1,
+        "question": "Does customer data live on this provider's infrastructure?",
+        "yes_implies": "Subservice org confirmed.",
+        "no_implies": "Re-classify \u2014 may be a regular vendor.",
+        "required_evidence": "\u2014"
+      },
+      {
+        "question_number": 2,
+        "question": "If this provider had a multi-hour outage, would your service go down?",
+        "yes_implies": "Commitment risk confirmed.",
+        "no_implies": "Re-evaluate criticality.",
+        "required_evidence": "\u2014"
+      },
+      {
+        "question_number": 3,
+        "question": "Do you have their current SOC 2 report (Type 2 if available)?",
+        "yes_implies": "Soft prompt: ask the client to upload it under 05-subservice-evidence/.",
+        "no_implies": "Noted as a finding (CUEC gap). Not blocking.",
+        "required_evidence": "SOC 2 report PDF"
+      },
+      {
+        "question_number": 4,
+        "question": "Carve out (rely on their SOC 2) or inclusive (audit them yourself)?",
+        "yes_implies": "Default: carve out. Inclusive is rare.",
+        "no_implies": "\u2014",
+        "required_evidence": "Document the decision."
+      }
+    ],
+    "managed_database": [
+      {
+        "question_number": 1,
+        "question": "Does customer data live in this database service?",
+        "yes_implies": "Subservice org confirmed.",
+        "no_implies": "Re-classify.",
+        "required_evidence": "\u2014"
+      },
+      {
+        "question_number": 2,
+        "question": "If the database service had an outage, would customers be impacted?",
+        "yes_implies": "Commitment risk confirmed.",
+        "no_implies": "Re-evaluate.",
+        "required_evidence": "\u2014"
+      },
+      {
+        "question_number": 3,
+        "question": "Do you have the vendor's SOC 2 report on file?",
+        "yes_implies": "Soft prompt: ask for upload.",
+        "no_implies": "Noted as finding.",
+        "required_evidence": "SOC 2 report PDF"
+      },
+      {
+        "question_number": 4,
+        "question": "Are you using their managed encryption keys, or customer-managed keys?",
+        "yes_implies": "Document the key arrangement; affects what we test on your side.",
+        "no_implies": "\u2014",
+        "required_evidence": "Key management policy"
+      }
+    ],
+    "ai_inference": [
+      {
+        "question_number": 1,
+        "question": "Do your prompts to this provider include customer data?",
+        "yes_implies": "Subservice org confirmed; DPA matters.",
+        "no_implies": "Might still be SSO if their outage breaks your product.",
+        "required_evidence": "\u2014"
+      },
+      {
+        "question_number": 2,
+        "question": "If their API was unavailable for hours, would your product still meet commitments?",
+        "yes_implies": "Commitment risk confirmed.",
+        "no_implies": "Tolerable outage \u2014 note resilience.",
+        "required_evidence": "\u2014"
+      },
+      {
+        "question_number": 3,
+        "question": "SOC 2 / ISO / equivalent attestation on file?",
+        "yes_implies": "Soft prompt: ask for upload.",
+        "no_implies": "Noted as finding.",
+        "required_evidence": "SOC 2 or ISO 27001"
+      },
+      {
+        "question_number": 4,
+        "question": "Do you have a Data Processing Agreement (DPA) with them?",
+        "yes_implies": "Upload the DPA.",
+        "no_implies": "Recommend executing one before report issuance.",
+        "required_evidence": "DPA / DPF copy"
+      }
+    ],
+    "payment_processor": [
+      {
+        "question_number": 1,
+        "question": "Do you ever store card numbers, CVV, or full PAN anywhere on your side?",
+        "yes_implies": "PCI scope expands significantly \u2014 flag for separate scoping.",
+        "no_implies": "Good \u2014 fully outsourced PCI.",
+        "required_evidence": "\u2014"
+      },
+      {
+        "question_number": 2,
+        "question": "If their service was down, would you be unable to fulfill commitments?",
+        "yes_implies": "Commitment risk confirmed.",
+        "no_implies": "Evaluate alternative.",
+        "required_evidence": "\u2014"
+      },
+      {
+        "question_number": 3,
+        "question": "SOC 2 + PCI-DSS AOC on file?",
+        "yes_implies": "Soft prompt: ask for upload of both.",
+        "no_implies": "Noted as finding.",
+        "required_evidence": "SOC 2 and PCI AOC"
+      },
+      {
+        "question_number": 4,
+        "question": "Carve out, treat as subservice org?",
+        "yes_implies": "Default: carve out.",
+        "no_implies": "\u2014",
+        "required_evidence": "\u2014"
+      }
+    ],
+    "email_service": [
+      {
+        "question_number": 1,
+        "question": "Do you send transactional or marketing emails containing customer data via this provider?",
+        "yes_implies": "Subservice org confirmed.",
+        "no_implies": "Could be a regular vendor.",
+        "required_evidence": "\u2014"
+      },
+      {
+        "question_number": 2,
+        "question": "Would prolonged outage affect your customer commitments?",
+        "yes_implies": "Commitment risk confirmed.",
+        "no_implies": "Note resilience.",
+        "required_evidence": "\u2014"
+      },
+      {
+        "question_number": 3,
+        "question": "SOC 2 on file?",
+        "yes_implies": "Soft prompt: ask for upload.",
+        "no_implies": "Noted as finding.",
+        "required_evidence": "SOC 2 report"
+      },
+      {
+        "question_number": 4,
+        "question": "DPA executed?",
+        "yes_implies": "Upload the DPA.",
+        "no_implies": "Recommend executing one.",
+        "required_evidence": "DPA copy"
+      }
+    ],
+    "analytics": [
+      {
+        "question_number": 1,
+        "question": "Does customer-identifying data flow to this analytics provider?",
+        "yes_implies": "Subservice org confirmed.",
+        "no_implies": "If only anonymous data \u2014 vendor.",
+        "required_evidence": "\u2014"
+      },
+      {
+        "question_number": 2,
+        "question": "Is the analytics provider material to your service delivery?",
+        "yes_implies": "Commitment risk confirmed.",
+        "no_implies": "Likely vendor only.",
+        "required_evidence": "\u2014"
+      },
+      {
+        "question_number": 3,
+        "question": "SOC 2 + DPA on file?",
+        "yes_implies": "Soft prompt: ask for both.",
+        "no_implies": "Noted as finding.",
+        "required_evidence": "SOC 2 + DPA"
+      },
+      {
+        "question_number": 4,
+        "question": "Are appropriate consent / opt-out controls implemented on your side?",
+        "yes_implies": "Document \u2014 affects Privacy TSC if in scope.",
+        "no_implies": "Flag as a gap.",
+        "required_evidence": "Consent flow evidence"
+      }
+    ],
+    "dns": [
+      {
+        "question_number": 1,
+        "question": "Does this DNS provider route production traffic?",
+        "yes_implies": "Subservice org confirmed.",
+        "no_implies": "\u2014",
+        "required_evidence": "\u2014"
+      },
+      {
+        "question_number": 2,
+        "question": "If DNS was down, would your service be unreachable?",
+        "yes_implies": "Commitment risk confirmed.",
+        "no_implies": "\u2014",
+        "required_evidence": "\u2014"
+      },
+      {
+        "question_number": 3,
+        "question": "SOC 2 / ISO 27001 on file?",
+        "yes_implies": "Soft prompt.",
+        "no_implies": "Noted.",
+        "required_evidence": "SOC 2 or ISO 27001"
+      },
+      {
+        "question_number": 4,
+        "question": "\u2014",
+        "yes_implies": "\u2014",
+        "no_implies": "\u2014",
+        "required_evidence": "\u2014"
+      }
+    ],
+    "vector_database": [
+      {
+        "question_number": 1,
+        "question": "Do the embeddings stored here encode customer data?",
+        "yes_implies": "Subservice org confirmed.",
+        "no_implies": "Might be vendor only.",
+        "required_evidence": "\u2014"
+      },
+      {
+        "question_number": 2,
+        "question": "If this service was down, would search / RAG / agent functionality break?",
+        "yes_implies": "Commitment risk confirmed.",
+        "no_implies": "Re-evaluate criticality.",
+        "required_evidence": "\u2014"
+      },
+      {
+        "question_number": 3,
+        "question": "SOC 2 on file?",
+        "yes_implies": "Soft prompt: ask for upload.",
+        "no_implies": "Noted as finding.",
+        "required_evidence": "SOC 2 report PDF"
+      },
+      {
+        "question_number": 4,
+        "question": "Are you using a managed key or customer-managed key?",
+        "yes_implies": "Document the key arrangement.",
+        "no_implies": "\u2014",
+        "required_evidence": "Key management policy"
+      }
+    ],
+    "llm_observability": [
+      {
+        "question_number": 1,
+        "question": "Do the traces ingested by this tool include user prompts or responses that contain customer data?",
+        "yes_implies": "Subservice org confirmed. DPA matters.",
+        "no_implies": "Possibly vendor.",
+        "required_evidence": "\u2014"
+      },
+      {
+        "question_number": 2,
+        "question": "If this tool was unavailable, would your debugging capability be affected? (Usually no \u2014 non-blocking.)",
+        "yes_implies": "Soft commitment risk.",
+        "no_implies": "Vendor only.",
+        "required_evidence": "\u2014"
+      },
+      {
+        "question_number": 3,
+        "question": "SOC 2 on file?",
+        "yes_implies": "Soft prompt.",
+        "no_implies": "Noted.",
+        "required_evidence": "SOC 2 report"
+      },
+      {
+        "question_number": 4,
+        "question": "Is the DPA executed with them?",
+        "yes_implies": "Upload the DPA.",
+        "no_implies": "Recommend executing one.",
+        "required_evidence": "DPA copy"
+      }
+    ],
+    "gpu_compute": [
+      {
+        "question_number": 1,
+        "question": "Does customer data flow through inference / training runs on this provider?",
+        "yes_implies": "Subservice org confirmed.",
+        "no_implies": "Might be vendor.",
+        "required_evidence": "\u2014"
+      },
+      {
+        "question_number": 2,
+        "question": "If their compute was unavailable for hours, would your service degrade?",
+        "yes_implies": "Commitment risk confirmed.",
+        "no_implies": "Note resilience.",
+        "required_evidence": "\u2014"
+      },
+      {
+        "question_number": 3,
+        "question": "SOC 2 on file?",
+        "yes_implies": "Soft prompt.",
+        "no_implies": "Noted.",
+        "required_evidence": "SOC 2 report"
+      },
+      {
+        "question_number": 4,
+        "question": "Are model weights / customer data persisted on their storage beyond a single run?",
+        "yes_implies": "Document retention.",
+        "no_implies": "Clean \u2014 ephemeral only.",
+        "required_evidence": "Retention policy"
+      }
+    ]
+  },
+  "gitc_matrix": {
+    "cloud_platform_production": {
+      "system_type": "cloud_platform_production",
+      "access": "YES",
+      "change_management": "YES",
+      "operations": "YES",
+      "encryption": "YES",
+      "relevant_control_ids": [
+        "IAM-04",
+        "IAM-07",
+        "IAM-08",
+        "DAT-01",
+        "DAT-02",
+        "NET-01",
+        "NET-02",
+        "BCP-02",
+        "MON-01",
+        "AVL-01",
+        "VUL-01"
+      ],
+      "evidence_examples": "IAM users + roles export, MFA enforcement screenshot, infra-as-code review, audit log retention config, KMS key list, TLS settings, backup + restore test record"
+    },
+    "managed_database": {
+      "system_type": "managed_database",
+      "access": "YES",
+      "change_management": "PARTIAL",
+      "operations": "YES",
+      "encryption": "YES",
+      "relevant_control_ids": [
+        "IAM-04",
+        "IAM-07",
+        "IAM-08",
+        "DAT-01",
+        "DAT-03",
+        "BCP-02",
+        "MON-01"
+      ],
+      "evidence_examples": "DB user list, role grants, TDE on, backups configured, point-in-time-restore evidence, schema migration controls"
+    },
+    "identity_provider": {
+      "system_type": "identity_provider",
+      "access": "YES",
+      "change_management": "PARTIAL",
+      "operations": "PARTIAL",
+      "encryption": "YES",
+      "relevant_control_ids": [
+        "IAM-01",
+        "IAM-02",
+        "IAM-03",
+        "IAM-04",
+        "IAM-05",
+        "IAM-06",
+        "IAM-07",
+        "POL-01"
+      ],
+      "evidence_examples": "User list with status, MFA policy, conditional access rules, admin role assignments, last access review, password policy"
+    },
+    "code_repository": {
+      "system_type": "code_repository",
+      "access": "YES",
+      "change_management": "YES",
+      "operations": "NO",
+      "encryption": "PARTIAL",
+      "relevant_control_ids": [
+        "CHG-01",
+        "CHG-04",
+        "IAM-04",
+        "IAM-06",
+        "IAM-08",
+        "VUL-01"
+      ],
+      "evidence_examples": "Collaborator list, 2FA enforcement on org, branch protection rules on main, required reviewers, status checks, secret scanning enabled, recent PR sample"
+    },
+    "ci_cd_pipeline": {
+      "system_type": "ci_cd_pipeline",
+      "access": "YES",
+      "change_management": "YES",
+      "operations": "NO",
+      "encryption": "YES",
+      "relevant_control_ids": [
+        "CHG-01",
+        "CHG-02",
+        "CHG-03",
+        "IAM-08",
+        "VUL-01"
+      ],
+      "evidence_examples": "Workflow file (.yml/.yaml) review, secret list (names not values), deployment approval requirements, recent run history"
+    },
+    "monitoring_logging": {
+      "system_type": "monitoring_logging",
+      "access": "YES",
+      "change_management": "NO",
+      "operations": "YES",
+      "encryption": "PARTIAL",
+      "relevant_control_ids": [
+        "IAM-04",
+        "MON-01",
+        "MON-02"
+      ],
+      "evidence_examples": "User list, retention configuration, sample alerts firing, on-call tied in, log shipping enabled"
+    },
+    "oncall_alerting": {
+      "system_type": "oncall_alerting",
+      "access": "YES",
+      "change_management": "NO",
+      "operations": "YES",
+      "encryption": "NO",
+      "relevant_control_ids": [
+        "IAM-04",
+        "INC-01",
+        "INC-02"
+      ],
+      "evidence_examples": "User list, rotation schedule, escalation policy, recent incident triage record"
+    },
+    "endpoint_mdm": {
+      "system_type": "endpoint_mdm",
+      "access": "YES",
+      "change_management": "PARTIAL",
+      "operations": "YES",
+      "encryption": "YES",
+      "relevant_control_ids": [
+        "END-01",
+        "END-02",
+        "IAM-04"
+      ],
+      "evidence_examples": "Enrolled device list, compliance status, FDE enforcement, lock screen policy, automatic updates, install restrictions"
+    },
+    "endpoint_edr": {
+      "system_type": "endpoint_edr",
+      "access": "YES",
+      "change_management": "NO",
+      "operations": "YES",
+      "encryption": "NO",
+      "relevant_control_ids": [
+        "END-01",
+        "MON-02"
+      ],
+      "evidence_examples": "Coverage report (devices protected vs total), recent detections, real-time protection status"
+    },
+    "secrets_manager_workforce": {
+      "system_type": "secrets_manager_workforce",
+      "access": "YES",
+      "change_management": "NO",
+      "operations": "PARTIAL",
+      "encryption": "YES",
+      "relevant_control_ids": [
+        "IAM-04",
+        "IAM-07",
+        "IAM-08"
+      ],
+      "evidence_examples": "Vault membership, sharing policies, admin role list, master password / SSO requirement, audit log enabled"
+    },
+    "secrets_manager_infra": {
+      "system_type": "secrets_manager_infra",
+      "access": "YES",
+      "change_management": "YES",
+      "operations": "PARTIAL",
+      "encryption": "YES",
+      "relevant_control_ids": [
+        "IAM-04",
+        "IAM-08",
+        "DAT-01"
+      ],
+      "evidence_examples": "Access policy review, rotation schedule, audit log export, secret count + types"
+    },
+    "backup_service": {
+      "system_type": "backup_service",
+      "access": "YES",
+      "change_management": "NO",
+      "operations": "YES",
+      "encryption": "YES",
+      "relevant_control_ids": [
+        "BCP-01",
+        "BCP-02"
+      ],
+      "evidence_examples": "Backup schedule, last successful run, retention policy, last restore test record, encryption at rest verification"
+    },
+    "hr_system": {
+      "system_type": "hr_system",
+      "access": "YES",
+      "change_management": "NO",
+      "operations": "PARTIAL",
+      "encryption": "PARTIAL",
+      "relevant_control_ids": [
+        "PPL-01",
+        "PPL-02",
+        "PPL-03",
+        "PPL-04",
+        "IAM-03",
+        "IAM-04"
+      ],
+      "evidence_examples": "Admin user list, employee list (active/terminated), offboarding workflow evidence, last termination's deprovisioning record"
+    },
+    "vulnerability_scanner": {
+      "system_type": "vulnerability_scanner",
+      "access": "YES",
+      "change_management": "NO",
+      "operations": "YES",
+      "encryption": "NO",
+      "relevant_control_ids": [
+        "VUL-01",
+        "VUL-02",
+        "EVL-02"
+      ],
+      "evidence_examples": "Scan coverage (all repos / hosts scanned), recent scan results, remediation tracking, severity SLAs"
+    },
+    "cdn_waf": {
+      "system_type": "cdn_waf",
+      "access": "YES",
+      "change_management": "YES",
+      "operations": "PARTIAL",
+      "encryption": "PARTIAL",
+      "relevant_control_ids": [
+        "IAM-04",
+        "NET-01",
+        "NET-02",
+        "MON-01",
+        "DAT-01"
+      ],
+      "evidence_examples": "Admin user list, WAF rule export, recent rule changes, traffic logs, TLS configuration"
+    },
+    "office_productivity": {
+      "system_type": "office_productivity",
+      "access": "YES",
+      "change_management": "NO",
+      "operations": "PARTIAL",
+      "encryption": "PARTIAL",
+      "relevant_control_ids": [
+        "IAM-01",
+        "IAM-02",
+        "IAM-04",
+        "DAT-01"
+      ],
+      "evidence_examples": "User list, admin list, MFA enforcement, sharing rules, conditional access"
+    },
+    "realtime_data_layer": {
+      "system_type": "realtime_data_layer",
+      "access": "YES",
+      "change_management": "PARTIAL",
+      "operations": "PARTIAL",
+      "encryption": "YES",
+      "relevant_control_ids": [
+        "IAM-04",
+        "IAM-08",
+        "DAT-01"
+      ],
+      "evidence_examples": "Access policies, API keys list, recent config changes, TLS endpoint"
+    }
+  },
+  "known_vendors": [
+    {
+      "vendor_name": "AWS",
+      "aliases": [
+        "amazon web services"
+      ],
+      "system_type": "cloud_platform_production",
+      "notes": "Most common cloud provider for SaaS."
+    },
+    {
+      "vendor_name": "GCP",
+      "aliases": [
+        "google cloud",
+        "google cloud platform"
+      ],
+      "system_type": "cloud_platform_production",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Azure",
+      "aliases": [
+        "microsoft azure"
+      ],
+      "system_type": "cloud_platform_production",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Vercel",
+      "aliases": [],
+      "system_type": "cloud_platform_production",
+      "notes": "Hosting + deploy platform; classification varies if used only for marketing site (vendor)."
+    },
+    {
+      "vendor_name": "Fly.io",
+      "aliases": [
+        "fly"
+      ],
+      "system_type": "cloud_platform_production",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Railway",
+      "aliases": [],
+      "system_type": "cloud_platform_production",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Render",
+      "aliases": [],
+      "system_type": "cloud_platform_production",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Heroku",
+      "aliases": [],
+      "system_type": "cloud_platform_production",
+      "notes": ""
+    },
+    {
+      "vendor_name": "DigitalOcean",
+      "aliases": [
+        "digital ocean"
+      ],
+      "system_type": "cloud_platform_production",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Supabase",
+      "aliases": [],
+      "system_type": "managed_database",
+      "notes": "Postgres + auth + storage. Often acts as both DB and identity layer."
+    },
+    {
+      "vendor_name": "Neon",
+      "aliases": [],
+      "system_type": "managed_database",
+      "notes": ""
+    },
+    {
+      "vendor_name": "PlanetScale",
+      "aliases": [],
+      "system_type": "managed_database",
+      "notes": ""
+    },
+    {
+      "vendor_name": "MongoDB Atlas",
+      "aliases": [
+        "mongo atlas",
+        "atlas"
+      ],
+      "system_type": "managed_database",
+      "notes": ""
+    },
+    {
+      "vendor_name": "AWS RDS",
+      "aliases": [
+        "rds"
+      ],
+      "system_type": "managed_database",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Aurora",
+      "aliases": [
+        "aws aurora"
+      ],
+      "system_type": "managed_database",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Firestore",
+      "aliases": [
+        "google firestore",
+        "firebase firestore"
+      ],
+      "system_type": "managed_database",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Snowflake",
+      "aliases": [],
+      "system_type": "subprocessor_data_warehouse",
+      "notes": ""
+    },
+    {
+      "vendor_name": "BigQuery",
+      "aliases": [
+        "google bigquery"
+      ],
+      "system_type": "subprocessor_data_warehouse",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Databricks",
+      "aliases": [],
+      "system_type": "subprocessor_data_warehouse",
+      "notes": ""
+    },
+    {
+      "vendor_name": "OpenAI",
+      "aliases": [
+        "openai api",
+        "gpt"
+      ],
+      "system_type": "ai_inference",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Anthropic",
+      "aliases": [
+        "claude",
+        "anthropic api"
+      ],
+      "system_type": "ai_inference",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Together",
+      "aliases": [
+        "together.ai"
+      ],
+      "system_type": "ai_inference",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Mistral",
+      "aliases": [
+        "mistral.ai"
+      ],
+      "system_type": "ai_inference",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Cohere",
+      "aliases": [],
+      "system_type": "ai_inference",
+      "notes": ""
+    },
+    {
+      "vendor_name": "AWS Bedrock",
+      "aliases": [
+        "bedrock"
+      ],
+      "system_type": "ai_inference",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Google Vertex AI",
+      "aliases": [
+        "vertex ai"
+      ],
+      "system_type": "ai_inference",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Stripe",
+      "aliases": [],
+      "system_type": "payment_processor",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Square",
+      "aliases": [
+        "block"
+      ],
+      "system_type": "payment_processor",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Paddle",
+      "aliases": [],
+      "system_type": "payment_processor",
+      "notes": ""
+    },
+    {
+      "vendor_name": "SendGrid",
+      "aliases": [
+        "twilio sendgrid"
+      ],
+      "system_type": "email_service",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Resend",
+      "aliases": [],
+      "system_type": "email_service",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Postmark",
+      "aliases": [],
+      "system_type": "email_service",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Mailgun",
+      "aliases": [],
+      "system_type": "email_service",
+      "notes": ""
+    },
+    {
+      "vendor_name": "AWS SES",
+      "aliases": [
+        "ses"
+      ],
+      "system_type": "email_service",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Twilio",
+      "aliases": [],
+      "system_type": "sms_voice",
+      "notes": ""
+    },
+    {
+      "vendor_name": "MessageBird",
+      "aliases": [
+        "bird"
+      ],
+      "system_type": "sms_voice",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Vonage",
+      "aliases": [],
+      "system_type": "sms_voice",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Mixpanel",
+      "aliases": [],
+      "system_type": "analytics",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Segment",
+      "aliases": [
+        "twilio segment"
+      ],
+      "system_type": "analytics",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Amplitude",
+      "aliases": [],
+      "system_type": "analytics",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Heap",
+      "aliases": [],
+      "system_type": "analytics",
+      "notes": ""
+    },
+    {
+      "vendor_name": "PostHog",
+      "aliases": [],
+      "system_type": "analytics",
+      "notes": "Self-hosted PostHog flips to in_scope_tool."
+    },
+    {
+      "vendor_name": "Intercom",
+      "aliases": [],
+      "system_type": "customer_support_tool",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Zendesk",
+      "aliases": [],
+      "system_type": "customer_support_tool",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Help Scout",
+      "aliases": [],
+      "system_type": "customer_support_tool",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Front",
+      "aliases": [
+        "frontapp"
+      ],
+      "system_type": "customer_support_tool",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Cloudflare",
+      "aliases": [],
+      "system_type": "cdn_waf",
+      "notes": "Also acts as DNS \u2014 split classification."
+    },
+    {
+      "vendor_name": "Fastly",
+      "aliases": [],
+      "system_type": "cdn_waf",
+      "notes": ""
+    },
+    {
+      "vendor_name": "AWS CloudFront",
+      "aliases": [
+        "cloudfront"
+      ],
+      "system_type": "cdn_waf",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Route 53",
+      "aliases": [
+        "aws route 53",
+        "route53"
+      ],
+      "system_type": "dns",
+      "notes": ""
+    },
+    {
+      "vendor_name": "GoDaddy DNS",
+      "aliases": [
+        "godaddy"
+      ],
+      "system_type": "dns",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Okta",
+      "aliases": [],
+      "system_type": "identity_provider",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Entra ID",
+      "aliases": [
+        "entra",
+        "azure ad",
+        "microsoft entra"
+      ],
+      "system_type": "identity_provider",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Auth0",
+      "aliases": [],
+      "system_type": "identity_provider",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Google Workspace",
+      "aliases": [
+        "g suite",
+        "gws"
+      ],
+      "system_type": "identity_provider",
+      "notes": "Also office_productivity \u2014 pick the dominant role."
+    },
+    {
+      "vendor_name": "AWS IAM",
+      "aliases": [
+        "iam",
+        "aws identity"
+      ],
+      "system_type": "identity_provider",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Clerk",
+      "aliases": [
+        "clerk.dev"
+      ],
+      "system_type": "identity_provider",
+      "notes": ""
+    },
+    {
+      "vendor_name": "WorkOS",
+      "aliases": [],
+      "system_type": "identity_provider",
+      "notes": ""
+    },
+    {
+      "vendor_name": "GitHub",
+      "aliases": [],
+      "system_type": "code_repository",
+      "notes": ""
+    },
+    {
+      "vendor_name": "GitLab",
+      "aliases": [],
+      "system_type": "code_repository",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Bitbucket",
+      "aliases": [],
+      "system_type": "code_repository",
+      "notes": ""
+    },
+    {
+      "vendor_name": "GitHub Actions",
+      "aliases": [
+        "github actions",
+        "gh actions"
+      ],
+      "system_type": "ci_cd_pipeline",
+      "notes": ""
+    },
+    {
+      "vendor_name": "CircleCI",
+      "aliases": [
+        "circle ci"
+      ],
+      "system_type": "ci_cd_pipeline",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Buildkite",
+      "aliases": [],
+      "system_type": "ci_cd_pipeline",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Jenkins",
+      "aliases": [],
+      "system_type": "ci_cd_pipeline",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Datadog",
+      "aliases": [],
+      "system_type": "monitoring_logging",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Sentry",
+      "aliases": [],
+      "system_type": "monitoring_logging",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Grafana",
+      "aliases": [],
+      "system_type": "monitoring_logging",
+      "notes": ""
+    },
+    {
+      "vendor_name": "CloudWatch",
+      "aliases": [
+        "aws cloudwatch"
+      ],
+      "system_type": "monitoring_logging",
+      "notes": ""
+    },
+    {
+      "vendor_name": "New Relic",
+      "aliases": [
+        "newrelic"
+      ],
+      "system_type": "monitoring_logging",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Splunk",
+      "aliases": [],
+      "system_type": "monitoring_logging",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Logz.io",
+      "aliases": [
+        "logz"
+      ],
+      "system_type": "monitoring_logging",
+      "notes": ""
+    },
+    {
+      "vendor_name": "PagerDuty",
+      "aliases": [],
+      "system_type": "oncall_alerting",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Opsgenie",
+      "aliases": [],
+      "system_type": "oncall_alerting",
+      "notes": ""
+    },
+    {
+      "vendor_name": "incident.io",
+      "aliases": [
+        "incident io"
+      ],
+      "system_type": "oncall_alerting",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Jamf",
+      "aliases": [
+        "jamf pro"
+      ],
+      "system_type": "endpoint_mdm",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Kandji",
+      "aliases": [],
+      "system_type": "endpoint_mdm",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Intune",
+      "aliases": [
+        "microsoft intune"
+      ],
+      "system_type": "endpoint_mdm",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Mosyle",
+      "aliases": [],
+      "system_type": "endpoint_mdm",
+      "notes": ""
+    },
+    {
+      "vendor_name": "CrowdStrike",
+      "aliases": [
+        "falcon",
+        "cs falcon"
+      ],
+      "system_type": "endpoint_edr",
+      "notes": ""
+    },
+    {
+      "vendor_name": "SentinelOne",
+      "aliases": [
+        "sentinel one",
+        "s1"
+      ],
+      "system_type": "endpoint_edr",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Microsoft Defender",
+      "aliases": [
+        "defender for endpoint"
+      ],
+      "system_type": "endpoint_edr",
+      "notes": ""
+    },
+    {
+      "vendor_name": "1Password",
+      "aliases": [
+        "1password business"
+      ],
+      "system_type": "secrets_manager_workforce",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Bitwarden",
+      "aliases": [],
+      "system_type": "secrets_manager_workforce",
+      "notes": ""
+    },
+    {
+      "vendor_name": "HashiCorp Vault",
+      "aliases": [
+        "vault",
+        "hcp vault"
+      ],
+      "system_type": "secrets_manager_infra",
+      "notes": ""
+    },
+    {
+      "vendor_name": "AWS Secrets Manager",
+      "aliases": [
+        "secrets manager"
+      ],
+      "system_type": "secrets_manager_infra",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Doppler",
+      "aliases": [],
+      "system_type": "secrets_manager_infra",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Infisical",
+      "aliases": [],
+      "system_type": "secrets_manager_infra",
+      "notes": ""
+    },
+    {
+      "vendor_name": "AWS Backup",
+      "aliases": [],
+      "system_type": "backup_service",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Veeam",
+      "aliases": [],
+      "system_type": "backup_service",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Druva",
+      "aliases": [],
+      "system_type": "backup_service",
+      "notes": ""
+    },
+    {
+      "vendor_name": "HiBob",
+      "aliases": [
+        "bob"
+      ],
+      "system_type": "hr_system",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Rippling",
+      "aliases": [],
+      "system_type": "hr_system",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Gusto",
+      "aliases": [],
+      "system_type": "hr_system",
+      "notes": ""
+    },
+    {
+      "vendor_name": "BambooHR",
+      "aliases": [
+        "bamboo hr"
+      ],
+      "system_type": "hr_system",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Justworks",
+      "aliases": [
+        "just works"
+      ],
+      "system_type": "hr_system",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Deel",
+      "aliases": [],
+      "system_type": "hr_system",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Snyk",
+      "aliases": [],
+      "system_type": "vulnerability_scanner",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Dependabot",
+      "aliases": [
+        "github dependabot"
+      ],
+      "system_type": "vulnerability_scanner",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Wiz",
+      "aliases": [
+        "wiz.io"
+      ],
+      "system_type": "vulnerability_scanner",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Qualys",
+      "aliases": [],
+      "system_type": "vulnerability_scanner",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Aikido",
+      "aliases": [
+        "aikido security"
+      ],
+      "system_type": "vulnerability_scanner",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Semgrep",
+      "aliases": [],
+      "system_type": "vulnerability_scanner",
+      "notes": ""
+    },
+    {
+      "vendor_name": "GitGuardian",
+      "aliases": [
+        "git guardian"
+      ],
+      "system_type": "vulnerability_scanner",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Linear",
+      "aliases": [
+        "linear app"
+      ],
+      "system_type": "project_management",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Jira",
+      "aliases": [
+        "atlassian jira"
+      ],
+      "system_type": "project_management",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Asana",
+      "aliases": [],
+      "system_type": "project_management",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Trello",
+      "aliases": [],
+      "system_type": "project_management",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Notion",
+      "aliases": [],
+      "system_type": "internal_wiki",
+      "notes": "Flips to in_scope_tool if customer data is stored here."
+    },
+    {
+      "vendor_name": "Confluence",
+      "aliases": [],
+      "system_type": "internal_wiki",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Slack",
+      "aliases": [],
+      "system_type": "team_chat",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Microsoft Teams",
+      "aliases": [
+        "ms teams"
+      ],
+      "system_type": "team_chat",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Microsoft 365",
+      "aliases": [
+        "m365",
+        "office 365",
+        "o365"
+      ],
+      "system_type": "office_productivity",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Dropbox Business",
+      "aliases": [
+        "dropbox",
+        "dropbox biz"
+      ],
+      "system_type": "office_productivity",
+      "notes": ""
+    },
+    {
+      "vendor_name": "QuickBooks",
+      "aliases": [
+        "qbo"
+      ],
+      "system_type": "finance_accounting",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Xero",
+      "aliases": [],
+      "system_type": "finance_accounting",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Brex",
+      "aliases": [],
+      "system_type": "finance_accounting",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Ramp",
+      "aliases": [
+        "ramp.com"
+      ],
+      "system_type": "finance_accounting",
+      "notes": ""
+    },
+    {
+      "vendor_name": "NetSuite",
+      "aliases": [],
+      "system_type": "finance_accounting",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Modal",
+      "aliases": [
+        "modal.com",
+        "modal labs"
+      ],
+      "system_type": "gpu_compute",
+      "notes": "Most common GPU runtime for solo AI builders."
+    },
+    {
+      "vendor_name": "RunPod",
+      "aliases": [
+        "run pod"
+      ],
+      "system_type": "gpu_compute",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Lambda Labs",
+      "aliases": [
+        "lambda cloud",
+        "lambdalabs"
+      ],
+      "system_type": "gpu_compute",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Coreweave",
+      "aliases": [],
+      "system_type": "gpu_compute",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Replicate",
+      "aliases": [
+        "replicate.com"
+      ],
+      "system_type": "gpu_compute",
+      "notes": "Hosted model inference + GPU runs."
+    },
+    {
+      "vendor_name": "Google Gemini",
+      "aliases": [
+        "gemini",
+        "gemini api"
+      ],
+      "system_type": "ai_inference",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Groq",
+      "aliases": [
+        "groq cloud"
+      ],
+      "system_type": "ai_inference",
+      "notes": "Fast inference for solo AI builders."
+    },
+    {
+      "vendor_name": "Fireworks AI",
+      "aliases": [
+        "fireworks"
+      ],
+      "system_type": "ai_inference",
+      "notes": ""
+    },
+    {
+      "vendor_name": "DeepInfra",
+      "aliases": [
+        "deep infra"
+      ],
+      "system_type": "ai_inference",
+      "notes": ""
+    },
+    {
+      "vendor_name": "OpenRouter",
+      "aliases": [
+        "open router"
+      ],
+      "system_type": "ai_inference",
+      "notes": "LLM router; routes through multiple providers."
+    },
+    {
+      "vendor_name": "Hugging Face",
+      "aliases": [
+        "hugging face hub",
+        "huggingface",
+        "hf inference"
+      ],
+      "system_type": "ai_inference",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Perplexity API",
+      "aliases": [
+        "perplexity"
+      ],
+      "system_type": "ai_inference",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Pinecone",
+      "aliases": [],
+      "system_type": "vector_database",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Weaviate",
+      "aliases": [
+        "weaviate cloud"
+      ],
+      "system_type": "vector_database",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Qdrant",
+      "aliases": [
+        "qdrant cloud"
+      ],
+      "system_type": "vector_database",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Chroma",
+      "aliases": [
+        "chroma cloud",
+        "chromadb"
+      ],
+      "system_type": "vector_database",
+      "notes": "Self-hosted = in_scope_tool, Chroma Cloud = SSO."
+    },
+    {
+      "vendor_name": "Turbopuffer",
+      "aliases": [
+        "turbo puffer"
+      ],
+      "system_type": "vector_database",
+      "notes": ""
+    },
+    {
+      "vendor_name": "LangSmith",
+      "aliases": [
+        "lang smith",
+        "langchain langsmith"
+      ],
+      "system_type": "llm_observability",
+      "notes": "Most popular LLM observability for solo AI builders."
+    },
+    {
+      "vendor_name": "Helicone",
+      "aliases": [],
+      "system_type": "llm_observability",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Langfuse",
+      "aliases": [
+        "lang fuse"
+      ],
+      "system_type": "llm_observability",
+      "notes": "Often self-hosted \u2014 verify deployment model."
+    },
+    {
+      "vendor_name": "Braintrust",
+      "aliases": [
+        "braintrust data",
+        "braintrust eval"
+      ],
+      "system_type": "llm_observability",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Phoenix",
+      "aliases": [
+        "arize phoenix"
+      ],
+      "system_type": "llm_observability",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Promptlayer",
+      "aliases": [
+        "prompt layer"
+      ],
+      "system_type": "llm_observability",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Promptfoo",
+      "aliases": [],
+      "system_type": "ai_eval_platform",
+      "notes": "Self-hosted CLI common; cloud version is SSO."
+    },
+    {
+      "vendor_name": "Cloudflare Workers",
+      "aliases": [
+        "workers",
+        "cf workers"
+      ],
+      "system_type": "cloud_platform_production",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Cloudflare Pages",
+      "aliases": [
+        "cf pages"
+      ],
+      "system_type": "cloud_platform_production",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Cloudflare R2",
+      "aliases": [
+        "r2"
+      ],
+      "system_type": "cloud_platform_production",
+      "notes": "Object storage."
+    },
+    {
+      "vendor_name": "Cloudflare D1",
+      "aliases": [
+        "d1"
+      ],
+      "system_type": "managed_database",
+      "notes": "Edge SQLite."
+    },
+    {
+      "vendor_name": "Convex",
+      "aliases": [
+        "convex.dev"
+      ],
+      "system_type": "realtime_data_layer",
+      "notes": "All-in-one reactive DB + functions for AI apps."
+    },
+    {
+      "vendor_name": "Turso",
+      "aliases": [
+        "turso.tech"
+      ],
+      "system_type": "managed_database",
+      "notes": "Edge SQLite."
+    },
+    {
+      "vendor_name": "Upstash",
+      "aliases": [
+        "upstash redis",
+        "upstash kafka"
+      ],
+      "system_type": "realtime_data_layer",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Liveblocks",
+      "aliases": [
+        "live blocks"
+      ],
+      "system_type": "realtime_data_layer",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Stytch",
+      "aliases": [],
+      "system_type": "identity_provider",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Magic",
+      "aliases": [
+        "magic link",
+        "magic.link"
+      ],
+      "system_type": "identity_provider",
+      "notes": ""
+    },
+    {
+      "vendor_name": "NextAuth",
+      "aliases": [
+        "next auth",
+        "authjs"
+      ],
+      "system_type": "identity_provider",
+      "notes": "Open source; self-hosted with the app."
+    },
+    {
+      "vendor_name": "Loops",
+      "aliases": [
+        "loops.so"
+      ],
+      "system_type": "email_service",
+      "notes": "Popular with solo AI builders for transactional + marketing."
+    },
+    {
+      "vendor_name": "Knock",
+      "aliases": [
+        "knock.app"
+      ],
+      "system_type": "email_service",
+      "notes": "Transactional + in-app notifications."
+    },
+    {
+      "vendor_name": "Polar",
+      "aliases": [
+        "polar.sh"
+      ],
+      "system_type": "payment_processor",
+      "notes": "Indie payment platform; SOC 2 in progress."
+    },
+    {
+      "vendor_name": "Lemon Squeezy",
+      "aliases": [
+        "lemonsqueezy",
+        "lemon squeezy"
+      ],
+      "system_type": "payment_processor",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Tinybird",
+      "aliases": [],
+      "system_type": "analytics",
+      "notes": "Real-time analytics with customer data."
+    },
+    {
+      "vendor_name": "Plausible",
+      "aliases": [
+        "plausible.io"
+      ],
+      "system_type": "analytics",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Fathom",
+      "aliases": [
+        "fathom analytics"
+      ],
+      "system_type": "analytics",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Vercel Analytics",
+      "aliases": [],
+      "system_type": "analytics",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Axiom",
+      "aliases": [
+        "axiom.co"
+      ],
+      "system_type": "monitoring_logging",
+      "notes": ""
+    },
+    {
+      "vendor_name": "BetterStack",
+      "aliases": [
+        "better stack",
+        "betteruptime",
+        "better uptime",
+        "logtail"
+      ],
+      "system_type": "monitoring_logging",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Highlight",
+      "aliases": [
+        "highlight.io"
+      ],
+      "system_type": "monitoring_logging",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Cal.com",
+      "aliases": [
+        "cal.com cloud"
+      ],
+      "system_type": "booking_scheduling",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Plain",
+      "aliases": [
+        "plain.com"
+      ],
+      "system_type": "customer_support_tool",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Crisp",
+      "aliases": [
+        "crisp chat"
+      ],
+      "system_type": "customer_support_tool",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Discord",
+      "aliases": [],
+      "system_type": "team_chat",
+      "notes": "Often doubles as community / support \u2014 note content classification."
+    },
+    {
+      "vendor_name": "Cursor",
+      "aliases": [
+        "cursor ide",
+        "cursor.com"
+      ],
+      "system_type": "builder_tool",
+      "notes": "Reads your code (IP). Reclassify if engineers use it on customer data."
+    },
+    {
+      "vendor_name": "GitHub Copilot",
+      "aliases": [
+        "copilot"
+      ],
+      "system_type": "builder_tool",
+      "notes": "Code AI assist; same caveat as Cursor."
+    },
+    {
+      "vendor_name": "Claude Code",
+      "aliases": [
+        "claude code cli"
+      ],
+      "system_type": "builder_tool",
+      "notes": "AI coding assistant; usually a workforce tool."
+    },
+    {
+      "vendor_name": "Bolt.new",
+      "aliases": [
+        "bolt"
+      ],
+      "system_type": "builder_tool",
+      "notes": "Builder tool; check whether prod assets live here."
+    },
+    {
+      "vendor_name": "v0",
+      "aliases": [
+        "v0.dev",
+        "vercel v0"
+      ],
+      "system_type": "builder_tool",
+      "notes": "Builder tool."
+    },
+    {
+      "vendor_name": "HubSpot",
+      "aliases": [
+        "hubspot crm"
+      ],
+      "system_type": "crm",
+      "notes": "CRM + marketing suite. Vendor unless product data syncs in."
+    },
+    {
+      "vendor_name": "Salesforce",
+      "aliases": [
+        "sfdc",
+        "salesforce crm"
+      ],
+      "system_type": "crm",
+      "notes": "CRM. Vendor unless product data syncs in."
+    },
+    {
+      "vendor_name": "Attio",
+      "aliases": [],
+      "system_type": "crm",
+      "notes": "CRM. Vendor unless product data syncs in."
+    },
+    {
+      "vendor_name": "Pipedrive",
+      "aliases": [],
+      "system_type": "crm",
+      "notes": "CRM. Vendor unless product data syncs in."
+    },
+    {
+      "vendor_name": "Close",
+      "aliases": [
+        "close.com",
+        "close crm"
+      ],
+      "system_type": "crm",
+      "notes": "CRM. Vendor unless product data syncs in."
+    },
+    {
+      "vendor_name": "Copper",
+      "aliases": [
+        "copper crm"
+      ],
+      "system_type": "crm",
+      "notes": "CRM. Vendor unless product data syncs in."
+    },
+    {
+      "vendor_name": "Zoho CRM",
+      "aliases": [
+        "zoho"
+      ],
+      "system_type": "crm",
+      "notes": "CRM. Vendor unless product data syncs in."
+    },
+    {
+      "vendor_name": "Google Drive",
+      "aliases": [
+        "gdrive",
+        "google docs",
+        "googledrive"
+      ],
+      "system_type": "office_productivity",
+      "notes": "Part of Google Workspace. If customer data lives in shared drives, that is a separate scoping conversation."
+    },
+    {
+      "vendor_name": "Outlook",
+      "aliases": [
+        "microsoft outlook",
+        "outlook 365"
+      ],
+      "system_type": "corporate_email",
+      "notes": "Corporate email client (Microsoft 365 bundle). In-scope pieces (Entra ID, Intune, SharePoint with customer data) are separate systems."
+    },
+    {
+      "vendor_name": "Workday",
+      "aliases": [
+        "workday hcm"
+      ],
+      "system_type": "hr_system",
+      "notes": "Enterprise HR system of record. In scope for People controls (background checks, onboarding/offboarding, training records, terminations)."
+    },
+    {
+      "vendor_name": "ADP",
+      "aliases": [
+        "adp workforce now",
+        "adp run"
+      ],
+      "system_type": "hr_system",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Paychex",
+      "aliases": [
+        "paychex flex"
+      ],
+      "system_type": "hr_system",
+      "notes": ""
+    },
+    {
+      "vendor_name": "Namely",
+      "aliases": [],
+      "system_type": "hr_system",
+      "notes": ""
+    },
+    {
+      "vendor_name": "TriNet",
+      "aliases": [
+        "trinet zenefits"
+      ],
+      "system_type": "hr_system",
+      "notes": ""
+    }
+  ],
+  "version": "1.0",
+  "source": "Control-Library-v3.xlsx (Scoping tabs)"
+}

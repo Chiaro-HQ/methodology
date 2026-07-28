@@ -1,0 +1,478 @@
+{
+  "CC1.1": {
+    "text": "The entity demonstrates a commitment to integrity and ethical values.",
+    "category": "Control Environment",
+    "intent": "RISK: Personnel act unethically or without integrity, harming the entity's objectives. INTENT: The entity doesn't just have rules \u2014 it actively demonstrates commitment through enforcement.",
+    "objective_ids": [
+      "OBJ-1.1.1",
+      "OBJ-1.1.2"
+    ]
+  },
+  "CC1.2": {
+    "text": "The board of directors demonstrates independence from management and exercises oversight of the development and performance of internal control.",
+    "category": "Control Environment",
+    "intent": "RISK: Management operates without independent oversight, allowing control weaknesses to go undetected. INTENT: Someone independent from daily operations is watching. For startups without a board, this can be an advisory board, external advisor, or structured self-assessment with documented independence.",
+    "objective_ids": [
+      "OBJ-1.2.1",
+      "OBJ-1.2.2"
+    ]
+  },
+  "CC1.3": {
+    "text": "Management establishes, with board oversight, structures, reporting lines, and appropriate authorities and responsibilities in the pursuit of objectives.",
+    "category": "Control Environment",
+    "intent": "RISK: Nobody knows who is responsible for what, or one person controls too much without checks. INTENT: Clear structure prevents gaps and conflicts in responsibilities.",
+    "objective_ids": [
+      "OBJ-1.3.1",
+      "OBJ-1.3.2"
+    ]
+  },
+  "CC1.4": {
+    "text": "The entity demonstrates a commitment to attract, develop, and retain competent individuals in alignment with objectives.",
+    "category": "Control Environment",
+    "intent": "RISK: Incompetent or unsuitable personnel, no skills development, key-person dependency. INTENT: The entity actively invests in its people \u2014 vetting them (attract), growing them (develop), and ensuring continuity (retain). Not just hiring and hoping.",
+    "objective_ids": [
+      "OBJ-1.4.1",
+      "OBJ-1.4.2",
+      "OBJ-1.4.3",
+      "OBJ-1.4.4",
+      "OBJ-1.4.5"
+    ]
+  },
+  "CC1.5": {
+    "text": "The entity holds individuals accountable for their internal control responsibilities in the pursuit of objectives.",
+    "category": "Control Environment",
+    "intent": "RISK: People ignore security duties because there are no consequences. INTENT: Accountability is a closed loop \u2014 expectations are set, performance is measured, violations have consequences. Not just documenting expectations, but enforcing them.",
+    "objective_ids": [
+      "OBJ-1.5.1",
+      "OBJ-1.5.2"
+    ]
+  },
+  "CC2.1": {
+    "text": "The entity obtains or generates and uses relevant, quality information to support the functioning of internal control.",
+    "category": "Information & Communication",
+    "intent": "RISK: Controls operate on bad information \u2014 incomplete asset lists, unclassified data, inaccurate logs. INTENT: The entity knows what it has, how sensitive it is, and that the information feeding its controls is reliable.",
+    "objective_ids": [
+      "OBJ-2.1.1",
+      "OBJ-2.1.2",
+      "OBJ-2.1.3"
+    ]
+  },
+  "CC2.2": {
+    "text": "The entity internally communicates information, including objectives and responsibilities for internal control, necessary to support the functioning of internal control.",
+    "category": "Information & Communication",
+    "intent": "RISK: People don't know the rules, don't know their responsibilities, or don't know how to report problems. INTENT: Information flows DOWN to everyone who needs it, including changes.",
+    "objective_ids": [
+      "OBJ-2.2.1",
+      "OBJ-2.2.2",
+      "OBJ-2.2.3"
+    ]
+  },
+  "CC2.3": {
+    "text": "The entity communicates with external parties regarding matters affecting the functioning of internal control.",
+    "category": "Information & Communication",
+    "intent": "RISK: External parties don't know the entity's commitments, can't report problems, or external signals about control issues are ignored. INTENT: Information flows to/from the outside world \u2014 outbound (commitments, reporting channels) and inbound (external signals).",
+    "objective_ids": [
+      "OBJ-2.3.1",
+      "OBJ-2.3.2",
+      "OBJ-2.3.3"
+    ]
+  },
+  "CC3.1": {
+    "text": "The entity specifies objectives with sufficient clarity to enable the identification and assessment of risks relating to objectives.",
+    "category": "Risk Assessment",
+    "intent": "RISK: If objectives aren't clear, you can't identify what threatens them. INTENT: Objectives are defined well enough that someone could say 'this risk threatens objective X.' Not vague \u2014 specific and documented.",
+    "objective_ids": [
+      "OBJ-3.1.1"
+    ]
+  },
+  "CC3.2": {
+    "text": "The entity identifies risks to the achievement of its objectives across the entity and analyzes risks as a basis for determining how the risks should be managed.",
+    "category": "Risk Assessment",
+    "intent": "RISK: Threats go unrecognized, vulnerabilities aren't assessed, risk responses aren't deliberate. INTENT: The entity systematically identifies what could go wrong, how bad it would be, and what to do about it \u2014 including from third parties.",
+    "objective_ids": [
+      "OBJ-3.2.1",
+      "OBJ-3.2.2"
+    ]
+  },
+  "CC3.3": {
+    "text": "The entity considers the potential for fraud in assessing risks to the achievement of objectives.",
+    "category": "Risk Assessment",
+    "intent": "RISK: Fraud is overlooked because 'we trust our people.' INTENT: Fraud isn't just a finance concern \u2014 in tech, it's unauthorized access, data theft, insider threats, and privilege abuse. The entity has explicitly thought about these.",
+    "objective_ids": [
+      "OBJ-3.3.1"
+    ]
+  },
+  "CC3.4": {
+    "text": "The entity identifies and assesses changes that could significantly impact the system of internal control.",
+    "category": "Risk Assessment",
+    "intent": "RISK: The world changed but controls didn't. New tech, new regulations, new team, new vendors \u2014 and nobody assessed the impact. INTENT: The control environment adapts to change rather than becoming stale.",
+    "objective_ids": [
+      "OBJ-3.4.1"
+    ]
+  },
+  "CC4.1": {
+    "text": "The entity selects, develops, and performs ongoing and/or separate evaluations to ascertain whether the components of internal control are present and functioning.",
+    "category": "Monitoring Activities",
+    "intent": "RISK: Controls exist on paper but aren't working in practice, and nobody notices. INTENT: The entity actively checks that its controls work \u2014 both through continuous monitoring and periodic independent evaluation. Not just 'set and forget.'",
+    "objective_ids": [
+      "OBJ-4.1.1",
+      "OBJ-4.1.2"
+    ]
+  },
+  "CC4.2": {
+    "text": "The entity evaluates and communicates internal control deficiencies in a timely manner to those parties responsible for taking corrective action, including senior management and the board of directors, as appropriate.",
+    "category": "Monitoring Activities",
+    "intent": "RISK: Problems are found but never fixed, or leadership doesn't know about serious issues. INTENT: Deficiencies don't just get logged \u2014 they get fixed, and the right people know about them. Closed-loop remediation.",
+    "objective_ids": [
+      "OBJ-4.2.1",
+      "OBJ-4.2.2"
+    ]
+  },
+  "CC5.1": {
+    "text": "The entity selects and develops control activities that contribute to the mitigation of risks to the achievement of objectives to acceptable levels.",
+    "category": "Control Activities",
+    "intent": "RISK: Controls are arbitrary rather than risk-based, or don't actually address the risks identified. INTENT: There's a clear line from 'we identified this risk' to 'we implemented this control to mitigate it.' Controls aren't random \u2014 they're risk-driven.",
+    "objective_ids": [
+      "OBJ-5.1.1",
+      "OBJ-5.1.2"
+    ]
+  },
+  "CC5.2": {
+    "text": "The entity also selects and develops general control activities over technology to support the achievement of objectives.",
+    "category": "Control Activities",
+    "intent": "RISK: Technology operates without controls \u2014 no access management, no vulnerability management, no change management for tech. INTENT: Technology has its own layer of controls beyond business-level controls. This is the 'parent' criterion for CC6-CC8 details.",
+    "objective_ids": [
+      "OBJ-5.2.1"
+    ]
+  },
+  "CC5.3": {
+    "text": "The entity deploys control activities through policies that establish what is expected and in procedures that put policies into action.",
+    "category": "Control Activities",
+    "intent": "RISK: Controls exist as tribal knowledge \u2014 undocumented, inconsistently applied, and dependent on individual memory. INTENT: This is the META-criterion. EVERY control should trace back to a policy (what) and a procedure (how). The entire SOC 2 audit implicitly tests this for every control. A process without a policy is a CC5.3 gap.",
+    "objective_ids": [
+      "OBJ-5.3.1",
+      "OBJ-5.3.2",
+      "OBJ-5.3.3"
+    ]
+  },
+  "CC6.1": {
+    "text": "The entity implements logical access security software, infrastructure, and architectures over protected information assets to protect them from security events to meet the entity's objectives.",
+    "category": "Logical & Physical Access",
+    "intent": "RISK: Unauthorized access to systems and data due to weak authentication, unencrypted data, flat networks, or unprotected endpoints. INTENT: Multiple layers of logical access protection \u2014 identity, authentication strength, encryption, network isolation, endpoint hardening. Defense in depth.",
+    "objective_ids": [
+      "OBJ-6.1.1",
+      "OBJ-6.1.2",
+      "OBJ-6.1.3",
+      "OBJ-6.1.4",
+      "OBJ-6.1.5"
+    ]
+  },
+  "CC6.2": {
+    "text": "Prior to issuing system credentials and granting system access, the entity registers and authorizes new internal and external users whose access is administered by the entity. User system credentials are removed when user access is no longer authorized.",
+    "category": "Logical & Physical Access",
+    "intent": "RISK: Unauthorized people have access (provisioned without approval), or former employees/role-changed people retain access they shouldn't have. INTENT: Access lifecycle is controlled: authorized before granted, removed when no longer needed, and periodically validated.",
+    "objective_ids": [
+      "OBJ-6.2.1",
+      "OBJ-6.2.2",
+      "OBJ-6.2.3"
+    ]
+  },
+  "CC6.3": {
+    "text": "The entity authorizes, modifies, or removes access to data, software, functions, and other protected information assets based on roles, responsibilities, or the system design and changes, giving consideration to the concepts of least privilege and segregation of duties, to meet the entity's objectives.",
+    "category": "Logical & Physical Access",
+    "intent": "RISK: Users have more access than needed, or privileged access is uncontrolled. INTENT: Access is proportional to role (least privilege), sensitive capabilities are tightly controlled (privileged access management), and incompatible access is separated (SoD \u2014 cross-ref with CC1.3).",
+    "objective_ids": [
+      "OBJ-6.3.1",
+      "OBJ-6.3.2"
+    ]
+  },
+  "CC6.4": {
+    "text": "The entity restricts physical access to facilities and protected information assets (for example, data center facilities, backup media storage, and other sensitive locations) to authorized personnel to meet the entity's objectives.",
+    "category": "Logical & Physical Access",
+    "intent": "RISK: Unauthorized physical access to systems, data, or facilities. INTENT: Physical access is controlled just like logical access. For cloud-only companies, this is largely inherited from the CSP.",
+    "objective_ids": [
+      "OBJ-6.4.1"
+    ]
+  },
+  "CC6.5": {
+    "text": "The entity discontinues logical and physical protections over physical assets only after the ability to read or recover data and software from those assets has been diminished and is no longer required to meet the entity's objectives.",
+    "category": "Logical & Physical Access",
+    "intent": "RISK: Disposed or repurposed assets still contain sensitive data. INTENT: You don't throw away a laptop with customer data on it. Data is gone before protections are removed.",
+    "objective_ids": [
+      "OBJ-6.5.1"
+    ]
+  },
+  "CC6.6": {
+    "text": "The entity implements logical access security measures to protect against threats from sources outside its system boundaries.",
+    "category": "Logical & Physical Access",
+    "intent": "RISK: External attackers penetrate the network perimeter. INTENT: The boundary between 'inside' and 'outside' is defended, and remote access doesn't create a backdoor.",
+    "objective_ids": [
+      "OBJ-6.6.1",
+      "OBJ-6.6.2"
+    ]
+  },
+  "CC6.7": {
+    "text": "The entity restricts the transmission, movement, and removal of information to authorized internal and external users and processes, and protects it during transmission, movement, or removal to meet the entity's objectives.",
+    "category": "Logical & Physical Access",
+    "intent": "RISK: Sensitive data is sent to unauthorized recipients or intercepted in transit. INTENT: Data doesn't leave the system boundary uncontrolled \u2014 it goes only to authorized destinations, through authorized channels, encrypted.",
+    "objective_ids": [
+      "OBJ-6.7.1"
+    ]
+  },
+  "CC6.8": {
+    "text": "The entity implements controls to prevent or detect and act upon the introduction of unauthorized or malicious software to meet the entity's objectives.",
+    "category": "Logical & Physical Access",
+    "intent": "RISK: Malware, ransomware, or unauthorized software is introduced. INTENT: Both prevention (restrict installation, detect malware) and response (investigate, remediate) for unauthorized software.",
+    "objective_ids": [
+      "OBJ-6.8.1",
+      "OBJ-6.8.2"
+    ]
+  },
+  "CC7.1": {
+    "text": "To meet its objectives, the entity uses detection and monitoring procedures to identify (1) changes to configurations that result in the introduction of new vulnerabilities, and (2) susceptibilities to newly discovered vulnerabilities.",
+    "category": "System Operations",
+    "intent": "RISK: Vulnerabilities exist and nobody knows. Config drift introduces weaknesses silently. INTENT: Two prongs \u2014 (1) detect when configs change in dangerous ways (hardening standards + monitoring), (2) detect when new vulns apply to your systems (scanning + pen testing).",
+    "objective_ids": [
+      "OBJ-7.1.1",
+      "OBJ-7.1.2",
+      "OBJ-7.1.3"
+    ]
+  },
+  "CC7.2": {
+    "text": "The entity monitors system components and the operation of those components for anomalies that are indicative of malicious acts, natural disasters, and errors affecting the entity's ability to meet its objectives; anomalies are analyzed to determine whether they represent security events.",
+    "category": "System Operations",
+    "intent": "RISK: Attacks or failures happen and nobody notices until it's too late. INTENT: The entity is WATCHING \u2014 logs are collected, anomalies are detected, and someone is paying attention. Not just logging \u2014 analyzing.",
+    "objective_ids": [
+      "OBJ-7.2.1",
+      "OBJ-7.2.2"
+    ]
+  },
+  "CC7.3": {
+    "text": "The entity evaluates security events to determine whether they could or have resulted in a failure of the entity to meet its objectives (security incidents) and, if so, takes actions to prevent or address such failures.",
+    "category": "System Operations",
+    "intent": "RISK: Security events are detected but never evaluated \u2014 'alert fatigue' causes real incidents to be ignored. INTENT: The bridge between detection (CC7.2) and response (CC7.4). Events are triaged, not just logged.",
+    "objective_ids": [
+      "OBJ-7.3.1"
+    ]
+  },
+  "CC7.4": {
+    "text": "The entity responds to identified security incidents by executing a defined incident-response program to understand, contain, remediate, and communicate security incidents, as appropriate.",
+    "category": "System Operations",
+    "intent": "RISK: An incident occurs and the response is chaotic \u2014 no plan, no roles, no communication, no documentation. INTENT: Four verbs in the criterion \u2014 understand, contain, remediate, communicate. Each must be covered. Plus documentation for learning and evidence.",
+    "objective_ids": [
+      "OBJ-7.4.1",
+      "OBJ-7.4.2",
+      "OBJ-7.4.3"
+    ]
+  },
+  "CC7.5": {
+    "text": "The entity identifies, develops, and implements activities to recover from identified security incidents.",
+    "category": "System Operations",
+    "intent": "RISK: After an incident, nothing changes \u2014 same vulnerability gets exploited again. INTENT: Recovery isn't just 'get back online.' It's also 'make sure this can't happen again.' The criterion says identify, develop, implement \u2014 a forward-looking improvement cycle.",
+    "objective_ids": [
+      "OBJ-7.5.1"
+    ]
+  },
+  "CC8.1": {
+    "text": "The entity authorizes, designs, develops or acquires, configures, documents, tests, approves, and implements changes to infrastructure, data, software, and procedures to meet its objectives.",
+    "category": "Change Management",
+    "intent": "RISK: Unauthorized, untested, or undocumented changes break production or introduce vulnerabilities. INTENT: The criterion lists the full lifecycle: authorize, design, develop/acquire, configure, document, test, approve, implement. OBJ-8.1.1 covers this entire chain. Emergency and environment separation are distinct scenarios.",
+    "objective_ids": [
+      "OBJ-8.1.1",
+      "OBJ-8.1.2",
+      "OBJ-8.1.3"
+    ]
+  },
+  "CC9.1": {
+    "text": "The entity identifies, selects, and develops risk mitigation activities for risks arising from potential business disruptions.",
+    "category": "Risk Mitigation",
+    "intent": "RISK: A disruption (outage, disaster, ransomware) occurs and the entity can't recover. INTENT: Three verbs \u2014 identify (what's critical), select (RTOs/RPOs, backup strategy), develop (the actual plan). Plus the plan must be tested \u2014 an untested plan is not a plan.",
+    "objective_ids": [
+      "OBJ-9.1.1",
+      "OBJ-9.1.2"
+    ]
+  },
+  "CC9.2": {
+    "text": "The entity assesses and manages risks associated with vendors and business partners.",
+    "category": "Risk Mitigation",
+    "intent": "RISK: A vendor fails, gets breached, or doesn't meet security requirements \u2014 and the entity's commitments are broken. INTENT: Vendor risk isn't optional \u2014 the criterion says 'assesses AND manages.' Full lifecycle: assess before engaging, monitor during, address issues, terminate if needed.",
+    "objective_ids": [
+      "OBJ-9.2.1",
+      "OBJ-9.2.2"
+    ]
+  },
+  "A1.1": {
+    "text": "The entity maintains, monitors, and evaluates current processing capacity and use of system components to manage capacity demand and to enable the implementation of additional capacity to help meet its objectives.",
+    "category": "Availability",
+    "intent": "RISK: System overloaded, performance degrades, availability commitments are missed. INTENT: Three verbs \u2014 maintain (keep adequate), monitor (know current state), evaluate (plan ahead). Not just reactive \u2014 proactive capacity management.",
+    "objective_ids": [
+      "OBJ-A1.1.1"
+    ]
+  },
+  "A1.2": {
+    "text": "The entity authorizes, designs, develops or acquires, implements, operates, approves, maintains, and monitors environmental protections, software, data backup processes, and recovery infrastructure to meet its objectives.",
+    "category": "Availability",
+    "intent": "RISK: Single point of failure takes everything down. INTENT: The infrastructure itself is designed for resilience \u2014 not just 'we have backups' but 'we have recovery infrastructure that works.'",
+    "objective_ids": [
+      "OBJ-A1.2.1"
+    ]
+  },
+  "A1.3": {
+    "text": "The entity tests recovery plan procedures supporting system recovery to meet its objectives.",
+    "category": "Availability",
+    "intent": "RISK: The recovery plan looks good on paper but doesn't work in practice. INTENT: Testing is the criterion, not planning. The plan exists (A1.2/CC9.1), but A1.3 specifically requires TESTING it.",
+    "objective_ids": [
+      "OBJ-A1.3.1"
+    ]
+  },
+  "C1.1": {
+    "text": "The entity identifies and maintains confidential information to meet the entity's objectives related to confidentiality.",
+    "category": "Confidentiality",
+    "intent": "RISK: Confidential information is not identified, leading to inadequate protection. INTENT: The entity knows what information is confidential and maintains protections accordingly.",
+    "objective_ids": []
+  },
+  "C1.2": {
+    "text": "The entity disposes of confidential information to meet the entity's objectives related to confidentiality.",
+    "category": "Confidentiality",
+    "intent": "RISK: Confidential information is retained beyond its useful life, increasing exposure. INTENT: Disposal processes ensure confidential data is destroyed when no longer needed.",
+    "objective_ids": []
+  },
+  "PI1.1": {
+    "text": "The entity obtains or generates, uses, and communicates relevant, quality information regarding the objectives related to processing, including definitions of data processed and product and service specifications, to support the use of products and services.",
+    "category": "Processing Integrity",
+    "intent": "RISK: Data inputs are incomplete, inaccurate, or unauthorized. INTENT: Processing starts with valid, authorized inputs.",
+    "objective_ids": []
+  },
+  "PI1.2": {
+    "text": "The entity implements policies and procedures over system processing to result in products, services, and reporting to meet the entity's objectives.",
+    "category": "Processing Integrity",
+    "intent": "RISK: Processing produces incorrect or incomplete results. INTENT: Processing logic is controlled and validated.",
+    "objective_ids": []
+  },
+  "PI1.3": {
+    "text": "The entity implements policies and procedures over system outputs to result in products, services, and reporting to meet the entity's objectives.",
+    "category": "Processing Integrity",
+    "intent": "RISK: Outputs are delivered to wrong parties or are incomplete. INTENT: Outputs are distributed accurately and completely.",
+    "objective_ids": []
+  },
+  "PI1.4": {
+    "text": "The entity implements policies and procedures to make available or deliver output completely, accurately, and timely in accordance with specifications to meet the entity's objectives.",
+    "category": "Processing Integrity",
+    "intent": "RISK: Processing errors go undetected and uncorrected. INTENT: Errors in processing are identified and corrected in a timely manner.",
+    "objective_ids": []
+  },
+  "PI1.5": {
+    "text": "The entity implements policies and procedures to store inputs, items in processing, and outputs completely, accurately, and timely in accordance with system specifications to meet the entity's objectives.",
+    "category": "Processing Integrity",
+    "intent": "RISK: Data storage processes corrupt or lose data. INTENT: Data integrity is maintained throughout storage.",
+    "objective_ids": []
+  },
+  "P1.1": {
+    "text": "The entity provides notice to data subjects about its privacy practices to meet the entity's objectives related to privacy.",
+    "category": "Privacy",
+    "intent": "RISK: Data subjects are unaware of how their personal information is collected, used, and shared. INTENT: Transparent privacy notice covering all required elements.",
+    "objective_ids": []
+  },
+  "P2.1": {
+    "text": "The entity communicates choices available regarding the collection, use, retention, disclosure, and disposal of personal information to data subjects.",
+    "category": "Privacy",
+    "intent": "RISK: Data subjects have no control over their personal information. INTENT: Meaningful choices and consent mechanisms.",
+    "objective_ids": []
+  },
+  "P3.1": {
+    "text": "Personal information is collected consistent with the entity's objectives related to privacy.",
+    "category": "Privacy",
+    "intent": "RISK: Collection exceeds what was disclosed in the privacy notice. INTENT: Collection aligns with stated purposes.",
+    "objective_ids": []
+  },
+  "P3.2": {
+    "text": "For information requiring explicit consent, the entity communicates the need for such consent, as well as the consequences of a failure to provide consent for the request for personal information, and obtains the consent prior to the collection of the information to meet the entity's objectives related to privacy.",
+    "category": "Privacy",
+    "intent": "RISK: Sensitive personal information collected without explicit consent. INTENT: Explicit consent obtained before collection of sensitive data.",
+    "objective_ids": []
+  },
+  "P4.1": {
+    "text": "The entity limits the use of personal information to the purposes identified in the entity's objectives related to privacy.",
+    "category": "Privacy",
+    "intent": "RISK: Personal information used for purposes beyond what was disclosed. INTENT: Use restricted to stated purposes.",
+    "objective_ids": []
+  },
+  "P4.2": {
+    "text": "The entity retains personal information consistent with the entity's objectives related to privacy.",
+    "category": "Privacy",
+    "intent": "RISK: Personal information retained longer than necessary. INTENT: Retention aligned with disclosed purposes and legal requirements.",
+    "objective_ids": []
+  },
+  "P4.3": {
+    "text": "The entity securely disposes of personal information to meet the entity's objectives related to privacy.",
+    "category": "Privacy",
+    "intent": "RISK: Personal information not properly destroyed when no longer needed. INTENT: Disposal processes ensure PI is irrecoverably destroyed.",
+    "objective_ids": []
+  },
+  "P5.1": {
+    "text": "The entity grants identified and authenticated data subjects the ability to access their stored personal information for review and, upon request, provides physical or electronic copies of that information to data subjects to meet the entity's objectives related to privacy.",
+    "category": "Privacy",
+    "intent": "RISK: Data subjects cannot access or review their personal information. INTENT: Accessible process for data subject access requests.",
+    "objective_ids": []
+  },
+  "P5.2": {
+    "text": "The entity corrects, amends, or appends personal information based on information provided by data subjects and communicates such information to third parties, as committed or required, to meet the entity's objectives related to privacy.",
+    "category": "Privacy",
+    "intent": "RISK: Inaccurate personal information cannot be corrected. INTENT: Data subjects can request corrections and third parties are notified.",
+    "objective_ids": []
+  },
+  "P6.1": {
+    "text": "The entity discloses personal information to third parties with the consent of the data subjects or as otherwise permitted or required by law to meet the entity's objectives related to privacy.",
+    "category": "Privacy",
+    "intent": "RISK: Personal information disclosed without proper authorization. INTENT: Disclosure only for authorized purposes.",
+    "objective_ids": []
+  },
+  "P6.2": {
+    "text": "The entity creates and retains a complete, accurate, and timely record of authorized disclosures of personal information to meet the entity's objectives related to privacy.",
+    "category": "Privacy",
+    "intent": "RISK: No record of who received personal information. INTENT: Disclosure records maintained.",
+    "objective_ids": []
+  },
+  "P6.3": {
+    "text": "The entity creates and retains a complete, accurate, and timely record of detected or reported unauthorized disclosures of personal information to meet the entity's objectives related to privacy.",
+    "category": "Privacy",
+    "intent": "RISK: Unauthorized disclosures go unrecorded. INTENT: Unauthorized disclosures documented and investigated.",
+    "objective_ids": []
+  },
+  "P6.4": {
+    "text": "The entity obtains privacy commitments from vendors and other third parties who have access to personal information to meet the entity's objectives related to privacy.",
+    "category": "Privacy",
+    "intent": "RISK: Third parties mishandle personal information. INTENT: Contractual privacy protections with third parties.",
+    "objective_ids": []
+  },
+  "P6.5": {
+    "text": "The entity obtains commitments from vendors and other third parties with access to personal information to notify the entity in the event of actual or suspected unauthorized disclosures of personal information.",
+    "category": "Privacy",
+    "intent": "RISK: Third-party breaches go unreported. INTENT: Contractual breach notification requirements.",
+    "objective_ids": []
+  },
+  "P6.6": {
+    "text": "The entity provides notification of breaches and incidents to affected data subjects, regulators, and others to meet the entity's objectives related to privacy.",
+    "category": "Privacy",
+    "intent": "RISK: Affected parties not notified of breaches. INTENT: Timely breach notification per applicable requirements.",
+    "objective_ids": []
+  },
+  "P6.7": {
+    "text": "The entity provides data subjects with an accounting of the personal information held and disclosure of the data subjects' personal information, upon the data subjects' request, to meet the entity's objectives related to privacy.",
+    "category": "Privacy",
+    "intent": "RISK: Data subjects cannot determine what information is held about them. INTENT: Accounting of disclosures available on request.",
+    "objective_ids": []
+  },
+  "P7.1": {
+    "text": "The entity collects and maintains accurate, up-to-date, complete, and relevant personal information to meet the entity's objectives related to privacy.",
+    "category": "Privacy",
+    "intent": "RISK: Personal information is inaccurate or outdated. INTENT: Data quality measures maintained.",
+    "objective_ids": []
+  },
+  "P8.1": {
+    "text": "The entity implements a process for receiving, addressing, resolving, and communicating the resolution of inquiries, complaints, and disputes from data subjects and others and periodically monitors compliance to meet the entity's objectives related to privacy.",
+    "category": "Privacy",
+    "intent": "RISK: Privacy complaints go unaddressed. INTENT: Formal complaint handling and compliance monitoring process.",
+    "objective_ids": []
+  }
+}
