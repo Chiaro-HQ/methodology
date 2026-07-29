@@ -125,8 +125,8 @@ The control library and the calibration examples are a first release, a
 starting point. The method grows as it is applied and challenged: controls get
 added, attribute texts get sharpened, and a judgment call worth teaching
 becomes a new calibration example. Expect this repository to keep expanding
-and updating. Method changes land dated and versioned in
-[`CHANGELOG.md`](CHANGELOG.md).
+and updating. The direction is in [`ROADMAP.md`](ROADMAP.md), and method
+changes land dated and versioned in [`CHANGELOG.md`](CHANGELOG.md).
 
 Suggestions are as welcome as corrections. Open an issue, or write to
 cpa@chiarohq.com. A methodology nobody can check is not better than no
