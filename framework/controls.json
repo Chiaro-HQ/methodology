@@ -5401,5 +5401,160 @@
     },
     "sample_eligible": false,
     "typically_na_for": []
+  },
+  "HIP-01": {
+    "title": "Business Associate Agreements",
+    "category": "VENDOR MANAGEMENT",
+    "description": "{company_name} executes business associate agreements before electronic protected health information is created, received, maintained, or transmitted on its behalf or on behalf of a customer, and with every subcontractor that handles ePHI. Agreements include the content required by 45 CFR 164.314(a), including security incident reporting and subcontractor flow-down.",
+    "criteria_mappings": [
+      "CC9.2"
+    ],
+    "can_be_na": true,
+    "na_trigger": "Is the HIPAA compliance add-on in scope for this engagement?",
+    "collection": {
+      "gating_question": "Does your organization sign business associate agreements (BAAs) with the customers and vendors that handle protected health information? (Yes/No)",
+      "absent_reason_template": "Entity does not execute business associate agreements for its ePHI relationships. All attributes for this control marked absent. This is a structural gap requiring implementation.",
+      "local_save": "vendor/",
+      "question": "How do you manage business associate agreements with the customers and subcontractors that touch ePHI?",
+      "follow_ups": [
+        "Which customers and vendors create, receive, store, or transmit ePHI with you?",
+        "Do you have a BAA in place with your cloud infrastructure provider (AWS, GCP, or Azure)?",
+        "Do you sign BAAs with every subcontractor that can access ePHI?",
+        "Does your BAA cover security incident reporting and flow-down of the same obligations to subcontractors?"
+      ],
+      "documents": [
+        "Executed BAAs",
+        "BAA template",
+        "Vendor Documentation"
+      ],
+      "evidence_commands": [],
+      "collection_playbook": {
+        "evidence_goals": [
+          "Pull the inventory or data flow document identifying which customers and subcontractors handle ePHI",
+          "Pull executed BAAs for customer relationships involving ePHI, with signature dates",
+          "Pull executed downstream BAAs for subcontractors that handle ePHI, including the cloud provider BAA",
+          "Pull the BAA template or a representative executed agreement showing the required terms"
+        ],
+        "what_good_looks_like": "A vendor or customer inventory that flags every ePHI counterparty, a signed BAA on file for each of them (the cloud provider's console-accepted BAA counts), and operative terms that require Security Rule compliance, subcontractor flow-down, and security incident reporting.",
+        "what_bad_looks_like": "ePHI flowing to customers or vendors with no inventory of who those parties are, sampled relationships with no executed agreement to show, or a BAA that omits one of the required elements.",
+        "red_flags": [
+          "No identification of which counterparties handle ePHI",
+          "A customer relationship where ePHI handling began before any BAA was signed, with no documented interim arrangement carrying the required terms for that window",
+          "A subcontractor with access to ePHI excluded from BAA scope without a documented rationale",
+          "BAA terms silent on subcontractor flow-down or on incident reporting"
+        ],
+        "platform_hints": {
+          "google_drive": "Pull the executed BAA folder and the vendor inventory spreadsheet. Check the ePHI flag column against the data flow document.",
+          "notion": "Pull the vendor register page and any BAA tracker. Executed agreements usually live as attachments or links on each vendor's page.",
+          "aws": "The AWS BAA is accepted through AWS Artifact. Pull the Artifact agreement acceptance page showing the account and acceptance date."
+        }
+      }
+    },
+    "sample_eligible": true,
+    "typically_na_for": []
+  },
+  "HIP-02": {
+    "title": "Emergency Access Procedure",
+    "category": "IDENTITY & ACCESS MANAGEMENT",
+    "description": "{company_name} maintains a documented emergency access procedure for obtaining access to systems containing electronic protected health information when normal access paths are unavailable. Emergency credentials are restricted and secured, and any use is logged and reviewed afterward.",
+    "criteria_mappings": [
+      "CC6.1",
+      "CC6.3"
+    ],
+    "can_be_na": true,
+    "na_trigger": "Is the HIPAA compliance add-on in scope for this engagement?",
+    "collection": {
+      "gating_question": "Does your organization have a documented way to reach systems containing ePHI when normal sign-in paths are down (a break-glass procedure)? (Yes/No)",
+      "absent_reason_template": "Entity does not have a documented emergency access procedure for systems containing ePHI. All attributes for this control marked absent. This is a structural gap requiring implementation.",
+      "local_save": "access-management/",
+      "question": "How would your team get into production systems holding ePHI if the normal sign-in path (SSO or your identity provider) were unavailable?",
+      "follow_ups": [
+        "Where are the break-glass credentials stored, and who can reach them?",
+        "What circumstances qualify as an emergency, and who is authorized to invoke the procedure?",
+        "Is use of the emergency path logged, and is any use reviewed afterward?"
+      ],
+      "documents": [
+        "Access control policy (break-glass section)",
+        "Emergency access runbook",
+        "Credential vault entry"
+      ],
+      "evidence_commands": [
+        {
+          "system": "aws",
+          "command": "aws iam get-account-summary --query 'SummaryMap.[AccountMFAEnabled,AccountAccessKeysPresent]'",
+          "shows": "Whether the root break-glass identity has MFA enabled and whether standing root access keys exist"
+        }
+      ],
+      "collection_playbook": {
+        "evidence_goals": [
+          "Pull the documented emergency access procedure covering qualifying circumstances, authorized personnel, and the steps to obtain access",
+          "Pull the inventory of emergency access paths (break-glass accounts, root credentials, recovery codes) and where each is secured",
+          "Pull the access log for the break-glass identity over the period, and the post-use review record for any use"
+        ],
+        "what_good_looks_like": "A written break-glass section naming who may invoke emergency access and when, credentials enumerated and locked to those people (a restricted vault entry or a physically secured device), and a log showing either zero uses or uses that each carry an after-the-fact review.",
+        "what_bad_looks_like": "Emergency access that exists only as tribal knowledge, a root password sitting in a vault the whole team can read, or an emergency sign-in during the period that nobody went back and reviewed.",
+        "red_flags": [
+          "No written procedure, or a procedure that names no authorized personnel",
+          "Emergency credentials reachable by people outside the named set",
+          "Root or break-glass sign-ins with no post-use review on record",
+          "No logging on the emergency path at all"
+        ],
+        "platform_hints": {
+          "aws": "Pull the account summary showing root MFA, and CloudTrail sign-in events filtered to the root identity for the period.",
+          "1password": "Pull the vault access report for the break-glass vault showing which people can reach the entry.",
+          "gcp": "Pull the organization admin sign-in audit log filtered to the recovery or super-admin identity."
+        }
+      }
+    },
+    "sample_eligible": true,
+    "typically_na_for": []
+  },
+  "HIP-03": {
+    "title": "Security Documentation Retention",
+    "category": "POLICY & DOCUMENTATION",
+    "description": "{company_name} retains its security policies and the records of required security activities, including risk assessments, access reviews, incident documentation, and training records, for at least six years from creation or the date last in effect, whichever is later, and can retrieve historical versions.",
+    "criteria_mappings": [
+      "CC5.3"
+    ],
+    "can_be_na": true,
+    "na_trigger": "Is the HIPAA compliance add-on in scope for this engagement?",
+    "collection": {
+      "gating_question": "Does your organization keep security policies and security activity records (risk assessments, reviews, incident notes, training records) for a defined retention period? (Yes/No)",
+      "absent_reason_template": "Entity does not define retention for security policies and security activity records. All attributes for this control marked absent. This is a structural gap requiring implementation.",
+      "local_save": "policies/",
+      "question": "How long do you keep security policies and the records of security activities, and can you still open an old version of a policy?",
+      "follow_ups": [
+        "Is there a written retention requirement covering security documentation, and does it reach six years?",
+        "Where do records of risk assessments, access reviews, incidents, and training live?",
+        "Can you retrieve an earlier version of a policy (version history, archive folder, or a system that preserves prior versions)?"
+      ],
+      "documents": [
+        "Retention schedule or policy governance section",
+        "Document repository version history",
+        "Archive folder structure"
+      ],
+      "evidence_commands": [],
+      "collection_playbook": {
+        "evidence_goals": [
+          "Pull the written retention requirement covering security policies and security activity records, showing the six year floor",
+          "Pull proof that historical versions are retrievable: version history on the policy repository, an archive folder, or retention settings on the system of record"
+        ],
+        "what_good_looks_like": "A retention statement that names security policies and activity records with a period of at least six years, and a repository that demonstrably produces prior versions (open an old version live, or show the archive).",
+        "what_bad_looks_like": "Retention defined only for customer data or logs while security documentation goes unmentioned, or policies edited in place in a tool whose history window cannot reach back to earlier versions.",
+        "red_flags": [
+          "No retention requirement for security documentation anywhere in the policy suite",
+          "A stated period shorter than six years",
+          "Policies edited in place with version history disabled or time-limited",
+          "Security activity records (reviews, incidents, training) with no defined home"
+        ],
+        "platform_hints": {
+          "google_drive": "Open version history on the security policy and show the oldest available version. Pull the shared drive's archive folder listing if one exists.",
+          "notion": "Page history depth depends on the plan. Pull the workspace plan settings alongside the page history so the retention window is verifiable.",
+          "github": "Policies kept in a repo carry full history. Pull the file's commit log showing the earliest versions."
+        }
+      }
+    },
+    "sample_eligible": false,
+    "typically_na_for": []
   }
 }

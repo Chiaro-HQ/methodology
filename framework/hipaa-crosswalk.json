@@ -1,0 +1,1014 @@
+{
+  "meta": {
+    "title": "HIPAA Security Rule crosswalk",
+    "framework": "45 CFR Part 164, Subpart C (Security Rule), text in force August 2026",
+    "library": "Chiaro control library (see framework/controls.json)",
+    "method_version": "1.1",
+    "scope_notes": [
+      "The mapping covers the Security Rule (Subpart C) only. It excludes the Privacy Rule (Subpart E) and the Breach Notification Rule (Subpart D). Breach response is operationally addressed by INC-01/INC-02 and COM-02, but those obligations are legal duties outside a controls mapping and are deliberately not rows here.",
+      "The SOC 2 opinion covers the Trust Services Criteria only. This crosswalk feeds Section 5 of the report (Other Information, unaudited, no opinion expressed) and the prep-phase HIPAA coverage view. It is never a compliance certification.",
+      "Verification sources: 45 CFR 164.308, 164.310, 164.312, 164.314, 164.316 via Cornell LII (current text), checked 2026-08-04. The January 2025 NPRM that would eliminate the addressable category is still proposed; HHS moved it to long-term actions with final action anticipated July 2027. This mapping targets the rule in force.",
+      "Row convention: every standard and every implementation specification is a row. Standards whose substance lives in their specifications resolve as roll-ups of the child rows."
+    ]
+  },
+  "resolutions": {
+    "covered": "Fully carried by mapped controls already in the library",
+    "covered_attr": "Carried by an existing control that gains one HIPAA-gated attribute so the ePHI delta is tested, not just advised",
+    "covered_note": "Carried by mapped controls, with a HIPAA lens note that becomes prep guidance",
+    "inherited": "Carried partly by the cloud provider's controls, monitored through VND-02, plus entity-level controls where facilities exist",
+    "new_control": "Requires one of the three drafted HIP controls",
+    "rollup": "Standard met through its implementation specifications (child rows)",
+    "na": "Not applicable to the client population this add-on serves"
+  },
+  "rows": [
+    {
+      "cite": "164.308(a)(1)(i)",
+      "name": "Security management process",
+      "kind": "standard",
+      "status": "required",
+      "safeguard": "Administrative",
+      "resolution": "rollup",
+      "controls": [
+        "RSK-01",
+        "RSK-02",
+        "EVL-02",
+        "POL-01"
+      ],
+      "rationale": "Met through the four specifications below; the umbrella process is the risk assessment cycle (RSK-01), risk-based control design (RSK-02), deficiency remediation (EVL-02) and the approved policy suite (POL-01)."
+    },
+    {
+      "cite": "164.308(a)(1)(ii)(A)",
+      "name": "Risk analysis",
+      "kind": "spec",
+      "status": "required",
+      "safeguard": "Administrative",
+      "resolution": "covered_attr",
+      "controls": [
+        "RSK-01",
+        "AST-01"
+      ],
+      "rationale": "RSK-01 A1 to A7 require a formal assessment of threats, vulnerabilities, likelihood and impact within the last 12 months; AST-01 A4 documents data flows.",
+      "note": "Gated attribute on RSK-01 tests that the risk analysis explicitly identifies where ePHI is created, received, maintained and transmitted."
+    },
+    {
+      "cite": "164.308(a)(1)(ii)(B)",
+      "name": "Risk management",
+      "kind": "spec",
+      "status": "required",
+      "safeguard": "Administrative",
+      "resolution": "covered",
+      "controls": [
+        "RSK-02",
+        "EVL-02"
+      ],
+      "rationale": "RSK-02 A1/A2 map each significant risk to at least one control; EVL-02 A3/A4 track corrective action plans to completion."
+    },
+    {
+      "cite": "164.308(a)(1)(ii)(C)",
+      "name": "Sanction policy",
+      "kind": "spec",
+      "status": "required",
+      "safeguard": "Administrative",
+      "resolution": "covered_attr",
+      "controls": [
+        "GOV-01",
+        "PPL-04"
+      ],
+      "rationale": "GOV-01 A2 documents a disciplinary process for violations; PPL-04 A2 defines consequences for policy violations and A4 evidences corrective action taken.",
+      "note": "Gated attribute on GOV-01 tests that the disciplinary process explicitly reaches violations of security policies and procedures."
+    },
+    {
+      "cite": "164.308(a)(1)(ii)(D)",
+      "name": "Information system activity review",
+      "kind": "spec",
+      "status": "required",
+      "safeguard": "Administrative",
+      "resolution": "covered",
+      "controls": [
+        "MON-01",
+        "MON-02",
+        "IAM-05"
+      ],
+      "rationale": "MON-01 collects and retains security event logs; MON-02 A3 evidences triage of alerts within defined timeframes; IAM-05 reviews access reports periodically."
+    },
+    {
+      "cite": "164.308(a)(2)",
+      "name": "Assigned security responsibility",
+      "kind": "standard",
+      "status": "required",
+      "safeguard": "Administrative",
+      "resolution": "covered_attr",
+      "controls": [
+        "GOV-03",
+        "GOV-04"
+      ],
+      "rationale": "GOV-03 A2 formally assigns security and compliance responsibilities; GOV-04 A1 identifies an oversight recipient independent of day to day engineering.",
+      "note": "Gated attribute on GOV-03 tests that a security official is designated by name, not only by function."
+    },
+    {
+      "cite": "164.308(a)(3)(i)",
+      "name": "Workforce security",
+      "kind": "standard",
+      "status": "required",
+      "safeguard": "Administrative",
+      "resolution": "rollup",
+      "controls": [
+        "IAM-03",
+        "PPL-01",
+        "IAM-04"
+      ],
+      "rationale": "Met through the three specifications below."
+    },
+    {
+      "cite": "164.308(a)(3)(ii)(A)",
+      "name": "Authorization and/or supervision",
+      "kind": "spec",
+      "status": "addressable",
+      "safeguard": "Administrative",
+      "resolution": "covered",
+      "controls": [
+        "IAM-03",
+        "IAM-06"
+      ],
+      "rationale": "IAM-03 A2/A4 require documented authorization by an authorized approver before access; IAM-06 assigns access by role."
+    },
+    {
+      "cite": "164.308(a)(3)(ii)(B)",
+      "name": "Workforce clearance procedure",
+      "kind": "spec",
+      "status": "addressable",
+      "safeguard": "Administrative",
+      "resolution": "covered",
+      "controls": [
+        "PPL-01"
+      ],
+      "rationale": "PPL-01 A1 to A5 require background checks for all personnel including contractors prior to or at start, with sampled completion."
+    },
+    {
+      "cite": "164.308(a)(3)(ii)(C)",
+      "name": "Termination procedures",
+      "kind": "spec",
+      "status": "addressable",
+      "safeguard": "Administrative",
+      "resolution": "covered",
+      "controls": [
+        "IAM-04"
+      ],
+      "rationale": "IAM-04 A1 to A5: documented offboarding, defined maximum removal timeframe, sampled evidence that all in-scope access was removed on time."
+    },
+    {
+      "cite": "164.308(a)(4)(i)",
+      "name": "Information access management",
+      "kind": "standard",
+      "status": "required",
+      "safeguard": "Administrative",
+      "resolution": "rollup",
+      "controls": [
+        "IAM-03",
+        "IAM-05",
+        "IAM-06"
+      ],
+      "rationale": "Met through the specifications below."
+    },
+    {
+      "cite": "164.308(a)(4)(ii)(A)",
+      "name": "Isolating health care clearinghouse functions",
+      "kind": "spec",
+      "status": "required",
+      "safeguard": "Administrative",
+      "resolution": "na",
+      "controls": [],
+      "rationale": "Applies only when the organization contains a health care clearinghouse inside a larger organization. Not the client population this add-on serves; the scoping profile should confirm and record this.",
+      "note": "If a future client is or contains a clearinghouse, this row becomes a scoping question, not a control."
+    },
+    {
+      "cite": "164.308(a)(4)(ii)(B)",
+      "name": "Access authorization",
+      "kind": "spec",
+      "status": "addressable",
+      "safeguard": "Administrative",
+      "resolution": "covered",
+      "controls": [
+        "IAM-03",
+        "IAM-06"
+      ],
+      "rationale": "IAM-03 A1/A2 document the provisioning process with authorization before grant; IAM-06 A1/A2 define roles and assign access through them."
+    },
+    {
+      "cite": "164.308(a)(4)(ii)(C)",
+      "name": "Access establishment and modification",
+      "kind": "spec",
+      "status": "addressable",
+      "safeguard": "Administrative",
+      "resolution": "covered",
+      "controls": [
+        "IAM-03",
+        "IAM-04",
+        "IAM-05"
+      ],
+      "rationale": "IAM-03 A5 verifies granted access matches the authorized request; IAM-04 adjusts access on role changes; IAM-05 A3 to A6 review and remediate periodically."
+    },
+    {
+      "cite": "164.308(a)(5)(i)",
+      "name": "Security awareness and training",
+      "kind": "standard",
+      "status": "required",
+      "safeguard": "Administrative",
+      "resolution": "covered",
+      "controls": [
+        "PPL-03"
+      ],
+      "rationale": "PPL-03 A1/A2/A4: curriculum exists, timing defined for onboarding and ongoing completion, sampled completion within the defined period."
+    },
+    {
+      "cite": "164.308(a)(5)(ii)(A)",
+      "name": "Security reminders",
+      "kind": "spec",
+      "status": "addressable",
+      "safeguard": "Administrative",
+      "resolution": "covered",
+      "controls": [
+        "PPL-03",
+        "POL-02"
+      ],
+      "rationale": "PPL-03 A2/A4 require periodic recurring training; POL-02 A4 communicates policy and system changes to affected personnel."
+    },
+    {
+      "cite": "164.308(a)(5)(ii)(B)",
+      "name": "Protection from malicious software",
+      "kind": "spec",
+      "status": "addressable",
+      "safeguard": "Administrative",
+      "resolution": "covered_note",
+      "controls": [
+        "END-01",
+        "PPL-03"
+      ],
+      "rationale": "END-01 A1/A4/A5 deploy anti-malware protection with automatic updates and evidence threats are remediated.",
+      "note": "Prep guidance: the training curriculum should include malware and phishing awareness (PPL-03 A1 topic list)."
+    },
+    {
+      "cite": "164.308(a)(5)(ii)(C)",
+      "name": "Log-in monitoring",
+      "kind": "spec",
+      "status": "addressable",
+      "safeguard": "Administrative",
+      "resolution": "covered",
+      "controls": [
+        "MON-01",
+        "MON-02"
+      ],
+      "rationale": "MON-01 A2 includes authentication events in required log categories; MON-02 A1 alerts on key threat scenarios including anomalous sign-in activity."
+    },
+    {
+      "cite": "164.308(a)(5)(ii)(D)",
+      "name": "Password management",
+      "kind": "spec",
+      "status": "addressable",
+      "safeguard": "Administrative",
+      "resolution": "covered_note",
+      "controls": [
+        "IAM-01",
+        "IAM-02"
+      ],
+      "rationale": "IAM-01 A3 tiers authentication strength by system sensitivity; IAM-02 enforces MFA on all in-scope systems.",
+      "note": "Addressable spec: SSO and passwordless or MFA-first authentication satisfies it as a stronger equivalent; document that choice in the access control policy."
+    },
+    {
+      "cite": "164.308(a)(6)(i)",
+      "name": "Security incident procedures",
+      "kind": "standard",
+      "status": "required",
+      "safeguard": "Administrative",
+      "resolution": "covered",
+      "controls": [
+        "INC-01"
+      ],
+      "rationale": "INC-01 A1 to A3: documented IR plan covering roles, severity, containment through recovery and communication, reviewed within 12 months."
+    },
+    {
+      "cite": "164.308(a)(6)(ii)",
+      "name": "Response and reporting",
+      "kind": "spec",
+      "status": "required",
+      "safeguard": "Administrative",
+      "resolution": "covered",
+      "controls": [
+        "INC-02",
+        "MON-02"
+      ],
+      "rationale": "INC-02 A2 to A7 evidence containment, root cause, restoration, notification and documentation for sampled incidents; MON-02 A4 defines escalation into incident response."
+    },
+    {
+      "cite": "164.308(a)(7)(i)",
+      "name": "Contingency plan",
+      "kind": "standard",
+      "status": "required",
+      "safeguard": "Administrative",
+      "resolution": "covered",
+      "controls": [
+        "BCP-01"
+      ],
+      "rationale": "BCP-01 A1 to A3: documented BCP/DR plan with critical systems, recovery objectives, procedures and responsible personnel. BCP-01 carries CC9.1, so it is in scope for every engagement including Security-only."
+    },
+    {
+      "cite": "164.308(a)(7)(ii)(A)",
+      "name": "Data backup plan",
+      "kind": "spec",
+      "status": "required",
+      "safeguard": "Administrative",
+      "resolution": "covered",
+      "controls": [
+        "BCP-02"
+      ],
+      "rationale": "BCP-02 A1 to A4: automated backups of critical data on schedule, monitored, stored in a geographically separate location; A6 evidences successful restoration tests (retrievable exact copies)."
+    },
+    {
+      "cite": "164.308(a)(7)(ii)(B)",
+      "name": "Disaster recovery plan",
+      "kind": "spec",
+      "status": "required",
+      "safeguard": "Administrative",
+      "resolution": "covered",
+      "controls": [
+        "BCP-01",
+        "BCP-02"
+      ],
+      "rationale": "BCP-01 A3 documents recovery procedures with responsible personnel; BCP-02 A5/A6 provide alternate processing capability and tested restoration."
+    },
+    {
+      "cite": "164.308(a)(7)(ii)(C)",
+      "name": "Emergency mode operation plan",
+      "kind": "spec",
+      "status": "required",
+      "safeguard": "Administrative",
+      "resolution": "covered_attr",
+      "controls": [
+        "BCP-01",
+        "BCP-02"
+      ],
+      "rationale": "BCP-01 A2/A3 identify critical systems and continuity procedures; BCP-02 A5 provides failover infrastructure.",
+      "note": "Gated attribute on BCP-01 tests that the plan states how ePHI security protections continue during emergency mode operations, not only how service is restored."
+    },
+    {
+      "cite": "164.308(a)(7)(ii)(D)",
+      "name": "Testing and revision procedures",
+      "kind": "spec",
+      "status": "addressable",
+      "safeguard": "Administrative",
+      "resolution": "covered",
+      "controls": [
+        "BCP-01"
+      ],
+      "rationale": "BCP-01 A5/A6: plan tested within the last 12 months with documented results, and updated based on findings."
+    },
+    {
+      "cite": "164.308(a)(7)(ii)(E)",
+      "name": "Applications and data criticality analysis",
+      "kind": "spec",
+      "status": "addressable",
+      "safeguard": "Administrative",
+      "resolution": "covered",
+      "controls": [
+        "BCP-01"
+      ],
+      "rationale": "BCP-01 A2 identifies critical systems with recovery time and recovery point objectives, which is the criticality ranking this spec asks for."
+    },
+    {
+      "cite": "164.308(a)(8)",
+      "name": "Evaluation",
+      "kind": "standard",
+      "status": "required",
+      "safeguard": "Administrative",
+      "resolution": "covered",
+      "controls": [
+        "EVL-01",
+        "RSK-01"
+      ],
+      "rationale": "EVL-01 A2/A3: management security posture review plus an independent evaluation within the last year (the SOC 2 examination itself qualifies); RSK-01 A11/A12 update the assessment on significant change."
+    },
+    {
+      "cite": "164.308(b)(1)",
+      "name": "Business associate contracts and other arrangements",
+      "kind": "standard",
+      "status": "required",
+      "safeguard": "Administrative",
+      "resolution": "new_control",
+      "controls": [
+        "HIP-01",
+        "VND-01"
+      ],
+      "rationale": "VND-01 A5/A8/A9 put security, confidentiality and data processing terms in vendor contracts, but a business associate agreement is a specific statutory contract with mandated clauses. HIP-01 requires identification of every ePHI counterparty and a signed BAA both upstream and downstream."
+    },
+    {
+      "cite": "164.308(b)(3)",
+      "name": "Written contract or other arrangement",
+      "kind": "spec",
+      "status": "required",
+      "safeguard": "Administrative",
+      "resolution": "new_control",
+      "controls": [
+        "HIP-01"
+      ],
+      "rationale": "HIP-01 A2/A3 sample signed BAAs for customer relationships and subcontractors that handle ePHI."
+    },
+    {
+      "cite": "164.310(a)(1)",
+      "name": "Facility access controls",
+      "kind": "standard",
+      "status": "required",
+      "safeguard": "Physical",
+      "resolution": "rollup",
+      "controls": [
+        "NET-03",
+        "VND-02"
+      ],
+      "rationale": "Met through the four specifications below. For cloud infrastructure the data center layer is the provider's controls, monitored through VND-02; NET-03 covers any entity facilities and is N/A-eligible for fully remote companies."
+    },
+    {
+      "cite": "164.310(a)(2)(i)",
+      "name": "Contingency operations (facility access)",
+      "kind": "spec",
+      "status": "addressable",
+      "safeguard": "Physical",
+      "resolution": "inherited",
+      "controls": [
+        "VND-02",
+        "BCP-01"
+      ],
+      "rationale": "Facility access in support of data restoration is a data center function inherited from the cloud provider (VND-02 A2/A4 review its SOC 2 report); BCP-01 documents entity-side recovery responsibilities."
+    },
+    {
+      "cite": "164.310(a)(2)(ii)",
+      "name": "Facility security plan",
+      "kind": "spec",
+      "status": "addressable",
+      "safeguard": "Physical",
+      "resolution": "inherited",
+      "controls": [
+        "NET-03",
+        "VND-02"
+      ],
+      "rationale": "NET-03 A1/A2 restrict facility and sensitive area access where the entity has premises; data center safeguarding is provider-inherited via VND-02."
+    },
+    {
+      "cite": "164.310(a)(2)(iii)",
+      "name": "Access control and validation procedures",
+      "kind": "spec",
+      "status": "addressable",
+      "safeguard": "Physical",
+      "resolution": "inherited",
+      "controls": [
+        "NET-03",
+        "VND-02"
+      ],
+      "rationale": "NET-03 A1/A4 authorize access by role and log visitors where premises exist; provider-inherited at the data center layer."
+    },
+    {
+      "cite": "164.310(a)(2)(iv)",
+      "name": "Maintenance records",
+      "kind": "spec",
+      "status": "addressable",
+      "safeguard": "Physical",
+      "resolution": "inherited",
+      "controls": [
+        "VND-02",
+        "NET-03"
+      ],
+      "rationale": "Records of repairs to physical security components are a facility operator function, provider-inherited for cloud and landlord-managed offices; NET-03 A5 gives the periodic entity-side review where applicable. Addressable, so the documented rationale is the compliance artifact."
+    },
+    {
+      "cite": "164.310(b)",
+      "name": "Workstation use",
+      "kind": "standard",
+      "status": "required",
+      "safeguard": "Physical",
+      "resolution": "covered",
+      "controls": [
+        "POL-01",
+        "END-02"
+      ],
+      "rationale": "POL-01 A1 requires an acceptable use policy specifying proper workstation functions; END-02 A3 governs removable media usage."
+    },
+    {
+      "cite": "164.310(c)",
+      "name": "Workstation security",
+      "kind": "standard",
+      "status": "required",
+      "safeguard": "Physical",
+      "resolution": "covered",
+      "controls": [
+        "END-01"
+      ],
+      "rationale": "END-01 A1 to A4: endpoint protection deployed with enforced disk encryption, screen lock and automatic updates on all managed endpoints."
+    },
+    {
+      "cite": "164.310(d)(1)",
+      "name": "Device and media controls",
+      "kind": "standard",
+      "status": "required",
+      "safeguard": "Physical",
+      "resolution": "rollup",
+      "controls": [
+        "DAT-02",
+        "AST-01",
+        "DAT-03"
+      ],
+      "rationale": "Met through the four specifications below."
+    },
+    {
+      "cite": "164.310(d)(2)(i)",
+      "name": "Disposal",
+      "kind": "spec",
+      "status": "required",
+      "safeguard": "Physical",
+      "resolution": "covered",
+      "controls": [
+        "DAT-02"
+      ],
+      "rationale": "DAT-02 A1 to A3: disposal procedure with wiping and destruction methods, sampled evidence of wipe before disposal, documented with date, method and asset identification."
+    },
+    {
+      "cite": "164.310(d)(2)(ii)",
+      "name": "Media re-use",
+      "kind": "spec",
+      "status": "required",
+      "safeguard": "Physical",
+      "resolution": "covered",
+      "controls": [
+        "DAT-02"
+      ],
+      "rationale": "DAT-02 A1/A2 cover removal of data before assets are returned or repurposed, including cloud storage destruction per provider procedures."
+    },
+    {
+      "cite": "164.310(d)(2)(iii)",
+      "name": "Accountability (media movement)",
+      "kind": "spec",
+      "status": "addressable",
+      "safeguard": "Physical",
+      "resolution": "covered_attr",
+      "controls": [
+        "AST-01",
+        "DAT-03"
+      ],
+      "rationale": "AST-01 A1 to A3 maintain an asset inventory including endpoints with designated owners, reviewed periodically.",
+      "note": "Served with the row below by the gated attribute on DAT-03 (policy position on local ePHI storage), alongside the AST-01 endpoint inventory."
+    },
+    {
+      "cite": "164.310(d)(2)(iv)",
+      "name": "Data backup and storage (before movement)",
+      "kind": "spec",
+      "status": "addressable",
+      "safeguard": "Physical",
+      "resolution": "covered_attr",
+      "controls": [
+        "BCP-02",
+        "DAT-03"
+      ],
+      "rationale": "BCP-02 A1/A4 maintain retrievable copies independent of any single device; DAT-03 A3 protects removable media and endpoints.",
+      "note": "Gated attribute on DAT-03 tests that policy addresses local ePHI storage on endpoints and removable media (prohibited, or inventoried and protected). Also serves the accountability row above."
+    },
+    {
+      "cite": "164.312(a)(1)",
+      "name": "Access control",
+      "kind": "standard",
+      "status": "required",
+      "safeguard": "Technical",
+      "resolution": "rollup",
+      "controls": [
+        "IAM-01",
+        "IAM-02",
+        "IAM-06",
+        "IAM-07"
+      ],
+      "rationale": "Met through the four specifications below plus role-based least privilege (IAM-06) and privileged access management (IAM-07)."
+    },
+    {
+      "cite": "164.312(a)(2)(i)",
+      "name": "Unique user identification",
+      "kind": "spec",
+      "status": "required",
+      "safeguard": "Technical",
+      "resolution": "covered",
+      "controls": [
+        "IAM-01"
+      ],
+      "rationale": "IAM-01 A1: all users uniquely identified, no shared accounts for interactive use."
+    },
+    {
+      "cite": "164.312(a)(2)(ii)",
+      "name": "Emergency access procedure",
+      "kind": "spec",
+      "status": "required",
+      "safeguard": "Technical",
+      "resolution": "new_control",
+      "controls": [
+        "HIP-02",
+        "IAM-07"
+      ],
+      "rationale": "IAM-07 governs standing privileged access but nothing in the library covers break-glass access to ePHI when normal access paths are unavailable. HIP-02 documents the procedure, restricts and secures the emergency path, and reviews any use."
+    },
+    {
+      "cite": "164.312(a)(2)(iii)",
+      "name": "Automatic logoff",
+      "kind": "spec",
+      "status": "addressable",
+      "safeguard": "Technical",
+      "resolution": "covered_note",
+      "controls": [
+        "END-01",
+        "IAM-01"
+      ],
+      "rationale": "END-01 A3 enforces screen lock on managed endpoints; IAM-01 A3 tiers authentication strength by sensitivity.",
+      "note": "Addressable: enforced screen lock plus SSO session policies is the accepted equivalent; where the product admin plane supports idle session timeout, prep guidance recommends enabling it."
+    },
+    {
+      "cite": "164.312(a)(2)(iv)",
+      "name": "Encryption and decryption (at rest)",
+      "kind": "spec",
+      "status": "addressable",
+      "safeguard": "Technical",
+      "resolution": "covered",
+      "controls": [
+        "DAT-01"
+      ],
+      "rationale": "DAT-01 A1/A3/A4/A5: encryption at rest on all in-scope systems with current algorithms and managed keys."
+    },
+    {
+      "cite": "164.312(b)",
+      "name": "Audit controls",
+      "kind": "standard",
+      "status": "required",
+      "safeguard": "Technical",
+      "resolution": "covered",
+      "controls": [
+        "MON-01",
+        "IAM-07"
+      ],
+      "rationale": "MON-01 A1 to A4 record and retain authentication, access, configuration and admin activity with tamper protection; IAM-07 A3 logs privileged activity."
+    },
+    {
+      "cite": "164.312(c)(1)",
+      "name": "Integrity",
+      "kind": "standard",
+      "status": "required",
+      "safeguard": "Technical",
+      "resolution": "covered_note",
+      "controls": [
+        "DAT-01",
+        "MON-01",
+        "BCP-02"
+      ],
+      "rationale": "Improper alteration or destruction is constrained by access controls, encryption (DAT-01), logged change activity (MON-01) and retrievable exact copies with tested restores (BCP-02 A6).",
+      "note": "Addressable mechanism below; the standard is met by the combination, documented in the mapped policy."
+    },
+    {
+      "cite": "164.312(c)(2)",
+      "name": "Mechanism to authenticate ePHI",
+      "kind": "spec",
+      "status": "addressable",
+      "safeguard": "Technical",
+      "resolution": "covered_note",
+      "controls": [
+        "DAT-01",
+        "BCP-02"
+      ],
+      "rationale": "TLS integrity protection in transit (DAT-01 A2/A3), managed-database checksumming at rest and successful restoration tests (BCP-02 A6) corroborate that ePHI has not been altered or destroyed in an unauthorized manner.",
+      "note": "Addressable: document these mechanisms as the corroboration measure in the data protection policy."
+    },
+    {
+      "cite": "164.312(d)",
+      "name": "Person or entity authentication",
+      "kind": "standard",
+      "status": "required",
+      "safeguard": "Technical",
+      "resolution": "covered",
+      "controls": [
+        "IAM-01",
+        "IAM-02"
+      ],
+      "rationale": "IAM-01 A2 requires authentication before access; IAM-02 enforces MFA across in-scope systems with sampled enrollment."
+    },
+    {
+      "cite": "164.312(e)(1)",
+      "name": "Transmission security",
+      "kind": "standard",
+      "status": "required",
+      "safeguard": "Technical",
+      "resolution": "covered",
+      "controls": [
+        "DAT-01"
+      ],
+      "rationale": "DAT-01 A2: TLS 1.2 or higher for all in-scope connections."
+    },
+    {
+      "cite": "164.312(e)(2)(i)",
+      "name": "Integrity controls (transmission)",
+      "kind": "spec",
+      "status": "addressable",
+      "safeguard": "Technical",
+      "resolution": "covered",
+      "controls": [
+        "DAT-01"
+      ],
+      "rationale": "TLS provides in-transit integrity protection against undetected modification (DAT-01 A2/A3)."
+    },
+    {
+      "cite": "164.312(e)(2)(ii)",
+      "name": "Encryption (transmission)",
+      "kind": "spec",
+      "status": "addressable",
+      "safeguard": "Technical",
+      "resolution": "covered",
+      "controls": [
+        "DAT-01"
+      ],
+      "rationale": "DAT-01 A2 encrypts data in transit for all in-scope connections."
+    },
+    {
+      "cite": "164.314(a)(1)",
+      "name": "Business associate contracts or other arrangements (content)",
+      "kind": "standard",
+      "status": "required",
+      "safeguard": "Organizational",
+      "resolution": "new_control",
+      "controls": [
+        "HIP-01"
+      ],
+      "rationale": "HIP-01 A4 verifies BAA terms carry the content this standard mandates."
+    },
+    {
+      "cite": "164.314(a)(2)(i)",
+      "name": "Business associate contract content",
+      "kind": "spec",
+      "status": "required",
+      "safeguard": "Organizational",
+      "resolution": "new_control",
+      "controls": [
+        "HIP-01"
+      ],
+      "rationale": "HIP-01 A4: BAA includes Security Rule compliance, subcontractor flow-down per 164.308(b)(2), and security incident reporting including breaches."
+    },
+    {
+      "cite": "164.314(a)(2)(ii)",
+      "name": "Other arrangements",
+      "kind": "spec",
+      "status": "required",
+      "safeguard": "Organizational",
+      "resolution": "na",
+      "controls": [],
+      "rationale": "Applies when covered entity and business associate are both government entities using a memorandum of understanding instead of a contract. Not the client population this add-on serves.",
+      "note": "If a client contracts directly with a government covered entity under an MOU, treat this row as in scope through HIP-01 with the MOU as the instrument."
+    },
+    {
+      "cite": "164.314(a)(2)(iii)",
+      "name": "Business associate contracts with subcontractors",
+      "kind": "spec",
+      "status": "required",
+      "safeguard": "Organizational",
+      "resolution": "new_control",
+      "controls": [
+        "HIP-01"
+      ],
+      "rationale": "HIP-01 A3 samples signed downstream BAAs for every subcontractor that handles ePHI."
+    },
+    {
+      "cite": "164.314(b)",
+      "name": "Requirements for group health plans",
+      "kind": "standard",
+      "status": "required",
+      "safeguard": "Organizational",
+      "resolution": "na",
+      "controls": [],
+      "rationale": "Applies to group health plans and their plan sponsors. SaaS business associates are not group health plans; the scoping profile records this."
+    },
+    {
+      "cite": "164.316(a)",
+      "name": "Policies and procedures",
+      "kind": "standard",
+      "status": "required",
+      "safeguard": "Policies and documentation",
+      "resolution": "covered",
+      "controls": [
+        "POL-01"
+      ],
+      "rationale": "POL-01 A1 to A6: approved policy suite across the required security domains with named owners, periodic review and operational procedures."
+    },
+    {
+      "cite": "164.316(b)(1)",
+      "name": "Documentation",
+      "kind": "standard",
+      "status": "required",
+      "safeguard": "Policies and documentation",
+      "resolution": "covered_note",
+      "controls": [
+        "POL-01",
+        "POL-02"
+      ],
+      "rationale": "Policies are maintained in written electronic form (POL-02 A2 accessible storage) with operational procedures documented (POL-01 A3).",
+      "note": "Records of required actions and assessments (risk analyses, reviews, incident records) exist as the evidence corpus each control produces; HIP-03 adds the retention requirement below."
+    },
+    {
+      "cite": "164.316(b)(2)(i)",
+      "name": "Time limit (6 year retention)",
+      "kind": "spec",
+      "status": "required",
+      "safeguard": "Policies and documentation",
+      "resolution": "new_control",
+      "controls": [
+        "HIP-03"
+      ],
+      "rationale": "No existing control sets a retention floor for security documentation. DAT-03 governs customer data retention, which is a different object. HIP-03 requires six year retention of security policies and activity records from creation or last effective date."
+    },
+    {
+      "cite": "164.316(b)(2)(ii)",
+      "name": "Availability (of documentation)",
+      "kind": "spec",
+      "status": "required",
+      "safeguard": "Policies and documentation",
+      "resolution": "covered",
+      "controls": [
+        "POL-02"
+      ],
+      "rationale": "POL-02 A2/A3: policies stored somewhere accessible and training points personnel to where relevant policies live."
+    },
+    {
+      "cite": "164.316(b)(2)(iii)",
+      "name": "Updates (to documentation)",
+      "kind": "spec",
+      "status": "required",
+      "safeguard": "Policies and documentation",
+      "resolution": "covered",
+      "controls": [
+        "POL-01",
+        "RSK-01"
+      ],
+      "rationale": "POL-01 A5 reviews and approves policies on a defined cadence; RSK-01 A11 updates the risk assessment when significant changes occur."
+    }
+  ],
+  "gated_attributes": [
+    {
+      "host": "RSK-01",
+      "host_title": "Annual Risk Assessment",
+      "carries": "164.308(a)(1)(ii)(A)",
+      "attr_type": "document",
+      "text": "Risk assessment identifies the systems and data flows where ePHI is created, received, maintained, or transmitted",
+      "typical_evidence": "The risk assessment document, with an ePHI scope section or ePHI-flagged rows in the asset and flow inventory",
+      "pass_criteria": "PASS: The risk assessment names the specific systems and data flows handling ePHI, consistent with the asset inventory (AST-01). FAIL: The assessment is generic with no identification of where ePHI lives, or contradicts the asset inventory."
+    },
+    {
+      "host": "GOV-01",
+      "host_title": "Code of Conduct & Ethics",
+      "carries": "164.308(a)(1)(ii)(C)",
+      "attr_type": "document",
+      "text": "The disciplinary process explicitly covers failures to comply with security policies and procedures, including those protecting ePHI",
+      "typical_evidence": "The disciplinary or sanctions section of the Code of Conduct or security policy",
+      "pass_criteria": "PASS: Documented consequences expressly apply to failures to comply with security policies and procedures, and the language reaches policies protecting ePHI (naming ePHI, HIPAA, or the security policy suite that governs it). FAIL: Discipline is documented only for general conduct, or the sanctions language cannot be read to reach security policy violations."
+    },
+    {
+      "host": "GOV-03",
+      "host_title": "Organizational Structure & Responsibilities",
+      "carries": "164.308(a)(2)",
+      "attr_type": "document",
+      "text": "A security official is designated by name as responsible for developing and implementing the policies and procedures that protect ePHI (the HIPAA Security Officer role)",
+      "typical_evidence": "Policy suite ownership page, org chart annotation, or a designation memo naming the individual",
+      "pass_criteria": "PASS: A specific named individual is designated as responsible for the security program covering ePHI (a HIPAA Security Officer designation, or an equivalent named assignment). FAIL: Responsibility is assigned to a function or team with no identifiable individual, or the designation exists but cannot be tied to ePHI protection."
+    },
+    {
+      "host": "BCP-01",
+      "host_title": "BCP/DR Plan & Testing",
+      "carries": "164.308(a)(7)(ii)(C)",
+      "attr_type": "document",
+      "text": "The contingency plan addresses how security protections for ePHI continue during emergency mode operations",
+      "typical_evidence": "Emergency mode or degraded operations section of the BCP/DR plan",
+      "pass_criteria": "PASS: The plan states how access control, logging, and data protection are maintained (or consciously constrained with compensating steps) while operating in emergency mode. FAIL: The plan covers only restoration of service with nothing on protecting ePHI during degraded operations."
+    },
+    {
+      "host": "DAT-03",
+      "host_title": "Data Retention & Deletion",
+      "carries": "164.310(d)(2)(iii), 164.310(d)(2)(iv)",
+      "attr_type": "document",
+      "text": "Policy addresses local storage of ePHI on endpoints and removable media",
+      "typical_evidence": "Data handling or acceptable use policy section on local storage of ePHI",
+      "pass_criteria": "PASS: Policy either prohibits storing ePHI on endpoints and removable media, or requires that any such storage is inventoried, encrypted, and backed up before device movement. FAIL: No policy position on local ePHI storage."
+    }
+  ],
+  "new_controls": [
+    {
+      "ref": "HIP-01",
+      "title": "Business Associate Agreements",
+      "category": "VENDOR MANAGEMENT",
+      "criteria_mappings": [
+        "CC9.2"
+      ],
+      "can_be_na": true,
+      "na_trigger": "Is the HIPAA compliance add-on in scope for this engagement?",
+      "description": "{company_name} executes business associate agreements before electronic protected health information is created, received, maintained, or transmitted on its behalf or on behalf of a customer, and with every subcontractor that handles ePHI. Agreements include the content required by 45 CFR 164.314(a), including security incident reporting and subcontractor flow-down.",
+      "maps_hipaa": [
+        "164.308(b)(1)",
+        "164.308(b)(3)",
+        "164.314(a)(1)",
+        "164.314(a)(2)(i)",
+        "164.314(a)(2)(iii)"
+      ],
+      "attributes": [
+        {
+          "id": "A1",
+          "attr_type": "document",
+          "text": "Counterparties that create, receive, maintain, or transmit ePHI are identified",
+          "typical_evidence": "Vendor or customer inventory with an ePHI flag, or a data flow document naming ePHI counterparties",
+          "pass_criteria": "PASS: An inventory or data flow document identifies which customers and subcontractors handle ePHI, and it is consistent with the vendor inventory in VND-01. FAIL: No identification of ePHI-handling counterparties, or the list contradicts the vendor inventory."
+        },
+        {
+          "id": "A2",
+          "attr_type": "sample",
+          "text": "For a sample of customer relationships involving ePHI: a signed BAA is in place",
+          "typical_evidence": "Executed BAA documents with signature dates",
+          "pass_criteria": "PASS: Each sampled ePHI customer relationship has a BAA signed on or before the date ePHI handling began. FAIL: Any sampled relationship lacks a signed BAA, or the BAA postdates the start of ePHI handling with no documented interim arrangement."
+        },
+        {
+          "id": "A3",
+          "attr_type": "sample",
+          "text": "For a sample of subcontractors that handle ePHI: a signed downstream BAA is in place",
+          "typical_evidence": "Executed subcontractor BAAs, including cloud provider BAA (for example the AWS, GCP, or Azure BAA)",
+          "pass_criteria": "PASS: Each sampled ePHI-handling subcontractor, including the cloud infrastructure provider, has a signed BAA. FAIL: Any ePHI-handling subcontractor operates without a BAA. Note: a subcontractor that only transmits ePHI transiently and never stores it, or a service that receives no ePHI at all, may be excluded only with a documented rationale. A vendor that stores or maintains ePHI remains a business associate even when the data is encrypted and the vendor holds no decryption key."
+        },
+        {
+          "id": "A4",
+          "attr_type": "document",
+          "text": "BAA terms include the elements required by 45 CFR 164.314(a)(2)",
+          "typical_evidence": "The BAA template or executed agreements",
+          "pass_criteria": "PASS: Terms require Security Rule compliance, flow-down of the same obligations to subcontractors, and upstream reporting of security incidents including breaches. FAIL: Any of the three required elements is absent from the operative BAA."
+        }
+      ]
+    },
+    {
+      "ref": "HIP-02",
+      "title": "Emergency Access Procedure",
+      "category": "IDENTITY & ACCESS MANAGEMENT",
+      "criteria_mappings": [
+        "CC6.1",
+        "CC6.3"
+      ],
+      "can_be_na": true,
+      "na_trigger": "Is the HIPAA compliance add-on in scope for this engagement?",
+      "description": "{company_name} maintains a documented emergency access procedure for obtaining access to systems containing electronic protected health information when normal access paths are unavailable. Emergency credentials are restricted and secured, and any use is logged and reviewed afterward.",
+      "maps_hipaa": [
+        "164.312(a)(2)(ii)"
+      ],
+      "attributes": [
+        {
+          "id": "A1",
+          "attr_type": "document",
+          "text": "Emergency access procedure is documented, covering when it applies and who may invoke it",
+          "typical_evidence": "Break-glass or emergency access section of the access control policy or runbook",
+          "pass_criteria": "PASS: A documented procedure defines the circumstances that qualify as an emergency, who is authorized to invoke emergency access, and the steps to obtain it. FAIL: No documented emergency access procedure, or the procedure names no authorized personnel."
+        },
+        {
+          "id": "A2",
+          "attr_type": "config",
+          "text": "Emergency access paths are inventoried, restricted, and secured",
+          "typical_evidence": "Break-glass account list, vault entry, or root credential storage configuration",
+          "pass_criteria": "PASS: Emergency credentials or access paths are enumerated, limited to the personnel named in the procedure, and stored securely (vault, sealed credential, or hardware token). FAIL: Emergency credentials are undocumented, broadly available, or stored in plaintext."
+        },
+        {
+          "id": "A3",
+          "attr_type": "sample",
+          "text": "For a sample of emergency access uses (if any): use was logged and reviewed afterward",
+          "typical_evidence": "Access logs for the break-glass identity plus the post-use review record",
+          "pass_criteria": "PASS: Each sampled use is logged and has a documented after-the-fact review confirming the use was appropriate. FAIL: Any use is unlogged or lacks a post-use review. If no uses occurred in the period, the attribute passes on the logging configuration being in place."
+        }
+      ]
+    },
+    {
+      "ref": "HIP-03",
+      "title": "Security Documentation Retention",
+      "category": "POLICY & DOCUMENTATION",
+      "criteria_mappings": [
+        "CC5.3"
+      ],
+      "can_be_na": true,
+      "na_trigger": "Is the HIPAA compliance add-on in scope for this engagement?",
+      "description": "{company_name} retains its security policies and the records of required security activities, including risk assessments, access reviews, incident documentation, and training records, for at least six years from creation or the date last in effect, whichever is later, and can retrieve historical versions.",
+      "maps_hipaa": [
+        "164.316(b)(2)(i)"
+      ],
+      "attributes": [
+        {
+          "id": "A1",
+          "attr_type": "document",
+          "text": "A six year retention requirement is defined for security policies and security activity records",
+          "typical_evidence": "Retention schedule or policy governance section naming the six year floor for security documentation",
+          "pass_criteria": "PASS: A documented retention requirement of at least six years covers security policies and the records of security activities (risk assessments, reviews, incidents, training). FAIL: No retention requirement for security documentation, or a period shorter than six years."
+        },
+        {
+          "id": "A2",
+          "attr_type": "config",
+          "text": "Historical versions of policies and security records are retrievable",
+          "typical_evidence": "Document repository version history, archive folder, or system-of-record retention configuration",
+          "pass_criteria": "PASS: The storage system demonstrably preserves prior versions (version history enabled, archive maintained, or deletion restricted) so a document from an earlier period can be produced. FAIL: Prior versions are overwritten or deleted with no archive."
+        }
+      ]
+    }
+  ]
+}

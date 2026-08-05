@@ -1,6 +1,6 @@
 # The tools
 
-The 37 tools a connected client's AI can call. Generated from the
+The 40 tools a connected client's AI can call. Generated from the
 live server, so this list is exactly what a client sees, including the
 descriptions the AI reads to decide what to do.
 
@@ -135,11 +135,12 @@ Args:
         Pass an empty list if the client only wants Security (the default).
     addons: Optional compliance add-ons to cover alongside SOC 2.
         Options: "gdpr", "ccpa", "hipaa". GDPR and CCPA require the
-        "privacy" category. Pass an empty list to remove all add-ons;
-        omit the argument to leave the client's current add-ons unchanged.
+        "privacy" category; HIPAA requires the "availability" category.
+        Pass an empty list to remove all add-ons; omit the argument to
+        leave the client's current add-ons unchanged.
     confirm_scope_change: Set true only after the client has reviewed
-        the scope-change preview and approved it. Ignored when the
-        category set is not changing.
+        the scope-change preview and approved it. Ignored when neither
+        the category set nor scope-moving add-ons (HIPAA) are changing.
 
 ## `delegate_topic`
 
@@ -184,6 +185,19 @@ renders no verdict.
 Args:
     control_ref: e.g. "IAM-02".
     attribute_id: e.g. "A1". Omit to get the kit for every attribute of the control.
+
+## `get_population_spec`
+
+What a population is, in our definition, and what a pull of it must carry.
+
+Call this BEFORE pulling anything. The definition is ours, not yours: if a
+reconciliation later shows a difference, the answer is to re-pull against
+this definition, never to narrow the definition until the difference goes
+away.
+
+Args:
+    population_key: One of the keys this returns when called with no
+        argument (e.g. "changes"). Omit to list them all.
 
 ## `get_progress`
 
@@ -356,6 +370,37 @@ Args:
         the system shouldn't be tested directly (e.g., "client doesn't
         configure it, just consumes managed defaults"). Recorded for
         the auditor's review.
+
+## `record_hipaa_intake`
+
+Record the HIPAA intake answers (asked when the HIPAA add-on is chosen).
+
+Ask the client these five things in plain language BEFORE confirm_scope,
+then record the answers here. They become recorded determinations on the
+scope profile: several Security Rule provisions apply only to specific
+organization types (health care clearinghouses, government entities under
+an MOU, group health plans), and a recorded answer is what makes skipping
+those provisions a documented determination instead of an assumption. The
+ePHI systems list also seeds the business associate agreement work.
+
+Args:
+    entity_role: "business_associate", "covered_entity", or "both". A
+        software company serving healthcare customers is almost always a
+        business associate.
+    contains_clearinghouse: True if the organization contains or operates
+        a health care clearinghouse (an entity translating health
+        information between standard and nonstandard formats).
+    group_health_plan: True if the organization is, or sponsors, a group
+        health plan whose administration touches the product in scope.
+        Offering ordinary employee health insurance is NOT this.
+    ephi_systems: The systems and data flows where ePHI is created,
+        received, maintained, or transmitted, named the way the client
+        names them (for example "production Postgres", "uploads bucket",
+        "transcription pipeline").
+    cloud_provider_baa: True if a business associate agreement is in
+        place with the cloud infrastructure provider.
+    cloud_provider_baa_note: Optional detail, for example "AWS BAA
+        accepted through Artifact".
 
 ## `record_questionnaire_answers`
 
@@ -696,6 +741,10 @@ Args:
         write-up). If such a record is dated today, it has no operating
         history — we don't block it, we flag it for review. (A policy you
         just created today is fine; you don't need a date for it.)
+    snapshot: Type II observation windows only. Pass "opening" when this
+        artifact is part of the opening configuration snapshot — the
+        config state of an in-scope system captured when the window
+        starts. Leave empty for all other evidence.
 
 ## `submit_note`
 
@@ -734,6 +783,59 @@ Args:
         quarterly reviews; client confirms zero review records exist"}]'.
         This writes the contradiction to those attributes so review can't
         miss it. The goal is never to hide a contradiction — surface it.
+
+## `submit_population`
+
+Hand over a complete population with the retrieval that produced it.
+
+You are NOT judging anything here. Convert the raw output into the canonical
+table and send both; every conclusion is formed later by the audit team.
+Do not drop rows that look like problems — a change that skipped review is
+exactly what the population is for, and removing it is the one thing that
+makes the whole exercise worthless.
+
+If I refuse, the message says what did not reconcile and what to re-pull.
+Fix and resend; do not work around it.
+
+Args:
+    population_key: From get_population_spec (e.g. "changes").
+    source_command: The exact command you ran, verbatim, re-runnable.
+    field_map: JSON object mapping each canonical field to where it comes
+        from in a raw record. A plain dotted path is {"path": "mergedAt"}.
+        For a list, use one of map_where / first_where / min_where /
+        max_where / count_where / any_where / all_where, e.g.
+        {"map_where": {"path": "reviews", "field": "state", "op": "eq",
+        "value": "APPROVED", "take": {"by": "author.login",
+        "at": "submittedAt"}}}.
+    raw: JSON object {"format": "json_array", "records": [...]} holding the
+        unedited output. Prefer the tool's own structured output (--json,
+        --output json) over parsed text. If it is too large I will tell you
+        how to narrow the pull rather than accepting a truncated one.
+    rows: JSON array of the normalized rows. Every row needs a source_ref
+        of the form "<raw_id_path>=<value>" or "raw#<index>".
+    raw_record_count: How many records are in the raw output. I count them
+        myself and refuse on a mismatch.
+    source_system: The system it came from ("github", "rippling", "okta").
+    filter_granularity: "exact_utc" if your filter used exact timestamps,
+        "date_only_widened" if it used dates and you widened the range one
+        day on each side. A bare "date_only" is refused: whether an item at
+        the edge is included would depend on the source's timezone.
+    raw_id_path: Path to each raw record's own identifier ("number", "id").
+    declared_exclusions: JSON array of filters you applied, e.g.
+        [{"field": "state", "op": "eq", "value": "MERGED", "keep": true,
+        "reason": "the population is changes that reached production"}].
+    aux_raw: JSON object of supporting pulls, each {"command": ...,
+        "records": [...]} — the identifier census and any second source.
+    completeness: JSON object declaring which completeness tests apply
+        (sequence, reconciliations, control_total, period_coverage,
+        recon_attempts). get_population_spec says which ones this
+        population supports.
+    policy: JSON object of parameters from the entity's OWN documented
+        policy, with policy_basis naming the document. Defaults are strict:
+        an undeclared exception does not exist.
+    segment_start: Optional ISO timestamp — only for a checkpoint pull that
+        covers part of the window rather than all of it.
+    segment_end: Optional ISO timestamp, as above.
 
 ## `undo_delegate`
 

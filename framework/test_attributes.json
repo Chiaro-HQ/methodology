@@ -159,6 +159,48 @@
             }
           ]
         }
+      },
+      {
+        "id": "A6",
+        "text": "The disciplinary process explicitly covers failures to comply with security policies and procedures, including those protecting ePHI",
+        "attr_type": "document",
+        "typical_evidence": "The disciplinary or sanctions section of the Code of Conduct or security policy",
+        "pass_criteria": "PASS: Documented consequences expressly apply to failures to comply with security policies and procedures, and the language reaches policies protecting ePHI (naming ePHI, HIPAA, or the security policy suite that governs it). FAIL: Discipline is documented only for general conduct, or the sanctions language cannot be read to reach security policy violations.",
+        "na_condition": "N/A if the HIPAA compliance add-on is not in scope",
+        "can_be_na": true,
+        "calibration_examples": [
+          {
+            "evidence_summary": "The handbook's disciplinary section covers 'violation of company policies, including the information security and data protection policies'. Neither ePHI nor HIPAA is named anywhere in the section.",
+            "ai_verdict": "gap",
+            "correct_verdict": "pass",
+            "reasoning": "Language reaching the security policy suite reaches the policies protecting ePHI, which is one of the three accepted forms. The sanctions text does not need to name ePHI when the security policies it covers are the ones that govern it.",
+            "weight": 0.5,
+            "source": "synthetic_taste_v1"
+          },
+          {
+            "evidence_summary": "The code of conduct lists termination as a consequence for harassment, fraud, and general misconduct. Nothing in the disciplinary language ties consequences to security policy compliance.",
+            "ai_verdict": "pass",
+            "correct_verdict": "gap",
+            "reasoning": "General misconduct language cannot be read to reach security policy violations. The attribute needs discipline expressly tied to security policies, and inferring it from a generic misconduct clause is the over-generous reading.",
+            "weight": 0.5,
+            "source": "synthetic_taste_v1"
+          }
+        ],
+        "collection_hint": {
+          "coverage_checks": [
+            {
+              "id": "sanctions_reach_security_policies",
+              "question": "Does the disciplinary or sanctions section expressly cover failures to comply with security policies, with language reaching ePHI, HIPAA, or the security policy suite?",
+              "lane": "document",
+              "alt_lanes": [
+                "record"
+              ],
+              "corroboration_required": true,
+              "command_ref": "",
+              "evidence_strength": "document"
+            }
+          ]
+        }
       }
     ]
   },
@@ -645,6 +687,48 @@
             {
               "id": "including_designated_privacy_owner",
               "question": "Does the evidence show that including a designated privacy owner?",
+              "lane": "document",
+              "alt_lanes": [
+                "record"
+              ],
+              "corroboration_required": true,
+              "command_ref": "",
+              "evidence_strength": "document"
+            }
+          ]
+        }
+      },
+      {
+        "id": "A7",
+        "text": "A security official is designated by name as responsible for developing and implementing the policies and procedures that protect ePHI (the HIPAA Security Officer role)",
+        "attr_type": "document",
+        "typical_evidence": "Policy suite ownership page, org chart annotation, or a designation memo naming the individual",
+        "pass_criteria": "PASS: A specific named individual is designated as responsible for the security program covering ePHI (a HIPAA Security Officer designation, or an equivalent named assignment). FAIL: Responsibility is assigned to a function or team with no identifiable individual, or the designation exists but cannot be tied to ePHI protection.",
+        "na_condition": "N/A if the HIPAA compliance add-on is not in scope",
+        "can_be_na": true,
+        "calibration_examples": [
+          {
+            "evidence_summary": "The security policy's ownership page assigns the security program, including the policies protecting patient data, to a named individual (the CTO, listed by full name in the ownership table). No document uses the words HIPAA Security Officer.",
+            "ai_verdict": "gap",
+            "correct_verdict": "pass",
+            "reasoning": "A named individual responsible for the security program covering ePHI is the designation. The title HIPAA Security Officer is not required; an equivalent named assignment satisfies the attribute.",
+            "weight": 0.5,
+            "source": "synthetic_taste_v1"
+          },
+          {
+            "evidence_summary": "The org chart shows a two-person security team owning the security program, and the policy suite lists 'Security Team' as owner. No individual is identified anywhere.",
+            "ai_verdict": "pass",
+            "correct_verdict": "gap",
+            "reasoning": "Assignment to a team or function without an identifiable individual fails the attribute. The rule asks for a designated person, and a two-person team with no named lead is still not one.",
+            "weight": 0.5,
+            "source": "synthetic_taste_v1"
+          }
+        ],
+        "collection_hint": {
+          "coverage_checks": [
+            {
+              "id": "named_security_official",
+              "question": "Does the evidence name a specific individual designated as responsible for the security program covering ePHI?",
               "lane": "document",
               "alt_lanes": [
                 "record"
@@ -3117,6 +3201,48 @@
               "corroboration_required": true,
               "command_ref": "",
               "evidence_strength": "record"
+            }
+          ]
+        }
+      },
+      {
+        "id": "A13",
+        "text": "Risk assessment identifies the systems and data flows where ePHI is created, received, maintained, or transmitted",
+        "attr_type": "document",
+        "typical_evidence": "The risk assessment document, with an ePHI scope section or ePHI-flagged rows in the asset and flow inventory",
+        "pass_criteria": "PASS: The risk assessment names the specific systems and data flows handling ePHI, consistent with the asset inventory. FAIL: The assessment is generic with no identification of where ePHI lives, or contradicts the asset inventory.",
+        "na_condition": "N/A if the HIPAA compliance add-on is not in scope",
+        "can_be_na": true,
+        "calibration_examples": [
+          {
+            "evidence_summary": "The risk assessment has no ePHI narrative section, but its own asset and threat table flags the production database, the transcription pipeline, and the EHR integration as PHI systems and ties threats to each.",
+            "ai_verdict": "gap",
+            "correct_verdict": "pass",
+            "reasoning": "PHI-flagged rows inside the assessment's own asset and flow inventory are the identification. A dedicated ePHI narrative section is not required when the assessment names the specific systems and ties analysis to them.",
+            "weight": 0.5,
+            "source": "synthetic_taste_v1"
+          },
+          {
+            "evidence_summary": "The risk assessment discusses threats to 'customer data' generically. A separate asset inventory flags the ePHI systems, but the assessment never references it or distinguishes ePHI anywhere.",
+            "ai_verdict": "pass",
+            "correct_verdict": "gap",
+            "reasoning": "The identification must live in the risk assessment itself. A generic assessment cannot borrow specificity from a separate inventory it never references, because the analysis then never actually reached the ePHI systems.",
+            "weight": 0.5,
+            "source": "synthetic_taste_v1"
+          }
+        ],
+        "collection_hint": {
+          "coverage_checks": [
+            {
+              "id": "ephi_scope_in_assessment",
+              "question": "Does the risk assessment itself name the specific systems and data flows where ePHI is created, received, maintained, or transmitted?",
+              "lane": "document",
+              "alt_lanes": [
+                "record"
+              ],
+              "corroboration_required": true,
+              "command_ref": "",
+              "evidence_strength": "document"
             }
           ]
         }
@@ -5962,6 +6088,48 @@
             {
               "id": "document_exists",
               "question": "Does the evidence include a data deletion procedure or automated purge configuration documentation?",
+              "lane": "document",
+              "alt_lanes": [
+                "record"
+              ],
+              "corroboration_required": true,
+              "command_ref": "",
+              "evidence_strength": "document"
+            }
+          ]
+        }
+      },
+      {
+        "id": "A5",
+        "text": "Policy addresses local storage of ePHI on endpoints and removable media",
+        "attr_type": "document",
+        "typical_evidence": "Data handling or acceptable use policy section on local storage of ePHI",
+        "pass_criteria": "PASS: Policy either prohibits storing ePHI on endpoints and removable media, or requires that any such storage is inventoried, encrypted, and backed up before device movement. FAIL: No policy position on local ePHI storage.",
+        "na_condition": "N/A if the HIPAA compliance add-on is not in scope",
+        "can_be_na": true,
+        "calibration_examples": [
+          {
+            "evidence_summary": "The data handling policy prohibits storing production data, including ePHI, on laptops and removable media, with no exceptions.",
+            "ai_verdict": "gap",
+            "correct_verdict": "pass",
+            "reasoning": "Prohibition is one of the two accepted policy positions. An inventory of local ePHI storage is only required when such storage is permitted, so failing a prohibition policy for lacking one is wrong.",
+            "weight": 0.5,
+            "source": "synthetic_taste_v1"
+          },
+          {
+            "evidence_summary": "The acceptable use policy tells staff to 'handle patient data with care' and to 'avoid keeping files locally where possible'. No definite position on local ePHI storage appears anywhere.",
+            "ai_verdict": "pass",
+            "correct_verdict": "gap",
+            "reasoning": "An exhortation to be careful is not a policy position. The policy must either prohibit local ePHI storage or set the inventory, encryption, and backup requirements for it; 'avoid where possible' does neither.",
+            "weight": 0.5,
+            "source": "synthetic_taste_v1"
+          }
+        ],
+        "collection_hint": {
+          "coverage_checks": [
+            {
+              "id": "local_ephi_storage_position",
+              "question": "Does the policy take a definite position on local ePHI storage (prohibited, or inventoried, encrypted, and backed up)?",
               "lane": "document",
               "alt_lanes": [
                 "record"
@@ -8895,6 +9063,48 @@
               "corroboration_required": true,
               "command_ref": "",
               "evidence_strength": "record"
+            }
+          ]
+        }
+      },
+      {
+        "id": "A8",
+        "text": "The contingency plan addresses how security protections for ePHI continue during emergency mode operations",
+        "attr_type": "document",
+        "typical_evidence": "Emergency mode or degraded operations section of the BCP/DR plan",
+        "pass_criteria": "PASS: The plan states how access control, logging, and data protection are maintained (or consciously constrained with compensating steps) while operating in emergency mode. FAIL: The plan covers only restoration of service with nothing on protecting ePHI during degraded operations.",
+        "na_condition": "N/A if the HIPAA compliance add-on is not in scope",
+        "can_be_na": true,
+        "calibration_examples": [
+          {
+            "evidence_summary": "The DR runbook's degraded operations section states that during failover, access stays behind SSO, database encryption is unchanged, and audit logging continues in the standby region.",
+            "ai_verdict": "gap",
+            "correct_verdict": "pass",
+            "reasoning": "A degraded operations section stating how access control, logging, and data protection continue is exactly the emergency mode content this attribute asks for. A separately titled emergency mode operation plan is not required.",
+            "weight": 0.5,
+            "source": "synthetic_taste_v1"
+          },
+          {
+            "evidence_summary": "The BCP commits to restoring service within four hours from backups and walks through the restore procedure, but says nothing about how protections operate while the system runs degraded.",
+            "ai_verdict": "pass",
+            "correct_verdict": "gap",
+            "reasoning": "Restoration speed is a different question from protection during degraded operations. A plan that only restores service leaves the emergency window unaddressed, which is the specific exposure this attribute tests.",
+            "weight": 0.5,
+            "source": "synthetic_taste_v1"
+          }
+        ],
+        "collection_hint": {
+          "coverage_checks": [
+            {
+              "id": "emergency_mode_protections",
+              "question": "Does the contingency plan state how access control, logging, and data protection continue (or are consciously constrained) during emergency mode operations?",
+              "lane": "document",
+              "alt_lanes": [
+                "record"
+              ],
+              "corroboration_required": true,
+              "command_ref": "",
+              "evidence_strength": "document"
             }
           ]
         }
@@ -16160,6 +16370,417 @@
               "corroboration_required": true,
               "command_ref": "",
               "evidence_strength": "record"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "HIP-01": {
+    "attributes": [
+      {
+        "id": "A1",
+        "text": "Counterparties that create, receive, maintain, or transmit ePHI are identified",
+        "attr_type": "document",
+        "typical_evidence": "Vendor or customer inventory with an ePHI flag, or a data flow document naming ePHI counterparties",
+        "pass_criteria": "PASS: An inventory or data flow document identifies which customers and subcontractors handle ePHI, and it is consistent with the vendor inventory. FAIL: No identification of ePHI-handling counterparties, or the list contradicts the vendor inventory.",
+        "na_condition": "",
+        "can_be_na": false,
+        "calibration_examples": [
+          {
+            "evidence_summary": "The vendor register has an ePHI column and the data flow document names the same three counterparties (cloud provider, transcription API, EHR integration partner). No separate HIPAA-titled inventory exists.",
+            "ai_verdict": "gap",
+            "correct_verdict": "pass",
+            "reasoning": "Judge substance over form: an ePHI flag on the existing vendor register plus a consistent data flow document is the identification this attribute asks for. A separately titled HIPAA inventory is not required.",
+            "weight": 0.5,
+            "source": "synthetic_taste_v1"
+          },
+          {
+            "evidence_summary": "The data flow diagram shows ePHI flowing to an analytics vendor, but the vendor register's ePHI column marks only the cloud provider.",
+            "ai_verdict": "pass",
+            "correct_verdict": "gap",
+            "reasoning": "A contradiction between the identification and the flow evidence fails the attribute. The inventory must agree with where ePHI actually goes, and an unflagged recipient is exactly the counterparty most likely to be missing a BAA.",
+            "weight": 0.5,
+            "source": "synthetic_taste_v1"
+          }
+        ],
+        "collection_hint": {
+          "coverage_checks": [
+            {
+              "id": "ephi_counterparty_inventory",
+              "question": "Does the evidence include an inventory or data flow document identifying which customers and subcontractors handle ePHI?",
+              "lane": "document",
+              "alt_lanes": [
+                "record"
+              ],
+              "corroboration_required": true,
+              "command_ref": "",
+              "evidence_strength": "document"
+            }
+          ]
+        }
+      },
+      {
+        "id": "A2",
+        "text": "For a sample of customer relationships involving ePHI: a signed BAA is in place",
+        "attr_type": "sample",
+        "typical_evidence": "Executed BAA documents with signature dates",
+        "pass_criteria": "PASS: Each sampled ePHI customer relationship has a BAA signed on or before the date ePHI handling began. FAIL: Any sampled relationship lacks a signed BAA, or the BAA postdates the start of ePHI handling with no documented interim arrangement.",
+        "na_condition": "",
+        "can_be_na": false,
+        "calibration_examples": [
+          {
+            "evidence_summary": "Three sampled customers each have an executed BAA. One was signed two weeks after the pilot began but states an effective date of the pilot start, and the executed pilot agreement already bound both parties to Security Rule compliance, subcontractor flow-down, and security incident reporting for that window.",
+            "ai_verdict": "gap",
+            "correct_verdict": "pass",
+            "reasoning": "A documented interim arrangement qualifies when the required terms actually covered the entire handling window; here the pilot agreement carried the BAA content and the executed BAA is effective from day one. Failing this on signature order alone is over-literal.",
+            "weight": 0.5,
+            "source": "synthetic_taste_v1"
+          },
+          {
+            "evidence_summary": "The client states every customer signs a BAA at onboarding and shows the onboarding checklist template containing a BAA step, but no executed agreement is produced for any sampled customer.",
+            "ai_verdict": "pass",
+            "correct_verdict": "gap",
+            "reasoning": "A sample attribute needs the executed artifact for the sampled items. A process description or checklist template never substitutes for the signed document.",
+            "weight": 0.5,
+            "source": "synthetic_taste_v1"
+          },
+          {
+            "evidence_summary": "One sampled BAA was signed three months after ePHI handling began. The client offers a dated email in which the customer agreed to keep pilot data confidential; the email contains no security obligations and no retroactive effect.",
+            "ai_verdict": "pass",
+            "correct_verdict": "gap",
+            "reasoning": "A documented interim arrangement must carry the required agreement content for the exposure window. A generic confidentiality email with no security terms and no retroactive effect does not, so the late signature stands uncured.",
+            "weight": 0.5,
+            "source": "synthetic_taste_v1"
+          }
+        ],
+        "collection_hint": {
+          "coverage_checks": [
+            {
+              "id": "customer_baa_executed",
+              "question": "Does the evidence include executed customer BAAs with signature dates for the sampled relationships (not just a template or a process description)?",
+              "lane": "document",
+              "alt_lanes": [
+                "record"
+              ],
+              "corroboration_required": true,
+              "command_ref": "",
+              "evidence_strength": "document"
+            }
+          ]
+        }
+      },
+      {
+        "id": "A3",
+        "text": "For a sample of subcontractors that handle ePHI: a signed downstream BAA is in place",
+        "attr_type": "sample",
+        "typical_evidence": "Executed subcontractor BAAs, including cloud provider BAA (for example the AWS, GCP, or Azure BAA)",
+        "pass_criteria": "PASS: Each sampled ePHI-handling subcontractor, including the cloud infrastructure provider, has a signed BAA. FAIL: Any ePHI-handling subcontractor operates without a BAA. Note: a subcontractor that only transmits ePHI transiently and never stores it, or a service that receives no ePHI at all, may be excluded only with a documented rationale. A vendor that stores or maintains ePHI remains a business associate even when the data is encrypted and the vendor holds no decryption key.",
+        "na_condition": "",
+        "can_be_na": false,
+        "calibration_examples": [
+          {
+            "evidence_summary": "The AWS BAA was accepted through AWS Artifact and the client shows the Artifact acceptance page with the account id and acceptance date. No countersigned PDF exists.",
+            "ai_verdict": "gap",
+            "correct_verdict": "pass",
+            "reasoning": "Console acceptance through the provider's agreement mechanism is the standard executed form of a cloud BAA. Requiring a wet-signature PDF is over-literal.",
+            "weight": 0.5,
+            "source": "synthetic_taste_v1"
+          },
+          {
+            "evidence_summary": "An error-monitoring vendor receives stack traces that can include patient names. The client excluded it from BAA scope with a note reading 'logs only'.",
+            "ai_verdict": "pass",
+            "correct_verdict": "gap",
+            "reasoning": "An exclusion rationale must establish that the subcontractor cannot access ePHI. 'Logs only' does not establish that when the logs carry patient data, so the exclusion fails and the vendor needs a BAA.",
+            "weight": 0.5,
+            "source": "synthetic_taste_v1"
+          },
+          {
+            "evidence_summary": "An offsite backup vendor stores encrypted database snapshots containing ePHI. The client excluded it from BAA scope with the rationale that the client holds the encryption keys and the vendor only ever sees ciphertext.",
+            "ai_verdict": "pass",
+            "correct_verdict": "gap",
+            "reasoning": "A vendor that stores or maintains ePHI is a business associate even when the data is encrypted and the vendor holds no key. The ciphertext rationale does not remove the BAA requirement; only transient transmission or receiving no ePHI at all can.",
+            "weight": 0.5,
+            "source": "synthetic_taste_v1"
+          }
+        ],
+        "collection_hint": {
+          "coverage_checks": [
+            {
+              "id": "subcontractor_baa_executed",
+              "question": "Does the evidence include executed BAAs for the sampled ePHI-handling subcontractors, including the cloud infrastructure provider?",
+              "lane": "document",
+              "alt_lanes": [
+                "record",
+                "screenshot"
+              ],
+              "corroboration_required": true,
+              "command_ref": "",
+              "evidence_strength": "document"
+            }
+          ]
+        }
+      },
+      {
+        "id": "A4",
+        "text": "BAA terms include the elements required by 45 CFR 164.314(a)(2)",
+        "attr_type": "document",
+        "typical_evidence": "The BAA template or executed agreements",
+        "pass_criteria": "PASS: Terms require Security Rule compliance, flow-down of the same obligations to subcontractors, and upstream reporting of security incidents including breaches. FAIL: Any of the three required elements is absent from the operative BAA.",
+        "na_condition": "",
+        "can_be_na": false,
+        "calibration_examples": [
+          {
+            "evidence_summary": "The BAA template requires Security Rule compliance and breach reporting but says nothing about subcontractors. The client notes that in practice every subcontractor signs the same template.",
+            "ai_verdict": "pass",
+            "correct_verdict": "gap",
+            "reasoning": "The flow-down obligation must appear in the operative terms. The client's practice of signing subcontractors does not put the required clause into the agreement, and the practice is invisible to the counterparty relying on it.",
+            "weight": 0.5,
+            "source": "synthetic_taste_v1"
+          },
+          {
+            "evidence_summary": "The executed BAA incorporates the customer's standard BAA rider by reference. The rider, provided in evidence, contains all three required elements.",
+            "ai_verdict": "gap",
+            "correct_verdict": "pass",
+            "reasoning": "Terms incorporated by reference are operative terms. Judge the assembled agreement the parties are bound by, not a single document in isolation.",
+            "weight": 0.5,
+            "source": "synthetic_taste_v1"
+          }
+        ],
+        "collection_hint": {
+          "coverage_checks": [
+            {
+              "id": "baa_required_terms",
+              "question": "Does the evidence include the BAA template or an executed BAA showing Security Rule compliance, subcontractor flow-down, and incident reporting terms?",
+              "lane": "document",
+              "alt_lanes": [
+                "record"
+              ],
+              "corroboration_required": true,
+              "command_ref": "",
+              "evidence_strength": "document"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "HIP-02": {
+    "attributes": [
+      {
+        "id": "A1",
+        "text": "Emergency access procedure is documented, covering when it applies and who may invoke it",
+        "attr_type": "document",
+        "typical_evidence": "Break-glass or emergency access section of the access control policy or runbook",
+        "pass_criteria": "PASS: A documented procedure defines the circumstances that qualify as an emergency, who is authorized to invoke emergency access, and the steps to obtain it. FAIL: No documented emergency access procedure, or the procedure names no authorized personnel.",
+        "na_condition": "",
+        "can_be_na": false,
+        "calibration_examples": [
+          {
+            "evidence_summary": "The access control policy has a break-glass section: it applies when the identity provider is down or all administrators are unreachable, either founder may invoke it, and the steps point to the vault entry holding the root credential.",
+            "ai_verdict": "gap",
+            "correct_verdict": "pass",
+            "reasoning": "A section within the access control policy satisfies the documentation requirement. A standalone emergency access document is not required when the section covers circumstances, authorized people, and steps.",
+            "weight": 0.5,
+            "source": "synthetic_taste_v1"
+          },
+          {
+            "evidence_summary": "The client walks through a sensible break-glass process in conversation and shows the vault entry it uses, but no written procedure exists anywhere in the policy suite or runbooks.",
+            "ai_verdict": "pass",
+            "correct_verdict": "gap",
+            "reasoning": "The attribute tests documentation. A working practice described verbally fails it, because in a real emergency the people who know the process may be exactly the ones unreachable.",
+            "weight": 0.5,
+            "source": "synthetic_taste_v1"
+          }
+        ],
+        "collection_hint": {
+          "coverage_checks": [
+            {
+              "id": "emergency_procedure_documented",
+              "question": "Does the evidence include a written emergency access procedure covering qualifying circumstances, authorized personnel, and steps?",
+              "lane": "document",
+              "alt_lanes": [
+                "record"
+              ],
+              "corroboration_required": true,
+              "command_ref": "",
+              "evidence_strength": "document"
+            }
+          ]
+        }
+      },
+      {
+        "id": "A2",
+        "text": "Emergency access paths are inventoried, restricted, and secured",
+        "attr_type": "config",
+        "typical_evidence": "Break-glass account list, vault entry, or root credential storage configuration",
+        "pass_criteria": "PASS: Emergency credentials or access paths are enumerated, limited to the personnel named in the procedure, and stored securely (vault, sealed credential, or hardware token). FAIL: Emergency credentials are undocumented, broadly available, or stored in plaintext.",
+        "na_condition": "",
+        "can_be_na": false,
+        "calibration_examples": [
+          {
+            "evidence_summary": "A dedicated vault holds the cloud root credential, the vault access report lists only the two founders named in the procedure, and the root MFA device sits in a fire safe noted in the vault entry.",
+            "ai_verdict": "gap",
+            "correct_verdict": "pass",
+            "reasoning": "The criterion accepts any secure storage form: vault, sealed credential, or hardware token. A restricted vault entry with a physically secured MFA device qualifies; a hardware token is not specifically required.",
+            "weight": 0.5,
+            "source": "synthetic_taste_v1"
+          },
+          {
+            "evidence_summary": "The root password sits in the shared engineering vault that all eight engineers can read. The client notes it has never been used.",
+            "ai_verdict": "pass",
+            "correct_verdict": "gap",
+            "reasoning": "Broadly available emergency credentials fail the restriction requirement. Storage in a vault does not by itself restrict access to the personnel the procedure names, and non-use does not cure over-availability.",
+            "weight": 0.5,
+            "source": "synthetic_taste_v1"
+          }
+        ],
+        "collection_hint": {
+          "coverage_checks": [
+            {
+              "id": "break_glass_restricted",
+              "question": "Does the configuration evidence show the emergency credentials enumerated, limited to the named personnel, and stored securely?",
+              "lane": "screenshot",
+              "alt_lanes": [
+                "export",
+                "auto_pull"
+              ],
+              "corroboration_required": true,
+              "command_ref": "aws",
+              "evidence_strength": "system"
+            }
+          ]
+        }
+      },
+      {
+        "id": "A3",
+        "text": "For a sample of emergency access uses (if any): use was logged and reviewed afterward",
+        "attr_type": "sample",
+        "typical_evidence": "Access logs for the break-glass identity plus the post-use review record",
+        "pass_criteria": "PASS: Each sampled use is logged and has a documented after-the-fact review confirming the use was appropriate. FAIL: Any use is unlogged or lacks a post-use review. If no uses occurred in the period, the attribute passes on the logging configuration being in place.",
+        "na_condition": "",
+        "can_be_na": false,
+        "calibration_examples": [
+          {
+            "evidence_summary": "No emergency access occurred during the period. The audit trail shows zero root sign-ins and the break-glass vault entry's access history is empty; both pulls are recorded with their commands.",
+            "ai_verdict": "gap",
+            "correct_verdict": "pass",
+            "reasoning": "With zero uses, the attribute passes on the logging configuration being in place, and the recorded empty pulls are the evidence of zero. Do not fail an empty population for lacking review records.",
+            "weight": 0.5,
+            "source": "synthetic_taste_v1"
+          },
+          {
+            "evidence_summary": "One root sign-in appears in the audit trail during an identity provider outage. The incident retrospective describes the outage but never examines the emergency access session itself.",
+            "ai_verdict": "pass",
+            "correct_verdict": "gap",
+            "reasoning": "Each use needs a documented after-the-fact review of the access itself: who signed in, what was done, whether it was appropriate. An incident retro that never looks at the emergency session is not that review.",
+            "weight": 0.5,
+            "source": "synthetic_taste_v1"
+          }
+        ],
+        "collection_hint": {
+          "coverage_checks": [
+            {
+              "id": "emergency_use_logged_reviewed",
+              "question": "Does the evidence include the break-glass identity's access log for the period, and a post-use review record for any use shown?",
+              "lane": "export",
+              "alt_lanes": [
+                "auto_pull",
+                "screenshot",
+                "record"
+              ],
+              "corroboration_required": true,
+              "command_ref": "aws",
+              "evidence_strength": "export"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "HIP-03": {
+    "attributes": [
+      {
+        "id": "A1",
+        "text": "A six year retention requirement is defined for security policies and security activity records",
+        "attr_type": "document",
+        "typical_evidence": "Retention schedule or policy governance section naming the six year floor for security documentation",
+        "pass_criteria": "PASS: A documented retention requirement of at least six years covers security policies and the records of security activities (risk assessments, reviews, incidents, training). FAIL: No retention requirement for security documentation, or a period shorter than six years.",
+        "na_condition": "",
+        "can_be_na": false,
+        "calibration_examples": [
+          {
+            "evidence_summary": "The data retention schedule covers customer data (24 months) and application logs (12 months). Security policies and the records of security activities appear nowhere in it.",
+            "ai_verdict": "pass",
+            "correct_verdict": "gap",
+            "reasoning": "Customer data retention is a different object from security documentation retention. A thorough schedule that never mentions security policies or activity records fails this attribute regardless of how well it covers everything else.",
+            "weight": 0.5,
+            "source": "synthetic_taste_v1"
+          },
+          {
+            "evidence_summary": "The policy governance section states that security policies and security activity records are retained for at least six years from creation or the date last in effect, whichever is later. There is no standalone retention schedule document.",
+            "ai_verdict": "gap",
+            "correct_verdict": "pass",
+            "reasoning": "A sentence in the policy governance section is a documented requirement. A dedicated retention schedule document is not required when the requirement is written, scoped to security documentation, and reaches six years.",
+            "weight": 0.5,
+            "source": "synthetic_taste_v1"
+          }
+        ],
+        "collection_hint": {
+          "coverage_checks": [
+            {
+              "id": "retention_requirement_documented",
+              "question": "Does the evidence include a written retention requirement of at least six years covering security policies and security activity records?",
+              "lane": "document",
+              "alt_lanes": [
+                "record"
+              ],
+              "corroboration_required": true,
+              "command_ref": "",
+              "evidence_strength": "document"
+            }
+          ]
+        }
+      },
+      {
+        "id": "A2",
+        "text": "Historical versions of policies and security records are retrievable",
+        "attr_type": "config",
+        "typical_evidence": "Document repository version history, archive folder, or system-of-record retention configuration",
+        "pass_criteria": "PASS: The storage system demonstrably preserves prior versions (version history enabled, archive maintained, or deletion restricted) so a document from an earlier period can be produced. FAIL: Prior versions are overwritten or deleted with no archive.",
+        "na_condition": "",
+        "can_be_na": false,
+        "calibration_examples": [
+          {
+            "evidence_summary": "Policies live in a shared drive with version history enabled, and the client opens a prior version of the security policy from 14 months ago on screen.",
+            "ai_verdict": "gap",
+            "correct_verdict": "pass",
+            "reasoning": "Version history that actually produces an earlier version demonstrates retrievability. A separate formal archive system is not required when the repository preserves and serves prior versions.",
+            "weight": 0.5,
+            "source": "synthetic_taste_v1"
+          },
+          {
+            "evidence_summary": "Policies are edited in place in a workspace tool whose plan limits page history to the last 7 days. The client intends to upgrade the plan.",
+            "ai_verdict": "pass",
+            "correct_verdict": "gap",
+            "reasoning": "Retrievability must actually reach back to earlier periods. A 7 day history window cannot produce prior versions, and an intention to upgrade is not a configuration.",
+            "weight": 0.5,
+            "source": "synthetic_taste_v1"
+          }
+        ],
+        "collection_hint": {
+          "coverage_checks": [
+            {
+              "id": "version_history_retrievable",
+              "question": "Does the configuration evidence show prior versions preserved and retrievable (version history, archive, or restricted deletion)?",
+              "lane": "screenshot",
+              "alt_lanes": [
+                "export",
+                "auto_pull"
+              ],
+              "corroboration_required": true,
+              "command_ref": "",
+              "evidence_strength": "system"
             }
           ]
         }

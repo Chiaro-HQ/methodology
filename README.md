@@ -5,13 +5,14 @@ control library we test against, the criteria each control maps to, the
 evidence we accept, and the rules the collection runs under. Readiness and the
 examination run on the same framework, so the bar a company prepares against
 is the bar the examination applies. It is published because the alternative to
-showing your work is asking people to take it on faith, and a compliance
-industry that ran on faith is why anyone is reading this.
+showing your work is asking people to take it on faith, and [a compliance
+industry that ran on faith](https://chiarohq.com/soc-2/vibe-compliance) is why
+anyone is reading this.
 
 ## What is here
 
-- **`framework/controls.json`**: 86 controls.
-- **`framework/test_attributes.json`**: 355 test attributes.
+- **`framework/controls.json`**: 89 controls.
+- **`framework/test_attributes.json`**: 369 test attributes.
   Each names what is tested, what evidence typically satisfies it, the pass
   criteria in both a point-in-time and an over-a-period form, and when it does
   not apply.
@@ -31,10 +32,14 @@ industry that ran on faith is why anyone is reading this.
   fallback with its selection algorithm.
 - **`method/tools.md`**: every tool a connected AI can call, generated from the
   live server.
+- **`method/hipaa-crosswalk.md`**: the HIPAA Security Rule mapped provision by
+  provision to this library, 64 rows with a stated resolution each,
+  including where existing controls carry it and where HIPAA-specific
+  controls were needed.
 
 ## The calibration examples
 
-The attributes carry 498 worked examples of a
+The attributes carry 528 worked examples of a
 judgment call between them, each recording a verdict an AI reached, the verdict
 that was correct, and why. They exist to calibrate judgment, and they are the part of this
 repository we would least like a competitor to have.
@@ -49,8 +54,8 @@ What is published here is the lesson: the distinction being drawn and the
 reasoning behind it. The companies, systems, numbers and people in the scenarios
 are not real and are not any client of ours.
 
-**Which way do they push?** 303 of them correct an AI that was too strict,
-and 195 correct one that was too lenient. We are publishing that ratio
+**Which way do they push?** 317 of them correct an AI that was too strict,
+and 211 correct one that was too lenient. We are publishing that ratio
 because anyone with the file can compute it, and because the honest reading is
 not flattering by default: an auditor whose examples mostly teach "that is fine
 actually" is exactly what the industry should be suspicious of after 2025.
@@ -98,8 +103,8 @@ than one written after it.
 ## What is not here
 
 The methodology is here in full. The software is not. Chiaro, our platform at
-app.chiarohq.com, is a product: it is what makes this method fast to run, and
-this repository is not its source code. Everything the method itself consists
+[app.chiarohq.com](https://app.chiarohq.com), is a product: it is what makes
+this method fast to run, and this repository is not its source code. Everything the method itself consists
 of is on these pages: what we test, what counts as evidence, and how each call
 is made.
 
@@ -129,7 +134,8 @@ and updating. The direction is in [`ROADMAP.md`](ROADMAP.md), and method
 changes land dated and versioned in [`CHANGELOG.md`](CHANGELOG.md).
 
 Suggestions are as welcome as corrections. Open an issue, or write to
-cpa@chiarohq.com. A methodology nobody can check is not better than no
-methodology, and that is the whole argument for publishing it.
+[cpa@chiarohq.com](mailto:cpa@chiarohq.com). A methodology nobody can check is
+not better than no methodology, and that is the whole argument for publishing
+it.
 
 Chiaro is a product of Y Assurance PLLC.

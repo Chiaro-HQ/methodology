@@ -6,13 +6,13 @@ software as much as by people. This page is the map.
 
 ## What each file is
 
-- `framework/controls.json`: the 86 controls, keyed by stable refs
+- `framework/controls.json`: the 89 controls, keyed by stable refs
   (GOV-01, IAM-03) that never renumber.
-- `framework/test_attributes.json`: 355 test attributes. Each carries
+- `framework/test_attributes.json`: 369 test attributes. Each carries
   pass criteria in a point-in-time form (readiness, Type I) and an
   over-a-period form (Type II), typical evidence, and conditions where it
   does not apply.
-- `framework/calibration-examples.json`: 498 worked judgment calls in
+- `framework/calibration-examples.json`: 528 worked judgment calls in
   one flat file: the verdict an AI reached, the correct verdict, and why.
   These anchor how strict or lenient a judgment should be.
 - `framework/criteria.json` and `framework/evidence_map.json`: the Trust
@@ -21,6 +21,9 @@ software as much as by people. This page is the map.
 - `method/`: how systems are scoped, the rules collection runs under, how a
   Type II is tested, and the tools a connected AI can call on the live
   server.
+- `framework/hipaa-crosswalk.json` and `method/hipaa-crosswalk.md`: the HIPAA
+  Security Rule (45 CFR 164.308 through 164.316) mapped row by row to the
+  controls, with the resolution and rationale for every provision.
 
 ## Reading it correctly
 
