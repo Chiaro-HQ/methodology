@@ -4,6 +4,28 @@ Method changes are dated, versioned, and published here before they are
 applied to an examination. Corrections that do not change the method (typos,
 formatting, clearer wording with the same meaning) ship without a version.
 
+## v1.2, 2026-08-06
+
+The census language pass. The method page has said since first publication
+that record-checked attributes are tested over the complete population; the
+texts now say it too.
+
+- Attribute texts read "for each X" / "for all X"; period-form pass criteria
+  read "every X in the period"; collection playbooks ask for the population,
+  not a sample of it. The exception rule is unchanged: an isolated miss in an
+  otherwise working practice is an exception, not a gap, and the published
+  deviation rule decides systematic.
+- Every record-checked attribute carries a `frequency` field, the input to
+  the published fallback-selection table for the rare population where a
+  complete pull is impracticable. Attributes drawing on the same population
+  carry the same frequency.
+- The readiness verdict vocabulary gains `absent` (the practice itself does
+  not exist), distinct from `gap` (the practice exists but cannot be
+  evidenced). Recording an absence requires the operator's own words.
+- Deliberate survivor: DAT-04's "sampled data," which means data-subsetting
+  for non-production environments, not audit sampling. Machine identifiers
+  (the `sample` attribute type, `sample_eligible`) keep their names.
+
 ## v1.1, 2026-08-06
 
 The HIPAA Security Rule crosswalk.
