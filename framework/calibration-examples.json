@@ -1262,7 +1262,7 @@
   {
     "control": "IAM-06",
     "attribute": "A3",
-    "evidence_summary": "A sampled DevOps engineer holds both AWS infrastructure-admin access and read-only billing console access; the job description confirms cost-monitoring duties as part of the role.",
+    "evidence_summary": "A DevOps engineer holds both AWS infrastructure-admin access and read-only billing console access; the job description confirms cost-monitoring duties as part of the role.",
     "ai_verdict": "gap",
     "correct_verdict": "pass",
     "reasoning": "No over-literalism: an access grant that falls outside the narrowest reading of a job title still aligns with job function when the job description documents the underlying duty. Verify against the actual documented responsibilities before flagging a mismatch.",
@@ -1302,7 +1302,7 @@
   {
     "control": "IAM-07",
     "attribute": "A2",
-    "evidence_summary": "During the walkthrough interview the IT lead states 'we always approve admin access before granting it,' but no approval record, ticket, or email is provided for any of the sampled privileged users.",
+    "evidence_summary": "During the walkthrough interview the IT lead states 'we always approve admin access before granting it,' but no approval record, ticket, or email is provided for any of the privileged users.",
     "ai_verdict": "pass",
     "correct_verdict": "gap",
     "reasoning": "Verbal confirmation is never a substitute for documented authorization. Each privileged user needs an actual retrievable authorization artifact, not a general assurance given in conversation.",
@@ -1695,7 +1695,7 @@
     "evidence_summary": "No laptops or hardware were disposed of during the period; the client has a written disposal procedure on file but no disposal events occurred to test against it.",
     "ai_verdict": "gap",
     "correct_verdict": "pass",
-    "reasoning": "Absence of disposal activity is a pass-by-default condition under this attribute's own criteria, not a gap. An AI that treats nothing-to-sample as an automatic fail is over-conservative; verify there truly were no disposals before failing.",
+    "reasoning": "Absence of disposal activity is a pass-by-default condition under this attribute's own criteria, not a gap. An AI that treats an empty population as an automatic fail is over-conservative; verify there truly were no disposals before failing.",
     "weight": 0.5,
     "source": "synthetic_taste_v1"
   },
@@ -2325,7 +2325,7 @@
     "evidence_summary": "During the interview, the founder stated that affected customers are always emailed after any incident, but no notification email, template, or send log was provided for the one qualifying incident in the period.",
     "ai_verdict": "pass",
     "correct_verdict": "gap",
-    "reasoning": "Verbal confirmation is never evidence. The attribute requires records showing affected parties were actually notified, and an unsubstantiated claim about standard practice does not establish that notification occurred for the sampled incident.",
+    "reasoning": "Verbal confirmation is never evidence. The attribute requires records showing affected parties were actually notified, and an unsubstantiated claim about standard practice does not establish that notification occurred for the incident under test.",
     "weight": 0.5,
     "source": "synthetic_taste_v1"
   },
@@ -3242,10 +3242,10 @@
   {
     "control": "INT-03",
     "attribute": "A4",
-    "evidence_summary": "No processing errors occurred at the company during the review period, and there is no error-correction record to sample because there was nothing to correct.",
+    "evidence_summary": "No processing errors occurred at the company during the review period, and there is no error-correction record to test because there was nothing to correct.",
     "ai_verdict": "gap",
     "correct_verdict": "pass",
-    "reasoning": "Process-exists sample attributes pass on the existence and use of the correction process, and this one explicitly passes by default when no errors occurred during the period. Marking a gap for having no sample to draw from ignores the pass criteria's own default-pass clause.",
+    "reasoning": "Process-exists population attributes pass on the existence and use of the correction process, and this one explicitly passes by default when no errors occurred during the period. Marking a gap for an empty population ignores the pass criteria's own default-pass clause.",
     "weight": 0.5,
     "source": "synthetic_taste_v1"
   },
@@ -3562,10 +3562,10 @@
   {
     "control": "PRI-03",
     "attribute": "A4",
-    "evidence_summary": "No personal information was retained beyond its original collection purpose during the review period, so there is no consent-to-retain record to sample.",
+    "evidence_summary": "No personal information was retained beyond its original collection purpose during the review period, so there is no consent-to-retain record to test.",
     "ai_verdict": "gap",
     "correct_verdict": "pass",
-    "reasoning": "Process-exists sample attributes pass on the existence and use of the consent-to-retain process, and this one explicitly passes by default when no such retention occurred during the period. Requiring a consent record to exist when the underlying trigger never happened ignores the pass criteria's own default-pass clause.",
+    "reasoning": "Process-exists population attributes pass on the existence and use of the consent-to-retain process, and this one explicitly passes by default when no such retention occurred during the period. Requiring a consent record to exist when the underlying trigger never happened ignores the pass criteria's own default-pass clause.",
     "weight": 0.5,
     "source": "synthetic_taste_v1"
   },
@@ -3662,10 +3662,10 @@
   {
     "control": "PRI-05",
     "attribute": "A5",
-    "evidence_summary": "The data-subject-rights runbook defines a 30-day response window and a named owner, and the company has never received an access or correction request in its operating history, so there are no fulfilled tickets to sample.",
+    "evidence_summary": "The data-subject-rights runbook defines a 30-day response window and a named owner, and the company has never received an access or correction request in its operating history, so there are no fulfilled tickets to test.",
     "ai_verdict": "gap",
     "correct_verdict": "pass",
-    "reasoning": "At the design/Type I stage this attribute passes when a defined response timeframe is in place and no requests have been received, the criteria states this default explicitly. There is no sample to draw because the triggering event never occurred, so treating the empty sample as a gap misapplies the criteria.",
+    "reasoning": "At the design/Type I stage this attribute passes when a defined response timeframe is in place and no requests have been received, the criteria states this default explicitly. The population is empty because the triggering event never occurred, so treating the empty population as a gap misapplies the criteria.",
     "weight": 0.5,
     "source": "synthetic_taste_v1"
   },
@@ -3782,10 +3782,10 @@
   {
     "control": "PRI-07",
     "attribute": "A3",
-    "evidence_summary": "The company has never experienced a data breach in its operating history, and has no breach notification records to sample.",
+    "evidence_summary": "The company has never experienced a data breach in its operating history, and has no breach notification records to test.",
     "ai_verdict": "gap",
     "correct_verdict": "pass",
-    "reasoning": "The pass criteria explicitly defaults to pass when no breaches occurred during the period, there's nothing to sample because the triggering event never happened. Apply the criteria's own default rather than treating absence of breach records as a gap.",
+    "reasoning": "The pass criteria explicitly defaults to pass when no breaches occurred during the period, the population is empty because the triggering event never happened. Apply the criteria's own default rather than treating absence of breach records as a gap.",
     "weight": 0.5,
     "source": "synthetic_taste_v1"
   },
@@ -3825,7 +3825,7 @@
     "evidence_summary": "The company has never received a request for an accounting of personal information held and disclosed.",
     "ai_verdict": "gap",
     "correct_verdict": "pass",
-    "reasoning": "The pass criteria defaults to pass when no accounting requests were received during the period. There is no sample to draw when the underlying event never occurred, so this isn't a gap.",
+    "reasoning": "The pass criteria defaults to pass when no accounting requests were received during the period. The population is empty when the underlying event never occurred, so this isn't a gap.",
     "weight": 0.5,
     "source": "synthetic_taste_v1"
   },
@@ -3895,7 +3895,7 @@
     "evidence_summary": "The company has never received a privacy complaint or dispute from a data subject, and so has no dispute resolution records on file.",
     "ai_verdict": "gap",
     "correct_verdict": "pass",
-    "reasoning": "The pass criteria defaults to pass when no disputes were received during the period, there is nothing to sample because the triggering event never occurred. Don't treat the absence of dispute records as evidence of a missing process when the criteria already accounts for zero disputes.",
+    "reasoning": "The pass criteria defaults to pass when no disputes were received during the period, the population is empty because the triggering event never occurred. Don't treat the absence of dispute records as evidence of a missing process when the criteria already accounts for zero disputes.",
     "weight": 0.5,
     "source": "synthetic_taste_v1"
   },
@@ -3962,17 +3962,17 @@
   {
     "control": "CHG-06",
     "attribute": "A4",
-    "evidence_summary": "For a solo-developer company, sampled merged pull requests show a description of the change and passing required CI checks, but were self-approved by the same developer who authored them, since no second engineer exists.",
+    "evidence_summary": "For a solo-developer company, the merged pull requests show a description of the change and passing required CI checks, but were self-approved by the same developer who authored them, since no second engineer exists.",
     "ai_verdict": "gap",
     "correct_verdict": "pass",
-    "reasoning": "Never import a neighbor attribute's requirement: this attribute only requires a description, passing required checks, and traceability, not a second-person approval, which belongs to a separate peer-review control. Judged against its own text, the sampled merges pass.",
+    "reasoning": "Never import a neighbor attribute's requirement: this attribute only requires a description, passing required checks, and traceability, not a second-person approval, which belongs to a separate peer-review control. Judged against its own text, the merges pass.",
     "weight": 0.5,
     "source": "synthetic_taste_v1"
   },
   {
     "control": "CHG-06",
     "attribute": "A4",
-    "evidence_summary": "Each of the three sampled merged changes has a clear description and a green status check visible on the pull request. On one of them the merge commit is timestamped 14:02 and the required test run finished at 14:41, having been triggered on the main branch after the merge.",
+    "evidence_summary": "Each of the three inspected merged changes has a clear description and a green status check visible on the pull request. On one of them the merge commit is timestamped 14:02 and the required test run finished at 14:41, having been triggered on the main branch after the merge.",
     "ai_verdict": "pass",
     "correct_verdict": "gap",
     "reasoning": "The checks have to pass before the merge, because a check that runs afterwards tells the entity what it shipped rather than gating whether it ships. A green badge read at fieldwork time hides the ordering, so the timestamps are the evidence, not the badge.",
@@ -4542,10 +4542,10 @@
   {
     "control": "AI-04",
     "attribute": "A3",
-    "evidence_summary": "A policy statement asserts that 'PII is redacted from AI logs before storage,' but no sampled log entry was pulled to confirm redaction is actually applied to stored prompts and completions.",
+    "evidence_summary": "A policy statement asserts that 'PII is redacted from AI logs before storage,' but no log entry was pulled to confirm redaction is actually applied to stored prompts and completions.",
     "ai_verdict": "pass",
     "correct_verdict": "gap",
-    "reasoning": "Redaction claimed but not visible in a sampled log entry does not pass, per the attribute's explicit note. The policy assertion must be corroborated by an actual redacted (or documented exposure) log sample, not taken on its word.",
+    "reasoning": "Redaction claimed but not visible in an inspected log entry does not pass, per the attribute's explicit note. The policy assertion must be corroborated by an actual redacted (or documented exposure) log entry, not taken on its word.",
     "weight": 0.5,
     "source": "synthetic_taste_v1"
   },
@@ -5102,7 +5102,7 @@
   {
     "control": "HIP-01",
     "attribute": "A2",
-    "evidence_summary": "Three sampled customers each have an executed BAA. One was signed two weeks after the pilot began but states an effective date of the pilot start, and the executed pilot agreement already bound both parties to Security Rule compliance, subcontractor flow-down, and security incident reporting for that window.",
+    "evidence_summary": "Three customers each have an executed BAA. One was signed two weeks after the pilot began but states an effective date of the pilot start, and the executed pilot agreement already bound both parties to Security Rule compliance, subcontractor flow-down, and security incident reporting for that window.",
     "ai_verdict": "gap",
     "correct_verdict": "pass",
     "reasoning": "A documented interim arrangement qualifies when the required terms actually covered the entire handling window; here the pilot agreement carried the BAA content and the executed BAA is effective from day one. Failing this on signature order alone is over-literal.",
@@ -5112,17 +5112,17 @@
   {
     "control": "HIP-01",
     "attribute": "A2",
-    "evidence_summary": "The client states every customer signs a BAA at onboarding and shows the onboarding checklist template containing a BAA step, but no executed agreement is produced for any sampled customer.",
+    "evidence_summary": "The client states every customer signs a BAA at onboarding and shows the onboarding checklist template containing a BAA step, but no executed agreement is produced for any customer.",
     "ai_verdict": "pass",
     "correct_verdict": "gap",
-    "reasoning": "A sample attribute needs the executed artifact for the sampled items. A process description or checklist template never substitutes for the signed document.",
+    "reasoning": "A population-tested attribute needs the executed artifact for the items tested. A process description or checklist template never substitutes for the signed document.",
     "weight": 0.5,
     "source": "synthetic_taste_v1"
   },
   {
     "control": "HIP-01",
     "attribute": "A2",
-    "evidence_summary": "One sampled BAA was signed three months after ePHI handling began. The client offers a dated email in which the customer agreed to keep pilot data confidential; the email contains no security obligations and no retroactive effect.",
+    "evidence_summary": "One BAA was signed three months after ePHI handling began. The client offers a dated email in which the customer agreed to keep pilot data confidential; the email contains no security obligations and no retroactive effect.",
     "ai_verdict": "pass",
     "correct_verdict": "gap",
     "reasoning": "A documented interim arrangement must carry the required agreement content for the exposure window. A generic confidentiality email with no security terms and no retroactive effect does not, so the late signature stands uncured.",

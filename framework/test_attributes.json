@@ -95,10 +95,10 @@
       },
       {
         "id": "A5",
-        "text": "For a sample of personnel: Code of Conduct is acknowledged and re-acknowledged within the defined period",
+        "text": "For all personnel: Code of Conduct is acknowledged and re-acknowledged within the defined period",
         "attr_type": "sample",
         "typical_evidence": "Re-acknowledgment records from the most recent annual cycle",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if a re-acknowledgment practice exists and the most recent acknowledgment records show personnel acknowledging the Code within the entity's defined cycle (default: 12 months of prior acknowledgment). Entity <12 months old: pass if initial acknowledgment completed. FAIL if no re-acknowledgment practice exists or no personnel have acknowledged the Code at all. TYPE II (over the period): PASS if all sampled individuals have a re-acknowledgment record dated within the defined cycle; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of re-acknowledgment is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if a re-acknowledgment practice exists and the most recent acknowledgment records show personnel acknowledging the Code within the entity's defined cycle (default: 12 months of prior acknowledgment). Entity <12 months old: pass if initial acknowledgment completed. FAIL if no re-acknowledgment practice exists or no personnel have acknowledged the Code at all. TYPE II (over the period): PASS if every individual has a re-acknowledgment record dated within the defined cycle; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of re-acknowledgment is a gap.",
         "na_condition": "Pass if entity < 12 months old and initial acknowledgment cycle not yet due",
         "can_be_na": true,
         "calibration_examples": [
@@ -158,7 +158,8 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "annual"
       },
       {
         "id": "A6",
@@ -344,10 +345,10 @@
       },
       {
         "id": "A4",
-        "text": "For a sample of governance meetings: security topics are on the agenda",
+        "text": "For each governance meeting: security topics are on the agenda",
         "attr_type": "sample",
         "typical_evidence": "Meeting minutes or agendas showing security topics discussed",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if a governance meeting practice exists and the most recent meeting's agenda or minutes contains at least one security, compliance, or risk topic. Entity <12 months old: pass if first governance meeting cycle not yet due. FAIL if governance meetings do not occur or no meeting addresses security related topics. TYPE II (over the period): PASS if all sampled meetings' agendas or minutes contain at least one security, compliance, or risk topic; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of security topics is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if a governance meeting practice exists and the most recent meeting's agenda or minutes contains at least one security, compliance, or risk topic. Entity <12 months old: pass if first governance meeting cycle not yet due. FAIL if governance meetings do not occur or no meeting addresses security related topics. TYPE II (over the period): PASS if every meeting's agenda or minutes contain at least one security, compliance, or risk topic; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of security topics is a gap.",
         "na_condition": "Pass if entity < 12 months old and first governance meeting cycle not yet due",
         "can_be_na": true,
         "calibration_examples": [
@@ -387,14 +388,15 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "quarterly"
       },
       {
         "id": "A5",
-        "text": "For a sample of governance meetings: decisions and action items are documented and tracked",
+        "text": "For each governance meeting: decisions and action items are documented and tracked",
         "attr_type": "sample",
         "typical_evidence": "Meeting minutes with action items and follow-up tracking",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if a meeting documentation practice exists and the most recent meeting has minutes containing decisions made, action items assigned, and evidence of follow-up on prior action items. Entity <12 months old: pass if first governance meeting cycle not yet due. FAIL if meetings produce no minutes, or decisions and action items are not recorded. TYPE II (over the period): PASS if all sampled meetings have minutes documenting decisions, action items, and follow-up on prior action items; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of documented decisions, action items, or follow-up is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if a meeting documentation practice exists and the most recent meeting has minutes containing decisions made, action items assigned, and evidence of follow-up on prior action items. Entity <12 months old: pass if first governance meeting cycle not yet due. FAIL if meetings produce no minutes, or decisions and action items are not recorded. TYPE II (over the period): PASS if every meeting in the period has minutes documenting decisions, action items, and follow-up on prior action items; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of documented decisions, action items, or follow-up is a gap.",
         "na_condition": "Pass if entity < 12 months old and first governance meeting cycle not yet due",
         "can_be_na": true,
         "calibration_examples": [
@@ -458,7 +460,8 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "quarterly"
       }
     ]
   },
@@ -870,10 +873,10 @@
       },
       {
         "id": "A4",
-        "text": "For a sample of new hires: background check was completed",
+        "text": "For each new hire: background check was completed",
         "attr_type": "sample",
         "typical_evidence": "Background check completion certificates or provider portal records",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if a background check practice exists and the most recent new hire has a background check completion record with a completion date on or before their start date (or within the policy-defined window). FAIL if no background check practice exists or new hires start with no background check performed. TYPE II (over the period): PASS if all sampled new hires have a background check completion record dated on or before their start date (or within the policy-defined window); isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of background checks is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if a background check practice exists and the most recent new hire has a background check completion record with a completion date on or before their start date (or within the policy-defined window). FAIL if no background check practice exists or new hires start with no background check performed. TYPE II (over the period): PASS if every new hire in the period has a background check completion record dated on or before their start date (or within the policy-defined window); isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of background checks is a gap.",
         "na_condition": "",
         "can_be_na": false,
         "calibration_examples": [
@@ -913,14 +916,15 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "ad_hoc"
       },
       {
         "id": "A5",
-        "text": "For a sample of new hires: check scope met policy requirements",
+        "text": "For each new hire: check scope met policy requirements",
         "attr_type": "sample",
         "typical_evidence": "Background check reports showing scope of checks performed",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if policy defines a minimum background check scope and the most recent background check report includes at least the check types defined as minimum scope (for example, criminal history, employment verification). FAIL if policy defines no minimum scope, or completed checks omit the required check types entirely. TYPE II (over the period): PASS if all sampled background check reports include at least the check types defined as minimum scope in policy; isolated misses in an otherwise working practice are an exception, not a gap; systematic omission of required check types is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if policy defines a minimum background check scope and the most recent background check report includes at least the check types defined as minimum scope (for example, criminal history, employment verification). FAIL if policy defines no minimum scope, or completed checks omit the required check types entirely. TYPE II (over the period): PASS if every background check report in the period includes at least the check types defined as minimum scope in policy; isolated misses in an otherwise working practice are an exception, not a gap; systematic omission of required check types is a gap.",
         "na_condition": "",
         "can_be_na": false,
         "calibration_examples": [
@@ -960,7 +964,8 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "ad_hoc"
       }
     ]
   },
@@ -1198,10 +1203,10 @@
       },
       {
         "id": "A4",
-        "text": "For a sample of personnel: security awareness training was completed within the defined period",
+        "text": "For all personnel: security awareness training was completed within the defined period",
         "attr_type": "sample",
         "typical_evidence": "Training completion records from LMS or training platform",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if a security awareness training practice exists and the most recent training records show personnel completing training within the entity's defined training period. Entity <12 months old: pass if first training cycle not yet due. FAIL if no training practice exists or no personnel have completed awareness training. TYPE II (over the period): PASS if all sampled individuals have a training completion record dated within the defined training period; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of training completion is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if a security awareness training practice exists and the most recent training records show personnel completing training within the entity's defined training period. Entity <12 months old: pass if first training cycle not yet due. FAIL if no training practice exists or no personnel have completed awareness training. TYPE II (over the period): PASS if every individual has a training completion record dated within the defined training period; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of training completion is a gap.",
         "na_condition": "Pass if entity < 12 months old and first training cycle not yet due",
         "can_be_na": true,
         "calibration_examples": [
@@ -1249,14 +1254,15 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "annual"
       },
       {
         "id": "A5",
-        "text": "For a sample of security-role personnel: role-specific training or continuing education is evidenced",
+        "text": "For all security-role personnel: role-specific training or continuing education is evidenced",
         "attr_type": "sample",
         "typical_evidence": "Certifications, conference attendance, technical training completion records",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if a role-specific training practice exists and the most recent security-role personnel have at least one record of role-specific training, certification, or continuing education (for example, course completion, conference attendance, certification maintenance). Entity <12 months old: pass if first cycle not yet due. FAIL if no role-specific training practice exists or no security-role personnel have any such evidence. TYPE II (over the period): PASS if all sampled security-role individuals have at least one record of role-specific training, certification, or continuing education; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of role-specific training is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if a role-specific training practice exists and the most recent security-role personnel have at least one record of role-specific training, certification, or continuing education (for example, course completion, conference attendance, certification maintenance). Entity <12 months old: pass if first cycle not yet due. FAIL if no role-specific training practice exists or no security-role personnel have any such evidence. TYPE II (over the period): PASS if every security-role individual has at least one record of role-specific training, certification, or continuing education; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of role-specific training is a gap.",
         "na_condition": "Pass if entity < 12 months old and first training cycle not yet due",
         "can_be_na": true,
         "calibration_examples": [
@@ -1296,7 +1302,8 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "annual"
       }
     ]
   },
@@ -1372,10 +1379,10 @@
       },
       {
         "id": "A3",
-        "text": "For a sample of personnel: performance evaluation was completed within the defined period",
+        "text": "For all personnel: performance evaluation was completed within the defined period",
         "attr_type": "sample",
         "typical_evidence": "Completed performance review forms or HRIS records showing evaluation dates",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if a performance evaluation practice exists and the most recent evaluations are dated within the entity's defined review cycle (default: 12 months). Entity <12 months old: pass if review cycle not yet due. FAIL if no performance evaluation practice exists or no evaluations have been completed. TYPE II (over the period): PASS if all sampled individuals have a completed performance evaluation dated within the defined review cycle; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of evaluations is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if a performance evaluation practice exists and the most recent evaluations are dated within the entity's defined review cycle (default: 12 months). Entity <12 months old: pass if review cycle not yet due. FAIL if no performance evaluation practice exists or no evaluations have been completed. TYPE II (over the period): PASS if every individual has a completed performance evaluation dated within the defined review cycle; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of evaluations is a gap.",
         "na_condition": "Pass if entity < 12 months old and review cycle not yet due",
         "can_be_na": true,
         "calibration_examples": [
@@ -1415,14 +1422,15 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "annual"
       },
       {
         "id": "A4",
-        "text": "For a sample of violations (if any): corrective action was taken and documented",
+        "text": "For each violation (if any): corrective action was taken and documented",
         "attr_type": "sample",
         "typical_evidence": "Corrective action records, written warnings, or HR investigation files",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if no violations occurred during the period, or a corrective action practice exists and the most recent violation has a corrective action record showing date, action taken, and responsible party. FAIL if violations occurred but no corrective action practice exists, or violations are handled with no documentation. TYPE II (over the period): PASS if no violations occurred, or all sampled violations have a corrective action record showing date, action taken, and responsible party; isolated misses in an otherwise working practice are an exception, not a gap; systematic failure to document corrective action is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if no violations occurred during the period, or a corrective action practice exists and the most recent violation has a corrective action record showing date, action taken, and responsible party. FAIL if violations occurred but no corrective action practice exists, or violations are handled with no documentation. TYPE II (over the period): PASS if no violations occurred, or every violation in the period has a corrective action record showing date, action taken, and responsible party; isolated misses in an otherwise working practice are an exception, not a gap; systematic failure to document corrective action is a gap.",
         "na_condition": "Pass if no policy violations occurred during the period",
         "can_be_na": true,
         "calibration_examples": [
@@ -1474,7 +1482,8 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "ad_hoc"
       }
     ]
   },
@@ -2335,7 +2344,7 @@
         "id": "A1",
         "text": "Customer-facing commitments are documented (contracts, SLAs, privacy policies, or trust pages)",
         "attr_type": "document",
-        "typical_evidence": "Sample contract with security clauses, SLA document, privacy policy, or trust page URL",
+        "typical_evidence": "A customer contract with security clauses, SLA document, privacy policy, or trust page URL",
         "pass_criteria": "PASS: At least one customer-facing document (contract, SLA, privacy policy, or trust page) contains specific security commitments. FAIL: No customer-facing document describes security commitments.",
         "na_condition": "",
         "can_be_na": false,
@@ -3712,17 +3721,17 @@
       },
       {
         "id": "A3",
-        "text": "For a sample of users: MFA is enrolled and active",
+        "text": "For each user: MFA is enrolled and active",
         "attr_type": "sample",
-        "typical_evidence": "Identity provider user list showing MFA enrollment status for sampled users",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if identity provider output shows the sampled users have MFA status enrolled and active, with zero sampled users in a not enrolled, inactive, or pending state as of the review date. FAIL if MFA is not enforced or the sampled users show no active MFA enrollment. TYPE II (over the period): PASS if all sampled users show MFA enrolled and active throughout the period; an isolated user briefly pending enrollment in an otherwise enforced program is an exception, not a gap; systematic absence of MFA across sampled users is a gap.",
+        "typical_evidence": "Identity provider user list showing MFA enrollment status for all users",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if identity provider output shows all users have MFA status enrolled and active, with zero users in a not enrolled, inactive, or pending state as of the review date. FAIL if MFA is not enforced or users show no active MFA enrollment. TYPE II (over the period): PASS if every user shows MFA enrolled and active throughout the period; an isolated user briefly pending enrollment in an otherwise enforced program is an exception, not a gap; systematic absence of MFA across users is a gap.",
         "na_condition": "",
         "can_be_na": false,
         "collection_hint": {
           "coverage_checks": [
             {
               "id": "user_sample_present",
-              "question": "Does the evidence include a list or sample of users with MFA status?",
+              "question": "Does the evidence include the user list with MFA status?",
               "lane": "auto_pull",
               "alt_lanes": [
                 "screenshot",
@@ -3734,7 +3743,7 @@
             },
             {
               "id": "mfa_enrollment_shown",
-              "question": "Does the evidence show MFA enrollment status per sampled user?",
+              "question": "Does the evidence show MFA enrollment status per user?",
               "lane": "auto_pull",
               "alt_lanes": [
                 "screenshot",
@@ -3746,7 +3755,7 @@
             },
             {
               "id": "mfa_active_shown",
-              "question": "Does the evidence show whether MFA is active (not just enrolled) per sampled user?",
+              "question": "Does the evidence show whether MFA is active (not just enrolled) per user?",
               "lane": "auto_pull",
               "alt_lanes": [
                 "screenshot",
@@ -3757,7 +3766,8 @@
               "evidence_strength": "system"
             }
           ]
-        }
+        },
+        "frequency": "ad_hoc"
       }
     ]
   },
@@ -3844,10 +3854,10 @@
       },
       {
         "id": "A3",
-        "text": "For a sample of provisioning events: access request and approval are documented",
+        "text": "For each provisioning event: access request and approval are documented",
         "attr_type": "sample",
         "typical_evidence": "Ticketing system records, email approvals, or HRIS workflow showing access request and approval",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the most recent provisioning event has a documented access request and a documented approval, both with timestamps, and approval occurred before or on the same day access was granted. FAIL if the provisioning process produces no request records or no approval records at all. TYPE II (over the period): PASS if all sampled provisioning events each have a timestamped request and a timestamped approval with approval on or before the grant date; an isolated event with a missing timestamp in an otherwise documented practice is an exception, not a gap; systematic absence of requests or approvals, or access routinely granted before approval, is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the most recent provisioning event has a documented access request and a documented approval, both with timestamps, and approval occurred before or on the same day access was granted. FAIL if the provisioning process produces no request records or no approval records at all. TYPE II (over the period): PASS if every provisioning event in the period has a timestamped request and a timestamped approval with approval on or before the grant date; an isolated event with a missing timestamp in an otherwise documented practice is an exception, not a gap; systematic absence of requests or approvals, or access routinely granted before approval, is a gap.",
         "na_condition": "",
         "can_be_na": false,
         "calibration_examples": [
@@ -3899,14 +3909,15 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "ad_hoc"
       },
       {
         "id": "A4",
-        "text": "For a sample of provisioning events: approval is from an authorized approver (manager or system owner)",
+        "text": "For each provisioning event: approval is from an authorized approver (manager or system owner)",
         "attr_type": "sample",
         "typical_evidence": "Approval records showing approver identity and their authorization to approve",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the most recent provisioning event shows approval from a manager or system owner who is a different person than the requester, with no self approval. FAIL if the process permits self approval or defines no authorized approver role. TYPE II (over the period): PASS if all sampled provisioning events show approval by a manager or system owner distinct from the requester; an isolated event routed to a valid alternate approver is an exception, not a gap; systematic self approval, or approval by someone who is not a manager or system owner, is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the most recent provisioning event shows approval from a manager or system owner who is a different person than the requester, with no self approval. FAIL if the process permits self approval or defines no authorized approver role. TYPE II (over the period): PASS if every provisioning event in the period shows approval by a manager or system owner distinct from the requester; an isolated event routed to a valid alternate approver is an exception, not a gap; systematic self approval, or approval by someone who is not a manager or system owner, is a gap.",
         "na_condition": "",
         "can_be_na": false,
         "calibration_examples": [
@@ -3946,14 +3957,15 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "ad_hoc"
       },
       {
         "id": "A5",
-        "text": "For a sample of provisioning events: access granted matches the authorized request",
+        "text": "For each provisioning event: access granted matches the authorized request",
         "attr_type": "sample",
         "typical_evidence": "Comparison of approved access request against actual access provisioned in the system",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the most recent provisioning event shows the access actually granted matches the access specified in the approved request, with no additional roles, permissions, or systems beyond what was requested. FAIL if access is granted with no reference to an approved scope. TYPE II (over the period): PASS if all sampled provisioning events show granted access matching the approved request; an isolated minor discrepancy later corrected in an otherwise controlled practice is an exception, not a gap; systematic granting of access beyond what was approved is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the most recent provisioning event shows the access actually granted matches the access specified in the approved request, with no additional roles, permissions, or systems beyond what was requested. FAIL if access is granted with no reference to an approved scope. TYPE II (over the period): PASS if every provisioning event in the period shows granted access matching the approved request; an isolated minor discrepancy later corrected in an otherwise controlled practice is an exception, not a gap; systematic granting of access beyond what was approved is a gap.",
         "na_condition": "",
         "can_be_na": false,
         "calibration_examples": [
@@ -4001,7 +4013,8 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "ad_hoc"
       }
     ]
   },
@@ -4077,10 +4090,10 @@
       },
       {
         "id": "A3",
-        "text": "For a sample of terminations: access removed within the defined timeframe",
+        "text": "For each termination: access removed within the defined timeframe",
         "attr_type": "sample",
-        "typical_evidence": "IdP disable date compared to HR termination date for sampled individuals",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the most recent termination shows the identity provider account disabled or deleted within the policy defined timeframe of the human resources termination date, measured as the disable timestamp minus the termination date; if no policy window is defined, within 5 business days. FAIL if terminated individuals are not deprovisioned at all or no timeframe governs removal. TYPE II (over the period): PASS if all sampled terminations show access revoked within the defined timeframe; an isolated termination revoked slightly outside the window in an otherwise timely practice is an exception, not a gap; systematic revocation outside the timeframe is a gap.",
+        "typical_evidence": "IdP disable date compared to HR termination date for each terminated individual",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the most recent termination shows the identity provider account disabled or deleted within the policy defined timeframe of the human resources termination date, measured as the disable timestamp minus the termination date; if no policy window is defined, within 5 business days. FAIL if terminated individuals are not deprovisioned at all or no timeframe governs removal. TYPE II (over the period): PASS if every termination in the period shows access revoked within the defined timeframe; an isolated termination revoked slightly outside the window in an otherwise timely practice is an exception, not a gap; systematic revocation outside the timeframe is a gap.",
         "na_condition": "",
         "can_be_na": false,
         "calibration_examples": [
@@ -4097,7 +4110,7 @@
           "coverage_checks": [
             {
               "id": "sample_record",
-              "question": "Does the evidence include an actual idp disable date compared to hr termination date for sampled individuals (not just a verbal description)?",
+              "question": "Does the evidence include an actual idp disable date compared to hr termination date for each terminated individual (not just a verbal description)?",
               "lane": "record",
               "alt_lanes": [
                 "export",
@@ -4120,14 +4133,15 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "ad_hoc"
       },
       {
         "id": "A4",
-        "text": "For a sample of terminations: all in-scope system access is removed",
+        "text": "For each termination: all in-scope system access is removed",
         "attr_type": "sample",
-        "typical_evidence": "Access verification across all in-scope systems for sampled terminated individuals",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the most recent terminated individual has zero active accounts across all in scope systems, including the identity provider, cloud consoles, code repositories, and business applications. FAIL if terminated individuals retain active access with no removal process. TYPE II (over the period): PASS if all sampled terminated individuals have no active accounts remaining on any in scope system; an isolated lingering account on a single system in an otherwise complete practice is an exception, not a gap; systematic retention of access after termination is a gap.",
+        "typical_evidence": "Access verification across all in-scope systems for each terminated individual",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the most recent terminated individual has zero active accounts across all in scope systems, including the identity provider, cloud consoles, code repositories, and business applications. FAIL if terminated individuals retain active access with no removal process. TYPE II (over the period): PASS if every terminated individual has no active accounts remaining on any in scope system; an isolated lingering account on a single system in an otherwise complete practice is an exception, not a gap; systematic retention of access after termination is a gap.",
         "na_condition": "",
         "can_be_na": false,
         "calibration_examples": [
@@ -4144,7 +4158,7 @@
           "coverage_checks": [
             {
               "id": "sample_record",
-              "question": "Does the evidence include an actual access verification across all in-scope systems for sampled terminated individuals (not just a verbal description)?",
+              "question": "Does the evidence include an actual access verification across all in-scope systems for each terminated individual (not just a verbal description)?",
               "lane": "record",
               "alt_lanes": [
                 "export",
@@ -4167,14 +4181,15 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "ad_hoc"
       },
       {
         "id": "A5",
-        "text": "For a sample of terminations: offboarding completion is tracked with timestamps",
+        "text": "For each termination: offboarding completion is tracked with timestamps",
         "attr_type": "sample",
         "typical_evidence": "Offboarding checklist with timestamps for each deprovisioning step",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the most recent offboarding record includes timestamps for key deprovisioning steps, at minimum when the identity provider was disabled and when systems access was revoked. FAIL if offboarding is not tracked or records carry no timestamps. TYPE II (over the period): PASS if all sampled offboarding records include timestamps for the deprovisioning steps; an isolated record missing a single timestamp in an otherwise tracked practice is an exception, not a gap; systematic absence of deprovisioning timestamps is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the most recent offboarding record includes timestamps for key deprovisioning steps, at minimum when the identity provider was disabled and when systems access was revoked. FAIL if offboarding is not tracked or records carry no timestamps. TYPE II (over the period): PASS if every offboarding record in the period includes timestamps for the deprovisioning steps; an isolated record missing a single timestamp in an otherwise tracked practice is an exception, not a gap; systematic absence of deprovisioning timestamps is a gap.",
         "na_condition": "",
         "can_be_na": false,
         "calibration_examples": [
@@ -4214,7 +4229,8 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "ad_hoc"
       }
     ]
   },
@@ -4323,7 +4339,7 @@
       },
       {
         "id": "A3",
-        "text": "For a sample of access reviews: review was performed at least {review_frequency}",
+        "text": "For each access review: review was performed at least {review_frequency}",
         "attr_type": "sample",
         "typical_evidence": "Access review records with dates showing reviews occurred at the defined frequency",
         "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity has a defined access review frequency and the most recent review was performed on schedule, with dated records showing the review occurred. FAIL if no review has been performed or no review frequency is defined. TYPE II (over the period): PASS if dated access review records show a review in every required period at the entity's defined frequency, for example four reviews in a 12 month period where the frequency is quarterly; an isolated review completed slightly late in an otherwise consistent cadence is an exception, not a gap; a required review period with no review record at all is a gap.",
@@ -4366,14 +4382,15 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "quarterly"
       },
       {
         "id": "A4",
-        "text": "For a sample of reviews: review covers all in-scope systems",
+        "text": "For each review: review covers all in-scope systems",
         "attr_type": "sample",
         "typical_evidence": "Access review records listing systems reviewed, compared against in-scope system list",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the most recent review record lists the systems reviewed and all in scope systems appear in that review. FAIL if reviews do not enumerate systems or omit in scope systems entirely. TYPE II (over the period): PASS if all sampled review records list the systems reviewed with every in scope system covered; an isolated review missing one recently added system in an otherwise complete practice is an exception, not a gap; systematic exclusion of an in scope system is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the most recent review record lists the systems reviewed and all in scope systems appear in that review. FAIL if reviews do not enumerate systems or omit in scope systems entirely. TYPE II (over the period): PASS if every review record in the period lists the systems reviewed with every in scope system covered; an isolated review missing one recently added system in an otherwise complete practice is an exception, not a gap; systematic exclusion of an in scope system is a gap.",
         "na_condition": "",
         "can_be_na": false,
         "calibration_examples": [
@@ -4414,7 +4431,7 @@
             },
             {
               "id": "all_in_scope_systems",
-              "question": "Are all in-scope systems listed in the sampled review?",
+              "question": "Are all in-scope systems listed in each review?",
               "lane": "record",
               "alt_lanes": [
                 "export",
@@ -4425,14 +4442,15 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "quarterly"
       },
       {
         "id": "A5",
-        "text": "For a sample of reviews: reviewer is the system owner or designated authority",
+        "text": "For each review: reviewer is the system owner or designated authority",
         "attr_type": "sample",
         "typical_evidence": "Access review records showing reviewer name/role, compared to system owner assignments",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the most recent review record shows the reviewer is the system owner or designated authority confirmed against the system owner list, and the reviewer is not reviewing their own access. FAIL if reviews are performed by end users over their own access or no reviewer authority is defined. TYPE II (over the period): PASS if all sampled reviews were performed by the system owner or designated authority with no self review; an isolated review delegated to a valid alternate authority is an exception, not a gap; systematic self review, or review by someone who is not the system owner or designated authority, is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the most recent review record shows the reviewer is the system owner or designated authority confirmed against the system owner list, and the reviewer is not reviewing their own access. FAIL if reviews are performed by end users over their own access or no reviewer authority is defined. TYPE II (over the period): PASS if every review in the period was performed by the system owner or designated authority with no self review; an isolated review delegated to a valid alternate authority is an exception, not a gap; systematic self review, or review by someone who is not the system owner or designated authority, is a gap.",
         "na_condition": "",
         "can_be_na": false,
         "calibration_examples": [
@@ -4484,15 +4502,16 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "quarterly"
       },
       {
         "id": "A6",
-        "text": "For a sample of reviews: identified issues are remediated within defined timeframe",
+        "text": "For each review: identified issues are remediated within defined timeframe",
         "attr_type": "sample",
         "typical_evidence": "Review records showing identified access issues and remediation dates",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if issues identified in the most recent review show remediation, meaning access removed or adjusted, completed within the entity's defined timeframe; if no issues were identified, pass by default. FAIL if identified issues carry no remediation process. TYPE II (over the period): PASS if every issue identified across sampled reviews shows remediation completed within the defined timeframe, or no issues were identified; an isolated remediation completed slightly late in an otherwise responsive practice is an exception, not a gap; systematic failure to remediate identified issues, or remediation routinely outside the defined timeframe, is a gap.",
-        "na_condition": "Pass if no inappropriate access was identified in sampled reviews",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if issues identified in the most recent review show remediation, meaning access removed or adjusted, completed within the entity's defined timeframe; if no issues were identified, pass by default. FAIL if identified issues carry no remediation process. TYPE II (over the period): PASS if every issue identified across the period's reviews shows remediation completed within the defined timeframe, or no issues were identified; an isolated remediation completed slightly late in an otherwise responsive practice is an exception, not a gap; systematic failure to remediate identified issues, or remediation routinely outside the defined timeframe, is a gap.",
+        "na_condition": "Pass if no inappropriate access was identified in the period's reviews",
         "can_be_na": true,
         "calibration_examples": [
           {
@@ -4555,7 +4574,8 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "quarterly"
       }
     ]
   },
@@ -4660,15 +4680,15 @@
       },
       {
         "id": "A3",
-        "text": "For a sample of users: role assignments align with job functions",
+        "text": "For each user: role assignments align with job functions",
         "attr_type": "sample",
-        "typical_evidence": "Comparison of sampled users' role assignments against their job titles/functions",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the sampled users' role assignments match their job title and function, with no admin roles assigned to non admin personnel and no production access for non technical roles. FAIL if roles are assigned with no relationship to job function. TYPE II (over the period): PASS if all sampled users have role assignments that align with their job function; an isolated over broad assignment later corrected in an otherwise least privilege practice is an exception, not a gap; systematic misalignment, for example a developer holding billing administration or a human resources user holding production shell access, is a gap. FLAG: role assignment is plausible but the job function description is ambiguous, flag for CPA review.",
+        "typical_evidence": "Comparison of users' role assignments against their job titles/functions",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if all users' role assignments match their job title and function, with no admin roles assigned to non admin personnel and no production access for non technical roles. FAIL if roles are assigned with no relationship to job function. TYPE II (over the period): PASS if every user has role assignments that align with their job function; an isolated over broad assignment later corrected in an otherwise least privilege practice is an exception, not a gap; systematic misalignment, for example a developer holding billing administration or a human resources user holding production shell access, is a gap. FLAG: role assignment is plausible but the job function description is ambiguous, flag for CPA review.",
         "na_condition": "",
         "can_be_na": false,
         "calibration_examples": [
           {
-            "evidence_summary": "A sampled DevOps engineer holds both AWS infrastructure-admin access and read-only billing console access; the job description confirms cost-monitoring duties as part of the role.",
+            "evidence_summary": "A DevOps engineer holds both AWS infrastructure-admin access and read-only billing console access; the job description confirms cost-monitoring duties as part of the role.",
             "ai_verdict": "gap",
             "correct_verdict": "pass",
             "reasoning": "No over-literalism: an access grant that falls outside the narrowest reading of a job title still aligns with job function when the job description documents the underlying duty. Verify against the actual documented responsibilities before flagging a mismatch.",
@@ -4680,7 +4700,7 @@
           "coverage_checks": [
             {
               "id": "sample_record",
-              "question": "Does the evidence include an actual comparison of sampled users' role assignments against their job titles/functions (not just a verbal description)?",
+              "question": "Does the evidence include an actual comparison of users' role assignments against their job titles/functions (not just a verbal description)?",
               "lane": "record",
               "alt_lanes": [
                 "export",
@@ -4703,7 +4723,8 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "ad_hoc"
       }
     ]
   },
@@ -4770,7 +4791,7 @@
             "source": "synthetic_taste_v1"
           },
           {
-            "evidence_summary": "During the walkthrough interview the IT lead states 'we always approve admin access before granting it,' but no approval record, ticket, or email is provided for any of the sampled privileged users.",
+            "evidence_summary": "During the walkthrough interview the IT lead states 'we always approve admin access before granting it,' but no approval record, ticket, or email is provided for any of the privileged users.",
             "ai_verdict": "pass",
             "correct_verdict": "gap",
             "reasoning": "Verbal confirmation is never a substitute for documented authorization. Each privileged user needs an actual retrievable authorization artifact, not a general assurance given in conversation.",
@@ -4952,7 +4973,7 @@
       },
       {
         "id": "A3",
-        "text": "For a sample of review periods: service account review was performed (separate from user access reviews)",
+        "text": "For each review period: service account review was performed (separate from user access reviews)",
         "attr_type": "sample",
         "typical_evidence": "Service account review records showing last-used dates and removal of inactive accounts",
         "pass_criteria": "PASS: Service account review records show a review performed within the last 12 months that checked last-used dates and removed or disabled unused accounts. This is distinct from the user access review; a user access review alone does not satisfy it. FAIL: No service account-specific review performed within the last 12 months, or review did not check last-used dates.",
@@ -4995,7 +5016,8 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "quarterly"
       }
     ]
   },
@@ -5807,10 +5829,10 @@
       },
       {
         "id": "A2",
-        "text": "For a sample of disposed assets: data is wiped or destroyed before disposal",
+        "text": "For each disposed asset: data is wiped or destroyed before disposal",
         "attr_type": "sample",
         "typical_evidence": "Certificate of destruction, data wipe log, or disposal vendor receipt",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if disposals occurred and the most recent disposal has a certificate of destruction, a data wipe log, or a disposal vendor receipt; if no disposals occurred, pass by default. FAIL if disposals occurred with no evidence of secure wiping or destruction. TYPE II (over the period): PASS if every sampled disposal has evidence of secure wiping or destruction, or no disposals occurred; an isolated disposal with an incomplete receipt in an otherwise documented practice is an exception, not a gap; systematic disposal of assets without secure wiping or destruction is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if disposals occurred and the most recent disposal has a certificate of destruction, a data wipe log, or a disposal vendor receipt; if no disposals occurred, pass by default. FAIL if disposals occurred with no evidence of secure wiping or destruction. TYPE II (over the period): PASS if every disposal has evidence of secure wiping or destruction, or no disposals occurred; an isolated disposal with an incomplete receipt in an otherwise documented practice is an exception, not a gap; systematic disposal of assets without secure wiping or destruction is a gap.",
         "na_condition": "PASS if no asset disposals occurred during the period",
         "can_be_na": true,
         "calibration_examples": [
@@ -5818,7 +5840,7 @@
             "evidence_summary": "No laptops or hardware were disposed of during the period; the client has a written disposal procedure on file but no disposal events occurred to test against it.",
             "ai_verdict": "gap",
             "correct_verdict": "pass",
-            "reasoning": "Absence of disposal activity is a pass-by-default condition under this attribute's own criteria, not a gap. An AI that treats nothing-to-sample as an automatic fail is over-conservative; verify there truly were no disposals before failing.",
+            "reasoning": "Absence of disposal activity is a pass-by-default condition under this attribute's own criteria, not a gap. An AI that treats an empty population as an automatic fail is over-conservative; verify there truly were no disposals before failing.",
             "weight": 0.5,
             "source": "synthetic_taste_v1"
           },
@@ -5858,14 +5880,15 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "ad_hoc"
       },
       {
         "id": "A3",
-        "text": "For a sample of disposals: disposal is documented with date, method, and asset identification",
+        "text": "For each disposal: disposal is documented with date, method, and asset identification",
         "attr_type": "sample",
         "typical_evidence": "Disposal log entries with asset ID, disposal date, and method used",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if disposals occurred and the most recent disposal record includes the asset identifier, the disposal date, and the disposal method used; if no disposals occurred, pass by default. FAIL if disposals occurred with no disposal records. TYPE II (over the period): PASS if every sampled disposal record includes asset identifier, date, and method, or no disposals occurred; an isolated record missing one field in an otherwise complete log is an exception, not a gap; systematic absence of disposal records or their key fields is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if disposals occurred and the most recent disposal record includes the asset identifier, the disposal date, and the disposal method used; if no disposals occurred, pass by default. FAIL if disposals occurred with no disposal records. TYPE II (over the period): PASS if every disposal record includes asset identifier, date, and method, or no disposals occurred; an isolated record missing one field in an otherwise complete log is an exception, not a gap; systematic absence of disposal records or their key fields is a gap.",
         "na_condition": "PASS if no asset disposals occurred during the period",
         "can_be_na": true,
         "calibration_examples": [
@@ -5917,7 +5940,8 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "ad_hoc"
       }
     ]
   },
@@ -6331,10 +6355,10 @@
       },
       {
         "id": "A5",
-        "text": "For a sample of detected threats: investigation and remediation is completed",
+        "text": "For each detected threat: investigation and remediation is completed",
         "attr_type": "sample",
         "typical_evidence": "EDR alert records showing investigation steps and remediation actions taken",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity has an endpoint protection process for investigating and remediating detected threats, and the most recent detected threat has EDR alert records showing investigation steps taken and remediation completed. If no threats were detected as of the test date, pass by default. FAIL if there is no threat investigation and remediation process, or a recent detected threat has no investigation or remediation record. TYPE II (over the period): PASS if all sampled detected threats have EDR alert records showing investigation and completed remediation, and pass by default where no threats were detected in the period; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of investigation or remediation is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity has an endpoint protection process for investigating and remediating detected threats, and the most recent detected threat has EDR alert records showing investigation steps taken and remediation completed. If no threats were detected as of the test date, pass by default. FAIL if there is no threat investigation and remediation process, or a recent detected threat has no investigation or remediation record. TYPE II (over the period): PASS if every detected threat in the period has EDR alert records showing investigation and completed remediation, and pass by default where no threats were detected in the period; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of investigation or remediation is a gap.",
         "na_condition": "PASS if no security threats were detected during the period",
         "can_be_na": true,
         "calibration_examples": [
@@ -6386,7 +6410,8 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "ad_hoc"
       }
     ]
   },
@@ -6729,10 +6754,10 @@
       },
       {
         "id": "A5",
-        "text": "For a sample of critical/high findings: remediation is completed within defined timelines",
+        "text": "For each critical/high finding: remediation is completed within defined timelines",
         "attr_type": "sample",
         "typical_evidence": "Finding remediation records showing fix dates within SLA for critical/high severity",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity has a remediation process for scan findings and the most recent critical or high finding has a remediation record with a fix date within the entity's SLA (default: critical within 30 days, high within 90 days). If no critical or high findings exist as of the test date, pass by default. FAIL if there is no remediation process, or a recent critical or high finding was not remediated within the defined timeline. TYPE II (over the period): PASS if all sampled critical or high findings were remediated within the defined timeline, and pass by default where no critical or high findings arose in the period; isolated misses in an otherwise working practice are an exception, not a gap; systematic failure to remediate within timelines is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity has a remediation process for scan findings and the most recent critical or high finding has a remediation record with a fix date within the entity's SLA (default: critical within 30 days, high within 90 days). If no critical or high findings exist as of the test date, pass by default. FAIL if there is no remediation process, or a recent critical or high finding was not remediated within the defined timeline. TYPE II (over the period): PASS if every critical or high finding in the period was remediated within the defined timeline, and pass by default where no critical or high findings arose in the period; isolated misses in an otherwise working practice are an exception, not a gap; systematic failure to remediate within timelines is a gap.",
         "na_condition": "Pass if no critical/high findings identified in scans during the period",
         "can_be_na": true,
         "calibration_examples": [
@@ -6780,7 +6805,8 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "ad_hoc"
       }
     ]
   },
@@ -6925,10 +6951,10 @@
       },
       {
         "id": "A5",
-        "text": "For a sample of critical/high findings: remediation completed within defined timeframe",
+        "text": "For each critical/high finding: remediation completed within defined timeframe",
         "attr_type": "sample",
         "typical_evidence": "Finding remediation records showing fix dates and re-test results for critical/high findings",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity has a process to remediate or formally accept penetration test findings and the most recent critical or high finding has remediation evidence with a fix date within the entity's SLA (default: critical within 30 days, high within 90 days), or a management-signed risk acceptance. If no critical or high findings exist as of the test date, pass by default. FAIL if there is no remediation or risk acceptance process, or a recent critical or high finding lacks both remediation and management-approved risk acceptance. TYPE II (over the period): PASS if all sampled critical or high findings were remediated within the defined timeframe or carry a management-approved risk acceptance, and pass by default where no critical or high findings arose in the period; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of remediation and risk acceptance is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity has a process to remediate or formally accept penetration test findings and the most recent critical or high finding has remediation evidence with a fix date within the entity's SLA (default: critical within 30 days, high within 90 days), or a management-signed risk acceptance. If no critical or high findings exist as of the test date, pass by default. FAIL if there is no remediation or risk acceptance process, or a recent critical or high finding lacks both remediation and management-approved risk acceptance. TYPE II (over the period): PASS if every critical or high finding in the period was remediated within the defined timeframe or carry a management-approved risk acceptance, and pass by default where no critical or high findings arose in the period; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of remediation and risk acceptance is a gap.",
         "na_condition": "Pass if no critical/high findings identified in penetration test",
         "can_be_na": true,
         "calibration_examples": [
@@ -6968,7 +6994,8 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "ad_hoc"
       }
     ]
   },
@@ -7108,7 +7135,7 @@
         "text": "Logs are protected from tampering",
         "attr_type": "config",
         "typical_evidence": "Log storage access controls, immutable storage settings, or write-once configuration",
-        "pass_criteria": "PASS: If centralized, log platform access is restricted to authorized personnel (access list is limited). If per-system, sampled systems show log protection (restricted access, immutable storage, or separate log account). FAIL: Log storage is writable or deletable by non-admin users, or no access restrictions on log data.",
+        "pass_criteria": "PASS: If centralized, log platform access is restricted to authorized personnel (access list is limited). If per-system, each in-scope system shows log protection (restricted access, immutable storage, or separate log account). FAIL: Log storage is writable or deletable by non-admin users, or no access restrictions on log data.",
         "na_condition": "",
         "can_be_na": false,
         "calibration_examples": [
@@ -7219,10 +7246,10 @@
       },
       {
         "id": "A3",
-        "text": "For a sample of alerts: alert was reviewed and triaged within defined timeframe",
+        "text": "For each alert: alert was reviewed and triaged within defined timeframe",
         "attr_type": "sample",
         "typical_evidence": "Alert review records showing triage timestamp relative to alert timestamp",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity has an alert review and triage process and the most recent triggered alert has a review or triage record with a timestamp showing response within the entity's defined timeframe. If no alerts were triggered as of the test date, pass by default. FAIL if there is no alert review process, or a recent triggered alert has no review record. TYPE II (over the period): PASS if all sampled alerts have review or triage records with response within the defined timeframe, and pass by default where no alerts were triggered in the period; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of alert review is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity has an alert review and triage process and the most recent triggered alert has a review or triage record with a timestamp showing response within the entity's defined timeframe. If no alerts were triggered as of the test date, pass by default. FAIL if there is no alert review process, or a recent triggered alert has no review record. TYPE II (over the period): PASS if every alert in the period has review or triage records with response within the defined timeframe, and pass by default where no alerts were triggered in the period; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of alert review is a gap.",
         "na_condition": "Pass if no alerts triggered during the period",
         "can_be_na": true,
         "calibration_examples": [
@@ -7274,7 +7301,8 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "ad_hoc"
       },
       {
         "id": "A4",
@@ -7486,7 +7514,7 @@
       },
       {
         "id": "A5",
-        "text": "For a sample of IR training events: IR team is trained through exercises or drills",
+        "text": "For each IR training event: IR team is trained through exercises or drills",
         "attr_type": "sample",
         "typical_evidence": "Tabletop exercise records, drill reports, or training completion records for IR team",
         "pass_criteria": "PASS: Training or exercise records (tabletop exercise, drill report, or IR training completion) show IR team participated in at least one training event within the audit period. FAIL: No IR training or exercise records for the audit period.",
@@ -7529,11 +7557,12 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "annual"
       },
       {
         "id": "A6",
-        "text": "For a sample of test events: incident response procedures are tested through exercises",
+        "text": "For each test event: incident response procedures are tested through exercises",
         "attr_type": "sample",
         "typical_evidence": "Tabletop exercise scenario documentation and results",
         "pass_criteria": "PASS: Tabletop exercise or simulation records are dated within the past 12 months, with scenario documentation and results. FAIL: No tabletop exercise or simulation conducted within the past 12 months.",
@@ -7576,7 +7605,8 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "annual"
       }
     ]
   },
@@ -7643,10 +7673,10 @@
       },
       {
         "id": "A2",
-        "text": "For a sample of incidents (if any): incidents are contained and mitigated",
+        "text": "For each incident (if any): incidents are contained and mitigated",
         "attr_type": "sample",
         "typical_evidence": "Incident records showing containment actions taken",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity has an incident containment and mitigation process and the most recent incident record documents containment actions taken and mitigation steps. If no incidents occurred as of the test date, pass by default. FAIL if there is no containment and mitigation process, or a recent incident record lacks documented containment or mitigation. TYPE II (over the period): PASS if all sampled incident records document containment actions and mitigation steps, and pass by default where no incidents occurred in the period; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of containment or mitigation is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity has an incident containment and mitigation process and the most recent incident record documents containment actions taken and mitigation steps. If no incidents occurred as of the test date, pass by default. FAIL if there is no containment and mitigation process, or a recent incident record lacks documented containment or mitigation. TYPE II (over the period): PASS if every incident record documents containment actions and mitigation steps, and pass by default where no incidents occurred in the period; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of containment or mitigation is a gap.",
         "na_condition": "Pass if no incidents occurred during the period",
         "can_be_na": true,
         "calibration_examples": [
@@ -7698,14 +7728,15 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "ad_hoc"
       },
       {
         "id": "A3",
-        "text": "For a sample of incidents (if any): root cause is investigated and determined",
+        "text": "For each incident (if any): root cause is investigated and determined",
         "attr_type": "sample",
         "typical_evidence": "Root cause analysis section in incident report",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity has a root cause analysis process and the most recent incident record includes a root cause analysis identifying the underlying cause. If no incidents occurred as of the test date, pass by default. FAIL if there is no root cause analysis process, or a recent incident record lacks root cause analysis. TYPE II (over the period): PASS if all sampled incident records include a root cause analysis, and pass by default where no incidents occurred in the period; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of root cause analysis is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity has a root cause analysis process and the most recent incident record includes a root cause analysis identifying the underlying cause. If no incidents occurred as of the test date, pass by default. FAIL if there is no root cause analysis process, or a recent incident record lacks root cause analysis. TYPE II (over the period): PASS if every incident record includes a root cause analysis, and pass by default where no incidents occurred in the period; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of root cause analysis is a gap.",
         "na_condition": "Pass if no incidents occurred during the period",
         "can_be_na": true,
         "calibration_examples": [
@@ -7765,14 +7796,15 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "ad_hoc"
       },
       {
         "id": "A4",
-        "text": "For a sample of incidents (if any): affected systems are restored to operational state",
+        "text": "For each incident (if any): affected systems are restored to operational state",
         "attr_type": "sample",
         "typical_evidence": "Incident resolution records showing system restoration",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity has a recovery process and the most recent incident record shows affected systems restored to operational state with a restoration timestamp. If no incidents occurred as of the test date, pass by default. FAIL if there is no recovery process, or a recent incident record lacks system restoration evidence. TYPE II (over the period): PASS if all sampled incident records show affected systems restored to operational state, and pass by default where no incidents occurred in the period; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of restoration evidence is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity has a recovery process and the most recent incident record shows affected systems restored to operational state with a restoration timestamp. If no incidents occurred as of the test date, pass by default. FAIL if there is no recovery process, or a recent incident record lacks system restoration evidence. TYPE II (over the period): PASS if every incident record shows affected systems restored to operational state, and pass by default where no incidents occurred in the period; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of restoration evidence is a gap.",
         "na_condition": "Pass if no incidents occurred during the period",
         "can_be_na": true,
         "calibration_examples": [
@@ -7812,14 +7844,15 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "ad_hoc"
       },
       {
         "id": "A5",
-        "text": "For a sample of incidents (if any): affected parties are notified per communication protocols",
+        "text": "For each incident (if any): affected parties are notified per communication protocols",
         "attr_type": "sample",
         "typical_evidence": "Notification records showing communication to affected parties",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity has a notification process aligned to its incident response communication protocols and the most recent incident that required notification has records showing affected parties were notified per those protocols. If no incidents occurred as of the test date, pass by default. FAIL if there is no notification process, or a recent incident that required notification has no notification records. TYPE II (over the period): PASS if all sampled incidents that required notification have records showing affected parties were notified per the communication protocols, and pass by default where no incidents occurred or none required notification in the period; isolated misses in an otherwise working practice are an exception, not a gap; systematic failure to notify is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity has a notification process aligned to its incident response communication protocols and the most recent incident that required notification has records showing affected parties were notified per those protocols. If no incidents occurred as of the test date, pass by default. FAIL if there is no notification process, or a recent incident that required notification has no notification records. TYPE II (over the period): PASS if every incident that required notification has records showing affected parties were notified per the communication protocols, and pass by default where no incidents occurred or none required notification in the period; isolated misses in an otherwise working practice are an exception, not a gap; systematic failure to notify is a gap.",
         "na_condition": "Pass if no incidents occurred during the period",
         "can_be_na": true,
         "calibration_examples": [
@@ -7827,7 +7860,7 @@
             "evidence_summary": "During the interview, the founder stated that affected customers are always emailed after any incident, but no notification email, template, or send log was provided for the one qualifying incident in the period.",
             "ai_verdict": "pass",
             "correct_verdict": "gap",
-            "reasoning": "Verbal confirmation is never evidence. The attribute requires records showing affected parties were actually notified, and an unsubstantiated claim about standard practice does not establish that notification occurred for the sampled incident.",
+            "reasoning": "Verbal confirmation is never evidence. The attribute requires records showing affected parties were actually notified, and an unsubstantiated claim about standard practice does not establish that notification occurred for the incident under test.",
             "weight": 0.5,
             "source": "synthetic_taste_v1"
           }
@@ -7859,14 +7892,15 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "ad_hoc"
       },
       {
         "id": "A6",
-        "text": "For a sample of incidents (if any): vulnerabilities identified are remediated",
+        "text": "For each incident (if any): vulnerabilities identified are remediated",
         "attr_type": "sample",
         "typical_evidence": "Remediation records for vulnerabilities identified during incident investigation",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity has a process to remediate vulnerabilities identified during incident investigation and the most recent incident's identified vulnerabilities have remediation records showing fixes applied. If no incidents occurred as of the test date, pass by default. FAIL if there is no such remediation process, or a recent incident's identified vulnerabilities lack remediation evidence. TYPE II (over the period): PASS if all vulnerabilities identified during sampled incidents have remediation records showing fixes applied, and pass by default where no incidents occurred or none identified vulnerabilities in the period; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of remediation is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity has a process to remediate vulnerabilities identified during incident investigation and the most recent incident's identified vulnerabilities have remediation records showing fixes applied. If no incidents occurred as of the test date, pass by default. FAIL if there is no such remediation process, or a recent incident's identified vulnerabilities lack remediation evidence. TYPE II (over the period): PASS if all vulnerabilities identified during the period's incidents have remediation records showing fixes applied, and pass by default where no incidents occurred or none identified vulnerabilities in the period; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of remediation is a gap.",
         "na_condition": "Pass if no incidents occurred during the period",
         "can_be_na": true,
         "calibration_examples": [
@@ -7906,14 +7940,15 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "ad_hoc"
       },
       {
         "id": "A7",
-        "text": "For a sample of incidents (if any): response is documented with timeline and actions taken",
+        "text": "For each incident (if any): response is documented with timeline and actions taken",
         "attr_type": "sample",
         "typical_evidence": "Incident report with timeline, actions taken, and outcomes",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity documents incident responses and the most recent incident has a response document containing a timeline of key timestamps, actions taken, and outcomes. If no incidents occurred as of the test date, pass by default. FAIL if incident responses are not documented, or a recent incident response document is missing timeline, actions, or outcomes. TYPE II (over the period): PASS if all sampled incident response documents contain a timeline, actions taken, and outcomes, and pass by default where no incidents occurred in the period; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of documented responses is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity documents incident responses and the most recent incident has a response document containing a timeline of key timestamps, actions taken, and outcomes. If no incidents occurred as of the test date, pass by default. FAIL if incident responses are not documented, or a recent incident response document is missing timeline, actions, or outcomes. TYPE II (over the period): PASS if every incident response document contains a timeline, actions taken, and outcomes, and pass by default where no incidents occurred in the period; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of documented responses is a gap.",
         "na_condition": "Pass if no incidents occurred during the period",
         "can_be_na": true,
         "calibration_examples": [
@@ -7965,14 +8000,15 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "ad_hoc"
       },
       {
         "id": "A8",
-        "text": "For a sample of personal data incidents (if any): unauthorized use or disclosure is communicated to data subjects and regulators as required",
+        "text": "For each personal data incident (if any): unauthorized use or disclosure is communicated to data subjects and regulators as required",
         "attr_type": "sample",
         "typical_evidence": "Breach notification records sent to data subjects and/or regulators",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity has a process to notify data subjects and regulators of personal data breaches as required by applicable law, and the most recent personal data incident has records showing data subjects and regulators were notified as required. If no personal data incidents occurred as of the test date, pass by default. FAIL if there is no breach notification process, or a recent personal data incident that required notification has no such records. TYPE II (over the period): PASS if all sampled personal data incidents that required notification have records showing data subjects and regulators were notified as required by applicable law, and pass by default where no personal data incidents occurred in the period; isolated misses in an otherwise working practice are an exception, not a gap; systematic failure to notify data subjects or regulators is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity has a process to notify data subjects and regulators of personal data breaches as required by applicable law, and the most recent personal data incident has records showing data subjects and regulators were notified as required. If no personal data incidents occurred as of the test date, pass by default. FAIL if there is no breach notification process, or a recent personal data incident that required notification has no such records. TYPE II (over the period): PASS if every personal data incident that required notification in the period has records showing data subjects and regulators were notified as required by applicable law, and pass by default where no personal data incidents occurred in the period; isolated misses in an otherwise working practice are an exception, not a gap; systematic failure to notify data subjects or regulators is a gap.",
         "na_condition": "N/A if Privacy TSC not in scope",
         "can_be_na": true,
         "calibration_examples": [
@@ -8024,7 +8060,8 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "ad_hoc"
       }
     ]
   },
@@ -8121,10 +8158,10 @@
       },
       {
         "id": "A3",
-        "text": "For a sample of changes: change is documented before implementation",
+        "text": "For each change: change is documented before implementation",
         "attr_type": "sample",
         "typical_evidence": "Pull request description, change ticket, or change request document",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the change process requires documentation before implementation and the most recent change has a pull request description, change ticket, or change request document with a creation timestamp on or before the change implementation timestamp. FAIL if changes can be implemented with no documentation, or the most recent change was documented only after it was deployed. TYPE II (over the period): PASS if all sampled changes have documentation created on or before the implementation timestamp; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of pre-implementation documentation is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the change process requires documentation before implementation and the most recent change has a pull request description, change ticket, or change request document with a creation timestamp on or before the change implementation timestamp. FAIL if changes can be implemented with no documentation, or the most recent change was documented only after it was deployed. TYPE II (over the period): PASS if every change in the period has documentation created on or before the implementation timestamp; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of pre-implementation documentation is a gap.",
         "na_condition": "",
         "can_be_na": false,
         "calibration_examples": [
@@ -8176,14 +8213,15 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "multi_daily"
       },
       {
         "id": "A4",
-        "text": "For a sample of changes: review is performed by someone other than the author",
+        "text": "For each change: review is performed by someone other than the author",
         "attr_type": "sample",
         "typical_evidence": "Pull request showing reviewer approval from a different person than the author",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the change process requires review by a person other than the author and the most recent change shows a code review or approval from a reviewer whose name differs from the author. FAIL if changes can be deployed without review, or the most recent change was reviewed only by the person who authored it. TYPE II (over the period): PASS if all sampled changes have a review performed by someone other than the author; isolated misses in an otherwise working practice are an exception, not a gap; systematic self-review or unreviewed deployment is a gap. FLAG: Entity has fewer than 3 developers and self-review is unavoidable, flag for CPA review of compensating controls (e.g., automated tests, post-deploy review).",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the change process requires review by a person other than the author and the most recent change shows a code review or approval from a reviewer whose name differs from the author. FAIL if changes can be deployed without review, or the most recent change was reviewed only by the person who authored it. TYPE II (over the period): PASS if every change in the period has a review performed by someone other than the author; isolated misses in an otherwise working practice are an exception, not a gap; systematic self-review or unreviewed deployment is a gap. FLAG: Entity has fewer than 3 developers and self-review is unavoidable, flag for CPA review of compensating controls (e.g., automated tests, post-deploy review).",
         "na_condition": "",
         "can_be_na": false,
         "calibration_examples": [
@@ -8223,14 +8261,15 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "multi_daily"
       },
       {
         "id": "A5",
-        "text": "For a sample of changes: testing is completed before deployment",
+        "text": "For each change: testing is completed before deployment",
         "attr_type": "sample",
         "typical_evidence": "CI/CD pipeline test results or test execution records with pass status before deployment",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the change process requires testing before deployment and the most recent change has test evidence (CI/CD pipeline pass status, test execution results, or manual test records) timestamped before deployment. FAIL if changes can be deployed with no test evidence, or the most recent change shows a test timestamp after the deployment timestamp. TYPE II (over the period): PASS if all sampled changes have test evidence timestamped before deployment; isolated misses in an otherwise working practice are an exception, not a gap; systematic deployment without test evidence is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the change process requires testing before deployment and the most recent change has test evidence (CI/CD pipeline pass status, test execution results, or manual test records) timestamped before deployment. FAIL if changes can be deployed with no test evidence, or the most recent change shows a test timestamp after the deployment timestamp. TYPE II (over the period): PASS if every change in the period has test evidence timestamped before deployment; isolated misses in an otherwise working practice are an exception, not a gap; systematic deployment without test evidence is a gap.",
         "na_condition": "",
         "can_be_na": false,
         "calibration_examples": [
@@ -8270,14 +8309,15 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "multi_daily"
       },
       {
         "id": "A6",
-        "text": "For a sample of changes: approval is obtained before deployment",
+        "text": "For each change: approval is obtained before deployment",
         "attr_type": "sample",
         "typical_evidence": "PR merge approval timestamp before deployment timestamp",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the change process requires approval before deployment by someone other than the author and the most recent change has an approval timestamp before its deployment timestamp. For teams with fewer than 3 developers, compensating controls (post-deploy review, automated checks) are acceptable. FAIL if the most recent change has an approval timestamp after deployment, or lacks approval. TYPE II (over the period): PASS if all sampled changes have approval before deployment by a person other than the author, or documented compensating controls for teams with fewer than 3 developers; isolated misses in an otherwise working practice are an exception, not a gap; systematic deployment without prior approval is a gap. FLAG: Solo developer approves own changes with compensating controls, flag for CPA review.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the change process requires approval before deployment by someone other than the author and the most recent change has an approval timestamp before its deployment timestamp. For teams with fewer than 3 developers, compensating controls (post-deploy review, automated checks) are acceptable. FAIL if the most recent change has an approval timestamp after deployment, or lacks approval. TYPE II (over the period): PASS if every change in the period has approval before deployment by a person other than the author, or documented compensating controls for teams with fewer than 3 developers; isolated misses in an otherwise working practice are an exception, not a gap; systematic deployment without prior approval is a gap. FLAG: Solo developer approves own changes with compensating controls, flag for CPA review.",
         "na_condition": "",
         "can_be_na": false,
         "calibration_examples": [
@@ -8317,7 +8357,8 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "multi_daily"
       }
     ]
   },
@@ -8359,10 +8400,10 @@
       },
       {
         "id": "A2",
-        "text": "For a sample of emergency changes (if any): retroactive approval and documentation are obtained",
+        "text": "For each emergency change (if any): retroactive approval and documentation are obtained",
         "attr_type": "sample",
         "typical_evidence": "Post-deployment approval records or retroactive change tickets for emergency changes",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity has a defined emergency change process requiring retroactive approval, and either no emergency changes have occurred or the most recent emergency change has retroactive approval documentation with approver name and date. FAIL if emergency changes can occur with no retroactive approval process in place. TYPE II (over the period): If no emergency changes occurred, pass by default. If emergency changes occurred, PASS if all sampled emergency changes have retroactive approval documentation with approver name and date; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of retroactive approval is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity has a defined emergency change process requiring retroactive approval, and either no emergency changes have occurred or the most recent emergency change has retroactive approval documentation with approver name and date. FAIL if emergency changes can occur with no retroactive approval process in place. TYPE II (over the period): If no emergency changes occurred, pass by default. If emergency changes occurred, PASS if every emergency change in the period has retroactive approval documentation with approver name and date; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of retroactive approval is a gap.",
         "na_condition": "Pass if no emergency changes occurred during the period",
         "can_be_na": true,
         "calibration_examples": [
@@ -8414,14 +8455,15 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "ad_hoc"
       },
       {
         "id": "A3",
-        "text": "For a sample of emergency changes (if any): post-implementation review is conducted",
+        "text": "For each emergency change (if any): post-implementation review is conducted",
         "attr_type": "sample",
         "typical_evidence": "Post-implementation review records for emergency changes",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity has a defined emergency change process requiring a post-implementation review, and either no emergency changes have occurred or the most recent emergency change has a post-implementation review record documenting what was changed, impact assessment, and lessons learned. FAIL if emergency changes can occur with no post-implementation review process in place. TYPE II (over the period): If no emergency changes occurred, pass by default. If emergency changes occurred, PASS if all sampled emergency changes have a post-implementation review record; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of post-implementation review is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity has a defined emergency change process requiring a post-implementation review, and either no emergency changes have occurred or the most recent emergency change has a post-implementation review record documenting what was changed, impact assessment, and lessons learned. FAIL if emergency changes can occur with no post-implementation review process in place. TYPE II (over the period): If no emergency changes occurred, pass by default. If emergency changes occurred, PASS if every emergency change in the period has a post-implementation review record; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of post-implementation review is a gap.",
         "na_condition": "Pass if no emergency changes occurred during the period",
         "can_be_na": true,
         "collection_hint": {
@@ -8451,7 +8493,8 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "ad_hoc"
       }
     ]
   },
@@ -8773,10 +8816,10 @@
       },
       {
         "id": "A2",
-        "text": "For a sample of architecture changes: security review is performed before deployment",
+        "text": "For each architecture change: security review is performed before deployment",
         "attr_type": "sample",
         "typical_evidence": "Security review records for architecture changes with review date before deployment date",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity requires a security review before deploying architecture changes, and either no architecture changes have occurred or the most recent architecture change has a security review record dated before its deployment date. FAIL if architecture changes can be deployed with no security review process in place. TYPE II (over the period): If no architecture changes occurred, pass by default. If architecture changes occurred, PASS if all sampled architecture changes have a security review dated before deployment; isolated misses in an otherwise working practice are an exception, not a gap; systematic deployment of architecture changes without security review is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity requires a security review before deploying architecture changes, and either no architecture changes have occurred or the most recent architecture change has a security review record dated before its deployment date. FAIL if architecture changes can be deployed with no security review process in place. TYPE II (over the period): If no architecture changes occurred, pass by default. If architecture changes occurred, PASS if every architecture change in the period has a security review dated before deployment; isolated misses in an otherwise working practice are an exception, not a gap; systematic deployment of architecture changes without security review is a gap.",
         "na_condition": "Pass if no architecture changes occurred during the period",
         "can_be_na": true,
         "calibration_examples": [
@@ -8824,7 +8867,8 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "ad_hoc"
       }
     ]
   },
@@ -9022,7 +9066,7 @@
       },
       {
         "id": "A6",
-        "text": "For a sample of test events: plan tested within the last 12 months with results documented",
+        "text": "For each test event: plan tested within the last 12 months with results documented",
         "attr_type": "sample",
         "typical_evidence": "DR test execution record with date, scope, results, and findings",
         "pass_criteria": "PASS: DR test execution record is dated within the past 12 months and includes test scope, results, and findings. FAIL: No DR test within the past 12 months, or test record lacks results documentation.",
@@ -9065,7 +9109,8 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "annual"
       },
       {
         "id": "A8",
@@ -9342,7 +9387,7 @@
       },
       {
         "id": "A6",
-        "text": "For a sample of restoration tests: backup restoration tested successfully within the last 12 months",
+        "text": "For each restoration test: backup restoration tested successfully within the last 12 months",
         "attr_type": "sample",
         "typical_evidence": "Restoration test records showing successful recovery with date and scope",
         "pass_criteria": "PASS: Restoration test record dated within the past 12 months shows a successful recovery test with scope, date, and outcome documented. FAIL: No restoration test within the past 12 months, or test record shows restoration failed.",
@@ -9393,7 +9438,8 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "quarterly"
       }
     ]
   },
@@ -9537,10 +9583,10 @@
       },
       {
         "id": "A5",
-        "text": "For a sample of vendor contracts: security requirements are defined",
+        "text": "For each vendor contract: security requirements are defined",
         "attr_type": "sample",
         "typical_evidence": "Vendor contracts or MSAs with security requirements clauses",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity's vendor onboarding requires security clauses in agreements and the most recent vendor contract or MSA contains clauses specifying security requirements (data protection, access controls, incident notification, or equivalent). FAIL if vendor contracts are executed with no security requirement clauses. TYPE II (over the period): PASS if all sampled vendor contracts contain security requirement clauses; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of security clauses is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity's vendor onboarding requires security clauses in agreements and the most recent vendor contract or MSA contains clauses specifying security requirements (data protection, access controls, incident notification, or equivalent). FAIL if vendor contracts are executed with no security requirement clauses. TYPE II (over the period): PASS if every vendor contract contains security requirement clauses; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of security clauses is a gap.",
         "na_condition": "",
         "can_be_na": false,
         "calibration_examples": [
@@ -9580,14 +9626,15 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "annual"
       },
       {
         "id": "A6",
-        "text": "For a sample of critical vendors: due diligence performed before onboarding",
+        "text": "For each critical vendor: due diligence performed before onboarding",
         "attr_type": "sample",
         "typical_evidence": "Vendor security assessment questionnaire or SOC 2 report review records",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity requires pre-engagement security assessment of critical or high-risk vendors, and either no critical or high-risk vendors were onboarded or the most recent such vendor has pre-engagement security assessment records (questionnaire, SOC 2 review, or security evaluation). FAIL if critical or high-risk vendors can be onboarded with no due diligence process in place. TYPE II (over the period): If no critical or high-risk vendors were onboarded, pass by default. If such vendors were onboarded, PASS if all sampled critical or high-risk vendors have a pre-engagement security assessment; isolated misses in an otherwise working practice are an exception, not a gap; systematic onboarding without due diligence is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity requires pre-engagement security assessment of critical or high-risk vendors, and either no critical or high-risk vendors were onboarded or the most recent such vendor has pre-engagement security assessment records (questionnaire, SOC 2 review, or security evaluation). FAIL if critical or high-risk vendors can be onboarded with no due diligence process in place. TYPE II (over the period): If no critical or high-risk vendors were onboarded, pass by default. If such vendors were onboarded, PASS if every critical or high-risk vendor has a pre-engagement security assessment; isolated misses in an otherwise working practice are an exception, not a gap; systematic onboarding without due diligence is a gap.",
         "na_condition": "PASS if no critical/high-risk vendors identified",
         "can_be_na": true,
         "calibration_examples": [
@@ -9627,14 +9674,15 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "annual"
       },
       {
         "id": "A7",
-        "text": "For a sample of critical vendors: security posture assessed at least annually",
+        "text": "For each critical vendor: security posture assessed at least annually",
         "attr_type": "sample",
         "typical_evidence": "Annual vendor reassessment records or SOC 2 report review for current period",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity reassesses critical or high-risk vendors on a defined cycle (default: within the last 12 months), and either no such vendors exist or the most recent reassessment record (SOC 2 report review, security questionnaire, or equivalent) falls within that cycle. FAIL if critical or high-risk vendors are used with no periodic reassessment process in place. TYPE II (over the period): If no critical or high-risk vendors exist, pass by default. PASS if all sampled critical or high-risk vendors have a reassessment within the defined cycle (default: within the last 12 months); isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of reassessment is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity reassesses critical or high-risk vendors on a defined cycle (default: within the last 12 months), and either no such vendors exist or the most recent reassessment record (SOC 2 report review, security questionnaire, or equivalent) falls within that cycle. FAIL if critical or high-risk vendors are used with no periodic reassessment process in place. TYPE II (over the period): If no critical or high-risk vendors exist, pass by default. PASS if every critical or high-risk vendor has a reassessment within the defined cycle (default: within the last 12 months); isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of reassessment is a gap.",
         "na_condition": "PASS if no critical/high-risk vendors identified",
         "can_be_na": true,
         "calibration_examples": [
@@ -9674,14 +9722,15 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "annual"
       },
       {
         "id": "A8",
-        "text": "For a sample of vendors with confidential data access: confidentiality commitments are signed",
+        "text": "For each vendor with confidential data access: confidentiality commitments are signed",
         "attr_type": "sample",
         "typical_evidence": "Signed NDA or confidentiality clause in vendor contract",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity requires confidentiality commitments from vendors with access to confidential information, and the most recent such vendor has a signed NDA or confidentiality clause in their contract on file. FAIL if vendors can access confidential information with no confidentiality commitment process in place. TYPE II (over the period): PASS if all sampled vendors with access to confidential information have signed confidentiality commitments on file; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of confidentiality commitments is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity requires confidentiality commitments from vendors with access to confidential information, and the most recent such vendor has a signed NDA or confidentiality clause in their contract on file. FAIL if vendors can access confidential information with no confidentiality commitment process in place. TYPE II (over the period): PASS if every vendor with access to confidential information has signed confidentiality commitments on file; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of confidentiality commitments is a gap.",
         "na_condition": "N/A if Confidentiality TSC not in scope",
         "can_be_na": true,
         "calibration_examples": [
@@ -9721,14 +9770,15 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "annual"
       },
       {
         "id": "A9",
-        "text": "For a sample of vendors with personal data access: privacy and data processing commitments are signed",
+        "text": "For each vendor with personal data access: privacy and data processing commitments are signed",
         "attr_type": "sample",
         "typical_evidence": "Signed DPA or privacy addendum in vendor contract",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity requires privacy and data processing commitments from vendors with access to personal information, and the most recent such vendor has a signed DPA or privacy addendum on file. FAIL if vendors can access personal information with no data processing commitment process in place. TYPE II (over the period): PASS if all sampled vendors with access to personal information have signed privacy commitments or a DPA on file; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of privacy commitments is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity requires privacy and data processing commitments from vendors with access to personal information, and the most recent such vendor has a signed DPA or privacy addendum on file. FAIL if vendors can access personal information with no data processing commitment process in place. TYPE II (over the period): PASS if every vendor with access to personal information has signed privacy commitments or a DPA on file; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of privacy commitments is a gap.",
         "na_condition": "N/A if Privacy TSC not in scope",
         "can_be_na": true,
         "calibration_examples": [
@@ -9780,7 +9830,8 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "annual"
       }
     ]
   },
@@ -10200,10 +10251,10 @@
       },
       {
         "id": "A4",
-        "text": "For a sample of deficiencies (if any): remediation is tracked to completion",
+        "text": "For each deficiency (if any): remediation is tracked to completion",
         "attr_type": "sample",
         "typical_evidence": "Deficiency tracker showing progress and closure records",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity tracks identified deficiencies to completion, and either no deficiencies were identified or the most recent deficiency has a tracker entry showing progress through completion with timestamps. FAIL if deficiencies can be identified with no remediation tracking process in place. TYPE II (over the period): If no deficiencies were identified, pass by default. If deficiencies were identified, PASS if all sampled deficiencies have a tracker entry showing progress through completion with timestamps; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of remediation tracking, or deficiencies left open without a documented timeline, is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity tracks identified deficiencies to completion, and either no deficiencies were identified or the most recent deficiency has a tracker entry showing progress through completion with timestamps. FAIL if deficiencies can be identified with no remediation tracking process in place. TYPE II (over the period): If no deficiencies were identified, pass by default. If deficiencies were identified, PASS if every deficiency in the period has a tracker entry showing progress through completion with timestamps; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of remediation tracking, or deficiencies left open without a documented timeline, is a gap.",
         "na_condition": "Pass if no deficiencies identified during the period",
         "can_be_na": true,
         "calibration_examples": [
@@ -10243,7 +10294,8 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "ad_hoc"
       }
     ]
   },
@@ -10844,18 +10896,18 @@
       },
       {
         "id": "A4",
-        "text": "For a sample of processing errors (if any): errors are corrected within the entity's defined SLA",
+        "text": "For each processing error (if any): errors are corrected within the entity's defined SLA",
         "attr_type": "sample",
         "typical_evidence": "Error correction records showing detection timestamp, correction timestamp, and resolution details",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity corrects processing errors within a defined SLA (default: critical within 24 hours, non-critical within 5 business days), and either no processing errors occurred or the most recent error has a correction record with timestamps showing correction within the defined SLA. FAIL if processing errors can occur with no correction process or defined SLA in place. TYPE II (over the period): If no processing errors occurred, pass by default. If errors occurred, PASS if all sampled processing errors were corrected within the defined SLA (default: critical within 24 hours, non-critical within 5 business days); isolated misses in an otherwise working practice are an exception, not a gap; systematic failure to correct errors within the SLA is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity corrects processing errors within a defined SLA (default: critical within 24 hours, non-critical within 5 business days), and either no processing errors occurred or the most recent error has a correction record with timestamps showing correction within the defined SLA. FAIL if processing errors can occur with no correction process or defined SLA in place. TYPE II (over the period): If no processing errors occurred, pass by default. If errors occurred, PASS if every processing error in the period was corrected within the defined SLA (default: critical within 24 hours, non-critical within 5 business days); isolated misses in an otherwise working practice are an exception, not a gap; systematic failure to correct errors within the SLA is a gap.",
         "na_condition": "Pass if no processing errors occurred during the period",
         "can_be_na": true,
         "calibration_examples": [
           {
-            "evidence_summary": "No processing errors occurred at the company during the review period, and there is no error-correction record to sample because there was nothing to correct.",
+            "evidence_summary": "No processing errors occurred at the company during the review period, and there is no error-correction record to test because there was nothing to correct.",
             "ai_verdict": "gap",
             "correct_verdict": "pass",
-            "reasoning": "Process-exists sample attributes pass on the existence and use of the correction process, and this one explicitly passes by default when no errors occurred during the period. Marking a gap for having no sample to draw from ignores the pass criteria's own default-pass clause.",
+            "reasoning": "Process-exists population attributes pass on the existence and use of the correction process, and this one explicitly passes by default when no errors occurred during the period. Marking a gap for an empty population ignores the pass criteria's own default-pass clause.",
             "weight": 0.5,
             "source": "synthetic_taste_v1"
           }
@@ -10887,7 +10939,8 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "ad_hoc"
       }
     ]
   },
@@ -11789,18 +11842,18 @@
       },
       {
         "id": "A4",
-        "text": "For a sample of retained information beyond original purpose (if any): explicit consent to retain is documented",
+        "text": "For all information retained beyond its original purpose (if any): explicit consent to retain is documented",
         "attr_type": "sample",
         "typical_evidence": "Consent records showing explicit consent for retention of personal information beyond the original collection purpose",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity documents explicit consent when information is retained beyond its original purpose, and either no information is retained beyond its original purpose or the most recent instance has documented explicit consent for retention with timestamp and data subject identifier. FAIL if information can be retained beyond its original purpose with no explicit consent process in place. TYPE II (over the period): If no information was retained beyond its original purpose, pass by default. If retention beyond purpose occurred, PASS if all sampled instances have documented explicit consent for retention with timestamp and data subject identifier; isolated misses in an otherwise working practice are an exception, not a gap; systematic retention beyond purpose without documented consent is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity documents explicit consent when information is retained beyond its original purpose, and either no information is retained beyond its original purpose or the most recent instance has documented explicit consent for retention with timestamp and data subject identifier. FAIL if information can be retained beyond its original purpose with no explicit consent process in place. TYPE II (over the period): If no information was retained beyond its original purpose, pass by default. If retention beyond purpose occurred, PASS if every instance in the period has documented explicit consent for retention with timestamp and data subject identifier; isolated misses in an otherwise working practice are an exception, not a gap; systematic retention beyond purpose without documented consent is a gap.",
         "na_condition": "Pass if no information retained beyond original purpose during the period",
         "can_be_na": true,
         "calibration_examples": [
           {
-            "evidence_summary": "No personal information was retained beyond its original collection purpose during the review period, so there is no consent-to-retain record to sample.",
+            "evidence_summary": "No personal information was retained beyond its original collection purpose during the review period, so there is no consent-to-retain record to test.",
             "ai_verdict": "gap",
             "correct_verdict": "pass",
-            "reasoning": "Process-exists sample attributes pass on the existence and use of the consent-to-retain process, and this one explicitly passes by default when no such retention occurred during the period. Requiring a consent record to exist when the underlying trigger never happened ignores the pass criteria's own default-pass clause.",
+            "reasoning": "Process-exists population attributes pass on the existence and use of the consent-to-retain process, and this one explicitly passes by default when no such retention occurred during the period. Requiring a consent record to exist when the underlying trigger never happened ignores the pass criteria's own default-pass clause.",
             "weight": 0.5,
             "source": "synthetic_taste_v1"
           }
@@ -11832,7 +11885,8 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "ad_hoc"
       }
     ]
   },
@@ -12107,18 +12161,18 @@
       },
       {
         "id": "A5",
-        "text": "For a sample of access/correction requests (if any): requests are responded to within the defined timeframe",
+        "text": "For each access/correction request (if any): requests are responded to within the defined timeframe",
         "attr_type": "sample",
-        "typical_evidence": "Request tracking records showing receipt date, response date, and resolution for sampled access/correction requests",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity responds to access and correction requests within a defined timeframe (default: 30 days), and either no requests were received or the most recent request was responded to within the defined timeframe with personal information provided in an understandable format. FAIL if access and correction requests can be received with no defined response process or timeframe in place. TYPE II (over the period): If no requests were received, pass by default. If requests were received, PASS if all sampled requests were responded to within the defined timeframe (default: 30 days) with personal information provided in an understandable format; isolated misses in an otherwise working practice are an exception, not a gap; systematic failure to respond within the timeframe is a gap.",
+        "typical_evidence": "Request tracking records showing receipt date, response date, and resolution for each access/correction request",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity responds to access and correction requests within a defined timeframe (default: 30 days), and either no requests were received or the most recent request was responded to within the defined timeframe with personal information provided in an understandable format. FAIL if access and correction requests can be received with no defined response process or timeframe in place. TYPE II (over the period): If no requests were received, pass by default. If requests were received, PASS if every request in the period was responded to within the defined timeframe (default: 30 days) with personal information provided in an understandable format; isolated misses in an otherwise working practice are an exception, not a gap; systematic failure to respond within the timeframe is a gap.",
         "na_condition": "Pass if no access/correction requests received during the period",
         "can_be_na": true,
         "calibration_examples": [
           {
-            "evidence_summary": "The data-subject-rights runbook defines a 30-day response window and a named owner, and the company has never received an access or correction request in its operating history, so there are no fulfilled tickets to sample.",
+            "evidence_summary": "The data-subject-rights runbook defines a 30-day response window and a named owner, and the company has never received an access or correction request in its operating history, so there are no fulfilled tickets to test.",
             "ai_verdict": "gap",
             "correct_verdict": "pass",
-            "reasoning": "At the design/Type I stage this attribute passes when a defined response timeframe is in place and no requests have been received, the criteria states this default explicitly. There is no sample to draw because the triggering event never occurred, so treating the empty sample as a gap misapplies the criteria.",
+            "reasoning": "At the design/Type I stage this attribute passes when a defined response timeframe is in place and no requests have been received, the criteria states this default explicitly. The population is empty because the triggering event never occurred, so treating the empty population as a gap misapplies the criteria.",
             "weight": 0.5,
             "source": "synthetic_taste_v1"
           }
@@ -12150,7 +12204,8 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "ad_hoc"
       }
     ]
   },
@@ -12320,10 +12375,10 @@
       },
       {
         "id": "A5",
-        "text": "For a sample of third parties receiving personal information: privacy compliance is assessed and breach reporting commitments are on file",
+        "text": "For each third party receiving personal information: privacy compliance is assessed and breach reporting commitments are on file",
         "attr_type": "sample",
-        "typical_evidence": "Third-party privacy assessment records and contractual breach notification clauses for sampled recipients of personal information",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity assesses privacy compliance of third parties receiving personal information and obtains breach reporting commitments, and either no third-party disclosures occurred or the most recent third party has a privacy compliance assessment on file and a contractual commitment to report unauthorized disclosures. FAIL if personal information can be disclosed to third parties with no privacy assessment or breach reporting commitment process in place. TYPE II (over the period): If no third-party disclosures occurred, pass by default. PASS if all sampled third parties receiving personal information have a privacy compliance assessment and a breach reporting commitment on file; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of privacy assessment or breach reporting commitments is a gap.",
+        "typical_evidence": "Third-party privacy assessment records and contractual breach notification clauses for each recipient of personal information",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity assesses privacy compliance of third parties receiving personal information and obtains breach reporting commitments, and either no third-party disclosures occurred or the most recent third party has a privacy compliance assessment on file and a contractual commitment to report unauthorized disclosures. FAIL if personal information can be disclosed to third parties with no privacy assessment or breach reporting commitment process in place. TYPE II (over the period): If no third-party disclosures occurred, pass by default. PASS if every third party receiving personal information has a privacy compliance assessment and a breach reporting commitment on file; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of privacy assessment or breach reporting commitments is a gap.",
         "na_condition": "Pass if no personal information disclosed to third parties during the period",
         "can_be_na": true,
         "calibration_examples": [
@@ -12340,7 +12395,7 @@
           "coverage_checks": [
             {
               "id": "sample_record",
-              "question": "Does the evidence include an actual third-party privacy assessment records and contractual breach notification clauses for sampled recipients of personal information (not just a verbal description)?",
+              "question": "Does the evidence include an actual third-party privacy assessment records and contractual breach notification clauses for each recipient of personal information (not just a verbal description)?",
               "lane": "record",
               "alt_lanes": [
                 "export",
@@ -12374,7 +12429,8 @@
               "evidence_strength": "document"
             }
           ]
-        }
+        },
+        "frequency": "annual"
       }
     ]
   },
@@ -12480,18 +12536,18 @@
       },
       {
         "id": "A3",
-        "text": "For a sample of breaches (if any): notifications were sent within required timelines",
+        "text": "For each breach (if any): notifications were sent within required timelines",
         "attr_type": "sample",
-        "typical_evidence": "Breach notification records showing notification date, recipients, and content for sampled breaches",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity notifies affected parties and regulators of breaches within required timelines, and either no breaches occurred or the most recent breach has notification records showing affected parties and regulators notified within required timelines. FAIL if breaches can occur with no breach notification process in place. TYPE II (over the period): If no breaches occurred, pass by default. If breaches occurred, PASS if all sampled breaches have notification records showing affected parties and regulators notified within required timelines; isolated misses in an otherwise working practice are an exception, not a gap; systematic failure to notify within required timelines is a gap.",
+        "typical_evidence": "Breach notification records showing notification date, recipients, and content for each breach",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity notifies affected parties and regulators of breaches within required timelines, and either no breaches occurred or the most recent breach has notification records showing affected parties and regulators notified within required timelines. FAIL if breaches can occur with no breach notification process in place. TYPE II (over the period): If no breaches occurred, pass by default. If breaches occurred, PASS if every breach in the period has notification records showing affected parties and regulators notified within required timelines; isolated misses in an otherwise working practice are an exception, not a gap; systematic failure to notify within required timelines is a gap.",
         "na_condition": "Pass if no privacy breaches occurred during the period",
         "can_be_na": true,
         "calibration_examples": [
           {
-            "evidence_summary": "The company has never experienced a data breach in its operating history, and has no breach notification records to sample.",
+            "evidence_summary": "The company has never experienced a data breach in its operating history, and has no breach notification records to test.",
             "ai_verdict": "gap",
             "correct_verdict": "pass",
-            "reasoning": "The pass criteria explicitly defaults to pass when no breaches occurred during the period, there's nothing to sample because the triggering event never happened. Apply the criteria's own default rather than treating absence of breach records as a gap.",
+            "reasoning": "The pass criteria explicitly defaults to pass when no breaches occurred during the period, the population is empty because the triggering event never happened. Apply the criteria's own default rather than treating absence of breach records as a gap.",
             "weight": 0.5,
             "source": "synthetic_taste_v1"
           }
@@ -12523,7 +12579,8 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "ad_hoc"
       }
     ]
   },
@@ -12618,10 +12675,10 @@
       },
       {
         "id": "A3",
-        "text": "For a sample of accounting requests (if any): requests are responded to within defined timeframes",
+        "text": "For each accounting request (if any): requests are responded to within defined timeframes",
         "attr_type": "sample",
-        "typical_evidence": "Request tracking records showing receipt date, response date, and information provided for sampled accounting requests",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity responds to accounting requests within defined timeframes, and either no accounting requests were received or the most recent request was responded to within the defined timeframe with documentation of personal information held and disclosures made. FAIL if accounting requests can be received with no defined response process or timeframe in place. TYPE II (over the period): If no accounting requests were received, pass by default. If requests were received, PASS if all sampled accounting requests were responded to within the defined timeframe with documentation of personal information held and disclosures made; isolated misses in an otherwise working practice are an exception, not a gap; systematic failure to respond within the timeframe is a gap.",
+        "typical_evidence": "Request tracking records showing receipt date, response date, and information provided for each accounting request",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity responds to accounting requests within defined timeframes, and either no accounting requests were received or the most recent request was responded to within the defined timeframe with documentation of personal information held and disclosures made. FAIL if accounting requests can be received with no defined response process or timeframe in place. TYPE II (over the period): If no accounting requests were received, pass by default. If requests were received, PASS if every accounting request in the period was responded to within the defined timeframe with documentation of personal information held and disclosures made; isolated misses in an otherwise working practice are an exception, not a gap; systematic failure to respond within the timeframe is a gap.",
         "na_condition": "Pass if no accounting requests received during the period",
         "can_be_na": true,
         "calibration_examples": [
@@ -12629,7 +12686,7 @@
             "evidence_summary": "The company has never received a request for an accounting of personal information held and disclosed.",
             "ai_verdict": "gap",
             "correct_verdict": "pass",
-            "reasoning": "The pass criteria defaults to pass when no accounting requests were received during the period. There is no sample to draw when the underlying event never occurred, so this isn't a gap.",
+            "reasoning": "The pass criteria defaults to pass when no accounting requests were received during the period. The population is empty when the underlying event never occurred, so this isn't a gap.",
             "weight": 0.5,
             "source": "synthetic_taste_v1"
           }
@@ -12661,7 +12718,8 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "ad_hoc"
       }
     ]
   },
@@ -12965,10 +13023,10 @@
       },
       {
         "id": "A5",
-        "text": "For a sample of disputes (if any): resolutions are documented and communicated to the data subject",
+        "text": "For each dispute (if any): resolutions are documented and communicated to the data subject",
         "attr_type": "sample",
-        "typical_evidence": "Dispute resolution records showing investigation, outcome, and communication to the data subject for sampled disputes",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity documents dispute resolutions and communicates them to the data subject, and either no disputes were received or the most recent dispute has a resolution record documenting the outcome and evidence of communication to the data subject. FAIL if disputes can be received with no resolution and communication process in place. TYPE II (over the period): If no disputes were received, pass by default. If disputes were received, PASS if all sampled disputes have a resolution record documenting the outcome and evidence of communication to the data subject; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of documented resolution or communication is a gap.",
+        "typical_evidence": "Dispute resolution records showing investigation, outcome, and communication to the data subject for each dispute",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity documents dispute resolutions and communicates them to the data subject, and either no disputes were received or the most recent dispute has a resolution record documenting the outcome and evidence of communication to the data subject. FAIL if disputes can be received with no resolution and communication process in place. TYPE II (over the period): If no disputes were received, pass by default. If disputes were received, PASS if every dispute in the period has a resolution record documenting the outcome and evidence of communication to the data subject; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of documented resolution or communication is a gap.",
         "na_condition": "Pass if no privacy disputes received during the period",
         "can_be_na": true,
         "calibration_examples": [
@@ -12976,7 +13034,7 @@
             "evidence_summary": "The company has never received a privacy complaint or dispute from a data subject, and so has no dispute resolution records on file.",
             "ai_verdict": "gap",
             "correct_verdict": "pass",
-            "reasoning": "The pass criteria defaults to pass when no disputes were received during the period, there is nothing to sample because the triggering event never occurred. Don't treat the absence of dispute records as evidence of a missing process when the criteria already accounts for zero disputes.",
+            "reasoning": "The pass criteria defaults to pass when no disputes were received during the period, the population is empty because the triggering event never occurred. Don't treat the absence of dispute records as evidence of a missing process when the criteria already accounts for zero disputes.",
             "weight": 0.5,
             "source": "synthetic_taste_v1"
           }
@@ -13020,7 +13078,8 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "ad_hoc"
       }
     ]
   },
@@ -13181,23 +13240,23 @@
       },
       {
         "id": "A4",
-        "text": "For a sample of changes: each merged change is traceable and carries a description and passing required checks",
+        "text": "For each merged change: the change is traceable and carries a description and passing required checks",
         "attr_type": "sample",
         "typical_evidence": "Merged pull request or merge request records showing a description, the passing required status checks, and the commit history linking the change to the production branch",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if each sampled merged change has a description explaining the change, shows the required status checks passed before the merge, and is traceable to its commit history on the production branch. FAIL if any sampled change has no description, merged with failing or missing required checks, or cannot be traced to a merge. TYPE II (over the period): PASS if all sampled merged changes across the period carry a description and passing required checks; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of descriptions or of passing checks is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if each inspected merged change has a description explaining the change, shows the required status checks passed before the merge, and is traceable to its commit history on the production branch. FAIL if any inspected change has no description, merged with failing or missing required checks, or cannot be traced to a merge. TYPE II (over the period): PASS if every merged change across the period carries a description and passing required checks; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of descriptions or of passing checks is a gap.",
         "na_condition": "",
         "can_be_na": false,
         "calibration_examples": [
           {
-            "evidence_summary": "For a solo-developer company, sampled merged pull requests show a description of the change and passing required CI checks, but were self-approved by the same developer who authored them, since no second engineer exists.",
+            "evidence_summary": "For a solo-developer company, the merged pull requests show a description of the change and passing required CI checks, but were self-approved by the same developer who authored them, since no second engineer exists.",
             "ai_verdict": "gap",
             "correct_verdict": "pass",
-            "reasoning": "Never import a neighbor attribute's requirement: this attribute only requires a description, passing required checks, and traceability, not a second-person approval, which belongs to a separate peer-review control. Judged against its own text, the sampled merges pass.",
+            "reasoning": "Never import a neighbor attribute's requirement: this attribute only requires a description, passing required checks, and traceability, not a second-person approval, which belongs to a separate peer-review control. Judged against its own text, the merges pass.",
             "weight": 0.5,
             "source": "synthetic_taste_v1"
           },
           {
-            "evidence_summary": "Each of the three sampled merged changes has a clear description and a green status check visible on the pull request. On one of them the merge commit is timestamped 14:02 and the required test run finished at 14:41, having been triggered on the main branch after the merge.",
+            "evidence_summary": "Each of the three inspected merged changes has a clear description and a green status check visible on the pull request. On one of them the merge commit is timestamped 14:02 and the required test run finished at 14:41, having been triggered on the main branch after the merge.",
             "ai_verdict": "pass",
             "correct_verdict": "gap",
             "reasoning": "The checks have to pass before the merge, because a check that runs afterwards tells the entity what it shipped rather than gating whether it ships. A green badge read at fieldwork time hides the ordering, so the timestamps are the evidence, not the badge.",
@@ -13244,14 +13303,15 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "multi_daily"
       },
       {
         "id": "A5",
         "text": "A post deployment verification practice confirms each deployed change works as intended",
         "attr_type": "process",
         "typical_evidence": "Records of checks performed after deployment such as monitoring dashboards, health check results, smoke test output, or deployment logs showing verification after release",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if {company_name} performs a defined verification after each deployment such as automated health checks, smoke tests, or a monitoring review, and evidence shows this was done for a recent deployment. FAIL if there is no verification after deployment, or it is only described verbally with no supporting record. TYPE II (over the period): PASS if all sampled deployments across the period show verification was performed; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of verification after deployment is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if {company_name} performs a defined verification after each deployment such as automated health checks, smoke tests, or a monitoring review, and evidence shows this was done for a recent deployment. FAIL if there is no verification after deployment, or it is only described verbally with no supporting record. TYPE II (over the period): PASS if every deployment across the period shows verification was performed; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of verification after deployment is a gap.",
         "na_condition": "",
         "can_be_na": false,
         "calibration_examples": [
@@ -13576,10 +13636,10 @@
       },
       {
         "id": "A2",
-        "text": "For a sample of review periods: a self-review was performed at least quarterly with a dated record",
+        "text": "For each review period: a self-review was performed at least quarterly with a dated record",
         "attr_type": "sample",
         "typical_evidence": "Dated review records showing reviews occurred at least once per quarter across the timeframe",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if a dated record shows a self-review was performed within the last 12 months at the entity's stated cadence, at least quarterly. FAIL if no dated review record exists or the most recent review predates the stated cadence. TYPE II (over the period): PASS if all sampled review periods show a dated review at least quarterly across the period; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence, such as only one review across a full year, is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if a dated record shows a self-review was performed within the last 12 months at the entity's stated cadence, at least quarterly. FAIL if no dated review record exists or the most recent review predates the stated cadence. TYPE II (over the period): PASS if every review period shows a dated review at least quarterly across the period; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence, such as only one review across a full year, is a gap.",
         "na_condition": "",
         "can_be_na": false,
         "calibration_examples": [
@@ -13627,14 +13687,15 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "quarterly"
       },
       {
         "id": "A3",
-        "text": "For a sample of reviews: each review is anchored on a system-generated access export for every in-scope system",
+        "text": "For each review: each review is anchored on a system-generated access export for every in-scope system",
         "attr_type": "sample",
         "typical_evidence": "Review records with the attached or referenced system pulled user lists for each in-scope system",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the most recent review attaches or references a user list exported from each in-scope system, and the exports are system-generated rather than typed from memory. FAIL if any in-scope system is missing its export, or the access list is a self-authored spreadsheet with no system origin. TYPE II (over the period): PASS if all sampled reviews attach a system-generated export for every in-scope system; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence, such as reviews resting on hand-typed lists, is a gap. NOTE: A founder-authored spreadsheet is not a system-generated export; acceptable proof is output pulled from the system such as an API result, an admin console export, or a screenshot of the system's own user list.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the most recent review attaches or references a user list exported from each in-scope system, and the exports are system-generated rather than typed from memory. FAIL if any in-scope system is missing its export, or the access list is a self-authored spreadsheet with no system origin. TYPE II (over the period): PASS if every review in the period attaches a system-generated export for every in-scope system; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence, such as reviews resting on hand-typed lists, is a gap. NOTE: A founder-authored spreadsheet is not a system-generated export; acceptable proof is output pulled from the system such as an API result, an admin console export, or a screenshot of the system's own user list.",
         "na_condition": "",
         "can_be_na": false,
         "calibration_examples": [
@@ -13651,7 +13712,7 @@
           "coverage_checks": [
             {
               "id": "export_attached",
-              "question": "Does each sampled review include a user list pulled from the system for each in-scope system?",
+              "question": "Does each review include a user list pulled from the system for each in-scope system?",
               "lane": "export",
               "alt_lanes": [
                 "auto_pull",
@@ -13674,14 +13735,15 @@
               "evidence_strength": "system"
             }
           ]
-        }
+        },
+        "frequency": "quarterly"
       },
       {
         "id": "A4",
-        "text": "For a sample of reviews: unexpected access found is noted and remediated with a dated record",
+        "text": "For each review: unexpected access found is noted and remediated with a dated record",
         "attr_type": "sample",
         "typical_evidence": "Review records showing any unexpected accounts or permissions identified and the dated removal or adjustment",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the most recent review shows either that no unexpected access was found, or that each unexpected account or permission was removed or adjusted with a dated record. FAIL if unexpected access is noted with no evidence of remediation. TYPE II (over the period): PASS if across all sampled reviews every noted item of unexpected access was remediated with a dated record; isolated delays in an otherwise working practice are an exception, not a gap; unremediated access left standing is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the most recent review shows either that no unexpected access was found, or that each unexpected account or permission was removed or adjusted with a dated record. FAIL if unexpected access is noted with no evidence of remediation. TYPE II (over the period): PASS if across all reviews in the period every noted item of unexpected access was remediated with a dated record; isolated delays in an otherwise working practice are an exception, not a gap; unremediated access left standing is a gap.",
         "na_condition": "",
         "can_be_na": false,
         "calibration_examples": [
@@ -13741,7 +13803,8 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "quarterly"
       }
     ]
   },
@@ -14056,7 +14119,7 @@
         "text": "Provider audit logs are reviewed on a defined cadence or connected to alerting so that anomalies are surfaced",
         "attr_type": "process",
         "typical_evidence": "Records of periodic log review, such as dated review notes, tickets, or sign offs, or configuration routing provider logs into an alerting or monitoring destination",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if there is either a defined log review cadence with at least one dated review record, or configuration showing provider audit logs are routed into an alerting or monitoring destination that notifies personnel. FAIL if enabled logs are never reviewed and are not connected to any alerting. TYPE II (over the period): PASS if all sampled review periods show the review was performed on the defined cadence, or the alerting connection was in place throughout the period; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence is a gap. NOTE: The triage and severity handling of individual alerts is evaluated separately under the entity's security alerting control; this attribute tests only that the platform native logs are actually consumed rather than left write only.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if there is either a defined log review cadence with at least one dated review record, or configuration showing provider audit logs are routed into an alerting or monitoring destination that notifies personnel. FAIL if enabled logs are never reviewed and are not connected to any alerting. TYPE II (over the period): PASS if every review period shows the review was performed on the defined cadence, or the alerting connection was in place throughout the period; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence is a gap. NOTE: The triage and severity handling of individual alerts is evaluated separately under the entity's security alerting control; this attribute tests only that the platform native logs are actually consumed rather than left write only.",
         "na_condition": "",
         "can_be_na": false,
         "calibration_examples": [
@@ -14143,10 +14206,10 @@
       },
       {
         "id": "A2",
-        "text": "For a sample of restoration tests: recovery from a provider managed backup was tested successfully within the last 12 months, with date and scope documented",
+        "text": "For each restoration test: recovery from a provider managed backup was tested successfully within the last 12 months, with date and scope documented",
         "attr_type": "sample",
         "typical_evidence": "Restoration test records showing a recovery performed from a provider managed backup, with the date, the data store restored, and the outcome",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if a restoration test record dated within the past 12 months shows a successful recovery from a provider managed backup, with the scope, date, and outcome documented. FAIL if there is no restoration test within the past 12 months, or the record shows the restoration failed. TYPE II (over the period): PASS if all sampled restoration tests in the period completed successfully with documented scope and outcome; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if a restoration test record dated within the past 12 months shows a successful recovery from a provider managed backup, with the scope, date, and outcome documented. FAIL if there is no restoration test within the past 12 months, or the record shows the restoration failed. TYPE II (over the period): PASS if every restoration test in the period completed successfully with documented scope and outcome; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence is a gap.",
         "na_condition": "",
         "can_be_na": false,
         "calibration_examples": [
@@ -14186,7 +14249,8 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "quarterly"
       },
       {
         "id": "A3",
@@ -14608,7 +14672,7 @@
         "text": "Fine-tuning or training of models on customer data occurs only after documented authorization for that use",
         "attr_type": "process",
         "typical_evidence": "Authorization records, such as an approval ticket, signed customer consent, or a data processing agreement provision, tied to each fine-tuning or training run that used customer data, alongside the list of training runs",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity has a defined requirement that customer data may be used for fine-tuning or training only with documented authorization, and any training run existing as of the review date that used customer data has a matching authorization record. FAIL if training on customer data is possible with no authorization requirement, or an existing run used customer data with no authorization on file. TYPE II (over the period): PASS if all sampled fine-tuning or training runs that used customer data during the period have documented authorization predating the run; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence is a gap. FAIL if runs used customer data without authorization as a matter of practice.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity has a defined requirement that customer data may be used for fine-tuning or training only with documented authorization, and any training run existing as of the review date that used customer data has a matching authorization record. FAIL if training on customer data is possible with no authorization requirement, or an existing run used customer data with no authorization on file. TYPE II (over the period): PASS if every fine-tuning or training run that used customer data during the period has documented authorization predating the run; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence is a gap. FAIL if runs used customer data without authorization as a matter of practice.",
         "na_condition": "Entity does not fine-tune or train models on customer data",
         "can_be_na": true,
         "calibration_examples": [
@@ -14760,7 +14824,7 @@
         "text": "Access to AI interaction logs is restricted to authorized roles, and sensitive data in the logs is redacted or the retained exposure is documented",
         "attr_type": "config",
         "typical_evidence": "Access role configuration on the log store or observability tool, plus redaction configuration or a documented decision recording what sensitive data remains in the logs",
-        "pass_criteria": "PASS: The log stores show access limited to defined authorized roles, project membership on the observability tool, database role grants, or index access controls, and sensitive data in prompts and completions is either redacted before storage or the retained exposure is documented and accepted. FAIL: Any log store holding prompt or completion data is broadly accessible beyond authorized roles, or sensitive data is retained in the logs with no redaction and no documented decision. NOTE: Redaction claimed but not visible in a sampled log entry does not pass.",
+        "pass_criteria": "PASS: The log stores show access limited to defined authorized roles, project membership on the observability tool, database role grants, or index access controls, and sensitive data in prompts and completions is either redacted before storage or the retained exposure is documented and accepted. FAIL: Any log store holding prompt or completion data is broadly accessible beyond authorized roles, or sensitive data is retained in the logs with no redaction and no documented decision. NOTE: Redaction claimed but not visible in an inspected log entry does not pass.",
         "na_condition": "",
         "can_be_na": false,
         "calibration_examples": [
@@ -14773,10 +14837,10 @@
             "source": "synthetic_taste_v1"
           },
           {
-            "evidence_summary": "A policy statement asserts that 'PII is redacted from AI logs before storage,' but no sampled log entry was pulled to confirm redaction is actually applied to stored prompts and completions.",
+            "evidence_summary": "A policy statement asserts that 'PII is redacted from AI logs before storage,' but no log entry was pulled to confirm redaction is actually applied to stored prompts and completions.",
             "ai_verdict": "pass",
             "correct_verdict": "gap",
-            "reasoning": "Redaction claimed but not visible in a sampled log entry does not pass, per the attribute's explicit note. The policy assertion must be corroborated by an actual redacted (or documented exposure) log sample, not taken on its word.",
+            "reasoning": "Redaction claimed but not visible in an inspected log entry does not pass, per the attribute's explicit note. The policy assertion must be corroborated by an actual redacted (or documented exposure) log entry, not taken on its word.",
             "weight": 0.5,
             "source": "synthetic_taste_v1"
           }
@@ -14861,10 +14925,10 @@
       },
       {
         "id": "A2",
-        "text": "For a sample of leadership, investor, or advisor updates over the period: security or compliance status was included",
+        "text": "For each leadership, investor, or advisor update over the period: security or compliance status was included",
         "attr_type": "sample",
         "typical_evidence": "Leadership meeting notes, investor updates, or advisor briefings showing a security or compliance topic",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the most recent leadership, investor, or advisor update issued before the examination date includes security or compliance as a topic, or the entity is less than 12 months old and its first update cycle is not yet due. FAIL if recent updates omit security or compliance entirely. TYPE II (over the period): PASS if all sampled updates across the period include security or compliance as a topic; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the most recent leadership, investor, or advisor update issued before the examination date includes security or compliance as a topic, or the entity is less than 12 months old and its first update cycle is not yet due. FAIL if recent updates omit security or compliance entirely. TYPE II (over the period): PASS if every update across the period includes security or compliance as a topic; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence is a gap.",
         "na_condition": "Pass if entity < 12 months old and first update cycle not yet due",
         "can_be_na": true,
         "calibration_examples": [
@@ -14901,7 +14965,7 @@
             },
             {
               "id": "security_topic_in_update",
-              "question": "Do the sampled updates show at least one security or compliance topic?",
+              "question": "Do the updates show at least one security or compliance topic?",
               "lane": "record",
               "alt_lanes": [
                 "export",
@@ -14912,14 +14976,15 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "quarterly"
       },
       {
         "id": "A3",
-        "text": "For a sample of updates: the security content conveys substantive status rather than a generic mention",
+        "text": "For each update: the security content conveys substantive status rather than a generic mention",
         "attr_type": "sample",
         "typical_evidence": "Update records where the security section reports open risks, incidents, remediation progress, or compliance milestones",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the most recent update that covered security conveys substantive status such as open risks, incidents, remediation progress, or compliance milestones, or the entity is less than 12 months old and its first update cycle is not yet due. FAIL if security appears only as a generic mention with no status, risk, or decision content. TYPE II (over the period): PASS if all sampled updates that cover security convey substantive status; isolated thin entries in an otherwise working practice are an exception, not a gap; systematic absence of substance is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the most recent update that covered security conveys substantive status such as open risks, incidents, remediation progress, or compliance milestones, or the entity is less than 12 months old and its first update cycle is not yet due. FAIL if security appears only as a generic mention with no status, risk, or decision content. TYPE II (over the period): PASS if every update that covers security conveys substantive status; isolated thin entries in an otherwise working practice are an exception, not a gap; systematic absence of substance is a gap.",
         "na_condition": "Pass if entity < 12 months old and first update cycle not yet due",
         "can_be_na": true,
         "calibration_examples": [
@@ -14959,7 +15024,8 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "ad_hoc"
       }
     ]
   },
@@ -14967,10 +15033,10 @@
     "attributes": [
       {
         "id": "A1",
-        "text": "For a sample of contractors with production or customer data access: a signed confidentiality and security agreement was in place before access was granted",
+        "text": "For each contractor with production or customer data access: a signed confidentiality and security agreement was in place before access was granted",
         "attr_type": "sample",
         "typical_evidence": "Signed contractor agreements, NDAs, or master service agreements containing confidentiality and security terms, dated on or before the date access was provisioned",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if for each sampled contractor with production or customer data access, a signed agreement containing confidentiality and security obligations exists and is dated on or before the date access was granted. FAIL if any sampled contractor has access without a signed agreement, or the agreement omits confidentiality or security obligations. TYPE II (over the period): PASS if all contractors sampled across the period were under a signed agreement before access was granted; an isolated late signature in an otherwise working practice is an exception, not a gap; systematic absence of agreements is a gap. NOTE: A verbal understanding or an unsigned template is not an agreement.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if for each contractor with production or customer data access, a signed agreement containing confidentiality and security obligations exists and is dated on or before the date access was granted. FAIL if any contractor has access without a signed agreement, or the agreement omits confidentiality or security obligations. TYPE II (over the period): PASS if every contractor granted access in the period was under a signed agreement before access was granted; an isolated late signature in an otherwise working practice is an exception, not a gap; systematic absence of agreements is a gap. NOTE: A verbal understanding or an unsigned template is not an agreement.",
         "na_condition": "Entity engages no contractors with production or customer data access",
         "can_be_na": true,
         "calibration_examples": [
@@ -14987,7 +15053,7 @@
           "coverage_checks": [
             {
               "id": "agreement_signed_present",
-              "question": "Does the evidence include an actual signed agreement for each sampled contractor, not just a verbal claim or blank template?",
+              "question": "Does the evidence include an actual signed agreement for each contractor, not just a verbal claim or blank template?",
               "lane": "document",
               "alt_lanes": [
                 "record"
@@ -15019,14 +15085,15 @@
               "evidence_strength": "document"
             }
           ]
-        }
+        },
+        "frequency": "annual"
       },
       {
         "id": "A2",
-        "text": "For a sample of contractors: access was provisioned through the standard onboarding process and revoked promptly when the engagement ended",
+        "text": "For each contractor: access was provisioned through the standard onboarding process and revoked promptly when the engagement ended",
         "attr_type": "sample",
         "typical_evidence": "Onboarding and offboarding tickets or identity provider and repository records for contractors showing account creation on engagement start and disablement or removal on engagement end",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if for each sampled contractor, access was granted through the standard onboarding workflow and, for contractors whose engagement has ended, access was disabled or removed within the entity's stated timeframe. FAIL if any sampled contractor was granted access outside the standard process, or a departed contractor retained active access. TYPE II (over the period): PASS if all sampled contractor onboardings and offboardings followed the standard process within the stated timeframe; an isolated delayed revocation in an otherwise working practice is an exception, not a gap; systematic gaps are a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if for each contractor, access was granted through the standard onboarding workflow and, for contractors whose engagement has ended, access was disabled or removed within the entity's stated timeframe. FAIL if any contractor was granted access outside the standard process, or a departed contractor retained active access. TYPE II (over the period): PASS if every contractor onboarding and offboarding in the period followed the standard process within the stated timeframe; an isolated delayed revocation in an otherwise working practice is an exception, not a gap; systematic gaps are a gap.",
         "na_condition": "Entity engages no contractors with production or customer data access",
         "can_be_na": true,
         "calibration_examples": [
@@ -15080,7 +15147,8 @@
               "evidence_strength": "system"
             }
           ]
-        }
+        },
+        "frequency": "annual"
       },
       {
         "id": "A3",
@@ -15226,7 +15294,7 @@
         "text": "Availability incidents such as outages or degradations are responded to and resolved",
         "attr_type": "sample",
         "typical_evidence": "Incident records for availability events showing detection, response actions, and resolution timestamps",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity has a defined path for responding to availability incidents, and if any outages have occurred each has an incident record showing response and resolution; if no availability incidents have occurred, pass by default on the defined path. FAIL if there is no defined response path, or an outage occurred with no response record. TYPE II (over the period): PASS if all sampled availability incidents show timely response and resolution with detection and resolution timestamps recorded; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence is a gap. FAIL if sampled incidents routinely lack response or resolution records.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity has a defined path for responding to availability incidents, and if any outages have occurred each has an incident record showing response and resolution; if no availability incidents have occurred, pass by default on the defined path. FAIL if there is no defined response path, or an outage occurred with no response record. TYPE II (over the period): PASS if every availability incident in the period shows timely response and resolution with detection and resolution timestamps recorded; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence is a gap. FAIL if incidents routinely lack response or resolution records.",
         "na_condition": "N/A if Availability TSC not in scope",
         "can_be_na": true,
         "calibration_examples": [
@@ -15254,7 +15322,8 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "ad_hoc"
       },
       {
         "id": "A4",
@@ -15351,7 +15420,7 @@
         "text": "For incidents that meet the review threshold, a written post-incident review documents what happened, the impact, and corrective actions",
         "attr_type": "sample",
         "typical_evidence": "Post-incident review documents capturing the incident summary, impact, and corrective actions",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if for the incidents that crossed the review threshold a written post-incident review exists that captures what happened, the impact, and the corrective actions; if no incidents crossed the threshold during the period, pass by default on the defined process. FAIL if a qualifying incident occurred with no written review, or a review omits what happened, impact, or corrective actions. TYPE II (over the period): PASS if all sampled qualifying incidents have a written review covering what happened, impact, and corrective actions; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence is a gap. FAIL if qualifying incidents routinely lack a written review.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if for the incidents that crossed the review threshold a written post-incident review exists that captures what happened, the impact, and the corrective actions; if no incidents crossed the threshold during the period, pass by default on the defined process. FAIL if a qualifying incident occurred with no written review, or a review omits what happened, impact, or corrective actions. TYPE II (over the period): PASS if every qualifying incident in the period has a written review covering what happened, impact, and corrective actions; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence is a gap. FAIL if qualifying incidents routinely lack a written review.",
         "na_condition": "",
         "can_be_na": false,
         "calibration_examples": [
@@ -15379,14 +15448,15 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "ad_hoc"
       },
       {
         "id": "A3",
         "text": "Corrective actions from post-incident reviews are tracked through to completion",
         "attr_type": "sample",
         "typical_evidence": "Issue tracker records showing corrective action items linked to incidents, with completion status and dates",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if corrective actions from reviews are recorded in a tracker with an owner and status, and completed actions show a completion date; if no corrective actions were open during the period, pass by default on the tracking practice. FAIL if corrective actions are named but tracked nowhere. TYPE II (over the period): PASS if all sampled corrective actions were tracked and reached a completed state, or remain open within a reasonable timeframe with evidence of follow-up; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence is a gap. FAIL if corrective actions are routinely left untracked or open indefinitely with no follow-up.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if corrective actions from reviews are recorded in a tracker with an owner and status, and completed actions show a completion date; if no corrective actions were open during the period, pass by default on the tracking practice. FAIL if corrective actions are named but tracked nowhere. TYPE II (over the period): PASS if every corrective action in the period was tracked and reached a completed state, or remain open within a reasonable timeframe with evidence of follow-up; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence is a gap. FAIL if corrective actions are routinely left untracked or open indefinitely with no follow-up.",
         "na_condition": "",
         "can_be_na": false,
         "calibration_examples": [
@@ -15414,7 +15484,8 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "ad_hoc"
       }
     ]
   },
@@ -15502,7 +15573,7 @@
         "text": "Over the examination period, production or customer data reaching a non-production environment is masked or approved in line with the rule, or the entity attests no such copying occurred",
         "attr_type": "sample",
         "typical_evidence": "Attestation of no-copy practice, or for any permitted copy, evidence of the masking step and the approval recorded",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity shows either a no-copy practice consistent with the rule, or that any current non-production data set was masked or approved as the rule requires. FAIL if raw production data sits in a non-production environment contrary to the rule. TYPE II (over the period): PASS if all sampled instances of production data entering a non-production environment were masked or approved per the rule, or the entity attests and evidence supports that no copying occurred; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity shows either a no-copy practice consistent with the rule, or that any current non-production data set was masked or approved as the rule requires. FAIL if raw production data sits in a non-production environment contrary to the rule. TYPE II (over the period): PASS if every instance of production data entering a non-production environment in the period was masked or approved per the rule, or the entity attests and evidence supports that no copying occurred; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence is a gap.",
         "na_condition": "",
         "can_be_na": false,
         "calibration_examples": [
@@ -15538,7 +15609,8 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "ad_hoc"
       }
     ]
   },
@@ -15683,7 +15755,8 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "quarterly"
       }
     ]
   },
@@ -15776,10 +15849,10 @@
       },
       {
         "id": "A3",
-        "text": "For a sample of dependency advisories, the vulnerability was addressed within the entity's defined window",
+        "text": "For each dependency advisory, the vulnerability was addressed within the entity's defined window",
         "attr_type": "sample",
         "typical_evidence": "Resolved dependency alerts or update pull requests showing the opened date and the fixed date for critical and high advisories",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if resolved dependency advisories show fixes applied within the entity's window, and no critical or high advisory is open beyond it. FAIL if critical or high advisories sit open past the window with no remediation. TYPE II (over the period): PASS if all sampled critical and high advisories were remediated within the defined window, or upgraded and closed with a documented reason; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if resolved dependency advisories show fixes applied within the entity's window, and no critical or high advisory is open beyond it. FAIL if critical or high advisories sit open past the window with no remediation. TYPE II (over the period): PASS if every critical and high advisory in the period was remediated within the defined window, or upgraded and closed with a documented reason; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence is a gap.",
         "na_condition": "",
         "can_be_na": false,
         "calibration_examples": [
@@ -15819,7 +15892,8 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "ad_hoc"
       }
     ]
   },
@@ -15936,7 +16010,8 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "quarterly"
       }
     ]
   },
@@ -16024,7 +16099,7 @@
         "text": "For an executed deletion, the customer data was removed within the entity's defined window",
         "attr_type": "sample",
         "typical_evidence": "Deletion record or system evidence showing a customer's data removed following account deletion or a deletion request",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if a deletion example shows the customer's associated data removed and the account no longer present, consistent with the retention schedule. FAIL if data persists after deletion beyond the defined window. TYPE II (over the period): PASS if all sampled deletions removed the associated customer data within the defined window; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if a deletion example shows the customer's associated data removed and the account no longer present, consistent with the retention schedule. FAIL if data persists after deletion beyond the defined window. TYPE II (over the period): PASS if every deletion in the period removed the associated customer data within the defined window; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence is a gap.",
         "na_condition": "Pass if no customer data deletions were requested or required during the period",
         "can_be_na": true,
         "calibration_examples": [
@@ -16064,7 +16139,8 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "ad_hoc"
       }
     ]
   },
@@ -16146,7 +16222,8 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "ad_hoc"
       },
       {
         "id": "A3",
@@ -16181,7 +16258,8 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "ad_hoc"
       }
     ]
   },
@@ -16344,7 +16422,7 @@
         "text": "For any incident in the period, post incident notes record the root cause and a follow up action",
         "attr_type": "sample",
         "typical_evidence": "Post incident notes or a tabletop note capturing what happened, the root cause, and a follow up action, drawn from the incident log or issue tracker",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity can show at least one post incident note or tabletop note capturing what happened, the root cause, and a follow up action, demonstrating the practice exists. FAIL if no post incident notes and no tabletop note exist. TYPE II (over the period): PASS if all sampled incidents in the period have a post incident note recording the root cause and a follow up action; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence is a gap. NOTE: if no incidents occurred during the period, a tabletop or dry run note serves as the evaluation basis.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity can show at least one post incident note or tabletop note capturing what happened, the root cause, and a follow up action, demonstrating the practice exists. FAIL if no post incident notes and no tabletop note exist. TYPE II (over the period): PASS if every incident in the period has a post incident note recording the root cause and a follow up action; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence is a gap. NOTE: if no incidents occurred during the period, a tabletop or dry run note serves as the evaluation basis.",
         "na_condition": "Pass basis shifts to a tabletop or dry run note if no incidents occurred during the period",
         "can_be_na": true,
         "calibration_examples": [
@@ -16372,7 +16450,8 @@
               "evidence_strength": "record"
             }
           ]
-        }
+        },
+        "frequency": "ad_hoc"
       }
     ]
   },
@@ -16422,15 +16501,15 @@
       },
       {
         "id": "A2",
-        "text": "For a sample of customer relationships involving ePHI: a signed BAA is in place",
+        "text": "For each customer relationship involving ePHI: a signed BAA is in place",
         "attr_type": "sample",
         "typical_evidence": "Executed BAA documents with signature dates",
-        "pass_criteria": "PASS: Each sampled ePHI customer relationship has a BAA signed on or before the date ePHI handling began. FAIL: Any sampled relationship lacks a signed BAA, or the BAA postdates the start of ePHI handling with no documented interim arrangement.",
+        "pass_criteria": "PASS: Each ePHI customer relationship has a BAA signed on or before the date ePHI handling began. FAIL: Any relationship lacks a signed BAA, or the BAA postdates the start of ePHI handling with no documented interim arrangement.",
         "na_condition": "",
         "can_be_na": false,
         "calibration_examples": [
           {
-            "evidence_summary": "Three sampled customers each have an executed BAA. One was signed two weeks after the pilot began but states an effective date of the pilot start, and the executed pilot agreement already bound both parties to Security Rule compliance, subcontractor flow-down, and security incident reporting for that window.",
+            "evidence_summary": "Three customers each have an executed BAA. One was signed two weeks after the pilot began but states an effective date of the pilot start, and the executed pilot agreement already bound both parties to Security Rule compliance, subcontractor flow-down, and security incident reporting for that window.",
             "ai_verdict": "gap",
             "correct_verdict": "pass",
             "reasoning": "A documented interim arrangement qualifies when the required terms actually covered the entire handling window; here the pilot agreement carried the BAA content and the executed BAA is effective from day one. Failing this on signature order alone is over-literal.",
@@ -16438,15 +16517,15 @@
             "source": "synthetic_taste_v1"
           },
           {
-            "evidence_summary": "The client states every customer signs a BAA at onboarding and shows the onboarding checklist template containing a BAA step, but no executed agreement is produced for any sampled customer.",
+            "evidence_summary": "The client states every customer signs a BAA at onboarding and shows the onboarding checklist template containing a BAA step, but no executed agreement is produced for any customer.",
             "ai_verdict": "pass",
             "correct_verdict": "gap",
-            "reasoning": "A sample attribute needs the executed artifact for the sampled items. A process description or checklist template never substitutes for the signed document.",
+            "reasoning": "A population-tested attribute needs the executed artifact for the items tested. A process description or checklist template never substitutes for the signed document.",
             "weight": 0.5,
             "source": "synthetic_taste_v1"
           },
           {
-            "evidence_summary": "One sampled BAA was signed three months after ePHI handling began. The client offers a dated email in which the customer agreed to keep pilot data confidential; the email contains no security obligations and no retroactive effect.",
+            "evidence_summary": "One BAA was signed three months after ePHI handling began. The client offers a dated email in which the customer agreed to keep pilot data confidential; the email contains no security obligations and no retroactive effect.",
             "ai_verdict": "pass",
             "correct_verdict": "gap",
             "reasoning": "A documented interim arrangement must carry the required agreement content for the exposure window. A generic confidentiality email with no security terms and no retroactive effect does not, so the late signature stands uncured.",
@@ -16458,7 +16537,7 @@
           "coverage_checks": [
             {
               "id": "customer_baa_executed",
-              "question": "Does the evidence include executed customer BAAs with signature dates for the sampled relationships (not just a template or a process description)?",
+              "question": "Does the evidence include executed customer BAAs with signature dates for the ePHI customer relationships (not just a template or a process description)?",
               "lane": "document",
               "alt_lanes": [
                 "record"
@@ -16468,14 +16547,15 @@
               "evidence_strength": "document"
             }
           ]
-        }
+        },
+        "frequency": "ad_hoc"
       },
       {
         "id": "A3",
-        "text": "For a sample of subcontractors that handle ePHI: a signed downstream BAA is in place",
+        "text": "For each subcontractor that handles ePHI: a signed downstream BAA is in place",
         "attr_type": "sample",
         "typical_evidence": "Executed subcontractor BAAs, including cloud provider BAA (for example the AWS, GCP, or Azure BAA)",
-        "pass_criteria": "PASS: Each sampled ePHI-handling subcontractor, including the cloud infrastructure provider, has a signed BAA. FAIL: Any ePHI-handling subcontractor operates without a BAA. Note: a subcontractor that only transmits ePHI transiently and never stores it, or a service that receives no ePHI at all, may be excluded only with a documented rationale. A vendor that stores or maintains ePHI remains a business associate even when the data is encrypted and the vendor holds no decryption key.",
+        "pass_criteria": "PASS: Each ePHI-handling subcontractor, including the cloud infrastructure provider, has a signed BAA. FAIL: Any ePHI-handling subcontractor operates without a BAA. Note: a subcontractor that only transmits ePHI transiently and never stores it, or a service that receives no ePHI at all, may be excluded only with a documented rationale. A vendor that stores or maintains ePHI remains a business associate even when the data is encrypted and the vendor holds no decryption key.",
         "na_condition": "",
         "can_be_na": false,
         "calibration_examples": [
@@ -16508,7 +16588,7 @@
           "coverage_checks": [
             {
               "id": "subcontractor_baa_executed",
-              "question": "Does the evidence include executed BAAs for the sampled ePHI-handling subcontractors, including the cloud infrastructure provider?",
+              "question": "Does the evidence include executed BAAs for the ePHI-handling subcontractors, including the cloud infrastructure provider?",
               "lane": "document",
               "alt_lanes": [
                 "record",
@@ -16519,7 +16599,8 @@
               "evidence_strength": "document"
             }
           ]
-        }
+        },
+        "frequency": "annual"
       },
       {
         "id": "A4",
@@ -16654,10 +16735,10 @@
       },
       {
         "id": "A3",
-        "text": "For a sample of emergency access uses (if any): use was logged and reviewed afterward",
+        "text": "For each emergency access use (if any): use was logged and reviewed afterward",
         "attr_type": "sample",
         "typical_evidence": "Access logs for the break-glass identity plus the post-use review record",
-        "pass_criteria": "PASS: Each sampled use is logged and has a documented after-the-fact review confirming the use was appropriate. FAIL: Any use is unlogged or lacks a post-use review. If no uses occurred in the period, the attribute passes on the logging configuration being in place.",
+        "pass_criteria": "PASS: Each use is logged and has a documented after-the-fact review confirming the use was appropriate. FAIL: Any use is unlogged or lacks a post-use review. If no uses occurred in the period, the attribute passes on the logging configuration being in place.",
         "na_condition": "",
         "can_be_na": false,
         "calibration_examples": [
@@ -16694,7 +16775,8 @@
               "evidence_strength": "export"
             }
           ]
-        }
+        },
+        "frequency": "ad_hoc"
       }
     ]
   },

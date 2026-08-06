@@ -26,7 +26,7 @@
   },
   "hr_system_records": {
     "name": "HR System / Records",
-    "what_to_provide": "Background check policy + sample records; offboarding checklist with access revocation timestamps; training completion records; performance review template; job descriptions; Code of Conduct acknowledgments; key person analysis; cross-training records",
+    "what_to_provide": "Background check policy + completion records; offboarding checklist with access revocation timestamps; training completion records; performance review template; job descriptions; Code of Conduct acknowledgments; key person analysis; cross-training records",
     "controls_covered": [
       "PPL-01",
       "PPL-02",
@@ -91,7 +91,7 @@
   },
   "version_control_git": {
     "name": "Version Control (Git) + CI/CD Pipeline",
-    "what_to_provide": "Sample PRs: description, code review, CI test results, approval, merge. Pipeline config: automated tests, deployment stages, branch protection rules.",
+    "what_to_provide": "Merged PRs: description, code review, CI test results, approval, merge. Pipeline config: automated tests, deployment stages, branch protection rules.",
     "controls_covered": [
       "CHG-01",
       "CHG-02",
@@ -167,7 +167,7 @@
   },
   "siem_log_management": {
     "name": "SIEM / Log Management (Datadog / Splunk / CloudTrail)",
-    "what_to_provide": "Dashboard showing log sources; sample alert rules; retention config; event triage process; on-call rotation; escalation records",
+    "what_to_provide": "Dashboard showing log sources; alert rule definitions; retention config; event triage process; on-call rotation; escalation records",
     "controls_covered": [
       "MON-01",
       "MON-02",

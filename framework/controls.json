@@ -28,7 +28,7 @@
         "evidence_goals": [
           "Pull the current Code of Conduct document showing the standards of behavior it defines and a visible approval or effective date",
           "Pull the documented disciplinary or violation handling procedure that applies when the Code is breached",
-          "Pull acknowledgment records for a sample of personnel, including contractors, showing each person accepted the current version within the required period"
+          "Pull acknowledgment records for all personnel, including contractors, showing each person accepted the current version within the required period"
         ],
         "what_good_looks_like": "The approved Code document with a visible effective or approval date, the written disciplinary procedure, and per person acknowledgment records from the HR or onboarding system showing names and dates that fall within the required re-acknowledgment window and cover contractors as well as employees.",
         "what_bad_looks_like": "A statement that a Code exists without the document itself, the document with no acknowledgment records, or acknowledgments that predate the current version of the Code.",
@@ -78,13 +78,13 @@
         "evidence_goals": [
           "Pull documentation identifying the governance body and its defined oversight responsibilities for security and internal controls",
           "Pull a roster or bios showing member expertise and at least one member independent from day to day management",
-          "Pull minutes or notes from a sample of meetings showing security topics on the agenda and decisions or action items recorded and tracked to closure"
+          "Pull minutes or notes from the period's meetings showing security topics on the agenda and decisions or action items recorded and tracked to closure"
         ],
         "what_good_looks_like": "A charter or terms of reference naming the governance body and its security oversight duties, a roster showing member backgrounds and at least one member independent of daily operations, plus dated meeting minutes where a security topic appears and action items are assigned and later followed up.",
         "what_bad_looks_like": "A claim that leadership discusses security with no minutes, minutes with no security content, or a body with no identified expertise or independence from management.",
         "red_flags": [
           "No written minutes or notes for any meeting",
-          "Security never appears on any agenda across the sampled meetings",
+          "Security never appears on any agenda across the meetings",
           "Action items are recorded but never tracked to closure",
           "Every member is part of daily management with no independent voice",
           "The body exists on paper but has not met within the last 12 months"
@@ -202,17 +202,17 @@
       "collection_playbook": {
         "evidence_goals": [
           "Pull the written policy requiring background checks for all personnel including contractors prior to or upon start date, and defining the minimum check scope",
-          "Pull completed background check records from the screening vendor for a sample of recent hires showing the check was run and its scope",
-          "Pull hire records tying each sampled check to its subject and start date so timing against policy can be assessed"
+          "Pull completed background check records from the screening vendor for each hire in the period showing the check was run and its scope",
+          "Pull hire records tying each check to its subject and start date so timing against policy can be assessed"
         ],
-        "what_good_looks_like": "The screening policy stating who is covered, the timing requirement, and the minimum scope such as criminal history and employment verification, plus results or completion confirmations from the screening vendor for a sample of hires dated on or before each person's start date.",
+        "what_good_looks_like": "The screening policy stating who is covered, the timing requirement, and the minimum scope such as criminal history and employment verification, plus results or completion confirmations from the screening vendor for each hire dated on or before each person's start date.",
         "what_bad_looks_like": "A policy with no completed check records, a vendor invoice with no per person results, or checks whose scope cannot be confirmed against the policy minimum.",
         "red_flags": [
           "Contractors or temporary workers are excluded from screening",
           "Checks completed well after the start date with no documented interim control",
           "Scope of the check cannot be confirmed to meet the policy minimum",
           "Screening relies on candidate self attestation rather than an independent check",
-          "No records for a portion of sampled hires"
+          "No records for a portion of hires"
         ],
         "platform_hints": {
           "checkr": "Pull the per candidate report or completed status showing the check package and date; the package name should map to the policy minimum scope.",
@@ -297,8 +297,8 @@
         "evidence_goals": [
           "Pull the security awareness training curriculum or course content showing the topics covered",
           "Pull the training policy defining timing for new personnel and ongoing completion requirements, plus any role specific technical training requirements",
-          "Pull completion records for a sample of personnel showing training was completed within the required period",
-          "Pull evidence of role specific training or continuing education for a sample of security role personnel"
+          "Pull completion records for all personnel showing training was completed within the required period",
+          "Pull evidence of role specific training or continuing education for all security role personnel"
         ],
         "what_good_looks_like": "The training content or platform course outline, a policy stating when training is due, and per person completion records exported from the training platform showing names and completion dates inside the required window, plus certificates or course records for specialized roles.",
         "what_bad_looks_like": "A statement that training happens with no course content or completion records, completion figures with no per person dates, or a client authored spreadsheet asserting everyone was trained.",
@@ -346,14 +346,14 @@
         "evidence_goals": [
           "Pull the performance evaluation template or criteria showing security and control responsibilities are part of the assessment",
           "Pull documentation defining consequences for policy violations including privacy violations",
-          "Pull completed performance evaluations for a sample of personnel dated within the required period",
+          "Pull completed performance evaluations for all personnel dated within the required period",
           "Where violations occurred, pull records showing corrective action was taken and documented"
         ],
-        "what_good_looks_like": "An evaluation template that explicitly references security or control duties, a written consequence or disciplinary schedule, and completed dated reviews for a sample of staff, plus corrective action records for any violations that arose during the period.",
+        "what_good_looks_like": "An evaluation template that explicitly references security or control duties, a written consequence or disciplinary schedule, and completed dated reviews for all staff, plus corrective action records for any violations that arose during the period.",
         "what_bad_looks_like": "A review template with no security content, a claim that reviews happen with no completed examples, or violations handled verbally with no record of corrective action.",
         "red_flags": [
           "Security responsibilities are absent from the evaluation criteria",
-          "No completed reviews for sampled personnel within the period",
+          "No completed reviews for personnel within the period",
           "Consequences for violations including privacy violations are undefined",
           "Violations occurred but no corrective action was documented",
           "Reviews exist but excessive workload pressures on personnel are never assessed"
@@ -835,7 +835,7 @@
       "evidence_commands": [],
       "collection_playbook": {
         "evidence_goals": [
-          "Pull the customer facing commitment documents (a sample contract or master service agreement with security clauses, an SLA, the privacy policy, or the public trust page)",
+          "Pull the customer facing commitment documents (a customer contract or master service agreement with security clauses, an SLA, the privacy policy, or the public trust page)",
           "Pull the documented customer responsibilities (shared responsibility model, trust page section, or contract clause listing what the customer must do)",
           "Pull evidence that changes to commitments are communicated to customers, such as a trust page changelog, a notification email, or a contract amendment process"
         ],
@@ -1197,13 +1197,13 @@
       "collection_playbook": {
         "evidence_goals": [
           "Pull the written provisioning procedure or onboarding checklist that lists the access-granting steps",
-          "Pull a sample of provisioning records for recent new hires or role changes, showing the access request and its approval",
+          "Pull provisioning records for the period's new hires and role changes, showing the access request and its approval",
           "Pull the current per-user access list from the identity provider to compare against what was authorized"
         ],
         "what_good_looks_like": "The written procedure plus, for named recent joiners or role changes, the actual request-and-approval record (a ticket or an email from an authorized manager or system owner) matched against the access that now appears in the identity provider.",
         "what_bad_looks_like": "A procedure document with no completed request or approval records behind it, or a statement that a manager approves access verbally with nothing captured.",
         "red_flags": [
-          "Approvals missing entirely for sampled access grants",
+          "Approvals missing entirely for access grants",
           "Approver is the same person who received the access, or has no authority to approve it",
           "Access provisioned is broader than what was requested and approved",
           "No records exist for the earliest hires because the process started recently",
@@ -1211,8 +1211,8 @@
         ],
         "platform_hints": {
           "okta": "Pull per-user assignments and group memberships to confirm what access was actually granted. Compare against the approval records.",
-          "google_workspace": "Pull the Admin console user list and group memberships to confirm granted access for sampled joiners.",
-          "github": "Pull organization membership and team assignments for sampled joiners to confirm repository access matches the approval.",
+          "google_workspace": "Pull the Admin console user list and group memberships to confirm granted access for joiners.",
+          "github": "Pull organization membership and team assignments for joiners to confirm repository access matches the approval.",
           "linear": "Provisioning approval tickets or issues often live here. Pull the request and the approver comment or state change.",
           "notion": "Onboarding checklists and access-request records are often kept here. Pull the completed instance, not the template."
         }
@@ -1271,7 +1271,7 @@
           "Pull the written offboarding procedure or checklist covering access-revocation steps and the required timeframe",
           "Pull the list of departures during the period from the HR system, with termination dates",
           "Pull identity provider account status showing deactivation dates, to compare timing against the termination dates",
-          "Pull evidence of access removal across all in-scope systems for a sample of leavers"
+          "Pull evidence of access removal across all in-scope systems for each leaver"
         ],
         "what_good_looks_like": "For named leavers, the HR termination date matched against the identity provider deactivation timestamp inside the policy window, plus confirmation the account was removed from every in-scope system, not just the primary directory.",
         "what_bad_looks_like": "A blank checklist template with no completed instances, or a claim that access is removed promptly without any dated deactivation records to prove it.",
@@ -1283,11 +1283,11 @@
           "Offboarding steps have no timestamps, so timeliness cannot be verified"
         ],
         "platform_hints": {
-          "okta": "Pull per-user status and the deactivation date for sampled leavers. Compare against the HR termination date.",
-          "google_workspace": "Pull the user list showing suspended or deleted status and the date it changed for sampled leavers.",
-          "github": "Confirm sampled leavers were removed from organization membership and all teams. Check for lingering outside-collaborator access.",
-          "gusto": "Termination dates for sampled leavers come from here. Pull the record showing the departure date.",
-          "rippling": "Pull termination dates and, where offboarding is automated, the app-deprovisioning log for sampled leavers."
+          "okta": "Pull per-user status and the deactivation date for each leaver. Compare against the HR termination date.",
+          "google_workspace": "Pull the user list showing suspended or deleted status and the date it changed for each leaver.",
+          "github": "Confirm leavers were removed from organization membership and all teams. Check for lingering outside-collaborator access.",
+          "gusto": "Termination dates for leavers come from here. Pull the record showing the departure date.",
+          "rippling": "Pull termination dates and, where offboarding is automated, the app-deprovisioning log for leavers."
         }
       }
     },
@@ -2168,7 +2168,7 @@
       "collection_playbook": {
         "evidence_goals": [
           "Pull the written data and asset disposal procedure covering both hardware retirement and logical data deletion",
-          "Pull disposal or destruction records for a sample of retired assets, with asset identification, date, and method",
+          "Pull disposal or destruction records for each retired asset, with asset identification, date, and method",
           "Pull the corroborating destruction evidence such as a certificate of destruction, a data-wipe log, or a disposal vendor receipt"
         ],
         "what_good_looks_like": "Disposal log entries naming the asset, the date, and the method used, backed by a certificate of destruction, a wipe log, or a vendor receipt, and where cloud data was retired, evidence that the volumes or snapshots were actually deleted.",
@@ -2399,12 +2399,12 @@
         {
           "system": "crowdstrike",
           "command": "curl -s -X POST 'https://api.crowdstrike.com/oauth2/token' -d 'client_id={client_id}&client_secret={client_secret}' | python3 -c \"import sys,json; t=json.load(sys.stdin)['access_token']; import urllib.request as r; req=r.Request('https://api.crowdstrike.com/devices/queries/devices/v1?limit=5', headers={'Authorization': f'Bearer {t}'}); print(r.urlopen(req).read().decode())\"",
-          "shows": "Returns a sample of devices enrolled in CrowdStrike Falcon; an empty result, or a company-owned device roster larger than the device count returned, means endpoint detection is not deployed across all managed devices."
+          "shows": "Returns the list of devices enrolled in CrowdStrike Falcon; an empty result, or a company-owned device roster larger than the device count returned, means endpoint detection is not deployed across all managed devices."
         },
         {
           "system": "sentinelone",
           "command": "curl -s -H 'Authorization: ApiToken {api_token}' 'https://{domain}.sentinelone.net/web/api/v2.1/agents?limit=5'",
-          "shows": "Returns a sample of agents enrolled in SentinelOne; a device known to be company issued that does not appear in this list is running without endpoint protection."
+          "shows": "Returns the list of agents enrolled in SentinelOne; a device known to be company issued that does not appear in this list is running without endpoint protection."
         },
         {
           "system": "google_workspace",
@@ -2465,12 +2465,12 @@
         {
           "system": "crowdstrike",
           "command": "curl -s -X POST 'https://api.crowdstrike.com/oauth2/token' -d 'client_id={client_id}&client_secret={client_secret}' | python3 -c \"import sys,json; t=json.load(sys.stdin)['access_token']; import urllib.request as r; req=r.Request('https://api.crowdstrike.com/discover/queries/applications/v1?limit=5', headers={'Authorization': f'Bearer {t}'}); print(r.urlopen(req).read().decode())\"",
-          "shows": "Returns a sample of the application inventory CrowdStrike Falcon Discover has observed across managed endpoints; unapproved or unrecognized software titles appearing across multiple hosts indicates installation is not restricted to an authorized set."
+          "shows": "Returns the application inventory CrowdStrike Falcon Discover has observed across managed endpoints; unapproved or unrecognized software titles appearing across multiple hosts indicates installation is not restricted to an authorized set."
         },
         {
           "system": "sentinelone",
           "command": "curl -s -H 'Authorization: ApiToken {api_token}' 'https://{domain}.sentinelone.net/web/api/v2.1/installed-applications?limit=5'",
-          "shows": "Returns a sample of installed applications reported by SentinelOne agents; unapproved applications appearing on multiple endpoints indicates a gap in restricting who can install software."
+          "shows": "Returns the installed applications reported by SentinelOne agents; unapproved applications appearing on multiple endpoints indicates a gap in restricting who can install software."
         },
         {
           "system": "github",
@@ -2791,16 +2791,16 @@
         {
           "system": "github",
           "command": "gh api \"repos/{owner}/{repo}/dependabot/alerts?state=fixed&per_page=50\" --jq '.[] | {package: .dependency.package.name, severity: .security_advisory.severity, created_at: .created_at, fixed_at: .fixed_at}'",
-          "shows": "A sample of resolved dependency alerts with the opened and fixed dates, so remediation time can be measured against the entity's defined window."
+          "shows": "The resolved dependency alerts with the opened and fixed dates, so remediation time can be measured against the entity's defined window."
         }
       ],
       "collection_playbook": {
         "evidence_goals": [
           "Obtain the automated dependency alerting configuration for production repositories",
           "Obtain the entity's defined remediation window by severity",
-          "Obtain a sample of dependency advisories with opened and resolved dates to measure remediation time"
+          "Obtain the period's dependency advisories with opened and resolved dates to measure remediation time"
         ],
-        "what_good_looks_like": "Dependency alerting enabled on all production repositories. A stated window such as critical within a defined number of days. A sample of advisories showing resolution within that window and no long-outstanding critical or high items.",
+        "what_good_looks_like": "Dependency alerting enabled on all production repositories. A stated window such as critical within a defined number of days. Advisories showing resolution within that window and no long-outstanding critical or high items.",
         "what_bad_looks_like": "A claim that dependencies are kept current with no configuration shown, or alerting enabled on only some repositories while others are excluded.",
         "red_flags": [
           "Production repositories with no dependency alerting enabled",
@@ -3163,7 +3163,7 @@
       "collection_playbook": {
         "evidence_goals": [
           "Pull the incident log or register listing incidents over the period with dates and severity",
-          "For a sampled incident, pull the full record showing detection time, containment, root cause investigation, resolution, and restoration of operations",
+          "For each incident, pull the full record showing detection time, containment, root cause investigation, resolution, and restoration of operations",
           "Pull the post incident review or post mortem showing lessons learned and follow up actions",
           "Where an incident affected customer data, pull the notification record to affected parties"
         ],
@@ -3179,7 +3179,7 @@
         "platform_hints": {
           "pagerduty": "Pull the incident history with timestamps and responders to reconstruct the detection and response timeline.",
           "linear": "Pull incident labeled issues and their comment history to see containment, root cause, and resolution.",
-          "slack": "Pull the incident channel history for the sampled incident to see the real time response and handoffs.",
+          "slack": "Pull the incident channel history for the incident to see the real time response and handoffs.",
           "notion": "Pull the post mortem documents and confirm each has an owner, date, and tracked follow up actions."
         }
       }
@@ -3766,7 +3766,7 @@
         "evidence_goals": [
           "Pull branch protection configuration for the production branch showing direct pushes blocked, force pushes disabled, required status checks, and administrator enforcement",
           "Pull the CI workflow definition that produces the required checks",
-          "Pull a sample of merged changes showing descriptions and passing checks",
+          "Pull the period's merged changes showing descriptions and passing checks",
           "Pull records of verification performed after deployment"
         ],
         "what_good_looks_like": "Branch protection on the production branch with direct and force pushes disabled, one or more required status checks that must pass before a merge, an active CI workflow that produces those checks, administrator enforcement enabled, merged changes that each carry a description and passing checks, and post deployment health checks or smoke tests with results.",
@@ -5382,13 +5382,13 @@
           "Obtain the retention configuration or purge jobs enforcing deletion of AI logs after the defined period",
           "Obtain the access configuration on each log store and evidence of redaction or a documented exposure decision"
         ],
-        "what_good_looks_like": "A current inventory covering application databases, observability tools, and accessible provider logs, retention visibly configured on each store, access limited to named roles, and sampled log entries showing redaction or a documented acceptance of what remains.",
+        "what_good_looks_like": "A current inventory covering application databases, observability tools, and accessible provider logs, retention visibly configured on each store, access limited to named roles, and inspected log entries showing redaction or a documented acceptance of what remains.",
         "what_bad_looks_like": "A statement that logs are kept safely without naming the stores. A stated retention with no enforcing setting or job. Broad access to raw prompt and completion content. A client-authored spreadsheet asserting retention or access state.",
         "red_flags": [
           "An observability tool in active use that is missing from the inventory",
           "Prompt and completion logs retained indefinitely with no retention configured",
           "Raw customer prompts containing sensitive data readable by all staff",
-          "Redaction claimed in policy but visible sensitive data in a sampled log entry"
+          "Redaction claimed in policy but visible sensitive data in an inspected log entry"
         ],
         "platform_hints": {
           "langfuse": "Pull traces to confirm capture and inspect retained fields. Check project members for access scope and any data masking settings.",
@@ -5436,7 +5436,7 @@
           "Pull the BAA template or a representative executed agreement showing the required terms"
         ],
         "what_good_looks_like": "A vendor or customer inventory that flags every ePHI counterparty, a signed BAA on file for each of them (the cloud provider's console-accepted BAA counts), and operative terms that require Security Rule compliance, subcontractor flow-down, and security incident reporting.",
-        "what_bad_looks_like": "ePHI flowing to customers or vendors with no inventory of who those parties are, sampled relationships with no executed agreement to show, or a BAA that omits one of the required elements.",
+        "what_bad_looks_like": "ePHI flowing to customers or vendors with no inventory of who those parties are, relationships with no executed agreement to show, or a BAA that omits one of the required elements.",
         "red_flags": [
           "No identification of which counterparties handle ePHI",
           "A customer relationship where ePHI handling began before any BAA was signed, with no documented interim arrangement carrying the required terms for that window",

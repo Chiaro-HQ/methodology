@@ -142,7 +142,7 @@
       "controls": [
         "PPL-01"
       ],
-      "rationale": "PPL-01 A1 to A5 require background checks for all personnel including contractors prior to or at start, with sampled completion."
+      "rationale": "PPL-01 A1 to A5 require background checks for all personnel including contractors prior to or at start, with completion tested for each person."
     },
     {
       "cite": "164.308(a)(3)(ii)(C)",
@@ -154,7 +154,7 @@
       "controls": [
         "IAM-04"
       ],
-      "rationale": "IAM-04 A1 to A5: documented offboarding, defined maximum removal timeframe, sampled evidence that all in-scope access was removed on time."
+      "rationale": "IAM-04 A1 to A5: documented offboarding, defined maximum removal timeframe, per-termination evidence that all in-scope access was removed on time."
     },
     {
       "cite": "164.308(a)(4)(i)",
@@ -218,7 +218,7 @@
       "controls": [
         "PPL-03"
       ],
-      "rationale": "PPL-03 A1/A2/A4: curriculum exists, timing defined for onboarding and ongoing completion, sampled completion within the defined period."
+      "rationale": "PPL-03 A1/A2/A4: curriculum exists, timing defined for onboarding and ongoing completion, completion tested for each person within the defined period."
     },
     {
       "cite": "164.308(a)(5)(ii)(A)",
@@ -297,7 +297,7 @@
         "INC-02",
         "MON-02"
       ],
-      "rationale": "INC-02 A2 to A7 evidence containment, root cause, restoration, notification and documentation for sampled incidents; MON-02 A4 defines escalation into incident response."
+      "rationale": "INC-02 A2 to A7 evidence containment, root cause, restoration, notification and documentation for each incident; MON-02 A4 defines escalation into incident response."
     },
     {
       "cite": "164.308(a)(7)(i)",
@@ -410,7 +410,7 @@
       "controls": [
         "HIP-01"
       ],
-      "rationale": "HIP-01 A2/A3 sample signed BAAs for customer relationships and subcontractors that handle ePHI."
+      "rationale": "HIP-01 A2/A3 verify signed BAAs for customer relationships and subcontractors that handle ePHI."
     },
     {
       "cite": "164.310(a)(1)",
@@ -526,7 +526,7 @@
       "controls": [
         "DAT-02"
       ],
-      "rationale": "DAT-02 A1 to A3: disposal procedure with wiping and destruction methods, sampled evidence of wipe before disposal, documented with date, method and asset identification."
+      "rationale": "DAT-02 A1 to A3: disposal procedure with wiping and destruction methods, evidence of wipe before each disposal, documented with date, method and asset identification."
     },
     {
       "cite": "164.310(d)(2)(ii)",
@@ -687,7 +687,7 @@
         "IAM-01",
         "IAM-02"
       ],
-      "rationale": "IAM-01 A2 requires authentication before access; IAM-02 enforces MFA across in-scope systems with sampled enrollment."
+      "rationale": "IAM-01 A2 requires authentication before access; IAM-02 enforces MFA across in-scope systems with enrollment verified across users."
     },
     {
       "cite": "164.312(e)(1)",
@@ -770,7 +770,7 @@
       "controls": [
         "HIP-01"
       ],
-      "rationale": "HIP-01 A3 samples signed downstream BAAs for every subcontractor that handles ePHI."
+      "rationale": "HIP-01 A3 verifies signed downstream BAAs for every subcontractor that handles ePHI."
     },
     {
       "cite": "164.314(b)",
@@ -922,16 +922,16 @@
         {
           "id": "A2",
           "attr_type": "sample",
-          "text": "For a sample of customer relationships involving ePHI: a signed BAA is in place",
+          "text": "For each customer relationship involving ePHI: a signed BAA is in place",
           "typical_evidence": "Executed BAA documents with signature dates",
-          "pass_criteria": "PASS: Each sampled ePHI customer relationship has a BAA signed on or before the date ePHI handling began. FAIL: Any sampled relationship lacks a signed BAA, or the BAA postdates the start of ePHI handling with no documented interim arrangement."
+          "pass_criteria": "PASS: Each ePHI customer relationship has a BAA signed on or before the date ePHI handling began. FAIL: Any relationship lacks a signed BAA, or the BAA postdates the start of ePHI handling with no documented interim arrangement."
         },
         {
           "id": "A3",
           "attr_type": "sample",
-          "text": "For a sample of subcontractors that handle ePHI: a signed downstream BAA is in place",
+          "text": "For each subcontractor that handles ePHI: a signed downstream BAA is in place",
           "typical_evidence": "Executed subcontractor BAAs, including cloud provider BAA (for example the AWS, GCP, or Azure BAA)",
-          "pass_criteria": "PASS: Each sampled ePHI-handling subcontractor, including the cloud infrastructure provider, has a signed BAA. FAIL: Any ePHI-handling subcontractor operates without a BAA. Note: a subcontractor that only transmits ePHI transiently and never stores it, or a service that receives no ePHI at all, may be excluded only with a documented rationale. A vendor that stores or maintains ePHI remains a business associate even when the data is encrypted and the vendor holds no decryption key."
+          "pass_criteria": "PASS: Each ePHI-handling subcontractor, including the cloud infrastructure provider, has a signed BAA. FAIL: Any ePHI-handling subcontractor operates without a BAA. Note: a subcontractor that only transmits ePHI transiently and never stores it, or a service that receives no ePHI at all, may be excluded only with a documented rationale. A vendor that stores or maintains ePHI remains a business associate even when the data is encrypted and the vendor holds no decryption key."
         },
         {
           "id": "A4",
@@ -974,9 +974,9 @@
         {
           "id": "A3",
           "attr_type": "sample",
-          "text": "For a sample of emergency access uses (if any): use was logged and reviewed afterward",
+          "text": "For each emergency access use (if any): use was logged and reviewed afterward",
           "typical_evidence": "Access logs for the break-glass identity plus the post-use review record",
-          "pass_criteria": "PASS: Each sampled use is logged and has a documented after-the-fact review confirming the use was appropriate. FAIL: Any use is unlogged or lacks a post-use review. If no uses occurred in the period, the attribute passes on the logging configuration being in place."
+          "pass_criteria": "PASS: Each use is logged and has a documented after-the-fact review confirming the use was appropriate. FAIL: Any use is unlogged or lacks a post-use review. If no uses occurred in the period, the attribute passes on the logging configuration being in place."
         }
       ]
     },

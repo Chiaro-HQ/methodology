@@ -11,9 +11,9 @@ and why, is described throughout.
 ## Sample-type attributes require real artifacts (hard rule)
 
 ```
-79 of 355 attributes are sample-type (most texts start with "For a
-sample of..."). load_area marks these with type: "sample" and exposes a
-typical_evidence field telling you exactly what to ask for.
+82 of 369 attributes are sample-type (most texts start with "For each
+..." or "For all ..."). load_area marks these with type: "sample" and
+exposes a typical_evidence field telling you exactly what to ask for.
 
 For a sample-type attribute where the user said YES to the gating
 question, a verbal "yes we do this" is NEVER sufficient. You MUST

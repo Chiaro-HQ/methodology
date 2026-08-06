@@ -256,16 +256,19 @@ wrong population is exactly the failure this rule exists to catch.
 
 ## A note on the attribute language
 
-79 attributes in this repository are typed as per-item record checks, and
-most of their texts read "for a sample of X," with pass criteria that speak of
-"sampled individuals." Read against this page that wording is wrong, and this
-page governs: those attributes are tested over the complete population by
-default, and "sample" in them should be read as "each item examined." The same
-wording lives in the control-level collection playbooks ("pull a sample
-of..."), in a `sample_eligible` field on the controls, and in the period-form
-pass criteria of a few config- and process-typed attributes: same reading,
-same revision pending. We would rather publish the method and name the seam
-than hold it back until every text catches up.
+When this page was first published (2026-07-27), 79 attributes still carried
+sampling-era wording ("for a sample of X," "all sampled individuals") that
+this page overrode: population testing governed regardless of what the texts
+said. That revision landed on 2026-08-06. The texts now read "for each X" /
+"for all X," the period-form pass criteria say "every X in the period," and
+the collection playbooks ask for the population, not a sample of it. Each
+record-checked attribute also now carries a `frequency` field, the input to
+the published fallback-selection table for the rare population where a
+complete pull is impracticable. The `sample_eligible` field name and the
+`sample` attribute type remain as machine identifiers; prose is
+population-first throughout. The one deliberate survivor: DAT-04's "sampled
+data," where the word means data-subsetting for non-production environments,
+not audit sampling.
 
 ## Changes to this method
 

@@ -432,7 +432,9 @@ applies, and flipping a gap to pass needs newer evidence or correction=true.
 Args:
     control_ref: e.g. "IAM-02".
     attribute_id: e.g. "A1".
-    verdict: "pass" | "gap" | "not_applicable".
+    verdict: "pass" | "gap" | "absent" | "not_applicable" (absent = the
+        practice itself does not exist; a practice that exists but lacks
+        records is a gap).
     reasoning: one or two sentences citing the evidence and the criterion.
     evidence_ids: JSON list of evidence ids (from submit_evidence/submit_document).
     basis: "evidence" (default) or "attested" (user explicitly confirms
@@ -829,7 +831,8 @@ Args:
     completeness: JSON object declaring which completeness tests apply
         (sequence, reconciliations, control_total, period_coverage,
         recon_attempts). get_population_spec says which ones this
-        population supports.
+        population supports. For a roster (state-as-of) population it must
+        also carry as_of — the exact timestamp the state was captured at.
     policy: JSON object of parameters from the entity's OWN documented
         policy, with policy_basis naming the document. Defaults are strict:
         an undeclared exception does not exist.
