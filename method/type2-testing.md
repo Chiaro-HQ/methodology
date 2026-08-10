@@ -4,7 +4,8 @@ A Type I asks whether controls were suitably designed as of a date. A Type II
 asks whether they operated over a period. The operating question is where
 sampling has always lived, and it is where we depart from standard practice:
 
-**We test complete populations by default. We do not sample.**
+**We test complete populations by default. Sampling is a disclosed exception,
+used only where a population genuinely cannot be retrieved in full.**
 
 Audit sampling exists because human hours are expensive. When testing means a
 person reading records one at a time, checking 25 of 214 changes is a

@@ -7,8 +7,6 @@ The direction, in the order we care about it. Dates land in
   call teaches something worth keeping.
 - Sharper pass criteria. Wherever a criterion reads two ways, it gets
   rewritten until it reads one way.
-- The census language pass. The 79 attribute texts that still say
-  "for a sample of" get rewritten to match the published Type II method.
 - More controls, where real stacks need them.
 
 Suggestions on what should come first: open an issue or write to

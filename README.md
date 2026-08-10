@@ -72,17 +72,17 @@ If you think a specific example softens something it should not, that is a
 concrete thing you can point at. Open an issue with the control and attribute
 id. That is the entire reason this file is public.
 
-## Type II: complete populations, not samples
+## Type II: complete populations by default
 
-By default we do not sample. The data a modern company runs on is produced by
-machines, so it can be verified at machine speed, all of it. The client's AI
-retrieves the complete population for each control (every change, every
-termination, every access review in the observation window). Completeness is
-corroborated: recorded retrieval always, and reconciliation against an
-independent second source wherever one exists. Then every item is tested,
-deterministically where the evidence is structured, by calibrated reading where
-it is prose, with every candidate deviation confirmed by the CPA before it
-becomes an exception.
+The default is a census, not a sample. The data a modern company runs on is
+produced by machines, so it can be verified at machine speed, all of it. The
+client's AI retrieves the complete population for each control (every change,
+every termination, every access review in the observation window).
+Completeness is corroborated: recorded retrieval always, and reconciliation
+against an independent second source wherever one exists. Then every item is
+tested, deterministically where the evidence is structured, by calibrated
+reading where it is prose, with every candidate deviation confirmed by the CPA
+before it becomes an exception.
 
 Sampling survives only where a population genuinely cannot be retrieved in
 full, and the report discloses, per control, which lane ran. When sampling
@@ -91,10 +91,7 @@ population itself, so neither side can steer or re-roll it.
 
 The full method is in [`method/type2-testing.md`](method/type2-testing.md):
 population rules, the deviation rule and its worked examples, the fallback
-table, and the selection algorithm. Most of the 79
-per-item attributes say "for a sample of," as does scattered "sample" phrasing
-in the control playbooks and pass criteria. Read against the method that wording
-is wrong and the method governs; the texts are pending revision.
+table, and the selection algorithm.
 
 Any change to this method is published here before it is applied to an
 examination. A rule that predates the engagement it governs is easier to trust

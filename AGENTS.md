@@ -30,9 +30,10 @@ software as much as by people. This page is the map.
 - A company can be measured against this framework directly: evidence is
   judged against each attribute's pass criteria, with the calibration
   examples as the reference for edge calls.
-- Where an attribute text says "for a sample of," the census method in
-  `method/type2-testing.md` governs: complete populations by default. The
-  texts are pending revision, and the method wins over the wording.
+- Attribute texts are population-first, matching the census method in
+  `method/type2-testing.md`: they read "for each X" or "for all X." DAT-04's
+  "sampled data" is the one survivor of the older wording, and there it means
+  data-subsetting for non-production environments, not audit sampling.
 - Zero rows with a recorded pull is evidence of a zero. An unrecorded "we
   had none" is a missing population.
 - This is the methodology, not the product. The evaluation engine and the
