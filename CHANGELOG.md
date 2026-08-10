@@ -2,7 +2,8 @@
 
 Method changes are dated, versioned, and published here before they are
 applied to an examination. Corrections that do not change the method (typos,
-formatting, clearer wording with the same meaning) ship without a version.
+formatting, clearer wording with the same meaning) ship without a version, and
+the commit history on this repo records every one of them.
 
 ## v1.2, 2026-08-06
 
