@@ -2687,11 +2687,11 @@
     "criteria_mappings": [
       "CC7.1"
     ],
-    "can_be_na": false,
-    "na_trigger": "",
+    "can_be_na": true,
+    "na_trigger": "Applies only where management runs a penetration testing program",
     "collection": {
       "gating_question": "Has your organization ever had a penetration test performed? (Yes/No)",
-      "absent_reason_template": "Entity does not have penetration testing practices in place. All attributes for this control marked absent. This is a structural gap requiring implementation.",
+      "absent_reason_template": "Entity does not perform penetration testing. All attributes for this control are marked absent. Penetration testing is an optional practice rather than a criterion requirement, so this answer puts the control out of scope instead of recording a deficiency: CC7.1 stays covered by the vulnerability scanning and dependency update controls, and independent evaluation of the control system is tested separately under EVL-01.",
       "evidence_commands": [
         {
           "system": "aws",
@@ -4195,7 +4195,7 @@
       "follow_ups": [
         "Do you perform periodic self-assessments or internal audits?",
         "Are automated monitoring tools used?",
-        "Have you had external assessments (pen tests, audits) that provide independent evaluation?"
+        "Has anyone outside your company checked your security or your controls in the last year? It counts when all three are true: the person or firm who did it does not run the systems they checked, they wrote down what they looked at and what they found with a date on it, and you have a record of what you did about what they found. Anything meeting all three counts, whatever it is called. If nothing comes to mind, these checks usually turn up in one of two ways: someone required it of you (a customer before signing, an app store, a platform), or someone offered it (a cloud provider's partner program, an advisor). Apply the three tests to whatever the client names."
       ],
       "documents": [
         "Vulnerability Scanner (Qualys / Nessus / etc.)",
@@ -4222,10 +4222,11 @@
       "collection_playbook": {
         "evidence_goals": [
           "Pull monitoring configuration that produces evidence of ongoing control operation (dashboards, scheduled reports, automated checks)",
-          "Pull examples of monitoring output (log summaries, compliance dashboards, control health reports)"
+          "Pull examples of monitoring output (log summaries, compliance dashboards, control health reports)",
+          "Where an outside party checked the company's security or controls, pull that party's written output and the company's response to it. Judge it against the test rather than against a list of instrument names: the party is outside the company and does not run what they checked, the record is dated and states scope and findings, and the company's response to those findings exists. The instrument can be anything meeting that test. Before submitting a customer's review of the company, confirm the company is permitted to share it."
         ],
-        "what_good_looks_like": "Config showing automated monitoring of key controls (access reviews, backup success, vulnerability scan completion). Dashboard or report config that tracks control health over time.",
-        "what_bad_looks_like": "Statement that controls are monitored without showing how. One-time audit results instead of ongoing monitoring config.",
+        "what_good_looks_like": "Config showing automated monitoring of key controls (access reviews, backup success, vulnerability scan completion). Dashboard or report config that tracks control health over time. For the outside check: a dated record from a party who does not run the systems they examined, stating what was looked at and what was found, plus the company's written response to the findings.",
+        "what_bad_looks_like": "Statement that controls are monitored without showing how. One-time audit results instead of ongoing monitoring config. Anything the company or its own service provider ran on itself offered as the outside check: a scan, an AI tool, a self-assessment, or a review by the provider that operates the systems being reviewed. A certificate or badge with no scope, no method and no findings.",
         "red_flags": [
           "No ongoing monitoring (only periodic manual checks)",
           "Monitoring exists but no one reviews the output",

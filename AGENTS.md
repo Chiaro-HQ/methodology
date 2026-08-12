@@ -12,7 +12,7 @@ software as much as by people. This page is the map.
   pass criteria in a point-in-time form (readiness, Type I) and an
   over-a-period form (Type II), typical evidence, and conditions where it
   does not apply.
-- `framework/calibration-examples.json`: 528 worked judgment calls in
+- `framework/calibration-examples.json`: 532 worked judgment calls in
   one flat file: the verdict an AI reached, the correct verdict, and why.
   These anchor how strict or lenient a judgment should be.
 - `framework/criteria.json` and `framework/evidence_map.json`: the Trust
@@ -21,6 +21,10 @@ software as much as by people. This page is the map.
 - `method/`: how systems are scoped, the rules collection runs under, how a
   Type II is tested, and the tools a connected AI can call on the live
   server.
+- `method/independent-evaluation.md`: whether a penetration test is required
+  under these criteria, which it is not, what CC4.1 requires instead, and the
+  five questions an instrument has to clear to satisfy EVL-01/A3. It is a
+  common enough question to have its own page.
 - `framework/hipaa-crosswalk.json` and `method/hipaa-crosswalk.md`: the HIPAA
   Security Rule (45 CFR 164.308 through 164.316) mapped row by row to the
   controls, with the resolution and rationale for every provision.

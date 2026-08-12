@@ -30,6 +30,9 @@ anyone is reading this.
 - **`method/type2-testing.md`**: how a Type II is tested. Complete populations
   by default, the deviation rule and its worked examples, and the sampling
   fallback with its selection algorithm.
+- **`method/independent-evaluation.md`**: whether a penetration test is
+  required (it is not), what the criterion does require instead, and the test
+  any instrument has to pass to satisfy it.
 - **`method/tools.md`**: every tool a connected AI can call, generated from the
   live server.
 - **`method/hipaa-crosswalk.md`**: the HIPAA Security Rule mapped provision by
@@ -39,14 +42,15 @@ anyone is reading this.
 
 ## The calibration examples
 
-The attributes carry 528 worked examples of a
+The attributes carry 532 worked examples of a
 judgment call between them, each recording a verdict an AI reached, the verdict
 that was correct, and why. They exist to calibrate judgment, and they are the part of this
 repository we would least like a competitor to have.
 
 **They carry our experience, not our clients' information.** Every published
-example carries `source: "synthetic_taste_v1"`. Each one takes a judgment call
-we have actually had to make and writes it as a scenario for the purpose. That
+example carries a `source` tag naming the round it was authored in, and only
+authored examples publish. Each one takes a judgment call we have actually had
+to make and writes it as a scenario for the purpose. That
 is deliberate, and it is the stricter of the two options: client work is
 confidential, and redaction removes a name without removing an identity, so a
 case lifted from fieldwork stays recognizable to anyone who knows the company.
@@ -54,8 +58,8 @@ What is published here is the lesson: the distinction being drawn and the
 reasoning behind it. The companies, systems, numbers and people in the scenarios
 are not real and are not any client of ours.
 
-**Which way do they push?** 317 of them correct an AI that was too strict,
-and 211 correct one that was too lenient. We are publishing that ratio
+**Which way do they push?** 319 of them correct an AI that was too strict,
+and 213 correct one that was too lenient. We are publishing that ratio
 because anyone with the file can compute it, and because the honest reading is
 not flattering by default: an auditor whose examples mostly teach "that is fine
 actually" is exactly what the industry should be suspicious of after 2025.

@@ -5,6 +5,30 @@ applied to an examination. Corrections that do not change the method (typos,
 formatting, clearer wording with the same meaning) ship without a version, and
 the commit history on this repo records every one of them.
 
+## v1.4, 2026-08-12
+
+Independent evaluation, and the penetration testing question.
+
+- [method/independent-evaluation.md](method/independent-evaluation.md) states
+  what CC4.1 requires, the five questions an instrument has to clear to satisfy
+  EVL-01/A3, and what does not count. No trust services criterion requires a
+  penetration test. A penetration test is one instrument that satisfies the
+  requirement that does exist.
+- EVL-01/A3 gains worked calibration examples in both directions, including two
+  that fail: a tool a company runs on itself, and a review performed by the
+  provider that operates the environment being reviewed.
+- VUL-02, penetration testing, becomes an optional-practice control. It applies
+  where management runs a penetration testing program and is out of scope where
+  management does not, through the same conditional applicability this library
+  already uses for practices that some companies run and others do not. CC7.1
+  stays carried by VUL-01 and VUL-04, both always in scope.
+- The pass criteria for EVL-01/A3 are not changed by any of this. The diff is
+  in this repository.
+- [method/tools.md](method/tools.md) picks up two tools the server exposes: one
+  that records a prior report from another firm, which seeds scope and raises
+  the amount of testing while carrying no conclusion, and one that reconciles
+  the recorded system scope against an independent enumerator.
+
 ## v1.3, 2026-08-11
 
 When evidence is collected. The method page has always said a population is

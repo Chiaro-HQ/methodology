@@ -10111,6 +10111,38 @@
             "reasoning": "Independence in this attribute is about who performed the evaluation, not how rigorous it was, and a person cannot provide it over controls they operate. A careful self assessment is real evidence for management review, and that is a different attribute from this one.",
             "weight": 0.5,
             "source": "synthetic_taste_v1"
+          },
+          {
+            "evidence_summary": "A two-person startup on AWS submitted a Well-Architected Review report performed by a partner firm five months ago: security findings classified by risk, with a dated remediation plan the founders acted on.",
+            "ai_verdict": "gap",
+            "correct_verdict": "pass",
+            "reasoning": "The criterion asks for an independent evaluation of controls, not for any particular instrument. A partner-led cloud security review is a named party evaluating the control environment, with scope, dated findings, and a management response. It qualifies on the same basis a pen test would.",
+            "weight": 0.5,
+            "source": "p07_instruments_v1"
+          },
+          {
+            "evidence_summary": "The founder ran an advanced AI security agent against their own repository and cloud account and submitted its forty-page findings export. No firm or individual signs the report; the tool subscription is in the founder's name.",
+            "ai_verdict": "pass",
+            "correct_verdict": "gap",
+            "reasoning": "Independence attaches to the party, not the tool. A tool run by the person responsible for the controls is a self-assessment however sophisticated the tool; an evaluation needs a named party who stands behind it and is not responsible for the controls evaluated.",
+            "weight": 0.5,
+            "source": "p07_instruments_v1"
+          },
+          {
+            "evidence_summary": "Before signing, an enterprise customer's security team assessed the company's controls: the submission includes their dated questionnaire findings, a follow-up letter listing required fixes, and the company's written remediation responses.",
+            "ai_verdict": "gap",
+            "correct_verdict": "pass",
+            "reasoning": "A customer's security review is an independent party evaluating the control environment, and the captured artifact carries scope, findings, a date, and the management response. The unusual source does not matter; the substance of the evaluation does.",
+            "weight": 0.5,
+            "source": "p07_instruments_v1"
+          },
+          {
+            "evidence_summary": "The managed IT provider that administers the company's endpoints, identity, and backups performed and signed an annual security review of that same environment, and the report is submitted as the independent evaluation.",
+            "ai_verdict": "pass",
+            "correct_verdict": "gap",
+            "reasoning": "The provider operates the controls it reviewed, so it is responsible for them and cannot independently evaluate them. Independence is about operational responsibility, not about being a separate legal entity.",
+            "weight": 0.5,
+            "source": "p07_instruments_v1"
           }
         ],
         "collection_hint": {

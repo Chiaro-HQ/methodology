@@ -1,6 +1,6 @@
 # The tools
 
-The 41 tools a connected client's AI can call. Generated from the
+The 43 tools a connected client's AI can call. Generated from the
 live server, so this list is exactly what a client sees, including the
 descriptions the AI reads to decide what to do.
 
@@ -400,6 +400,33 @@ Args:
         configure it, just consumes managed defaults"). Recorded for
         the auditor's review.
 
+## `reconcile_scope_inventory`
+
+Reconcile the recorded system scope against an independent enumerator.
+
+Pull a list the systems themselves can produce — the identity provider's
+application catalog, the cloud account's service inventory, DNS zones,
+SaaS spend if the user offers it — and send the names here with the exact
+command that produced them. I compare them against the recorded scope and
+return anything unmatched as QUESTIONS to ask the user. Nothing is added
+automatically: if the user confirms something unmatched is real and in
+use, record it with add_system, which classifies it like any other
+system.
+
+Run this during collection phase 1 alongside confirm_scope_delta, and
+run it AGAIN in phase 2 — a system adopted in the final three weeks only
+shows up in the re-run.
+
+Args:
+    source: What kind of enumerator this list came from. One of:
+        idp_app_catalog, cloud_service_inventory, dns_zones, saas_spend,
+        other.
+    command: The exact command or export that produced the list,
+        verbatim and re-runnable.
+    names: The enumerated names — a JSON array of strings, or one name
+        per line.
+    note: Anything the user said about the list (optional).
+
 ## `record_hipaa_intake`
 
 Record the HIPAA intake answers (asked when the HIPAA add-on is chosen).
@@ -430,6 +457,67 @@ Args:
         place with the cloud infrastructure provider.
     cloud_provider_baa_note: Optional detail, for example "AWS BAA
         accepted through Artifact".
+
+## `record_prior_report`
+
+Record whether this is a first SOC 2 or there is a prior report.
+
+Ask this ONE question at the very start of scoping, as a picker: is this
+their first SOC 2, or do they have a report from another firm? Then call
+this tool with the answer. If it is their first, pass had_prior=false and
+nothing else, and scoping carries on normally.
+
+If they have one, do it in this ORDER, and the order matters:
+
+  1. FIRST enumerate what they actually run, yourself. Detect what you can
+     from where you are running (the repo, package files, configs, CLIs
+     already authenticated), ask the user, and record what you find with
+     add_system. A report read before you have looked becomes an anchor
+     that both of us then rubber-stamp.
+  2. THEN ask them to point you at their most recent report and read it IN
+     FULL, including the exceptions. It is their file, you read it locally
+     with their approval, and it never leaves their machine. On an audit
+     engagement, save a copy into the engagement folder so it travels with
+     the evidence at handoff, and never submit it as evidence for a
+     control: it is context for scope and risk, not proof that anything
+     operated.
+  3. Send what you read here. I compare their system list against ours and
+     hand back the differences as QUESTIONS for the user.
+
+What a prior report is worth: it seeds the system list, and its exceptions
+raise the amount of testing we do. What it is never worth: a conclusion.
+Nothing in it passes, clears or shortens anything on our side. Every
+control is examined fresh against our own criteria and the company's own
+current evidence, and a clean prior report changes nothing about that.
+Nothing here is added to the scope automatically either. Names that do not
+match come back as questions; for anything the user confirms is real and in
+use, call add_system, which classifies it like any other system.
+
+Args:
+    had_prior: False for a first SOC 2 (nothing else is needed). True when
+        they have a report from another firm.
+    prior_firm: The firm that issued it, as printed on the report.
+    report_type: "type1" or "type2".
+    period: The period or date it covers, as printed (e.g. "January 1,
+        2025 to December 31, 2025").
+    systems: The systems named in its system description. A JSON array of
+        strings, or one name per line.
+    exceptions: Every exception, deviation or qualification the report
+        noted, in ITS words, not yours. A JSON array of objects is best:
+        [{"description": "...", "topic": "access management",
+          "systems": ["AWS"]}]. One per line also works. `topic` is plain
+        English (access management, change management, incident response,
+        vendor management, and so on) and helps me route the extra testing;
+        leave it out if you are unsure rather than guessing, and the
+        exception goes to our reviewer instead. Send an empty list only if
+        the report genuinely noted none.
+    categories: Which trust categories it covered (Security, Availability,
+        Confidentiality, Processing Integrity, Privacy). JSON array or one
+        per line.
+    opinion_modified: True if the opinion was qualified, adverse, or a
+        disclaimer rather than clean.
+    file_note: Which file you read, for the record (e.g. "SOC 2 Type II
+        report 2025, client's own copy, read locally").
 
 ## `record_questionnaire_answers`
 
@@ -567,8 +655,16 @@ Args:
         a penetration test, and with "no" the penetration testing control is
         simply out of scope. Independent evaluation of controls is still
         tested (a pen test is one way to satisfy it, not the only way).
-        Leave "" only if the client could not answer.
-    prior_soc2: Only when the company is TRANSITIONING from another firm.
+        When the answer is no, tell the client this is a scoping
+        determination, not a security recommendation, and that their
+        customer contracts can require a pen test even though the audit
+        criteria do not. Leave "" only if the client could not answer.
+    prior_soc2: PREFER record_prior_report, which is the tool for this
+        question on both engagement types: it reconciles their system list
+        against ours, banks the exceptions as risk flags, and stops the
+        question being asked again. This argument records the facts and
+        does none of that. Kept for the facts alone.
+        Only when the company is TRANSITIONING from another firm.
         Facts read from their most recent SOC 2 report (their file, read
         locally — we never receive it), as a dict:
         {"had_prior": true, "prior_type": "type1"|"type2",

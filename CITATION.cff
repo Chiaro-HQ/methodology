@@ -4,8 +4,8 @@ title: The Chiaro SOC 2 methodology
 type: dataset
 authors:
   - name: Y Assurance PLLC
-version: "1.1"
-date-released: "2026-08-06"
+version: "1.4"
+date-released: "2026-08-12"
 license: CC-BY-4.0
 url: https://github.com/Chiaro-HQ/methodology
 repository-code: https://github.com/Chiaro-HQ/methodology
