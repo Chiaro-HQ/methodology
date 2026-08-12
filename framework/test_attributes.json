@@ -10091,7 +10091,7 @@
         "id": "A3",
         "text": "Independent evaluation performed within the last year",
         "attr_type": "document",
-        "typical_evidence": "Internal audit report, third-party assessment, or independent control evaluation",
+        "typical_evidence": "Internal audit report, third-party assessment, cloud security review, or other independent control evaluation report",
         "pass_criteria": "PASS: An independent evaluation (internal audit, third-party assessment, or external auditor) of controls was performed within the last 12 months, by a party not responsible for the controls evaluated. FAIL: No independent evaluation within the last 12 months, or evaluation was performed by the same team responsible for the controls.",
         "na_condition": "",
         "can_be_na": false,

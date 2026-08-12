@@ -1,6 +1,6 @@
 # The tools
 
-The 40 tools a connected client's AI can call. Generated from the
+The 41 tools a connected client's AI can call. Generated from the
 live server, so this list is exactly what a client sees, including the
 descriptions the AI reads to decide what to do.
 
@@ -26,6 +26,12 @@ Args:
         for less common tools. (e.g. "internal admin dashboards that
         access production data")
     category: Optional category hint (e.g. "infrastructure", "auth", "monitoring")
+    in_service_date: YYYY-MM-DD, and ONLY for a system that went into
+        service after a Type II observation period had already started.
+        Ask the user when they started using it. A system adopted
+        mid-period was not there for the earlier part of it, so the
+        report says when it was placed into service and its records only
+        cover from that day.
 
 ## `answer_question`
 
@@ -84,12 +90,14 @@ Args:
 
 Complete evidence collection and hand off to CPA review.
 
-GATED: collection must be complete before this succeeds. Three gates:
+GATED: collection must be complete before this succeeds. The gates:
   1. Every in-scope attribute is in a terminal state (collected, absent, or N/A)
   2. Every in_scope_tool system has at least one real (non-conversation)
      evidence artifact referencing it
   3. Every collected sample-type attribute has a real artifact, not just
      a verbal submit_answer
+  3b. Type II only: collection phase 2 has opened AND every in-scope
+     population has been handed over
   4. Every subservice org has its SOC 2 status recorded (yes or no)
 
 On success, marks the engagement as awaiting_upload. The client uploads
@@ -108,6 +116,27 @@ Runs the full scoping engine:
 
 Before calling this, review the scope with get_scope_summary to make sure
 product info, systems, and data types are all correct.
+
+## `confirm_scope_delta`
+
+Record whether the systems in scope changed during the observation period.
+
+Ask the user ONE question, in their own words: since the period started,
+has anything been added, dropped or replaced in the stack? This is not a
+re-scope — the scope was fixed when the window opened — it is the one
+check that catches a system adopted mid-period, which nothing else can
+detect.
+
+If something WAS added, call add_system for it first (it runs through
+classification like any other system, and may not be in scope at all),
+then call this with the user's answer in `note`. If nothing changed, call
+it with unchanged=true.
+
+Args:
+    unchanged: True only when the user says nothing was added, dropped or
+        replaced since the period started.
+    note: The user's answer in their own words. Required when unchanged is
+        false — a change with no account of it is a hole in the record.
 
 ## `confirm_tsc`
 
@@ -532,6 +561,13 @@ Args:
         (1 means a single developer maintains the codebase). Leave 0 if unknown.
         This selects the change-management and review controls that fit the
         organization's real structure.
+    pen_test_program: "yes" or "no" — does the organization run a penetration
+        testing program (periodic pen tests by a qualified party)? ASK THIS
+        EXPLICITLY. "no" is a normal answer, not a gap: SOC 2 does not require
+        a penetration test, and with "no" the penetration testing control is
+        simply out of scope. Independent evaluation of controls is still
+        tested (a pen test is one way to satisfy it, not the only way).
+        Leave "" only if the client could not answer.
     prior_soc2: Only when the company is TRANSITIONING from another firm.
         Facts read from their most recent SOC 2 report (their file, read
         locally — we never receive it), as a dict:
@@ -592,11 +628,22 @@ is an independent examination: it never depends on the readiness meter,
 collected evidence carries over, and anything genuinely not in place when
 examined appears as an exception in the report.
 
-Type II window: after a bundled Type I delivers, this same tool starts
-the Type II observation window (the remaining bundle fee bills in two
+Type II window: after a bundled Type I delivers, this same tool starts the
+Type II observation window (the remaining bundle fee bills in two
 installments, the first no earlier than seven days after the client's
-notice). start_date: an ISO date (YYYY-MM-DD) IN THE FUTURE schedules the
-window start instead of starting now — forward-only, never a past date.
+notice). start_date is REQUIRED for a window and is the user's decision to
+make — ask them, never assume. A future date schedules the start; today
+starts now; a date already past is accepted, as long as the period has not
+already ended. Nothing is collected at the start of a window: evidence
+collection happens in two phases, the first opening three weeks before the
+period ends and the second the day after it closes.
+
+Args:
+    confirm_start: Set only after the user has seen the amounts and said
+        yes.
+    confirm_start_early: Set only after the user confirms starting before
+        readiness is complete.
+    start_date: The first day of the observation period, YYYY-MM-DD.
 
 ## `start_engagement`
 
@@ -743,10 +790,6 @@ Args:
         write-up). If such a record is dated today, it has no operating
         history — we don't block it, we flag it for review. (A policy you
         just created today is fine; you don't need a date for it.)
-    snapshot: Type II observation windows only. Pass "opening" when this
-        artifact is part of the opening configuration snapshot — the
-        config state of an in-scope system captured when the window
-        starts. Leave empty for all other evidence.
 
 ## `submit_note`
 
@@ -836,9 +879,6 @@ Args:
     policy: JSON object of parameters from the entity's OWN documented
         policy, with policy_basis naming the document. Defaults are strict:
         an undeclared exception does not exist.
-    segment_start: Optional ISO timestamp — only for a checkpoint pull that
-        covers part of the window rather than all of it.
-    segment_end: Optional ISO timestamp, as above.
 
 ## `undo_delegate`
 

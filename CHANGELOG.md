@@ -5,6 +5,29 @@ applied to an examination. Corrections that do not change the method (typos,
 formatting, clearer wording with the same meaning) ship without a version, and
 the commit history on this repo records every one of them.
 
+## v1.3, 2026-08-11
+
+When evidence is collected. The method page has always said a population is
+all occurrences over the observation window; this release pins the collection
+timing that makes the sentence literally true, recorded here before it is
+applied to an examination.
+
+- Collection happens in two phases, split by evidence type. Configuration
+  state, policies, and rosters are captured while the period is still open,
+  inside its final three weeks, each with the exact moment of observation.
+  Every event population is collected after the period closes, because a
+  list of everything that happened is only complete once the period has
+  ended.
+- The stretch between a configuration observation and the period's close is
+  carried by the system's own change record, pulled complete after the
+  close. The report states the date the state was inspected and the interval
+  the change record covers.
+- The tooling enforces the split with exactly two refusals: an event
+  population offered early, and a configuration capture offered after the
+  close. Nothing is refused for lateness; the one thing that decays while
+  collection drifts is the client's own log retention, and what can no
+  longer be produced is disclosed.
+
 ## v1.2, 2026-08-06
 
 The census language pass. The method page has said since first publication

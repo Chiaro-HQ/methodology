@@ -59,6 +59,48 @@ number with evidence behind it. A control whose population is genuinely empty
 for the period is reported as not occurring, which is distinct from
 operating effectively, and distinct from failing.
 
+## When evidence is collected
+
+Everything above assumes the population really is the period's population,
+which makes timing part of the method rather than a logistics detail. Two
+facts pull in opposite directions:
+
+- A list of everything that happened is only complete once the period has
+  closed. Pulled earlier, it is incomplete by construction, and it looks
+  exactly like a complete one.
+- A configuration setting can only be captured while the period is open. A
+  setting read in November says nothing about September.
+
+So collection happens in two phases, split by evidence type:
+
+1. **While the period is open, inside its final three weeks:** the policies,
+   the current configuration state of every in-scope system, and the rosters
+   (people, accounts, vendors), each captured with the exact moment of the
+   observation. State is a claim about a moment, and the moment is part of
+   the evidence.
+2. **After the period closes, in the two weeks that follow:** every
+   population. Changes, joiners and leavers, tickets, access reviews, and
+   the registers that are usually empty. Waiting for the close is what makes
+   "all occurrences over the observation window" literally true rather than
+   approximately true.
+
+The configuration observation sits inside the period rather than at its end,
+so the stretch between the observation and the close is carried the same way
+as the stretch before it: by the system's own change record, pulled complete
+after the close. One observation plus a complete change record is state over
+the period. The report states the date the state was inspected and the
+interval the change record covers, so a reader never has to infer either.
+
+The split is enforced by the tooling, not requested politely. Exactly two
+refusals exist: an event population offered before the period closes is
+refused, with the date it opens; a configuration capture offered after the
+close is refused, with the day the period ended, because accepting it would
+put November state behind a September conclusion. Nothing else is refused,
+and nothing is refused for lateness: a late client still gets their report.
+The one thing that decays while collection drifts is the client's own log
+retention, and what can no longer be produced is disclosed rather than
+papered over.
+
 ## How a census is evaluated
 
 Testing everything is only credible if the per-item check is reliable, so the
@@ -276,3 +318,11 @@ not audit sampling.
 Any change to this method, and the reason for it, is published here before it
 is applied to an examination. A rule that predates the engagement it governs is
 easier to trust than one written after it.
+
+**2026-08-11: added "When evidence is collected."** The method already said
+what a complete population is; that section pins when one can exist. The
+reason: an earlier draft of our tooling collected everything in a single
+round before the period ended, which would have left the final weeks of
+every population resting on a written representation instead of records.
+Records after the close and state while the period is open is the shape that
+makes the census claims on this page hold.

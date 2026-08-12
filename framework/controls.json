@@ -2752,7 +2752,10 @@
       }
     },
     "sample_eligible": false,
-    "typically_na_for": []
+    "typically_na_for": [],
+    "applicability": {
+      "condition": "pen_test_program"
+    }
   },
   "VUL-04": {
     "title": "Dependency & Platform Update Management",
@@ -4196,7 +4199,7 @@
       ],
       "documents": [
         "Vulnerability Scanner (Qualys / Nessus / etc.)",
-        "Penetration Test Report",
+        "Independent Assessment Report (pen test, cloud security review, or third-party assessment)",
         "Deficiency & Issue Tracking"
       ],
       "evidence_commands": [
