@@ -61,6 +61,16 @@
   },
   {
     "control": "GOV-02",
+    "attribute": "A1",
+    "evidence_summary": "A one-person company submits a one-page governance note stating that the founder is the governance body responsible for security and internal control, naming an outside advisor who receives a written security and compliance update each quarter, and listing what the update covers; there is no board and no charter document.",
+    "ai_verdict": "gap",
+    "correct_verdict": "pass",
+    "reasoning": "A governance document at the size of one person is the note that names who governs, what they oversee, and who outside day-to-day work is kept informed; the attribute asks for a document that identifies the body and its responsibilities, and a charter is one form of that, not the only one. The flag for a single founder without a charter is answered when the founder writes the structure down and names the outside recipient.",
+    "weight": 0.5,
+    "source": "synthetic_taste_v1"
+  },
+  {
+    "control": "GOV-02",
     "attribute": "A2",
     "evidence_summary": "No board bios exist, but the signed advisor engagement letter names an external security advisor and describes 15 years of information-security consulting experience.",
     "ai_verdict": "gap",
@@ -81,6 +91,26 @@
   },
   {
     "control": "GOV-02",
+    "attribute": "A3",
+    "evidence_summary": "A solo founder's signed advisory agreement names an outside advisor with no operational role who receives the quarterly security update and is consulted on material security decisions; the governance note lists the founder and that advisor as the governance body.",
+    "ai_verdict": "gap",
+    "correct_verdict": "pass",
+    "reasoning": "Independence is about whether someone outside day-to-day management is part of the oversight structure, and a named outside advisor with a written role is exactly that person. The attribute accepts an external advisor on its face; the document type is the advisory agreement plus the governance note rather than a board roster, and judging the substance passes it.",
+    "weight": 0.5,
+    "source": "synthetic_taste_v1"
+  },
+  {
+    "control": "GOV-02",
+    "attribute": "A3",
+    "evidence_summary": "A solo founder states that they 'run decisions past a couple of investor friends when something comes up'; no person is named in any document, no update has been written, and the governance note lists only the founder.",
+    "ai_verdict": "pass",
+    "correct_verdict": "gap",
+    "reasoning": "An unnamed person who is sometimes consulted is not a member of the governance structure, and the attribute asks for a named member independent of day-to-day management. The proportionate answer for a company of one is one named outside person with a written update cadence; until someone is named and the first update is written, the independence element is missing, and the flag for a very small entity stays for CPA review rather than resolving to a pass.",
+    "weight": 0.5,
+    "source": "synthetic_taste_v1"
+  },
+  {
+    "control": "GOV-02",
     "attribute": "A4",
     "evidence_summary": "Company founded nine months ago; no board or governance meetings have occurred yet because the first quarterly cycle is not due for three more months.",
     "ai_verdict": "gap",
@@ -91,11 +121,31 @@
   },
   {
     "control": "GOV-02",
+    "attribute": "A4",
+    "evidence_summary": "A one-person company holds no meetings. The most recent quarterly written update from the founder to the outside advisor covers open security risks, a completed access review, and a vendor change, and the advisor's dated reply asks two questions the founder answered in the same thread.",
+    "ai_verdict": "gap",
+    "correct_verdict": "pass",
+    "reasoning": "For a company of one the governance meeting is the written update and the exchange it produces, so the thread is the agenda and the minutes. The attribute asks whether security topics were on the most recent governance occasion, and the update carries them; requiring a sit-down meeting between the founder and themself would test a form the entity cannot produce.",
+    "weight": 0.5,
+    "source": "synthetic_taste_v1"
+  },
+  {
+    "control": "GOV-02",
     "attribute": "A5",
     "evidence_summary": "Quarterly board minutes list 'Security update' as a 20-minute agenda item and note it was discussed, but record no specific decision, no named action item, and no reference to prior action-item status.",
     "ai_verdict": "pass",
     "correct_verdict": "gap",
     "reasoning": "A record that shows a topic was discussed is not the same as one that shows decisions and tracked action items, and the two must not be conflated. Topic coverage alone does not satisfy A5's separate requirement for documented decisions, assignments, and follow-up on prior items.",
+    "weight": 0.5,
+    "source": "synthetic_taste_v1"
+  },
+  {
+    "control": "GOV-02",
+    "attribute": "A5",
+    "evidence_summary": "The solo founder's quarterly update to the outside advisor ends with a short list of decisions taken and open items with owners and dates, and the next quarter's update opens by reporting the status of each prior item.",
+    "ai_verdict": "gap",
+    "correct_verdict": "pass",
+    "reasoning": "Decisions, action items, and follow-up on prior items are the substance the attribute tests, and a written update that records them and reports on them next time satisfies it regardless of whether the record is titled minutes. The proportionate form for a company of one is the update thread, and this one carries all three elements.",
     "weight": 0.5,
     "source": "synthetic_taste_v1"
   },
@@ -4736,6 +4786,16 @@
     "ai_verdict": "gap",
     "correct_verdict": "pass",
     "reasoning": "Judge small companies against a proportional minimum design, not against a formal charter or distribution-list infrastructure. A recurring documented email thread to a non-engineering co-founder satisfies the independent-recipient requirement at this company's size.",
+    "weight": 0.5,
+    "source": "synthetic_taste_v1"
+  },
+  {
+    "control": "GOV-04",
+    "attribute": "A1",
+    "evidence_summary": "A solo founder who writes all the production code names an outside advisor, who holds no role in the company's systems, as the recipient of a quarterly security and compliance update; the advisory agreement and the dated email thread over the past year show the updates were sent and read.",
+    "ai_verdict": "gap",
+    "correct_verdict": "pass",
+    "reasoning": "The attribute asks for a specific person or body outside day-to-day engineering who receives security information, and the note under the pass criteria already lists an external advisor or an investor for a very small company. A named advisor with a written cadence and a thread proving receipt is the proportionate design for a company of one; the absence of a non-technical co-founder or board is not a gap when that outside recipient exists.",
     "weight": 0.5,
     "source": "synthetic_taste_v1"
   },

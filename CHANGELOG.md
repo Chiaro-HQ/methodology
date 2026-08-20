@@ -5,6 +5,23 @@ applied to an examination. Corrections that do not change the method (typos,
 formatting, clearer wording with the same meaning) ship without a version, and
 the commit history on this repo records every one of them.
 
+## v1.6, 2026-08-20
+
+Governance for a company of one.
+
+- Six worked calibration examples on GOV-02 and GOV-04 record how a
+  one-person company meets the oversight criterion: the founder is the
+  governance body, and one named person outside day-to-day work (an advisor,
+  an investor, a mentor, a fractional security lead) receives a written
+  security and compliance update each quarter. The update thread is the
+  agenda, the minutes, and the record of decisions and follow-up.
+- One of the six fails: a founder who sometimes consults unnamed investor
+  friends, with nobody named in any document and no update ever written. The
+  independence element is a named person and a written cadence; until both
+  exist the flag for a very small entity stays for CPA review.
+- No pass criteria change. Nothing here passes the independence check with no
+  outside person. The diff is in this repository.
+
 ## v1.5, 2026-08-20
 
 Calibration for a company of one.
