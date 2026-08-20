@@ -42,7 +42,7 @@ anyone is reading this.
 
 ## The calibration examples
 
-The attributes carry 532 worked examples of a
+The attributes carry 546 worked examples of a
 judgment call between them, each recording a verdict an AI reached, the verdict
 that was correct, and why. They exist to calibrate judgment, and they are the part of this
 repository we would least like a competitor to have.
@@ -58,8 +58,8 @@ What is published here is the lesson: the distinction being drawn and the
 reasoning behind it. The companies, systems, numbers and people in the scenarios
 are not real and are not any client of ours.
 
-**Which way do they push?** 319 of them correct an AI that was too strict,
-and 213 correct one that was too lenient. We are publishing that ratio
+**Which way do they push?** 332 of them correct an AI that was too strict,
+and 214 correct one that was too lenient. We are publishing that ratio
 because anyone with the file can compute it, and because the honest reading is
 not flattering by default: an auditor whose examples mostly teach "that is fine
 actually" is exactly what the industry should be suspicious of after 2025.

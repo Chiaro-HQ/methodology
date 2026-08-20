@@ -5,6 +5,34 @@ applied to an examination. Corrections that do not change the method (typos,
 formatting, clearer wording with the same meaning) ship without a version, and
 the commit history on this repo records every one of them.
 
+## v1.5, 2026-08-20
+
+Calibration for a company of one.
+
+- Fourteen worked calibration examples across thirteen checks record how a
+  one-person company meets controls that are usually written for a team:
+  background checks with no hires yet, a founder's own role description and
+  dated annual self-review, a named backup with runbooks for continuity,
+  provisioning and offboarding where the only events are a contractor's,
+  privileged access a founder grants themself with a dated justification, one
+  owner account plus scoped service accounts as role-based access, a solo
+  developer's emergency-change and architecture-review records, separation of
+  duties evaluated as infeasible with the compensating controls named, a
+  vendor's accepted standard terms as the contract's security clauses, and an
+  independent advisor's written annual review as an independent evaluation
+  instrument.
+- One of the fourteen fails: a continuity plan that lives only in a spoken
+  arrangement.
+- No pass criteria change. The examples add pass paths at the size of one
+  person; they do not remove a requirement. The diff is in this repository.
+- [method/tools.md](method/tools.md) catches up with three tools the server
+  has exposed since 2026-08-13: one that asks how else a security setting could
+  be changed outside the normal process (bypass routes), one that records what
+  the report assumes the client's customers and cloud providers do
+  (complementary controls), and one that records the SOC 2 reports held for
+  subservice organizations. EVL-01/A3's typical-evidence line now lists the
+  instruments the independent-evaluation page describes.
+
 ## v1.4, 2026-08-12
 
 Independent evaluation, and the penetration testing question.

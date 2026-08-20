@@ -887,6 +887,14 @@
             "reasoning": "A live vendor-portal screenshot is system evidence regardless of how it was labeled at submission. It directly shows a completed check dated before the start date, which is exactly what A4 requires.",
             "weight": 0.5,
             "source": "synthetic_taste_v1"
+          },
+          {
+            "evidence_summary": "A one-person company has an adopted background check policy covering future employees and contractors and has made no hires since founding; there is no background check report on file because there has been nobody to check.",
+            "ai_verdict": "gap",
+            "correct_verdict": "pass",
+            "reasoning": "Zero hires is zero events, not a missing practice. The attribute tests a practice and the most recent new hire, and when no hire has occurred the defined practice is the control and the population is tested the first time someone joins. A one-person company is not absent on a control whose only trigger has not happened.",
+            "weight": 0.5,
+            "source": "synthetic_taste_v1"
           }
         ],
         "collection_hint": {
@@ -985,6 +993,14 @@
             "ai_verdict": "gap",
             "correct_verdict": "pass",
             "reasoning": "The attribute tests whether responsibilities for key roles are documented, not whether they live in a file literally titled 'job description.' A handbook section that describes the same content for the security-relevant roles satisfies A1.",
+            "weight": 0.5,
+            "source": "synthetic_taste_v1"
+          },
+          {
+            "evidence_summary": "A solo founder submits a one-page role description for the founder position listing production-access duties, the security responsibilities they hold, and the competencies the role requires; there are no other roles in the company.",
+            "ai_verdict": "gap",
+            "correct_verdict": "pass",
+            "reasoning": "Key roles are documented when the one role that exists is described. A company of one has exactly one security-relevant role, and a current role description for it satisfies the attribute; demanding a set of job descriptions for positions that do not exist imports headcount the entity does not have.",
             "weight": 0.5,
             "source": "synthetic_taste_v1"
           }
@@ -1393,6 +1409,14 @@
             "reasoning": "Solo/young-entity proportionality applies literally here: the pass criteria explicitly allow a pass when the entity is under twelve months old and the review cycle is not yet due. Failing a company for not yet doing something not yet required is a false gap.",
             "weight": 0.5,
             "source": "synthetic_taste_v1"
+          },
+          {
+            "evidence_summary": "Solo founder, company two years old, stated review cadence annual. The founder submits a dated one-page self-review against the security responsibilities in their role description, completed within the last twelve months, with two follow-up items and their status.",
+            "ai_verdict": "gap",
+            "correct_verdict": "pass",
+            "reasoning": "A performance evaluation practice at the size of one person is a dated self-review against written responsibilities. The attribute asks whether evaluations are completed within the defined cycle, and a founder who documents one against defined criteria meets it; there is no manager to perform it and the criterion does not require one.",
+            "weight": 0.5,
+            "source": "synthetic_taste_v1"
           }
         ],
         "collection_hint": {
@@ -1537,6 +1561,22 @@
             "ai_verdict": "pass",
             "correct_verdict": "gap",
             "reasoning": "Verbal confirmation is never evidence of a documented control. Continuity measures must leave an artifact, cross-training notes, a runbook, or a named-successor record, a verbal claim of informal knowledge transfer with nothing written down does not meet the documentation bar.",
+            "weight": 0.5,
+            "source": "synthetic_taste_v1"
+          },
+          {
+            "evidence_summary": "A solo founder identifies themself as the key person for every function and states that a friend 'knows the passwords' if anything happens; no runbook exists and no document names the backup or how that person would reach the systems.",
+            "ai_verdict": "pass",
+            "correct_verdict": "gap",
+            "reasoning": "Continuity for a company of one is the control that matters most, and a verbal arrangement leaves nothing another person could follow. The attribute needs at least one documented continuity measure per dependency: a runbook, a named backup with a written way to reach the systems, or both. An unwritten understanding is zero documented measures.",
+            "weight": 0.5,
+            "source": "synthetic_taste_v1"
+          },
+          {
+            "evidence_summary": "A solo founder's continuity note names a trusted engineer as backup, describes an emergency access arrangement held outside the founder's own accounts, and links to runbooks for deploy, restore, and customer communication; the backup has never been needed.",
+            "ai_verdict": "gap",
+            "correct_verdict": "pass",
+            "reasoning": "Judge the measure against proportional form: a named backup with a written access path and followable runbooks is a documented continuity measure for a one-person company. The attribute asks for documentation per dependency, not a succession plan sized for a large organization, and it does not require the backup to have been exercised.",
             "weight": 0.5,
             "source": "synthetic_taste_v1"
           }
@@ -3081,6 +3121,14 @@
             "reasoning": "Compensating controls are a legitimate pass path at design stage: for a very small team, a documented, real second-person review of access changes stands in for formal separation of duties. Pass explicitly on this compensating basis, not by waiving the requirement.",
             "weight": 0.5,
             "source": "synthetic_taste_v1"
+          },
+          {
+            "evidence_summary": "A one-person company's risk register has a fraud row stating that separation of duties is not achievable with one person and lists the compensating controls it relies on instead: enforced branch protection, audit logs the founder cannot edit, MFA on every account, and a quarterly written security update to an outside advisor.",
+            "ai_verdict": "gap",
+            "correct_verdict": "pass",
+            "reasoning": "The attribute asks that separation of critical functions be evaluated as a fraud measure, and a written conclusion that it is infeasible plus the named compensating controls is that evaluation. An evaluation can end in 'not possible here, so we rely on these instead'; what fails is silence on the question.",
+            "weight": 0.5,
+            "source": "synthetic_taste_v1"
           }
         ],
         "collection_hint": {
@@ -3928,6 +3976,14 @@
             "reasoning": "An approval step existing is not the same as an authorized approval. The criteria require approval from a manager or system owner distinct from the requester, and a matching requester and approver identity is self-approval, which is a gap regardless of the presence of an approval field.",
             "weight": 0.5,
             "source": "synthetic_taste_v1"
+          },
+          {
+            "evidence_summary": "Solo founder with one contractor. The only provisioning event in the period is the contractor's repository and staging access: the contractor requested it in a message thread, the founder approved it in the same thread before granting it, and the procedure names the founder as the approver for every grant to another person.",
+            "ai_verdict": "gap",
+            "correct_verdict": "pass",
+            "reasoning": "Requester and approver are different people here, so the event passes on its own terms. A one-person company's procedure names the founder as the authorized approver for any access granted to someone else, which is a defined approver role; the founder's own owner accounts exist because the founder created the systems and are inventoried under privileged access, not requested and approved as provisioning events.",
+            "weight": 0.5,
+            "source": "synthetic_taste_v1"
           }
         ],
         "collection_hint": {
@@ -4102,6 +4158,14 @@
             "ai_verdict": "gap",
             "correct_verdict": "pass",
             "reasoning": "Judge against the entity's own documented timeframe, not an assumed industry norm such as same-day removal. Removal within the client's defined 3-business-day window satisfies the attribute even though it is not instantaneous.",
+            "weight": 0.5,
+            "source": "synthetic_taste_v1"
+          },
+          {
+            "evidence_summary": "A one-person company's offboarding procedure sets a same-day removal window. Nobody has been employed and left since founding; the one departure is a contractor whose repository and staging access was removed the day the engagement ended, shown by the repository's own access log.",
+            "ai_verdict": "gap",
+            "correct_verdict": "pass",
+            "reasoning": "The population is every person whose access ended, and here that is one contractor, removed inside the stated window with the system's own log as proof, which passes. A solo founder who has not left their own company is not a termination, and zero employee terminations is zero events rather than a gap.",
             "weight": 0.5,
             "source": "synthetic_taste_v1"
           }
@@ -4659,6 +4723,14 @@
             "reasoning": "A client-authored spreadsheet is not system proof for a configuration claim. This attribute tests actual IdP assignment structure, which requires a system export or screenshot corroborating the stated percentage, not a self-reported figure.",
             "weight": 0.5,
             "source": "synthetic_taste_v1"
+          },
+          {
+            "evidence_summary": "A one-person company: the identity provider and each in-scope system show a single human account holding the owner or administrator role, and three service accounts each scoped to a named function; there are no group assignments because there is nobody to group.",
+            "ai_verdict": "gap",
+            "correct_verdict": "pass",
+            "reasoning": "Role based assignment at the size of one user is a defined role held by the one account plus function-scoped service accounts, not a group structure with one member. The attribute fails access that is primarily ungoverned individual grants, and an owner role with scoped service accounts is the opposite of that; do not import a fleet expectation onto one person.",
+            "weight": 0.5,
+            "source": "synthetic_taste_v1"
           }
         ],
         "collection_hint": {
@@ -4795,6 +4867,14 @@
             "ai_verdict": "pass",
             "correct_verdict": "gap",
             "reasoning": "Verbal confirmation is never a substitute for documented authorization. Each privileged user needs an actual retrievable authorization artifact, not a general assurance given in conversation.",
+            "weight": 0.5,
+            "source": "synthetic_taste_v1"
+          },
+          {
+            "evidence_summary": "A solo founder holds the administrator or owner role on every in-scope system. The privileged access inventory names the founder for each system with the justification 'sole operator and account owner', dated and kept with the quarterly access review; no approval ticket exists because there is nobody else to approve.",
+            "ai_verdict": "gap",
+            "correct_verdict": "pass",
+            "reasoning": "Authorization for a company of one is a documented record, and the founder's dated written justification for each privileged role is that record. The attribute asks for a documented authorization and a business need per privileged user, which a dated inventory entry naming the role and the reason supplies; an approval ticket from a second person is a form the entity cannot produce and the criterion does not demand.",
             "weight": 0.5,
             "source": "synthetic_taste_v1"
           }
@@ -8414,6 +8494,14 @@
             "reasoning": "A client-typed record that an approval happened is not the approval itself, and the artifact has to come from wherever approvals are actually captured. The line carries an approver name and a date and so looks responsive on its face, but nothing independent of the client's own typing shows the named approver ever reviewed the change.",
             "weight": 0.5,
             "source": "synthetic_taste_v1"
+          },
+          {
+            "evidence_summary": "A solo developer's change procedure defines emergency changes and requires a dated retroactive note. The one hotfix in the period has a same-day entry in the change log naming the founder as approver, the reason for bypassing the normal path, and the time; no second person exists to approve it.",
+            "ai_verdict": "gap",
+            "correct_verdict": "pass",
+            "reasoning": "Retroactive approval at the size of one developer is a dated, attributable record that the expedited path was used knowingly, and the entry supplies the approver name and date the attribute asks for. The attribute does not demand a second approver; it demands that emergency changes are documented after the fact rather than disappearing.",
+            "weight": 0.5,
+            "source": "synthetic_taste_v1"
           }
         ],
         "collection_hint": {
@@ -8836,6 +8924,14 @@
             "ai_verdict": "pass",
             "correct_verdict": "gap",
             "reasoning": "A security review that follows deployment does not satisfy a criterion that requires the review to precede it. The quality of the review is not what is being tested here, its position in the sequence is, and a review dated nine days after go-live cannot have informed the decision to deploy.",
+            "weight": 0.5,
+            "source": "synthetic_taste_v1"
+          },
+          {
+            "evidence_summary": "Solo developer. The most recent architecture change moved file storage to a new object store; the founder's dated checklist entry covering access, data protection, and network exposure is dated three days before the deployment record for the same change.",
+            "ai_verdict": "gap",
+            "correct_verdict": "pass",
+            "reasoning": "The attribute tests that a security review happened before deployment, not who else was in the room. A one-person company's review is the founder working the defined checklist and dating it; the sequence is what is being tested, and here it precedes go-live.",
             "weight": 0.5,
             "source": "synthetic_taste_v1"
           }
@@ -9597,6 +9693,14 @@
             "reasoning": "A client-authored spreadsheet is not system proof of a contract's contents. The attribute requires the actual contract or MSA text showing the security clause, not a self-reported tracker entry.",
             "weight": 0.5,
             "source": "synthetic_taste_v1"
+          },
+          {
+            "evidence_summary": "A solo founder's vendors are all self-serve SaaS on the vendors' standard terms. For the most recently added critical vendor the founder filed the vendor's published data processing addendum and security terms, saved as dated PDFs under the vendor record, as the agreement the company accepted at signup.",
+            "ai_verdict": "gap",
+            "correct_verdict": "pass",
+            "reasoning": "Security requirements in a vendor contract can be the vendor's own standard terms when that is the contract the entity accepted; the clauses exist and bind the vendor. The attribute asks for clauses specifying security requirements in the most recent contract, and a filed copy of the accepted addendum and security terms is that contract's text, not a self-reported tracker entry.",
+            "weight": 0.5,
+            "source": "synthetic_taste_v1"
           }
         ],
         "collection_hint": {
@@ -10091,7 +10195,7 @@
         "id": "A3",
         "text": "Independent evaluation performed within the last year",
         "attr_type": "document",
-        "typical_evidence": "Internal audit report, third-party assessment, cloud security review, or other independent control evaluation report",
+        "typical_evidence": "Penetration test report, partner-led cloud security review, third-party or consultant assessment, an enterprise customer's security review of the company, a completed prior examination report, independent certification, or internal audit report",
         "pass_criteria": "PASS: An independent evaluation (internal audit, third-party assessment, or external auditor) of controls was performed within the last 12 months, by a party not responsible for the controls evaluated. FAIL: No independent evaluation within the last 12 months, or evaluation was performed by the same team responsible for the controls.",
         "na_condition": "",
         "can_be_na": false,
@@ -10143,6 +10247,14 @@
             "reasoning": "The provider operates the controls it reviewed, so it is responsible for them and cannot independently evaluate them. Independence is about operational responsibility, not about being a separate legal entity.",
             "weight": 0.5,
             "source": "p07_instruments_v1"
+          },
+          {
+            "evidence_summary": "A solo founder submits a written annual review of the company's controls performed by a technical advisor with a documented security background who holds advisory equity, operates none of the systems, and signed a dated report listing what was examined, three findings, and the founder's written responses.",
+            "ai_verdict": "gap",
+            "correct_verdict": "pass",
+            "reasoning": "Independence attaches to responsibility for the controls, not to the absence of any relationship, so an advisor who neither builds nor operates the systems can evaluate them. The report carries a named party, scope, dated findings, and a management response, which is the bar; weight it below a third-party assessment and record the competence basis in the file.",
+            "weight": 0.5,
+            "source": "synthetic_taste_v1"
           }
         ],
         "collection_hint": {

@@ -12,7 +12,7 @@ software as much as by people. This page is the map.
   pass criteria in a point-in-time form (readiness, Type I) and an
   over-a-period form (Type II), typical evidence, and conditions where it
   does not apply.
-- `framework/calibration-examples.json`: 532 worked judgment calls in
+- `framework/calibration-examples.json`: 546 worked judgment calls in
   one flat file: the verdict an AI reached, the correct verdict, and why.
   These anchor how strict or lenient a judgment should be.
 - `framework/criteria.json` and `framework/evidence_map.json`: the Trust

@@ -121,8 +121,8 @@ into the right folder, submit_evidence.
 
 For subservice orgs (AWS at the platform level, Anthropic, Supabase,
 Stripe — all `infrastructure_dependency`):
-  - Light artifact requirement: SOC 2 status recorded via the
-    subservice-org scope flow (yes/no on `soc2_report_obtained`).
+  - Light artifact requirement: SOC 2 report status recorded with
+    record_subservice_soc2 (yes or no, per subservice org).
   - But the CLIENT's CONFIGURATION of those services IS in scope
     and drills like AWS IAM, S3 encryption, CloudTrail, Supabase
     RLS still need real artifacts when the relevant control areas
@@ -353,7 +353,7 @@ EXACT ORDER:
 
 1. Verify the folder has substantial content:
      macOS / Linux: find ~/Documents/chiaro-soc2 -type f | wc -l
-     Windows PowerShell: (Get-ChildItem -Recurse $HOME\\Documents\\chiaro-soc2 -File).Count
+     Windows PowerShell: (Get-ChildItem -Recurse $HOME\Documents\chiaro-soc2 -File).Count
    If under ~10 files, you haven't drilled enough. Loop back through
    Phase 2B before proceeding.
 
@@ -374,34 +374,40 @@ EXACT ORDER:
 4. Call complete_step. Engagement transitions to awaiting_upload.
    If it refuses, the response names what's still open — resolve each
    item (collect the artifact or mark_gap with a reason) and try again.
-   There is no way around this gate, and request_upload_link will not
-   mint a link until complete_step has passed.
+   There is no way around this gate.
 
-5. Call request_upload_link. The response contains:
-     - for_the_user.upload_url   (the link)
+   complete_step hands back everything the upload needs:
+     - for_the_user.upload_url   (the user's own Upload page)
      - data.open_commands        (per-OS commands: macos / linux /
                                   windows_powershell / windows_cmd)
 
-6. IMMEDIATELY open the URL in the user's default browser — pick the
-   open_commands entry that matches the user's actual platform and run
-   it with their approval. You MUST run this — do not just print the
-   URL.
+5. DO NOT mint a link. The user already has an Upload page in their
+   portal's left nav and they are already signed in there; a fresh
+   tokenized link only makes them retype the name and email we hold.
+   Open their Upload page in the user's default browser — pick the
+   open_commands entry that matches their actual platform and run it
+   with their approval.
 
-7. After the open command runs, give the user ONE clear close — collection
+   The one exception: if that page will not load, or they are not signed
+   in and cannot be right now, THEN call request_upload_link with
+   portal_upload_unavailable=true and open the link it returns. Do not
+   reach for it otherwise, and do not offer it unless the page fails.
+
+6. After the open command runs, give the user ONE clear close — collection
    is done, nothing for them to fix right now, here's what happens next.
    Keep it NEUTRAL: this is the evidence-gathering phase, not a verdict — do
    NOT present pass/fail counts, a gap tally, or a remediation scorecard here.
    The firm performs the audit and gets back to them.
    "That's everything we collect from your side — you're done, and there's
-    nothing for you to fix right now. Upload page is open in your browser:
-    drag chiaro-soc2-evidence-<date>.zip from your Downloads folder onto it.
-    Our audit team reviews everything and gets back to you with your results
-    (with a prioritized fix plan) in about 3 business days if no more
-    follow-up is needed."
+    nothing for you to fix right now. Your upload page is open in your
+    browser: drag chiaro-soc2-evidence-<date>.zip from your Downloads
+    folder onto it. Our audit team reviews everything and gets back to you
+    with your results (with a prioritized fix plan) in about 3 business
+    days if no more follow-up is needed."
 
 DO NOT verify the upload yourself, ask the user if they uploaded, or
 keep the session open waiting. The web page handles the file transfer
-and notifies the audit team automatically. Once you've opened the link,
+and notifies the audit team automatically. Once you've opened the page,
 the session is done.
 
 ══════════════════════════════════════════════════════════════════

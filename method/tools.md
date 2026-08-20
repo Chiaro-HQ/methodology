@@ -1,6 +1,6 @@
 # The tools
 
-The 43 tools a connected client's AI can call. Generated from the
+The 46 tools a connected client's AI can call. Generated from the
 live server, so this list is exactly what a client sees, including the
 descriptions the AI reads to decide what to do.
 
@@ -427,6 +427,77 @@ Args:
         per line.
     note: Anything the user said about the list (optional).
 
+## `record_bypass_routes`
+
+Ask how else a security setting could be changed, outside the normal process.
+
+Call it with NO arguments first. You get back four yes-or-no questions in
+plain English and the systems they are about. Ask the user each one, in your
+own words if that reads better, then call again with the keys they said YES
+to. "No" to all four is a real answer: pass none=true.
+
+Keep it conversational. The user is telling you how their systems actually
+work, not filling in a form, and nothing here is signed. If they mention a
+route you were not asked about, send it in `other` in their words. If they
+are unsure about one, treat that as a yes and say so in `other`.
+
+Why it matters, if the user asks: their report will state that every change
+to their security configuration was recorded in the system's own log. These
+answers bound that sentence to what is true, so nobody is asked to stand
+behind something neither of us can check.
+
+Args:
+    confirmed: The keys the user said YES to, from the four sent back. A
+        JSON array of strings, or comma separated.
+    other: Any route they described that the four questions did not cover,
+        in their own words. One per line or a JSON array.
+    none: Pass true when the user said no to all four and named nothing
+        else. Recorded as the answer, never inferred from an empty list.
+
+## `record_complementary_controls`
+
+Record what the report assumes the client's customers and cloud providers do.
+
+Call it with NO arguments first. You get back the criteria that are in
+scope, the subservice organizations recorded for this engagement, and a few
+examples of what other companies' descriptions say. Read the examples to the
+user as options and ask what is actually true of THEM, then call again with
+their answer.
+
+Two questions, and the report cannot be issued without both:
+
+  1. COMPLEMENTARY USER ENTITY CONTROLS. What does this company rely on its
+     own customers to do for the service to be secure? Managing the accounts
+     it issues them, removing access when their own people leave, telling
+     the company about suspected misuse. If the user says their customers
+     are relied on for nothing, that is a real answer: pass
+     no_user_entity_controls=true.
+  2. COMPLEMENTARY SUBSERVICE ORGANIZATION CONTROLS. For each organization
+     the description carves out (the cloud providers), what does this
+     company assume THEY do? Physical security of the data centers is the
+     usual one. If nothing is assumed of a particular organization, name it
+     in no_subservice_controls_for.
+
+These sentences go into the report as management's, so they must be the
+user's answer in the user's words. The examples are there to give the user
+something to react to; they are options, not our answer, and nothing is
+recorded until the user has chosen, changed or replaced them. Every row is
+keyed to a criterion because the report's tables are, and only criteria in
+this examination's scope can be used.
+
+Args:
+    user_entity_controls: What the company relies on its customers to do. A
+        JSON array of objects: [{"criteria": ["CC6.2"], "statement": "User
+        entities are responsible for ..."}].
+    subservice_controls: What it assumes of each carved-out organization. A
+        JSON array of objects, each naming which one: [{"organization":
+        "Amazon Web Services (AWS)", "criteria": ["CC6.4"], "statement":
+        "The subservice organization is responsible for ..."}].
+    no_user_entity_controls: Pass true when the user says their controls
+        assume nothing of their customers. Recorded as the answer.
+    no_subservice_controls_for: The organizations nothing is assumed of. A
+        JSON array of names, or one per line.
+
 ## `record_hipaa_intake`
 
 Record the HIPAA intake answers (asked when the HIPAA add-on is chosen).
@@ -518,6 +589,17 @@ Args:
         disclaimer rather than clean.
     file_note: Which file you read, for the record (e.g. "SOC 2 Type II
         report 2025, client's own copy, read locally").
+    saved_path: Where you saved their report inside the engagement's
+        evidence folder. Required on BOTH engagement types (readiness
+        included — the same local folder carries into the examination
+        later), because the folder is what gets handed over at the end
+        and the report that raised the assessed risk has to be in the
+        file. Nothing is uploaded when you pass this; it travels with
+        the rest of the evidence at handoff.
+    not_provided: Pass true INSTEAD of saved_path when the user cannot
+        produce the file at all. That is a recordable answer, not a
+        silence, and it goes in the file as one. Put what they described
+        in file_note.
 
 ## `record_questionnaire_answers`
 
@@ -564,19 +646,51 @@ Args:
     assessments: OPTIONAL batch — JSON list of objects with the fields above
         (max 10 per call; each item is gated individually).
 
+## `record_subservice_soc2`
+
+Record whether a subservice organization's SOC 2 report is on file.
+
+For each Critical Dependency in scope (AWS, Stripe, the cloud platforms we
+rely on), ask the user explicitly: "Do you have their most recent SOC 2
+report on file?" and record the answer here — yes OR no, either is a real
+answer. complete_step refuses the handoff while any subservice org's
+status is unrecorded, because "we never asked" must never read as "no
+report obtained".
+
+Args:
+    name: The system as it appears in scope (e.g. "AWS", "Stripe").
+    report_obtained: True if the vendor's SOC 2 report is on file
+        (save a copy into 05-subservice-evidence/ so it travels at
+        handoff); False if they do not have it — recorded honestly, the
+        audit team weighs reliance accordingly. Never guess: ask.
+    note: Optional context in the user's words ("reviewed it in March",
+        "requested from the vendor, not received yet").
+
 ## `request_upload_link`
 
-Generate the secure upload link the client uses to deliver their evidence folder.
+Mint an upload link for someone who cannot use their portal Upload page.
 
-Main engagement flow: call this AFTER evidence collection is complete
-(all areas terminal in get_progress). Returns a chiarohq.com URL. Tell
-the user to open it in a browser and drag the entire
-~/Documents/chiaro-soc2 folder onto the page.
+NOT the normal handoff. A client with an account uploads from their own
+portal: the Upload page in their left nav, where they are already signed
+in. Send them there. get_status and complete_step both hand you that URL
+and the zip commands, and a link minted for that person only makes them
+retype the identity we already hold.
 
-Contributor/delegate flow: available at ANY stage — a helper's upload is
-inbound evidence for their topics, not the engagement handoff. Save what
-they share into ~/Documents/chiaro-soc2/, zip it (data.zip_commands),
-open the link (data.open_commands), and they drag the zip in.
+Call this in two cases, and no others:
+
+  the portal page will not work for them — it does not load, or they are
+  not signed in and cannot be right now. Set
+  portal_upload_unavailable=true, which is also what lets the link be
+  minted before the handoff. Only set it after the user has actually told
+  you the page failed; do not set it to skip a step.
+
+  you are helping as a contributor or a delegate — a helper's upload is
+  inbound evidence for their topics rather than the engagement handoff, so
+  the link is their door at any stage and no flag is needed.
+
+Save what is being shared into ~/Documents/chiaro-soc2/, zip it
+(data.zip_commands), and the user drags the zip onto the page
+(data.open_commands opens it).
 
 The link is single-engagement, time-limited (default 90 days), and revocable.
 Each call creates a NEW link — if you need to re-issue (e.g., the user lost the
@@ -585,6 +699,8 @@ URL), call again and the prior link still works until revoked.
 Args:
     label: Optional human-readable label for the link
            (e.g., "Mock exam round 1"). Helps the audit team triage.
+    portal_upload_unavailable: The user told you their portal Upload page
+           will not work for them. Set only on their word.
 
 ## `reset_readiness`
 
@@ -659,6 +775,13 @@ Args:
         determination, not a security recommendation, and that their
         customer contracts can require a pen test even though the audit
         criteria do not. Leave "" only if the client could not answer.
+        The answer BRANCHES what you ask next, and the response returns
+        `independent_evaluation_hint` telling you which branch you are on:
+        yes means the same pen test report also answers the independent
+        evaluation check, so collect it once and skip the alternatives
+        question entirely; no means you ask what other independent
+        evaluation they already hold, by name. Do not ask the alternatives
+        question of a client who runs pen tests.
     prior_soc2: PREFER record_prior_report, which is the tool for this
         question on both engagement types: it reconciles their system list
         against ours, banks the exceptions as risk flags, and stops the
@@ -674,6 +797,12 @@ Args:
         our evidence — every applicable check is still self-assessed with
         the company's own real evidence. Omit for a first-time SOC 2; pass
         {"had_prior": false} to clear a mistakenly recorded transition.
+    intended_obs_months: The observation window the company PLANS if they
+        go for a Type II later — 3, 6 or 12. One friendly planning
+        question, no commitment: it only tunes the log-retention guidance
+        (retention must cover the window), nothing is gated on it, and it
+        is reconciled automatically when a real window is purchased.
+        Omit or 0 when unanswered; the guidance then assumes 12.
 
 ## `set_data_types`
 
@@ -975,6 +1104,16 @@ Args:
     policy: JSON object of parameters from the entity's OWN documented
         policy, with policy_basis naming the document. Defaults are strict:
         an undeclared exception does not exist.
+    source_evidence_ids: When the population's records are DOCUMENTS
+        rather than command output (review PDFs with signatures, meeting
+        minutes, restore-test write-ups): submit each source document via
+        submit_document FIRST, then cite the returned evidence ids here
+        (JSON list, or comma-separated). The rows are then an extraction
+        the reviewer can check against the papers instead of a
+        transcription with no basis, and source_command honestly
+        describes the manual extraction (e.g. "manual: transcribed from
+        the four quarterly access review PDFs"). Leave empty for a
+        command-pulled population.
 
 ## `undo_delegate`
 
