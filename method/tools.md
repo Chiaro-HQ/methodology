@@ -1,6 +1,6 @@
 # The tools
 
-The 46 tools a connected client's AI can call. Generated from the
+The 48 tools a connected client's AI can call. Generated from the
 live server, so this list is exactly what a client sees, including the
 descriptions the AI reads to decide what to do.
 
@@ -206,10 +206,23 @@ Args:
 Serve everything your AI needs to JUDGE and FIX one control/attribute.
 
 Returns the Bible's pass criteria, what auditors look for, typical evidence,
-applicability (when it is not applicable), calibration principles, the
+applicability (when it is not applicable), worked calibration examples
+(a situation, the call an AI would get wrong, the correct call, and WHY), the
 coverage checks, and remediation guidance. This is reference DATA — you (the
 client's AI) make the judgment and decide on fixes with the user; Chiaro
 renders no verdict.
+
+READ `calibration_examples` BEFORE YOU CALL THE ATTRIBUTE. Each one is a real
+judgment call that an AI got wrong: `evidence_summary` is the situation,
+`ai_verdict` is the wrong call, `correct_verdict` is the right one, and
+`reasoning` says why in general terms. They exist because these are the
+specific mistakes AIs make on this attribute — a document attribute passing on
+substance rather than on being a standalone file, an acknowledgment measured
+against the roster rather than against the acknowledgment system's own
+contents, a process that excludes contractors. If your read of the evidence
+matches an `ai_verdict`, that is the signal to look again, not to proceed.
+(The same examples are published in Chiaro's open methodology repository —
+nothing here is secret.)
 
 Args:
     control_ref: e.g. "IAM-02".
@@ -312,9 +325,28 @@ when your tool supports one) and the coverage checks for the deeper drill.
 Without an area, returns a high-level summary of all areas (do NOT show
 this to the user — use it for your own planning).
 
+★ CHECK WHAT YOU ALREADY HAVE BEFORE YOU COLLECT ANYTHING. In detail mode
+each attribute may carry:
+  evidence_on_file  — files already registered against this attribute on
+                      this engagement, with their path, lane and summary.
+                      On an audit these include everything readiness handed
+                      over. Do not go and fetch these again.
+  readiness_cited   — files the client pointed at in READINESS for an
+                      attribute whose checks are still open here. This is a
+                      POINTER, not coverage: it never advanced the checklist
+                      and it never will, because the audit's record is the
+                      audit's own. Read its `note` — it says whether the file
+                      clears the bar for what is open. Very often it does
+                      not: a written policy is not a record that the thing
+                      happened, and citing it again will not close the check.
+
 Args:
     area: The area to load (e.g., "Access Management", "Governance",
-          "Incident Response"). Required for normal flow.
+          "Incident Response"). Required for normal flow. A control
+          TITLE from get_progress / get_scoping_guidance (e.g.
+          "Information Asset Inventory") also works — it loads that
+          control's area. Every checklist entry carries its control_ref
+          for your submit_* calls (never speak it to the user).
     gating_only: Internal. Leave default.
 
 ## `mark_absent`
@@ -382,6 +414,33 @@ Args:
         quarterly access reviews but no review records exist"}]'. When the
         reason for a gap is that reality conflicts with a stated commitment,
         anchor it so /review surfaces the contradiction, not just the gap.
+
+## `reclassify_evidence`
+
+Correct the evidence_type label on a file you already submitted.
+
+Use this when a file was filed under the wrong KIND — most often a dated
+write-up of something that HAPPENED (an access-review record, a DR test
+log, a deficiency tracker with entries) filed as "document", which is the
+label for policies and plans saying what SHOULD happen. Do NOT re-submit
+the file: an identical file reuses the existing row, so the label would
+not change.
+
+The evidence lane is re-derived by the server from the corrected label
+plus the original submission's own signals — relabeling cannot make a
+spreadsheet a system pull. Checks the corrected lane satisfies are
+applied; nothing already satisfied is taken away, and the correction is
+recorded for the reviewer either way.
+
+Args:
+    evidence_id: The evidence id returned at submit time. The file's
+        sha256 or its saved path also work.
+    evidence_type: The corrected label — same vocabulary as
+        submit_evidence: "record" (a log, a ticket, a dated write-up of a
+        completed activity), "policy"/"procedure"/"plan"/"document",
+        "cli_output"/"config"/"api_response"/"scan" (raw command output),
+        "export", "screenshot".
+    why: One sentence: why the original label was wrong.
 
 ## `reclassify_system`
 
@@ -628,6 +687,13 @@ cited evidence from this engagement (or basis='attested' with the user's
 explicit confirmation), not_applicable is refused where the check always
 applies, and flipping a gap to pass needs newer evidence or correction=true.
 
+A pass also has to MEET THE CHECK'S OWN BAR. Every coverage check declares
+the strength of artifact it needs, and citing something weaker is refused
+with the bar named — a policy cannot close a check that asks for a record of
+something happening. Read `how_to_judge` in get_judgment_kit before you
+judge; it is the same standard the examination applies. When the artifact
+does not exist, record a gap and say why. A gap is a normal answer.
+
 Args:
     control_ref: e.g. "IAM-02".
     attribute_id: e.g. "A1".
@@ -665,6 +731,35 @@ Args:
         audit team weighs reliance accordingly. Never guess: ask.
     note: Optional context in the user's words ("reviewed it in March",
         "requested from the vendor, not received yet").
+
+## `report_problem`
+
+Tell the Chiaro team that something on this server looks broken.
+
+A refusal is usually an answer, not a bug. needs_input and needs_confirmation
+are questions for the user; wrong_phase, not_open_yet and locked name a state
+to wait for or a tool that moves it. Read the message and do what it names
+ONCE before you consider reporting.
+
+Call this when, and only when, one of these is true:
+  1. the SAME call failed TWICE with the same reason after you did what the
+     first refusal named;
+  2. a refusal sent you to a tool that then refused you back for the same
+     engagement, so there is no way forward;
+  3. a call succeeded but get_progress did not move, twice in a row, for the
+     same attributes;
+  4. you genuinely do not know what to do next, and get_status,
+     get_scope_summary and get_progress did not tell you.
+
+One report per problem. Then tell the user in one line that the team has
+been told, and carry on with the areas that still work. Do not tell the user
+to email us — this does that.
+
+Args:
+    summary: What is wrong, in a sentence or two. Plain language.
+    what_i_tried: The calls you made and what came back.
+    expected: What you expected to happen instead.
+    tool_names: The tools involved, e.g. ["load_area", "get_progress"].
 
 ## `request_upload_link`
 
@@ -921,6 +1016,14 @@ Args:
 ## `submit_document`
 
 Record that a policy/procedure/plan document has been saved locally.
+
+This tool files the artifact as a DOCUMENT — something written saying what
+SHOULD happen. A dated write-up of something that DID happen (a completed
+access review, a DR test with results, a deficiency tracker with entries)
+is a RECORD: submit it with submit_evidence and evidence_type="record"
+instead, or record-bar checks cannot count it. A wrong label is fixed with
+reclassify_evidence, never by re-submitting.
+
 REQUIRED FLOW:
 
   1. You (the AI) saved the real document to local_path under
@@ -999,8 +1102,29 @@ Args:
         Examples: "Okta admin > Reports > Users > Export 2026-05-15" or
         "aws iam get-credential-report --output json on prod 2026-05-15".
     source_system: Source system (e.g., "okta", "aws-production", "github").
-    evidence_type: Short label: "cli_output" / "config" / "api_response" /
-        "screenshot_note" / "verbal_description" / "export".
+    evidence_type: What KIND of artifact this is. State it — it decides how
+        strong the evidence counts as, and leaving it blank files the
+        artifact at the weaker end on purpose.
+          system pull  "cli_output" / "config" / "api_response" / "scan"
+                       (raw output of a command you actually ran — pair it
+                       with source_command and source_system)
+          export       "export"  (a file the system generated for you)
+          screenshot   "screenshot_note" / "ui"
+          document     "policy" / "procedure" / "plan" / "document"
+                       (a written document saying what SHOULD happen —
+                       submit_document is the better tool for these)
+          record       "record" — a log, a ticket, a signed form, or a
+                       dated write-up of a COMPLETED activity (an access
+                       review you performed, a DR test with its results,
+                       a deficiency tracker with entries). Proof that
+                       something HAPPENED is a record, never a document,
+                       even when it lives in a .md file — many checks
+                       demand record-strength proof and a "document"
+                       label cannot satisfy them. Fix a wrong label with
+                       reclassify_evidence; do not re-submit the file.
+        A spreadsheet or a Word file is never a system pull, whatever the
+        label says — save the command's raw output instead if that is what
+        you meant.
     sha256: SHA-256 hex digest of the saved file. Compute it right after
         saving (macOS/Linux: `shasum -a 256 <file>`; PowerShell:
         `Get-FileHash <file> -Algorithm SHA256`). At review we reconcile

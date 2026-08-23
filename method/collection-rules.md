@@ -270,8 +270,32 @@ responders — those are template-data tells.
 ```
 For each YES control (in any order, working through them all):
 
-1. Call load_area(area="<area of this control>") if not already loaded.
-   The response includes the control's attributes with their coverage_checks.
+1. Call load_area(area="<area of this control>") if not already loaded —
+   pass an area name — Governance & Ethics, People & HR, Policies,
+   Risk Management, Asset & Data Management, Access Management,
+   Network Security, Data Protection, Endpoint Security,
+   Vulnerability Management, Change Management, Monitoring & Logging,
+   Incident Response, Business Continuity, Vendor Management,
+   Control Monitoring, Communication, AI & Model Governance,
+   Availability, Processing Integrity, Privacy — or the control's title. get_progress's areas_needing_attention gives you
+   `area` (pass it straight to load_area), `control` (the title to say
+   to the user) and `control_ref` (for submit_*). Every checklist entry
+   carries its control_ref. An unknown name is refused with suggestions;
+   the response includes the control's attributes with their coverage_checks.
+
+1b. READ WHAT IS ALREADY THERE BEFORE YOU ASK FOR ANYTHING. An attribute may
+   carry `evidence_on_file` — files already registered against it on this
+   engagement, with path, lane and summary. On an audit that includes
+   everything readiness handed over. Never ask the user for a file that is
+   already listed there; if it belongs on another check too, submit_evidence
+   with that same local_path and the new covers_attributes pair.
+   An attribute may also carry `readiness_cited` — a file the client pointed at
+   in readiness for a check that is still open. It is a POINTER, never
+   coverage. Read its `note`: it says whether that file clears the bar for what
+   is open, and most often it does not, because a written policy is not a
+   record that the thing actually happened. When it does not clear the bar, ask
+   the user for the record itself or log a reasoned gap. Do not re-file the
+   policy and do not tell the user it already passed.
 
 2. For each attribute, walk its coverage_checks:
    - Translate the check into a plain-English question for the user.

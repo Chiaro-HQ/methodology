@@ -918,7 +918,7 @@
         "text": "For each new hire: background check was completed",
         "attr_type": "sample",
         "typical_evidence": "Background check completion certificates or provider portal records",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if a background check practice exists and the most recent new hire has a background check completion record with a completion date on or before their start date (or within the policy-defined window). FAIL if no background check practice exists or new hires start with no background check performed. TYPE II (over the period): PASS if every new hire in the period has a background check completion record dated on or before their start date (or within the policy-defined window); isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of background checks is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if a background check practice exists and the most recent new hire has a background check completion record with a completion date on or before their start date (or within the policy-defined window). If no new hires have occurred as of the test date, pass by default. FAIL if no background check practice exists or new hires start with no background check performed. TYPE II (over the period): PASS if every new hire in the period has a background check completion record dated on or before their start date (or within the policy-defined window), and pass by default where no new hires occurred in the period; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of background checks is a gap.",
         "na_condition": "",
         "can_be_na": false,
         "calibration_examples": [
@@ -974,7 +974,7 @@
         "text": "For each new hire: check scope met policy requirements",
         "attr_type": "sample",
         "typical_evidence": "Background check reports showing scope of checks performed",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if policy defines a minimum background check scope and the most recent background check report includes at least the check types defined as minimum scope (for example, criminal history, employment verification). FAIL if policy defines no minimum scope, or completed checks omit the required check types entirely. TYPE II (over the period): PASS if every background check report in the period includes at least the check types defined as minimum scope in policy; isolated misses in an otherwise working practice are an exception, not a gap; systematic omission of required check types is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if policy defines a minimum background check scope and the most recent background check report includes at least the check types defined as minimum scope (for example, criminal history, employment verification). If no new hires have occurred as of the test date, pass by default. FAIL if policy defines no minimum scope, or completed checks omit the required check types entirely. TYPE II (over the period): PASS if every background check report in the period includes at least the check types defined as minimum scope in policy, and pass by default where no new hires occurred in the period; isolated misses in an otherwise working practice are an exception, not a gap; systematic omission of required check types is a gap.",
         "na_condition": "",
         "can_be_na": false,
         "calibration_examples": [
@@ -2825,8 +2825,9 @@
             {
               "id": "assessment_is_recent",
               "question": "Was the assessment conducted within the last 12 months?",
-              "lane": "record",
+              "lane": "document",
               "alt_lanes": [
+                "record",
                 "export",
                 "screenshot"
               ],
@@ -3947,7 +3948,7 @@
         "text": "For each provisioning event: access request and approval are documented",
         "attr_type": "sample",
         "typical_evidence": "Ticketing system records, email approvals, or HRIS workflow showing access request and approval",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the most recent provisioning event has a documented access request and a documented approval, both with timestamps, and approval occurred before or on the same day access was granted. FAIL if the provisioning process produces no request records or no approval records at all. TYPE II (over the period): PASS if every provisioning event in the period has a timestamped request and a timestamped approval with approval on or before the grant date; an isolated event with a missing timestamp in an otherwise documented practice is an exception, not a gap; systematic absence of requests or approvals, or access routinely granted before approval, is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the most recent provisioning event has a documented access request and a documented approval, both with timestamps, and approval occurred before or on the same day access was granted. If no provisioning events have occurred as of the test date, pass by default. FAIL if the provisioning process produces no request records or no approval records at all. TYPE II (over the period): PASS if every provisioning event in the period has a timestamped request and a timestamped approval with approval on or before the grant date, and pass by default where no provisioning events occurred in the period; an isolated event with a missing timestamp in an otherwise documented practice is an exception, not a gap; systematic absence of requests or approvals, or access routinely granted before approval, is a gap.",
         "na_condition": "",
         "can_be_na": false,
         "calibration_examples": [
@@ -4007,7 +4008,7 @@
         "text": "For each provisioning event: approval is from an authorized approver (manager or system owner)",
         "attr_type": "sample",
         "typical_evidence": "Approval records showing approver identity and their authorization to approve",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the most recent provisioning event shows approval from a manager or system owner who is a different person than the requester, with no self approval. FAIL if the process permits self approval or defines no authorized approver role. TYPE II (over the period): PASS if every provisioning event in the period shows approval by a manager or system owner distinct from the requester; an isolated event routed to a valid alternate approver is an exception, not a gap; systematic self approval, or approval by someone who is not a manager or system owner, is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the most recent provisioning event shows approval from a manager or system owner who is a different person than the requester, with no self approval. If no provisioning events have occurred as of the test date, pass by default. FAIL if the process permits self approval or defines no authorized approver role. TYPE II (over the period): PASS if every provisioning event in the period shows approval by a manager or system owner distinct from the requester, and pass by default where no provisioning events occurred in the period; an isolated event routed to a valid alternate approver is an exception, not a gap; systematic self approval, or approval by someone who is not a manager or system owner, is a gap.",
         "na_condition": "",
         "can_be_na": false,
         "calibration_examples": [
@@ -4063,7 +4064,7 @@
         "text": "For each provisioning event: access granted matches the authorized request",
         "attr_type": "sample",
         "typical_evidence": "Comparison of approved access request against actual access provisioned in the system",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the most recent provisioning event shows the access actually granted matches the access specified in the approved request, with no additional roles, permissions, or systems beyond what was requested. FAIL if access is granted with no reference to an approved scope. TYPE II (over the period): PASS if every provisioning event in the period shows granted access matching the approved request; an isolated minor discrepancy later corrected in an otherwise controlled practice is an exception, not a gap; systematic granting of access beyond what was approved is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the most recent provisioning event shows the access actually granted matches the access specified in the approved request, with no additional roles, permissions, or systems beyond what was requested. If no provisioning events have occurred as of the test date, pass by default. FAIL if access is granted with no reference to an approved scope. TYPE II (over the period): PASS if every provisioning event in the period shows granted access matching the approved request, and pass by default where no provisioning events occurred in the period; an isolated minor discrepancy later corrected in an otherwise controlled practice is an exception, not a gap; systematic granting of access beyond what was approved is a gap.",
         "na_condition": "",
         "can_be_na": false,
         "calibration_examples": [
@@ -4191,7 +4192,7 @@
         "text": "For each termination: access removed within the defined timeframe",
         "attr_type": "sample",
         "typical_evidence": "IdP disable date compared to HR termination date for each terminated individual",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the most recent termination shows the identity provider account disabled or deleted within the policy defined timeframe of the human resources termination date, measured as the disable timestamp minus the termination date; if no policy window is defined, within 5 business days. FAIL if terminated individuals are not deprovisioned at all or no timeframe governs removal. TYPE II (over the period): PASS if every termination in the period shows access revoked within the defined timeframe; an isolated termination revoked slightly outside the window in an otherwise timely practice is an exception, not a gap; systematic revocation outside the timeframe is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the most recent termination shows the identity provider account disabled or deleted within the policy defined timeframe of the human resources termination date, measured as the disable timestamp minus the termination date; if no policy window is defined, within 5 business days. If no terminations have occurred as of the test date, pass by default. FAIL if terminated individuals are not deprovisioned at all or no timeframe governs removal. TYPE II (over the period): PASS if every termination in the period shows access revoked within the defined timeframe, and pass by default where no terminations occurred in the period; an isolated termination revoked slightly outside the window in an otherwise timely practice is an exception, not a gap; systematic revocation outside the timeframe is a gap.",
         "na_condition": "",
         "can_be_na": false,
         "calibration_examples": [
@@ -4247,7 +4248,7 @@
         "text": "For each termination: all in-scope system access is removed",
         "attr_type": "sample",
         "typical_evidence": "Access verification across all in-scope systems for each terminated individual",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the most recent terminated individual has zero active accounts across all in scope systems, including the identity provider, cloud consoles, code repositories, and business applications. FAIL if terminated individuals retain active access with no removal process. TYPE II (over the period): PASS if every terminated individual has no active accounts remaining on any in scope system; an isolated lingering account on a single system in an otherwise complete practice is an exception, not a gap; systematic retention of access after termination is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the most recent terminated individual has zero active accounts across all in scope systems, including the identity provider, cloud consoles, code repositories, and business applications. If no terminations have occurred as of the test date, pass by default. FAIL if terminated individuals retain active access with no removal process. TYPE II (over the period): PASS if every terminated individual has no active accounts remaining on any in scope system, and pass by default where no terminations occurred in the period; an isolated lingering account on a single system in an otherwise complete practice is an exception, not a gap; systematic retention of access after termination is a gap.",
         "na_condition": "",
         "can_be_na": false,
         "calibration_examples": [
@@ -4295,7 +4296,7 @@
         "text": "For each termination: offboarding completion is tracked with timestamps",
         "attr_type": "sample",
         "typical_evidence": "Offboarding checklist with timestamps for each deprovisioning step",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the most recent offboarding record includes timestamps for key deprovisioning steps, at minimum when the identity provider was disabled and when systems access was revoked. FAIL if offboarding is not tracked or records carry no timestamps. TYPE II (over the period): PASS if every offboarding record in the period includes timestamps for the deprovisioning steps; an isolated record missing a single timestamp in an otherwise tracked practice is an exception, not a gap; systematic absence of deprovisioning timestamps is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the most recent offboarding record includes timestamps for key deprovisioning steps, at minimum when the identity provider was disabled and when systems access was revoked. If no terminations have occurred as of the test date, pass by default. FAIL if offboarding is not tracked or records carry no timestamps. TYPE II (over the period): PASS if every offboarding record in the period includes timestamps for the deprovisioning steps, and pass by default where no terminations occurred in the period; an isolated record missing a single timestamp in an otherwise tracked practice is an exception, not a gap; systematic absence of deprovisioning timestamps is a gap.",
         "na_condition": "",
         "can_be_na": false,
         "calibration_examples": [
@@ -7575,8 +7576,9 @@
             {
               "id": "plan_reviewed",
               "question": "Does the evidence show that plan reviewed?",
-              "lane": "record",
+              "lane": "document",
               "alt_lanes": [
+                "record",
                 "export",
                 "screenshot"
               ],
@@ -7587,8 +7589,9 @@
             {
               "id": "updated_within_last_months",
               "question": "Does the evidence show that updated within the last 12 months?",
-              "lane": "record",
+              "lane": "document",
               "alt_lanes": [
+                "record",
                 "export",
                 "screenshot"
               ],
@@ -9190,8 +9193,9 @@
             {
               "id": "plan_updated_based_on",
               "question": "Does the evidence show that plan is updated based on test findings?",
-              "lane": "record",
+              "lane": "document",
               "alt_lanes": [
+                "record",
                 "export",
                 "screenshot"
               ],
@@ -9876,7 +9880,7 @@
         "text": "For each vendor with confidential data access: confidentiality commitments are signed",
         "attr_type": "sample",
         "typical_evidence": "Signed NDA or confidentiality clause in vendor contract",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity requires confidentiality commitments from vendors with access to confidential information, and the most recent such vendor has a signed NDA or confidentiality clause in their contract on file. FAIL if vendors can access confidential information with no confidentiality commitment process in place. TYPE II (over the period): PASS if every vendor with access to confidential information has signed confidentiality commitments on file; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of confidentiality commitments is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity requires confidentiality commitments from vendors with access to confidential information, and the most recent such vendor has a signed NDA or confidentiality clause in their contract on file. If no vendor has access to confidential information as of the test date, pass by default. FAIL if vendors can access confidential information with no confidentiality commitment process in place. TYPE II (over the period): PASS if every vendor with access to confidential information has signed confidentiality commitments on file, and pass by default where no vendor had such access in the period; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of confidentiality commitments is a gap.",
         "na_condition": "N/A if Confidentiality TSC not in scope",
         "can_be_na": true,
         "calibration_examples": [
@@ -9924,7 +9928,7 @@
         "text": "For each vendor with personal data access: privacy and data processing commitments are signed",
         "attr_type": "sample",
         "typical_evidence": "Signed DPA or privacy addendum in vendor contract",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity requires privacy and data processing commitments from vendors with access to personal information, and the most recent such vendor has a signed DPA or privacy addendum on file. FAIL if vendors can access personal information with no data processing commitment process in place. TYPE II (over the period): PASS if every vendor with access to personal information has signed privacy commitments or a DPA on file; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of privacy commitments is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity requires privacy and data processing commitments from vendors with access to personal information, and the most recent such vendor has a signed DPA or privacy addendum on file. If no vendor has access to personal information as of the test date, pass by default. FAIL if vendors can access personal information with no data processing commitment process in place. TYPE II (over the period): PASS if every vendor with access to personal information has signed privacy commitments or a DPA on file, and pass by default where no vendor had such access in the period; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence of privacy commitments is a gap.",
         "na_condition": "N/A if Privacy TSC not in scope",
         "can_be_na": true,
         "calibration_examples": [
@@ -10221,8 +10225,9 @@
             {
               "id": "management_reviewed_security_posture",
               "question": "Does the evidence show that management reviewed security posture within the last {review_frequency} period?",
-              "lane": "record",
+              "lane": "document",
               "alt_lanes": [
+                "record",
                 "export",
                 "screenshot"
               ],
@@ -14858,7 +14863,7 @@
         "text": "Fine-tuning or training of models on customer data occurs only after documented authorization for that use",
         "attr_type": "process",
         "typical_evidence": "Authorization records, such as an approval ticket, signed customer consent, or a data processing agreement provision, tied to each fine-tuning or training run that used customer data, alongside the list of training runs",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity has a defined requirement that customer data may be used for fine-tuning or training only with documented authorization, and any training run existing as of the review date that used customer data has a matching authorization record. FAIL if training on customer data is possible with no authorization requirement, or an existing run used customer data with no authorization on file. TYPE II (over the period): PASS if every fine-tuning or training run that used customer data during the period has documented authorization predating the run; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence is a gap. FAIL if runs used customer data without authorization as a matter of practice.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if the entity has a defined requirement that customer data may be used for fine-tuning or training only with documented authorization, and any training run existing as of the review date that used customer data has a matching authorization record. If no fine-tuning or training runs exist as of the review date, pass by default. FAIL if training on customer data is possible with no authorization requirement, or an existing run used customer data with no authorization on file. TYPE II (over the period): PASS if every fine-tuning or training run that used customer data during the period has documented authorization predating the run, and pass by default where no runs occurred in the period; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence is a gap. FAIL if runs used customer data without authorization as a matter of practice.",
         "na_condition": "Entity does not fine-tune or train models on customer data",
         "can_be_na": true,
         "calibration_examples": [
@@ -16046,7 +16051,7 @@
         "text": "For each dependency advisory, the vulnerability was addressed within the entity's defined window",
         "attr_type": "sample",
         "typical_evidence": "Resolved dependency alerts or update pull requests showing the opened date and the fixed date for critical and high advisories",
-        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if resolved dependency advisories show fixes applied within the entity's window, and no critical or high advisory is open beyond it. FAIL if critical or high advisories sit open past the window with no remediation. TYPE II (over the period): PASS if every critical and high advisory in the period was remediated within the defined window, or upgraded and closed with a documented reason; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence is a gap.",
+        "pass_criteria": "DESIGN & TYPE I (as of a date): PASS if resolved dependency advisories show fixes applied within the entity's window, and no critical or high advisory is open beyond it. If no dependency advisories have been raised as of the test date, pass by default. FAIL if critical or high advisories sit open past the window with no remediation. TYPE II (over the period): PASS if every critical and high advisory in the period was remediated within the defined window, or upgraded and closed with a documented reason, and pass by default where no advisories were raised in the period; isolated misses in an otherwise working practice are an exception, not a gap; systematic absence is a gap.",
         "na_condition": "",
         "can_be_na": false,
         "calibration_examples": [

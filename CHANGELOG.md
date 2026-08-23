@@ -5,6 +5,30 @@ applied to an examination. Corrections that do not change the method (typos,
 formatting, clearer wording with the same meaning) ship without a version, and
 the commit history on this repo records every one of them.
 
+## v1.7, 2026-08-23
+
+Empty populations say what they mean, and a mislabeled record can be corrected.
+
+- Criteria for events that may never have occurred at a young company now say
+  so explicitly: provisioning events, terminations, new hires, vendors with
+  confidential or personal data access, dependency advisories, and model
+  training runs each carry "if none occurred as of the test date, pass by
+  default", matching the clause their sibling criteria already carried. An
+  empty population stated plainly is a pass; it was never meant to read as a
+  gap, and inconsistent wording made it grade differently in different tools.
+- Five coverage checks whose own pass criteria name a document as the passing
+  artifact (an incident response plan's own review date on its cover page, a
+  risk assessment on file, a recovery plan's version history, a documented
+  management review) now accept a document as their primary evidence kind,
+  with records and system output still accepted as before. Nothing accepted
+  yesterday is refused today; the change is strictly widening.
+- A new collection tool, `reclassify_evidence`, corrects the evidence-type
+  label on a file already submitted: a dated write-up of a completed
+  activity is a record, not a document, and the label decides which checks
+  the file can satisfy. The evidence tier is still derived server-side from
+  the original submission's own signals, so a relabel cannot claim a tier
+  the submission could not.
+
 ## v1.6, 2026-08-20
 
 Governance for a company of one.
