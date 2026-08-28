@@ -3,7 +3,7 @@
     "title": "HIPAA Security Rule crosswalk",
     "framework": "45 CFR Part 164, Subpart C (Security Rule), text in force August 2026",
     "library": "Chiaro control library (see framework/controls.json)",
-    "method_version": "1.8",
+    "method_version": "1.9",
     "scope_notes": [
       "The mapping covers the Security Rule (Subpart C) only. It excludes the Privacy Rule (Subpart E) and the Breach Notification Rule (Subpart D). Breach response is operationally addressed by INC-01/INC-02 and COM-02, but those obligations are legal duties outside a controls mapping and are deliberately not rows here.",
       "The SOC 2 opinion covers the Trust Services Criteria only. This crosswalk feeds Section 5 of the report (Other Information, unaudited, no opinion expressed) and the prep-phase HIPAA coverage view. It is never a compliance certification.",

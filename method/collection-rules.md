@@ -8,6 +8,96 @@ Deliberately not included: the exact phrases our server-side gates match
 on. Publishing those would publish the way around them. What the gates do,
 and why, is described throughout.
 
+## Unknown vendor → probe with 3 tests, don't default
+
+```
+When you call add_system with a vendor that's not in our scoping
+playbook (HubSpot, PitchBook, anything bespoke), the response will set
+`requires_probe: true` and default classification to "vendor"
+(out of scope). DO NOT accept that default silently. The
+for_the_user.probe_required field contains three questions — fire ONE
+picker with those three questions, then use the answers to decide the
+real classification:
+
+  Data test: Does customer data flow through {system}?
+  Commitment test: Outage takes the product down or breaks a customer
+    commitment?
+  Control test: Do you configure security settings inside {system}, or
+    just consume managed defaults?
+
+Decision rule (apply on the spot):
+  ✓ Data YES + Commitment YES + Configure → in_scope_tool (you set
+    the controls protecting customer data)
+  ✓ Data YES + Commitment YES + Consume → infrastructure_dependency
+    (subservice — rely on their SOC 2)
+  ✓ Data YES + Commitment NO + Configure → in_scope_tool
+  ✓ Data YES + Commitment NO + Consume → infrastructure_dependency (light)
+  ✓ Data NO → vendor (stay — confirmed not in scope)
+
+Then call reclassify_system(name, new_classification, reason=<the answer
+summary>). The downgrade-requires-reason gate is already satisfied
+because you're including the answer summary as the reason. Example
+reason: "Customer data: anonymous events only. No commitment risk. We
+just embed their script — out-of-scope vendor confirmed."
+
+Do this BEFORE confirm_scope. Otherwise you have unprobed systems and
+scope will be wrong.
+```
+
+## M365 / Google Workspace is not automatically in scope
+
+```
+If the user mentions Microsoft 365, Office 365, M365, or Google Workspace
+as their company productivity tool, that's a vendor — NOT in scope on
+its own. The audit-relevant pieces are SEPARATE systems:
+
+  - Entra ID (Azure AD) used for production SSO → identity_provider, in scope
+  - Intune used for endpoint MDM → endpoint_mdm, in scope
+  - SharePoint / OneDrive where customer data is stored → in scope as
+    data_store (rare, but ask)
+
+When the client says "we use M365" or "we're a Google Workspace shop":
+  1. Add the productivity bundle as a vendor (not in scope itself)
+  2. Probe each in-scope component:
+       "Are you using Entra ID (Azure AD) to log into production
+        systems, or just for company email and SSO into SaaS apps?"
+       "Are you using Intune to enforce MDM on company laptops?"
+       "Does any customer data sit in SharePoint or OneDrive?"
+  3. For each YES, call add_system with the specific component name
+     (Entra ID, Intune, SharePoint) so it lands in the right bucket
+     with the right GITC matrix.
+
+Productivity apps (Word, Excel, Teams, Outlook, Gmail, Docs, Sheets)
+are never in scope. Don't list them.
+```
+
+## Planning-time sanity check (run before drilling)
+
+```
+Before you touch a single pre-existing file, cross-reference what the
+user told you in scoping against what's in any folder/source they
+named. Catch mismatches on file 1, not file 80.
+
+Quick checks against scoping facts:
+  - team_size = "Solo founder (1)" or "2-5"? → expect 0-5 named people
+    in HR exports, no formal org chart, no board minutes, no named
+    "incident response team," no multi-person committees.
+  - If a proposed source contains 10+ named employees, formal job
+    descriptions, a named CISO/CTO/Security Lead the user never
+    mentioned, or any company name that ISN'T the engagement entity
+    → STOP and ASK before drilling.
+  - If the user said "informal" everywhere but the folder contains
+    polished, dated, version-numbered policies → STOP and ASK.
+
+The ask is one sentence:
+  "I see <observed fact> in <source>. Is this actually your real <X>,
+   or is this from somewhere else (a template, demo pack, prior
+   consultant's deliverable, another company's evidence)?"
+
+If the answer doesn't reconcile the mismatch, do NOT submit from that
+source. mark_absent or submit_note instead.
+```
+
 ## Sample-type attributes require real artifacts (hard rule)
 
 ```
@@ -301,6 +391,112 @@ complete, and harder to fabricate. Default to programmatic. Use
 screenshots only when you genuinely can't get the data any other way.
 ```
 
+## The drill procedure per system (concrete)
+
+```
+For each in-scope system, the AI proposes the SPECIFIC programmatic
+command first, runs it after one-line user approval, saves output,
+moves on. The user does NOT pick among methods. Worked examples:
+
+GitHub access controls drill (most common):
+  AI says: "Can I run these to grab your GitHub access state?
+            - gh api /user --jq '.login, .two_factor_authentication'
+            - gh api /repos/<owner>/<repo>/collaborators
+            - gh api /repos/<owner>/<repo>/branches/main/protection
+            I'll save the raw output to ~/Documents/chiaro-soc2/03-systems/github/."
+  User: "yes" / "go ahead"
+  AI: runs all three with Bash, saves to files, writes how_collected.md,
+      submit_evidence for each.
+  Falls back to API-via-curl with user's PAT ONLY if gh isn't installed.
+  Falls back to screenshot ONLY if both fail.
+
+Vercel:
+  AI says: "Can I run `vercel ls` and `vercel teams ls --json`? Saves
+            project + team membership to 03-systems/vercel/."
+
+Supabase:
+  AI says: "Can I run `supabase projects list` and grab your auth config?"
+  If no supabase CLI: "Can you screenshot the Project Settings >
+                       Authentication page? Save anywhere, tell me where."
+
+AWS / Azure / GCP:
+  AI says: "Can I run `aws iam list-users --output json` and
+            `aws iam get-credential-report`?"
+
+M365 web admin (no CLI for most settings — this is where screenshot
+makes sense AS THE PRIMARY METHOD):
+  AI says: "M365 settings are web-only. Can you screenshot the Users
+            page and the MFA policy page? Full screen, timestamp
+            visible in the menu bar."
+```
+
+## How to pick per common system
+
+```
+GitHub:
+    - Preferred: `gh` CLI. Ask: "Do you have the gh CLI installed?"
+      If yes: `gh api /user`, `gh api /repos/<owner>/<repo>/main/protection`,
+              `gh api /repos/<owner>/<repo>`, `gh api /orgs/.../members?role=admin`
+    - Fallback: GitHub REST API via curl + user's PAT.
+    - Screenshot only if the user has no terminal access to their account.
+
+  AWS / Azure / GCP:
+    - Preferred: native CLI (`aws`, `az`, `gcloud`).
+      aws: `aws iam list-users`, `aws iam get-credential-report`,
+           `aws s3api get-bucket-encryption`, `aws cloudtrail describe-trails`.
+      az:  `az ad user list`, `az account list-locations`, `az sql db tde show`.
+      gcloud: `gcloud iam service-accounts list`, etc.
+    - Fallback: cloud admin console export → CSV/JSON.
+    - Screenshot only for settings that exist only as toggles in UI.
+
+  Supabase:
+    - Preferred: `supabase` CLI when installed, plus direct database
+      queries via the connection string the user already has.
+    - API: Supabase Management API via curl (project keys, auth config).
+    - Fallback: dashboard screenshot.
+
+  Vercel:
+    - Preferred: `vercel` CLI: `vercel teams ls`, `vercel projects ls`,
+      `vercel env ls --environment production`.
+    - Fallback: Vercel dashboard screenshot.
+
+  Cloudflare:
+    - Preferred: Cloudflare API via curl (very complete) — DNS records,
+      WAF rules, access policies.
+    - Fallback: dashboard screenshot.
+
+  Okta / Entra / Auth0:
+    - Preferred: their Admin API via curl (user list, MFA policy, log
+      stream config). Most have a "users export" button that produces
+      a CSV — programmatic enough, take that path.
+    - Screenshot only for visual settings that don't export.
+
+  M365 / Google Workspace:
+    - Preferred: PowerShell modules (M365: ExchangeOnlineManagement,
+      MicrosoftGraph) or `gam` (Google Workspace) when available.
+    - Realistic for small teams: most don't have these set up. Screenshot
+      the relevant admin pages (user list, MFA status, audit log
+      retention setting) and capture the click path in the .md.
+
+  Stripe / Resend / Loops / Polar (saas with rich APIs):
+    - Preferred: their REST API via curl. Stripe: `curl https://api.stripe.com/v1/account`,
+      Resend: account info, etc.
+    - Fallback: dashboard screenshot.
+
+  Jamf / Kandji / Intune (MDM):
+    - Preferred: their Admin API for device list, compliance status,
+      FDE enforcement.
+    - Fallback: dashboard screenshot of device list + compliance page.
+```
+
+## Minimum per in-scope system
+
+```
+For every in-scope system, you should produce 2-5 raw files. Prefer
+configs + exports over screenshots. If you produce zero, you've failed
+the drill on that system.
+```
+
 ## Anti-fabrication (hard rule)
 
 ```
@@ -332,6 +528,32 @@ Bad (lost signal):
 Good (signal preserved):
   AI submits: 'answer: "yeah we have MFA but only on prod, dev is open
               and we know it" (user's verbatim words)'
+```
+
+## Capture discoveries at the moment they happen
+
+```
+Multi-session engagements lose conversation context across sessions.
+A reflection sweep at the very end can't see what was said yesterday.
+So capture in real time, not retrospectively.
+
+Trigger submit_note IMMEDIATELY when:
+  - The user volunteers anything audit-relevant that doesn't fit a
+    specific control answer ("we're migrating to GCP," "lost our
+    security engineer," "tested DR once and it failed").
+  - You discover something during collection that contradicts or
+    nuances an earlier claim ("user said GitHub is used for code
+    review, but `gh api` returns zero repos — code is local-only").
+  - The user corrects themselves ("actually I was wrong earlier,
+    we don't enforce that on dev").
+  - You find that a system the user said was in scope isn't
+    actually doing what was claimed (ECS cluster is empty,
+    Lambda doesn't exist, etc.).
+
+Don't store these in your head for later. Call submit_note in the
+same turn. The user can close the session right after and a future
+AI in a new session won't have your memory — but it WILL have the
+submit_note record.
 ```
 
 ## Mismatched evidence — default is don't submit
@@ -405,6 +627,37 @@ When the user provides a folder, walk a few files first and confirm
 the names/IDs match before drilling. Solo founders especially won't
 have 45-person HR records, board minutes, or named incident
 responders — those are template-data tells.
+```
+
+## Know what to focus on per system
+
+```
+Before drilling into evidence on an in-scope system (Okta, GitHub, your
+cloud platform, etc.), call get_scoping_guidance(system_name="..."). The
+response contains two kinds of information, BOTH internal to your
+planning:
+
+  - GITC bucket summary (access / change mgmt / ops / encryption =
+    YES/PARTIAL/NO) — high-level sanity check on what applies.
+  - relevant_controls: an array of {control_id, title} pairs. These are
+    the EXACT items to drill into. Use the TITLES when forming user-facing
+    questions; load_area accepts either an area name or one of these
+    titles (a title loads the whole area that control sits in and tells
+    you the area name to use next time). NEVER speak the control_id
+    (IAM-01, CHG-04, etc.) to the user.
+
+What you do with this data:
+  1. Look at relevant_controls. These are the controls to drill into.
+  2. For each, ask the user about the underlying practice in your own
+     plain-English voice. E.g., title "User Access Deprovisioning"
+     becomes: "When someone leaves the company, how do you turn off
+     their access?" NOT: "Let me check IAM-04 / your User Access
+     Deprovisioning control."
+  3. Skip GITC buckets marked NO — they don't apply.
+
+The control_id and system_type fields in the response are methodology
+metadata. Use them for your own routing. The user should never hear
+them.
 ```
 
 ## The drill for one control

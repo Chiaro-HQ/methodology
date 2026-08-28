@@ -35,6 +35,9 @@ anyone is reading this.
   any instrument has to pass to satisfy it.
 - **`method/tools.md`**: every tool a connected AI can call, generated from the
   live server.
+- **`method/commands.md`**: the 72 read-only commands we ask an AI to run to pull
+  configuration evidence, across 22 systems, each mapped to the criteria it
+  helps satisfy.
 - **`method/hipaa-crosswalk.md`**: the HIPAA Security Rule mapped provision by
   provision to this library, 64 rows with a stated resolution each,
   including where existing controls carry it and where HIPAA-specific

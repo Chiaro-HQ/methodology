@@ -5,6 +5,29 @@ applied to an examination. Corrections that do not change the method (typos,
 formatting, clearer wording with the same meaning) ship without a version, and
 the commit history on this repo records every one of them.
 
+## v1.9, 2026-08-28
+
+The per-system method, and the commands that pull the evidence.
+
+- `method/collection-rules.md` gains eight sections on what each kind of
+  system owes and how to reach it. The three-test probe that classifies a
+  vendor nobody has met before, on data, commitment and configuration. Why a
+  productivity bundle is out of scope while the identity provider and the
+  device manager inside it are in. What a system's own drill looks like end to
+  end, and the preferred path and the fallback path for the systems most
+  companies actually run. What the minimum output for an in-scope system is.
+  How the controls that apply to a system are turned into questions a person
+  can answer. Why a discovery is recorded the moment it happens rather than
+  reconstructed later. And the planning-time reconciliation that stops a
+  template, a demo pack or another company's evidence from entering an
+  engagement at file one, which is the check that has to run before the first
+  file rather than after the eightieth.
+- `method/commands.md` is new: the 72 read-only commands, across 22 systems,
+  that pull configuration evidence, each mapped to the Trust Services Criteria
+  it helps satisfy. A `command_ref` in `test_attributes.json` that names one of
+  these systems resolves here. Every command reads configuration and changes
+  nothing, and no credential appears in the library as a value.
+
 ## v1.8, 2026-08-28
 
 What a check accepts, and who decides that something does not exist.

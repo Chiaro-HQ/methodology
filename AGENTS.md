@@ -18,6 +18,10 @@ software as much as by people. This page is the map.
 - `framework/criteria.json` and `framework/evidence_map.json`: the Trust
   Services Criteria mappings and which evidence sources satisfy which
   controls.
+- `method/commands.md`: the read-only commands that pull configuration
+  evidence, by system and control area, each mapped to criteria. A
+  `command_ref` in `test_attributes.json` that names one of these systems
+  resolves here.
 - `method/`: how systems are scoped, the rules collection runs under, how a
   Type II is tested, and the tools a connected AI can call on the live
   server.
