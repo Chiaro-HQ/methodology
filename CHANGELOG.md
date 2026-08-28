@@ -5,6 +5,45 @@ applied to an examination. Corrections that do not change the method (typos,
 formatting, clearer wording with the same meaning) ship without a version, and
 the commit history on this repo records every one of them.
 
+## v1.8, 2026-08-28
+
+What a check accepts, and who decides that something does not exist.
+
+- The device configuration checks (END-03: disk encryption, screen lock,
+  automatic updates) accept a screenshot or an export of the device's own
+  configuration output. A written assertion that the setting is on does not
+  close them, which is what their pass criteria require: the proof is the
+  device's own output, not a statement about it. Audit log retention
+  (MON-03/A2) reads the same way. The check asks what each provider's
+  retention setting shows, so it accepts a screenshot or an export of that
+  setting, and a policy document, which cannot show a provider's
+  configuration, no longer closes it.
+- `absent` is the user's answer, never an inference. When the thing a
+  criterion names is nowhere in the evidence held, the question goes to the
+  user before anything is filed: "do you actually do this?" for a practice,
+  "does this exist anywhere, signed, published or defined?" for a named
+  thing. "We never created one" is `absent`, and the work is to build it.
+  "It lives somewhere else" is a `gap`, and the work is to find it. An empty
+  search establishes neither, and a document that discusses a subject is not
+  the thing a criterion names: a policy about vendor reviews is not a vendor
+  review, and a policy describing data processing is not the signed
+  agreement.
+- A drafted document is not an adopted document. A new tool,
+  `record_policy_adoption`, records the user's own words on whether they
+  adopt a document that was drafted for them, attributed to the person who
+  said it and dated by the server, on the same footing as any other
+  statement a person attests to. It is their decision to make and the AI
+  may not make it for them.
+- `method/collection-rules.md` publishes further sections of the rules
+  the collection runs under: the corroboration floor (every in-scope item
+  ends as a real artifact in the right lane or as a logged gap in the user's
+  own words, and what a user says is context that directs collection rather
+  than something that completes it), the input and output contract (every
+  evidence item captures the literal command, click path, URL or query
+  alongside the literal response it produced, and is incomplete with either
+  half missing), and the file format each kind of evidence takes. These
+  were always part of what this repository set out to publish.
+
 ## v1.7, 2026-08-23
 
 Empty populations say what they mean, and a mislabeled record can be corrected.

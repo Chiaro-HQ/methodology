@@ -13644,8 +13644,7 @@
               "question": "Does the evidence include actual disk encryption command output or a screenshot of it for each device in the inventory?",
               "lane": "screenshot",
               "alt_lanes": [
-                "export",
-                "record"
+                "export"
               ],
               "corroboration_required": true,
               "command_ref": "macos",
@@ -13656,8 +13655,7 @@
               "question": "Does every device's output show full disk encryption enabled?",
               "lane": "screenshot",
               "alt_lanes": [
-                "export",
-                "record"
+                "export"
               ],
               "corroboration_required": true,
               "command_ref": "macos",
@@ -13699,8 +13697,7 @@
               "question": "Does the evidence include actual screen lock setting output or a screenshot of it for each device in the inventory?",
               "lane": "screenshot",
               "alt_lanes": [
-                "export",
-                "record"
+                "export"
               ],
               "corroboration_required": true,
               "command_ref": "macos",
@@ -13711,8 +13708,7 @@
               "question": "Does every device's output show a password required with an idle timeout of 15 minutes or less?",
               "lane": "screenshot",
               "alt_lanes": [
-                "export",
-                "record"
+                "export"
               ],
               "corroboration_required": true,
               "command_ref": "macos",
@@ -13754,8 +13750,7 @@
               "question": "Does the evidence include actual automatic update setting output or a screenshot of it for each device in the inventory?",
               "lane": "screenshot",
               "alt_lanes": [
-                "export",
-                "record"
+                "export"
               ],
               "corroboration_required": true,
               "command_ref": "macos",
@@ -13766,8 +13761,7 @@
               "question": "Does every device's output show automatic operating system and software updates enabled?",
               "lane": "screenshot",
               "alt_lanes": [
-                "export",
-                "record"
+                "export"
               ],
               "corroboration_required": true,
               "command_ref": "macos",
@@ -14252,8 +14246,7 @@
               "question": "Does the evidence show each provider's log retention setting meeting the entity's defined retention period?",
               "lane": "screenshot",
               "alt_lanes": [
-                "export",
-                "document"
+                "export"
               ],
               "corroboration_required": true,
               "command_ref": "",

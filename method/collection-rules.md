@@ -52,6 +52,39 @@ shows it. A screenshot that can't be dated at review is weak evidence;
 the timestamp is what ties it to a point in time.
 ```
 
+## The corroboration floor (the one rule of collection)
+
+```
+Every in-scope item ends in exactly one of TWO states:
+  1. A REAL ARTIFACT in the right lane (file saved + submitted), or
+  2. A LOGGED GAP via mark_gap with the user's actual reason.
+
+What the user TELLS you is context — record it with submit_answer, it
+tells you what to go collect. It NEVER completes anything by itself.
+"Yes we do MFA" without the config pull is an open item, not progress.
+
+For EVERY control where the user answered yes in 2A, produce at least
+one real file under ~/Documents/chiaro-soc2/ in the expected lane.
+
+Two honest non-collected exits — pick by ONE question: does the practice
+EXIST at all?
+  - NEVER done (no risk assessment, no pen test, no BCP/DR, no background
+    checks) → mark_absent the control. That is the right call, not a gap.
+  - It IS done but the record can't be produced ("we review access but
+    never kept a log") → mark_gap with the user's reason.
+
+ASK BEFORE YOU GAP. A gap is permanent and becomes a finding — it is NOT a
+shortcut for "I haven't asked yet." Before gapping any check, ask: could
+the user hand this over with one screenshot, one export, or by pointing
+you at a page (their Security/Terms page, where their policies live)? If
+yes, ASK for it first; only gap it if they confirm they can't produce it.
+Gapping something that just needed a screenshot makes their results look
+worse than reality.
+
+"Yes but no evidence and no logged gap" blocks the handoff — the
+server enforces this, you cannot wrap up around it.
+```
+
 ## Contradictions: reconcile or log, never bury
 
 ```
@@ -81,6 +114,115 @@ vendor-side proof (a DPA, an order-form term, a config screenshot showing
 the setting). Record the claim as context, but log the missing
 corroboration as a contradiction on the relevant vendor item — don't let
 a stated promise close a check as if it were proven.
+```
+
+## The contract (non-negotiable)
+
+```
+EVERY evidence item captures BOTH the raw INPUT (how it was obtained)
+AND the raw OUTPUT (what was actually produced). Never just one.
+
+  - Raw INPUT  = the literal command, click path, URL, or query.
+                 Verbatim. Copy-pasteable.
+  - Raw OUTPUT = the literal response, file, screenshot, or export.
+                 Verbatim. No paraphrasing.
+
+For each evidence item, you do FOUR things in order:
+  1. Save BOTH the input AND the output to ~/Documents/chiaro-soc2/<folder>/.
+     The convention depends on evidence type (see examples below).
+  2. Write a sibling how_collected.md — a one-line human-readable
+     description (date, source, what's in there). NOT a replacement
+     for the raw input; the raw input lives in the evidence file itself.
+  3. (Optional) Read the saved file to confirm it landed.
+  4. Call submit_evidence or submit_document with summary + local_path
+     + covers_attributes JSON.
+```
+
+## Evidence file format by type
+
+```
+CLI command output → shell-style transcript in a .txt or .json file:
+
+  Path:    ~/Documents/chiaro-soc2/03-systems/github/branch-protection.txt
+  Content:
+    $ gh api /repos/<owner>/<repo>/branches/main/protection
+    Collected: 2026-05-17
+    Account: <owner>
+
+    {
+      "required_status_checks": { "strict": true, "contexts": [...] },
+      "enforce_admins": { "enabled": true },
+      ...
+    }
+
+  The `$ <command>` line at the top is the raw input. Everything below
+  is the raw output. ONE file, both captured.
+
+API response or export → same convention. Add the request URL + method:
+
+    $ curl -H "Authorization: Bearer <REDACTED>" https://api.example.com/foo
+    Collected: 2026-05-17
+
+    <raw response JSON>
+
+  Always REDACT secrets / tokens in the input line. Output stays
+  verbatim if it doesn't contain secrets.
+
+Screenshot → two-file pair:
+
+  ~/Documents/chiaro-soc2/03-systems/supabase/mfa-policy-2026-05-17.png
+    (the raw image — the OUTPUT)
+  ~/Documents/chiaro-soc2/03-systems/supabase/mfa-policy-2026-05-17.md
+    (the INPUT path + what's visible, one short paragraph)
+
+  Example .md content:
+    # Supabase MFA policy
+    Collected: 2026-05-17
+    Path: Supabase Dashboard > Project Settings > Authentication > MFA
+    Visible: MFA enforcement = ON for admins, OFF for users. TOTP allowed.
+    Not visible on this screen: WebAuthn settings, password policy.
+
+Document (PDF / Notion / Drive export) → keep the original file + a
+separate notes file capturing where it came from:
+
+  ~/Documents/chiaro-soc2/02-policies/information-security-policy.pdf
+    (the raw document — the OUTPUT)
+  ~/Documents/chiaro-soc2/02-policies/information-security-policy.notes.md
+    (or how_collected.md if only one doc — the INPUT path)
+
+  Example .notes.md content:
+    # Information Security Policy
+    Source: Notion > Company A > Security > Information Security Policy v3.1
+    Last edited in Notion: 2026-02-14
+    Captured via: Notion export → PDF, saved 2026-05-17
+
+Verbal-only context → save the verbatim words AND log the gap:
+
+  ~/Documents/chiaro-soc2/04-process-evidence/access-review.md
+
+  Example:
+    # Access Review Process (verbal — no artifact exists)
+    Source: founder told the AI directly on 2026-05-17
+    No written record exists.
+
+    Verbatim founder description:
+    "I'm the only person with access. When I added a contractor in
+     March we revoked GitHub and Vercel access when their work was
+     done. No formal review cadence; I just check every couple of
+     months when I'm in the dashboard."
+
+  A verbal description is CONTEXT, not evidence — it does not close
+  the item. Record it (submit_answer captures it), then call mark_gap
+  with the reason ("no written access-review record exists") so the
+  item terminates honestly as a logged gap instead of dangling open.
+```
+
+## The rule in one line
+
+```
+If your evidence file has the OUTPUT but not the INPUT — or the INPUT
+but not the OUTPUT — it's incomplete. Add the missing half before
+calling submit_evidence.
 ```
 
 ## For every in-scope system, actively gather (hard rule)

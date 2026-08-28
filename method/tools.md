@@ -1,6 +1,6 @@
 # The tools
 
-The 48 tools a connected client's AI can call. Generated from the
+The 49 tools a connected client's AI can call. Generated from the
 live server, so this list is exactly what a client sees, including the
 descriptions the AI reads to decide what to do.
 
@@ -405,8 +405,8 @@ Args:
     attribute_id: Attribute id within the control (e.g., "A3").
     reason: The user's actual reason, their words, specific. "No log was
         kept before May 2026" beats "not available". Required.
-    check_ids: JSON list of specific check ids to gap (from the
-        still_missing payloads), e.g. '["review_log_exists"]'.
+    check_ids: specific check ids to gap (from the still_missing
+        payloads), as an array ["review_log_exists"] or a JSON string.
         Empty = every still-open check on this attribute.
     contradicts: Optional JSON list anchoring a contradiction this gap
         embodies to specific attributes, e.g.
@@ -588,6 +588,27 @@ Args:
     cloud_provider_baa_note: Optional detail, for example "AWS BAA
         accepted through Artifact".
 
+## `record_policy_adoption`
+
+Record what the user said when asked whether they adopt a drafted document.
+
+Fire the picker `drafts_awaiting_adoption` serves you, once per document,
+then record the answer HERE in the user's own words. The server tracks which
+documents have been asked about, so a document that stops appearing in that
+list has been answered — never re-ask it.
+
+This records the USER's statement, exactly like an attested pass: their name
+and their words, dated by the server. It is their decision, never yours, and
+you may not answer it on their behalf.
+
+Args:
+    evidence_id: the drafted document's evidence_id, from the picker.
+    decision: "adopted" (they read it and adopt it) | "changing_first"
+        (they want edits before adopting) | "pre_existing" (the document
+        predates your draft and was already adopted) | "not_yet".
+    adopted_by: who said it — required for "adopted" and "pre_existing".
+    statement: their exact words — required for "adopted" and "pre_existing".
+
 ## `record_prior_report`
 
 Record whether this is a first SOC 2 or there is a prior report.
@@ -691,17 +712,25 @@ A pass also has to MEET THE CHECK'S OWN BAR. Every coverage check declares
 the strength of artifact it needs, and citing something weaker is refused
 with the bar named — a policy cannot close a check that asks for a record of
 something happening. Read `how_to_judge` in get_judgment_kit before you
-judge; it is the same standard the examination applies. When the artifact
-does not exist, record a gap and say why. A gap is a normal answer.
+judge; it is the same standard the examination applies. When the thing the
+criterion NAMES is nowhere in what you hold — you hold nothing, or you hold
+a document that discusses the subject without containing it — ask the user
+before you file: "do you actually do this?" for a practice, "does this exist
+anywhere, signed / published / defined?" for a named thing. Their "no, we
+never created one" is `absent` in their own words; their "yes, it lives
+somewhere else" is a `gap`. Both are normal answers; guessing between them
+is not.
 
 Args:
     control_ref: e.g. "IAM-02".
     attribute_id: e.g. "A1".
     verdict: "pass" | "gap" | "absent" | "not_applicable" (absent = the
-        practice itself does not exist; a practice that exists but lacks
-        records is a gap).
+        practice itself does not exist, on the user's word; a practice that
+        exists but lacks records is a gap — ask them which it is rather
+        than inferring it from an empty search).
     reasoning: one or two sentences citing the evidence and the criterion.
-    evidence_ids: JSON list of evidence ids (from submit_evidence/submit_document).
+    evidence_ids: the evidence ids (from submit_evidence/submit_document),
+        as an array ["<id>"] or as that array in a JSON string.
     basis: "evidence" (default) or "attested" (user explicitly confirms
         without walking through evidence — quote them).
     attested_by: who confirmed (required when basis='attested').
@@ -1048,8 +1077,9 @@ Args:
         Required. If you have not saved a real file, do not call this tool.
     summary: 1-3 sentences describing what the document contains.
         You MAY summarize. You MAY NOT add anything not in the source file.
-    covers_attributes: JSON list of [control_ref, attribute_id] pairs this
-        document helps satisfy. EXAMPLE: '[["POL-01","A1"],["POL-01","A2"]]'.
+    covers_attributes: the [control_ref, attribute_id] pairs this document
+        helps satisfy. Send it as a real array — [["POL-01","A1"],
+        ["POL-01","A2"]] — or as that array in a JSON string. Both work.
         EXISTENCE TRACKING ONLY — "does the document include the thing the
         coverage check asks about, yes or no." Quality is the auditor's job.
         Required.
@@ -1092,8 +1122,9 @@ Args:
         Required. If you have not saved a real file, do not call this tool.
     summary: 1-3 sentences describing what the file contains. Plain English.
         You MAY summarize. You MAY NOT invent content that isn't in the file.
-    covers_attributes: JSON list of [control_ref, attribute_id] pairs this
-        evidence helps satisfy. EXAMPLE: '[["IAM-02","A1"],["IAM-02","A3"]]'.
+    covers_attributes: the [control_ref, attribute_id] pairs this evidence
+        helps satisfy. Send it as a real array — [["IAM-02","A1"],
+        ["IAM-02","A3"]] — or as that array in a JSON string. Both work.
         This is EXISTENCE TRACKING ONLY — "does the file include the thing
         the coverage check asks about, yes or no." NOT quality judgment.
         our audit team judges quality during review later. Required if the evidence
