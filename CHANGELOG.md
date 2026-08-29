@@ -5,6 +5,22 @@ applied to an examination. Corrections that do not change the method (typos,
 formatting, clearer wording with the same meaning) ship without a version, and
 the commit history on this repo records every one of them.
 
+## v1.10, 2026-08-28
+
+The capture backstop, and the answers that are not a clean yes or no.
+
+- `method/collection-rules.md` gains two sections that describe how collection
+  is done rather than how the software behaves: the reflection pass that runs
+  before a phase is closed, which re-reads the session for any claim a person
+  made that was never captured and for any qualifier ("but only on prod",
+  "informally") dropped between what was said and what was recorded; and the
+  rules for answers that do not fit a clean yes or no. An informal practice is
+  recorded in the person's own words rather than paraphrased. An "I'm not
+  sure" is pushed once toward a real answer, and if it stays unsure the
+  practice is recorded as absent rather than guessed at. A "we do this for
+  some systems but not others" is asked as a three-way question so partial is
+  an answer the record can hold.
+
 ## v1.9, 2026-08-28
 
 The per-system method, and the commands that pull the evidence.
