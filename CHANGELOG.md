@@ -5,6 +5,34 @@ applied to an examination. Corrections that do not change the method (typos,
 formatting, clearer wording with the same meaning) ship without a version, and
 the commit history on this repo records every one of them.
 
+## v1.11, 2026-09-23
+
+The same 89 controls, with clearer checks and more worked examples.
+
+- 387 checks (was 369). The 19 new checks are parts of earlier checks, and each
+  one names the check it came from in `split_from`. One check is retired:
+  POL-01 A1 asked about eight policy areas at once and is now eight checks, A7
+  to A14.
+- 95 checks have revised pass and fail wording.
+- 945 worked examples (was 552). 42 checks carry separate Type I and Type II
+  guidance.
+- 41 checks state their rule in the check text itself, with any added rules in
+  `visible_rules`; their `pass_criteria` field is empty.
+- Readiness progress states its basis: evidence checked, earlier completion
+  kept with its recorded basis and date, or the customer's explicit
+  confirmation, labelled as evidence not checked. None of these is an audit
+  conclusion.
+- Work saved before this version is kept: earlier completions keep their
+  recorded basis and date, and existing evidence is considered before asking for
+  more. An examination already under way keeps the rules and evidence it started
+  with.
+- Type II: event populations are kept separate from each check's own sample,
+  and change history can connect a configuration snapshot to the examination
+  period. Type II keeps two collection rounds and automatic email
+  notifications.
+- New: `method/readiness-and-independence.md`, on what readiness measures and
+  who makes which decisions.
+
 ## v1.10, 2026-08-28
 
 The capture backstop, and the answers that are not a clean yes or no.

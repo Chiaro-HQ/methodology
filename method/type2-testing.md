@@ -4,8 +4,14 @@ A Type I asks whether controls were suitably designed as of a date. A Type II
 asks whether they operated over a period. The operating question is where
 sampling has always lived, and it is where we depart from standard practice:
 
-**We test complete populations by default. Sampling is a disclosed exception,
-used only where a population genuinely cannot be retrieved in full.**
+**Each examined check defines its own coverage. Event-population checks use
+complete populations by default. An authored sampled-user configuration check
+keeps its specified sample; fallback sampling is separately disclosed.**
+
+For IAM-02/A3, assess one user per in-scope system; the same person may be reused
+across systems. Type II combines that sampled-user snapshot with relevant
+configuration/security-change history covering the examination period. It does
+not impose an all-user census or automatic leaver reconstruction.
 
 Audit sampling exists because human hours are expensive. When testing means a
 person reading records one at a time, checking 25 of 214 changes is a
@@ -23,8 +29,8 @@ sample.
 
 ## Populations
 
-Every period test starts from a population: all occurrences of the thing the
-control governs, over the observation window. Which raises the question a
+Every event-population test starts from its defined population: all occurrences
+of the thing the check governs, over the observation window. Which raises the question a
 critic should ask first: the population is retrieved from the client's own
 systems by the client's own AI, so how do we know it is complete? A flawless
 census of an incomplete population proves nothing. Worse, it looks
@@ -61,45 +67,27 @@ operating effectively, and distinct from failing.
 
 ## When evidence is collected
 
-Everything above assumes the population really is the period's population,
-which makes timing part of the method rather than a logistics detail. Two
-facts pull in opposite directions:
+Type II retains two collection rounds and automatic email notifications.
+Round 1 opens three weeks before the period ends for policies and current
+system settings. Round 2 opens after the close for complete period records.
+The second round's due date is a reminder, not a collection lock. Later
+collection still requires sufficient evidence for the applicable dates.
 
-- A list of everything that happened is only complete once the period has
-  closed. Pulled earlier, it is incomplete by construction, and it looks
-  exactly like a complete one.
-- A configuration setting can only be captured while the period is open. A
-  setting read in November says nothing about September.
+Event populations must cover the complete examination window. A population
+collected before the period closes remains incomplete and needs a final refresh.
 
-So collection happens in two phases, split by evidence type:
+Configuration checks use one audit-phase collection of an appropriate snapshot
+and usable relevant configuration/security-change history covering the whole
+period. A snapshot outside the period needs a usable bridge to that period;
+its date alone does not make it unusable. Cover every in-scope system and retain
+the check's own sample requirement. Investigate relevant access-bypass or
+suspicious changes without automatically reconstructing every leaver.
 
-1. **While the period is open, inside its final three weeks:** the policies,
-   the current configuration state of every in-scope system, and the rosters
-   (people, accounts, vendors), each captured with the exact moment of the
-   observation. State is a claim about a moment, and the moment is part of
-   the evidence.
-2. **After the period closes, in the two weeks that follow:** every
-   population. Changes, joiners and leavers, tickets, access reviews, and
-   the registers that are usually empty. Waiting for the close is what makes
-   "all occurrences over the observation window" literally true rather than
-   approximately true.
-
-The configuration observation sits inside the period rather than at its end,
-so the stretch between the observation and the close is carried the same way
-as the stretch before it: by the system's own change record, pulled complete
-after the close. One observation plus a complete change record is state over
-the period. The report states the date the state was inspected and the
-interval the change record covers, so a reader never has to infer either.
-
-The split is enforced by the tooling, not requested politely. Exactly two
-refusals exist: an event population offered before the period closes is
-refused, with the date it opens; a configuration capture offered after the
-close is refused, with the day the period ended, because accepting it would
-put November state behind a September conclusion. Nothing else is refused,
-and nothing is refused for lateness: a late client still gets their report.
-The one thing that decays while collection drifts is the client's own log
-retention, and what can no longer be produced is disclosed rather than
-papered over.
+Evaluate changes by their effect. Harmless changes are allowed; a relevant gap
+can prevent a pass. Missing or partial history leaves collection pending and
+requires follow-up, rather than an assumed deficiency. Readiness assesses
+current settings and does not require this Type II history. Its extra intended
+retention requirement applies only to the mapped logging checks.
 
 ## How a census is evaluated
 
@@ -119,18 +107,19 @@ evaluation is layered by how much judgment each check needs:
 - **Every candidate deviation is confirmed by the CPA before it becomes an
   exception.** The machine flags; a person concludes. A false flag dies at
   review and never reaches a report.
-- **A slice of clean items is re-checked as quality control.** Sampling does
-  not vanish from our world entirely. It leaves the audit and returns as
-  internal QC over the evaluation itself, which is where it belongs.
+- **A slice of clean items is re-checked as quality control.** Sampling
+  also supports internal QC over the evaluation; it does not replace each
+  examined check's own coverage requirement.
 
 ## When we sample anyway
 
 Some populations cannot be practically retrieved in full: paper records at
 volume, a system with no export path, evidence held by a third party that
-answers slowly. For exactly those, a sampling lane exists, and the report
+answers slowly. For those event populations, a fallback sampling lane exists, and the report
 discloses, per control, which lane ran. "Complete population" is the default;
-"sampled, full retrieval impracticable" is the exception, stated in the
-deliverable, which is what keeps the lane honest and rare.
+"sampled, full retrieval impracticable" is the fallback, stated in the
+deliverable. This fallback does not override an authored check that already
+specifies a sample, such as IAM-02/A3.
 
 Impracticable means the population cannot reasonably be retrieved in full. It
 does not mean retrieval is tedious. Twenty-three contractor agreements as PDF
@@ -299,19 +288,16 @@ wrong population is exactly the failure this rule exists to catch.
 
 ## A note on the attribute language
 
-When this page was first published (2026-07-27), 79 attributes still carried
-sampling-era wording ("for a sample of X," "all sampled individuals") that
-this page overrode: population testing governed regardless of what the texts
-said. That revision landed on 2026-08-06. The texts now read "for each X" /
-"for all X," the period-form pass criteria say "every X in the period," and
-the collection playbooks ask for the population, not a sample of it. Each
-record-checked attribute also now carries a `frequency` field, the input to
-the published fallback-selection table for the rare population where a
-complete pull is impracticable. The `sample_eligible` field name and the
-`sample` attribute type remain as machine identifiers; prose is
-population-first throughout. The one deliberate survivor: DAT-04's "sampled
-data," where the word means data-subsetting for non-production environments,
-not audit sampling.
+The selected Type I or Type II suite is authoritative for each check's rules
+and coverage. Readiness uses Type I only. A sampled-record Type I check normally
+uses one relevant completed instance under the current process, preferably recent,
+unless its authored coverage differs. Related checks may reuse that instance;
+an absolute latest-start census or all date ties is not a default prerequisite.
+Do not discard a known deficient selected case to manufacture a pass.
+
+Type II event checks use the relevant complete period population unless their
+own coverage says otherwise. Configuration checks follow the snapshot/history
+rule above. Keep sample requirements and system coverage distinct.
 
 ## Changes to this method
 
@@ -319,7 +305,12 @@ Any change to this method, and the reason for it, is published here before it
 is applied to an examination. A rule that predates the engagement it governs is
 easier to trust than one written after it.
 
-**2026-08-11: added "When evidence is collected."** The method already said
+**v1.11: check-specific coverage and configuration history.** Authored
+sampled-user requirements govern alongside complete system coverage. Usable
+history can bridge an outside-period configuration snapshot; missing history
+is collection pending. The earlier timing rule below is historical.
+
+**2026-08-11: added "When evidence is collected." (superseded timing rule)** The method already said
 what a complete population is; that section pins when one can exist. The
 reason: an earlier draft of our tooling collected everything in a single
 round before the period ended, which would have left the final weeks of

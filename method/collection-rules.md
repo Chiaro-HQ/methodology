@@ -78,12 +78,10 @@ are never in scope. Don't list them.
   field, OR you ask a quick follow-up after the picker submits. Either way,
   capture their words verbatim into submit_answer's answer field. Don't
   paraphrase.
-- "I'm not sure if we do this" → push them: "Has anyone in the company
-  ever done it, even once? Treat 'no' as 'no' if it's genuinely not a
-  practice you have." If still unsure, mark absent.
-- Three-state question ("we do this for some systems but not others"):
-  use AskUserQuestion with multiSelect=false and three options
-  (yes/no/partial). Quick.
+- "I'm not sure": save the exact uncertainty with submit_note, topic_hint="".
+  Keep its topic in local working notes; identify who or what could clarify it.
+  Never use a scoping-slice hint for unknowns, which could mark that slice answered.
+- Partial: preserve which systems or people are included and which are not.
 ```
 
 ## Planning-time sanity check (run before drilling)
@@ -363,8 +361,9 @@ the audit record. Trying to game the gates is itself an audit finding.
 
 For systems with no CLI (M365 admin, Stripe webhook config,
 banking/HR portals): ask for a screenshot of the specific admin
-page. The user saves anywhere, tells you the path, you move/rename
-into the right folder, submit_evidence.
+page. The user saves anywhere. In readiness, register that accessible local
+file's path and hash. In an audit, copy it as-is into the collection folder
+without overwriting, then submit_evidence with the copy's path and hash.
 
 For subservice orgs (AWS at the platform level, Anthropic, Supabase,
 Stripe — all `infrastructure_dependency`):
@@ -515,11 +514,21 @@ the drill on that system.
 ## Anti-fabrication (hard rule)
 
 ```
-You may SUMMARIZE content from a real file. You may NEVER GENERATE content.
-- User says "I have a policy in Notion" → AI exports the page to ~/Documents/chiaro-soc2/02-policies/<name>.pdf → submits summary of what's actually in the export.
-- User says "informal risk notes, just things I worry about" → AI writes the user's verbatim list of risks as ~/Documents/chiaro-soc2/04-process-evidence/risk-notes.md → submits summary.
-- User says "no, we don't have anything for that" → AI calls mark_absent. Never generates a polished version of what a policy "should look like."
-- If a coverage check has no real file behind it after asking the user, that check is not satisfied. Do NOT inflate.
+Summarize only facts actually present in the inspected source. Never invent,
+reconstruct or backdate evidence, completed activities, approvals or adoption.
+- AUDIT: collect existing evidence. If the user confirms a policy is missing,
+  call mark_absent; never generate a replacement to satisfy the examination.
+- READINESS ONLY: with the user's permission, prepare a missing policy or a
+  proposed revision under POLICY REVISIONS above. Inspect what exists first,
+  retain the editable original, use the actual revision date and register the
+  proposed file as is_draft=true. The user chooses the content. Permission to
+  prepare changes is separate from adoption of the reviewed version.
+- An informal description stays verbatim with all qualifiers; a proposed policy
+  cannot be passed off as proof that the described activities already happened.
+- An unadopted draft earns no credit. Adoption alone never creates a pass; inspect
+  the exact version against every applicable requirement and preserve any gap.
+- Missing history stays missing in both modes. A new document cannot erase a
+  past deficiency or establish Type II operation before its actual effective date.
 ```
 
 ## Verbatim capture — with qualifiers (hard rule)
@@ -731,7 +740,7 @@ For each YES control (in any order, working through them all):
      Ask user:       "Does your security policy specify how long you
                      keep customer data?"
    - Find where the evidence lives:
-     • Written doc → ask for Notion link / Drive path → export to PDF/md → save to ~/Documents/chiaro-soc2/02-policies/
+     • Written doc → inspect it and preserve the original. In readiness, hash/register its accessible local path. In an audit, copy in the same format into ~/Documents/chiaro-soc2/02-policies/ without overwriting, then hash/register the copy. If copying is unavailable, ask the user to copy as-is. For web-only sources retain the source link with a faithful available export.
      • System config → ask permission to open admin console / run CLI → save raw output to ~/Documents/chiaro-soc2/03-systems/<system>/
      • Process record (review, ticket, training cert) → export/screenshot → save to ~/Documents/chiaro-soc2/04-process-evidence/<topic>/
      • Subservice org SOC 2 (AWS, Stripe, Anthropic) → ask user to download or fetch from vendor portal → save to ~/Documents/chiaro-soc2/05-subservice-evidence/<vendor>/

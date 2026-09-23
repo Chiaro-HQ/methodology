@@ -1,6 +1,6 @@
 # The tools
 
-The 49 tools a connected client's AI can call. Generated from the
+The 51 tools a connected client's AI can call. Generated from the
 live server, so this list is exactly what a client sees, including the
 descriptions the AI reads to decide what to do.
 
@@ -112,7 +112,8 @@ Runs the full scoping engine:
 2. Determines which controls are N/A based on your answers
 3. Computes dynamic fill values for your control descriptions
 4. Maps your systems to relevant control categories
-5. Initializes the evaluation grid
+5. Initializes the evaluation grid, or reconciles an existing readiness
+   checklist to the confirmed scope while preserving collected work.
 
 Before calling this, review the scope with get_scope_summary to make sure
 product info, systems, and data types are all correct.
@@ -175,9 +176,8 @@ Args:
 
 Delegate a conversation topic to a team member.
 
-The delegate receives an email with two options:
-1. Connect via their own AI agent (MCP) — they get a scoped token
-2. Use the web chat fallback
+The delegate receives a scoped token and instructions to connect their
+own AI agent. Audit invitations also include an evidence upload link.
 
 Only the assigned topic is accessible to the delegate.
 
@@ -188,45 +188,22 @@ Args:
 
 ## `finalize_policy_pack`
 
-Render the company's drafted policy library into branded PDFs in the
-portal.
+Retired server render: readiness policy documents stay on the user's machine.
 
-Working drafts stay markdown while readiness iterates; when the user wants
-the finished set, this renders every document submitted with content into
-a clean PDF on the COMPANY's own branding (their documents, never firm
-letterhead) and files them under Deliverables in the portal. Safe to
-re-run — a re-drafted document replaces its earlier render.
-
-Args:
-    confirm: first call with confirm=false lists what would render;
-        re-call with confirm=true after the user says go.
+Kept as a compatibility response for clients that already know this tool.
+If the user requests PDFs, the client AI can render separate local copies
+using its own file tools, preserving originals and their format. No document
+bytes are read, stored or uploaded by this server.
 
 ## `get_judgment_kit`
 
-Serve everything your AI needs to JUDGE and FIX one control/attribute.
+Serve Check, short Notes, required Assess coverage and curated Examples.
 
-Returns the Bible's pass criteria, what auditors look for, typical evidence,
-applicability (when it is not applicable), worked calibration examples
-(a situation, the call an AI would get wrong, the correct call, and WHY), the
-coverage checks, and remediation guidance. This is reference DATA — you (the
-client's AI) make the judgment and decide on fixes with the user; Chiaro
-renders no verdict.
-
-READ `calibration_examples` BEFORE YOU CALL THE ATTRIBUTE. Each one is a real
-judgment call that an AI got wrong: `evidence_summary` is the situation,
-`ai_verdict` is the wrong call, `correct_verdict` is the right one, and
-`reasoning` says why in general terms. They exist because these are the
-specific mistakes AIs make on this attribute — a document attribute passing on
-substance rather than on being a standalone file, an acknowledgment measured
-against the roster rather than against the acknowledgment system's own
-contents, a process that excludes contractors. If your read of the evidence
-matches an `ai_verdict`, that is the signal to look again, not to proceed.
-(The same examples are published in Chiaro's open methodology repository —
-nothing here is secret.)
-
-Args:
-    control_ref: e.g. "IAM-02".
-    attribute_id: e.g. "A1". Omit to get the kit for every attribute of the control.
+Open and inspect the actual local files, then echo each issued context_id
+with the version-bound observations in record_self_assessment, or in
+record_area_review after the end-of-area draft adoption response. Readiness
+grades Type I. No upload or second Type II grade is needed. The client makes
+the assessment; metadata does not independently authenticate local files.
 
 ## `get_population_spec`
 
@@ -417,14 +394,21 @@ Args:
 
 ## `reclassify_evidence`
 
-Correct the evidence_type label on a file you already submitted.
+Correct the evidence_type or source_system label on a file already submitted.
 
 Use this when a file was filed under the wrong KIND — most often a dated
 write-up of something that HAPPENED (an access-review record, a DR test
 log, a deficiency tracker with entries) filed as "document", which is the
 label for policies and plans saying what SHOULD happen. Do NOT re-submit
-the file: an identical file reuses the existing row, so the label would
-not change.
+the file: the same file at the same path reuses the existing row, so the
+label would not change, and saving it somewhere else to force a new row
+leaves two records of one artifact.
+
+Also use it when the WHERE is wrong. Submitting a file whose bytes are
+already stored reuses that first row and keeps its `source_system`, so a
+system named wrongly the first time stays wrong however many times the file
+is sent again — and a check that asks "which place was searched" then reads
+the old answer. Pass source_system= to correct it.
 
 The evidence lane is re-derived by the server from the corrected label
 plus the original submission's own signals — relabeling cannot make a
@@ -440,7 +424,11 @@ Args:
         completed activity), "policy"/"procedure"/"plan"/"document",
         "cli_output"/"config"/"api_response"/"scan" (raw command output),
         "export", "screenshot".
-    why: One sentence: why the original label was wrong.
+    why: One sentence: why the original label was wrong. Required.
+    source_system: The corrected system, tool or mailbox the artifact came
+        from ("Linear", "Google Workspace"). Leave empty to change only the
+        evidence_type. Correcting this NEVER strengthens the evidence lane —
+        naming a system does not make a write-up a system pull.
 
 ## `reclassify_system`
 
@@ -485,6 +473,26 @@ Args:
     names: The enumerated names — a JSON array of strings, or one name
         per line.
     note: Anything the user said about the list (optional).
+
+## `record_area_review`
+
+Save one area's proposed judgments and management's draft decisions together.
+
+Inspect the actual local files and judge each check against its current kit
+BEFORE asking for adoption. At the end of the area, show the named versions,
+the short changes, and one picker; record any document-specific exceptions.
+Existing effective policies need no new approval. Evidence bytes stay local.
+
+assessments: JSON list of record_self_assessment items (up to 100, one area).
+adoptions: JSON list of {evidence_id, version_id, decision, adopted_by, statement}.
+    decision is adopted, pre_existing, changing_first, or not_yet. Use the
+    person's actual words; never choose adoption for them. [] is allowed.
+review_id: UUID for this response. Reuse with identical answers after a
+    failed save; a changed response needs a new UUID. No new customer question
+    is needed for a transport retry or unchanged file.
+
+Approval cannot create a pass. A refused judgment stays open while a true
+adoption stands. An infrastructure failure rolls back the entire response.
 
 ## `record_bypass_routes`
 
@@ -592,12 +600,16 @@ Args:
 
 Record what the user said when asked whether they adopt a drafted document.
 
-Fire the picker `drafts_awaiting_adoption` serves you, once per document,
-then record the answer HERE in the user's own words. The server tracks which
-documents have been asked about, so a document that stops appearing in that
-list has been answered — never re-ask it.
+For normal readiness, first inspect and judge all proposed versions, collect
+ONE end-of-area response covering the named drafts and document exceptions,
+and use record_area_review to save adoption and assessments together. This
+single-document tool remains for recording an explicit standalone decision;
+it must not create a separate question for every draft. Never re-ask about
+an unchanged adopted version. Changed versions need a new review. Show
+choices using the available native tool or plain text. Native document
+formats use this same version-bound flow; never convert files for adoption.
 
-This records the USER's statement, exactly like an attested pass: their name
+This records the USER's statement, an assertion without readiness credit: their name
 and their words, dated by the server. It is their decision, never yours, and
 you may not answer it on their behalf.
 
@@ -608,6 +620,35 @@ Args:
         predates your draft and was already adopted) | "not_yet".
     adopted_by: who said it — required for "adopted" and "pre_existing".
     statement: their exact words — required for "adopted" and "pre_existing".
+
+## `record_population_place`
+
+Record WHERE a kind of event gets written down at this company. Asked once.
+
+Several checks turn on whether something happened — incidents, people
+leaving, emergency changes, privacy requests. When the honest answer is
+"none did", the proof is not a sentence saying so: it is a look at the place
+one WOULD have been recorded, showing it empty. That only works if we know
+which place, and asking on every check separately gets four different
+answers. So it is asked once per kind of event and reused everywhere.
+
+Ask the user in their own words and record what they say. "There is nowhere
+we write those down" is a real answer — record it as kind='none' and the
+affected checks route to a gap with the exact thing to start keeping, rather
+than to a pass nobody can evidence.
+
+Args:
+    population_key: which kind of event, e.g. "incidents", "terminations",
+        "new_hires". The refusal that sent you here names the exact key;
+        get_judgment_kit also returns it for any check that needs one.
+    place: the user's own words for where it lives ("Linear", "the
+        support@ inbox", "we just use email").
+    kind: "system" (a tool with a queue or log) | "inbox" (a mailbox or
+        channel) | "document" (a register or spreadsheet) | "none" (there is
+        no such place).
+    system: the connectable system's name when there is one, so a later pull
+        knows where to point.
+    notes: anything about how to search it that a future pull would need.
 
 ## `record_prior_report`
 
@@ -704,9 +745,14 @@ Record YOUR AI's self-assessment verdicts (the client's own judgment).
 
 Use after checking gathered evidence against the judgment kit. Server-side
 gates keep the meter honest (they check FORM, never re-judge): a pass needs
-cited evidence from this engagement (or basis='attested' with the user's
-explicit confirmation), not_applicable is refused where the check always
+current inspected evidence from this engagement, or a receipt from the server
+human-confirmation picker. An explicit last-resort confirmation earns
+self-assessed readiness credit and is labelled evidence unchecked. not_applicable is refused where the check always
 applies, and flipping a gap to pass needs newer evidence or correction=true.
+A check with current passing credit before and after this call returns
+already_passing=true and the control's open gaps. The meter counts each
+check once. Receipt retries return saved work. AI-supplied quotes and stale
+historical pass labels do not establish current credit.
 
 A pass also has to MEET THE CHECK'S OWN BAR. Every coverage check declares
 the strength of artifact it needs, and citing something weaker is refused
@@ -718,24 +764,50 @@ a document that discusses the subject without containing it — ask the user
 before you file: "do you actually do this?" for a practice, "does this exist
 anywhere, signed / published / defined?" for a named thing. Their "no, we
 never created one" is `absent` in their own words; their "yes, it lives
-somewhere else" is a `gap`. Both are normal answers; guessing between them
+somewhere else" leaves the assessment `unresolved` until inspected. Both are normal answers; guessing between them
 is not.
 
 Args:
     control_ref: e.g. "IAM-02".
     attribute_id: e.g. "A1".
-    verdict: "pass" | "gap" | "absent" | "not_applicable" (absent = the
-        practice itself does not exist, on the user's word; a practice that
-        exists but lacks records is a gap — ask them which it is rather
-        than inferring it from an empty search).
+    verdict: "pass" | "gap" | "absent" | "not_applicable" |
+        "non_occurrence" | "unresolved". unresolved = missing facts or an
+        unsupported acceptance basis; no credit and no confirmed N/A. absent = the practice itself does not exist, on
+        the user's word; an empty search leaves unresolved facts unless evidence
+        establishes a missed requirement. Ask where the actual record is.
+        non_occurrence = an inspected complete source shows the event
+        did not happen in the period (no incidents, no terminations), shown
+        by a look at the place it WOULD have been recorded, empty.
     reasoning: one or two sentences citing the evidence and the criterion.
     evidence_ids: the evidence ids (from submit_evidence/submit_document),
         as an array ["<id>"] or as that array in a JSON string.
     basis: "evidence" (default) or "attested" (user explicitly confirms
         without walking through evidence — quote them).
-    attested_by: who confirmed (required when basis='attested').
-    attested_statement: the user's own words (required when basis='attested').
+    attested_by: legacy input; completion uses the name supplied in the human picker.
+    attested_statement: legacy input; a quote alone never grants completion.
+    attestation_reason: for the last-resort attested path, explain the existing
+        evidence route tried and why checking evidence now is impractical.
+        The server presents its own explicit picker; never choose for the user.
     fix_description: when closing a previously recorded gap — what changed.
+    company_rule_schedules: optional due-date facts recorded once on the owning
+        company-rule check, keyed "control_ref/attribute_id" for its scheduled
+        children. Each value carries window(start/end, timezone-bearing ISO
+        timestamps), effective_from, timezone, complete, occurrences(id/due_at),
+        obligation_facts and evidence_ids from this owner's inspected evidence.
+        If a rule changed, include all versions(version_id, effective_from,
+        effective_until exclusive or null, evidence_ids) across the inspected
+        window, and rule_version_id on each original due occurrence. Keep the
+        original due IDs and dates even when a duty survives its rule version.
+        Cite the original and revised sources already inspected by this owner;
+        reuse those registered files. A gap in rule history stays unresolved.
+        For GOV-01/A9, subject_ids are the roster's stable item_ids; each due
+        occurrence has subject_id. Link each nested renewal_acknowledgments
+        record to its schedule_occurrence_id and actual at timestamp, reusing
+        its source_ref. A person with no duty due needs an evidenced future
+        first occurrence or no_due_subjects(subject_id, reason, evidence_ids)
+        citing this owner's inspected sources. Keep missing history unresolved.
+        The same accepted evidence/version and owner judgment are reused by
+        each child. Missing dates remain unresolved; never invent a cadence.
     correction: true when overturning your own earlier misjudgment (say why
         in reasoning).
     assessments: OPTIONAL batch — JSON list of objects with the fields above
@@ -770,7 +842,7 @@ are questions for the user; wrong_phase, not_open_yet and locked name a state
 to wait for or a tool that moves it. Read the message and do what it names
 ONCE before you consider reporting.
 
-Call this when, and only when, one of these is true:
+Report any of the following.
   1. the SAME call failed TWICE with the same reason after you did what the
      first refusal named;
   2. a refusal sent you to a tool that then refused you back for the same
@@ -778,11 +850,26 @@ Call this when, and only when, one of these is true:
   3. a call succeeded but get_progress did not move, twice in a row, for the
      same attributes;
   4. you genuinely do not know what to do next, and get_status,
-     get_scope_summary and get_progress did not tell you.
+     get_scope_summary and get_progress did not tell you;
+  5. the user reports confusing, repetitive or broken product behavior.
+     Preserve their complaint without requiring them to reproduce it.
 
-One report per problem. Then tell the user in one line that the team has
-been told, and carry on with the areas that still work. Do not tell the user
-to email us — this does that.
+One report per problem. For product feedback, describe only the confusing
+Chiaro step and relevant tool outcomes. Do not copy private conversations,
+unrelated complaints, personal remarks, credentials or evidence contents.
+Respect existing permission, host approvals and any user instruction not
+to send feedback. Do not announce routine reporting; help with the confusing
+step and carry on with areas that work. If asked, explain data.report_receipt
+honestly. Never conceal tool activity or deny a report; the host may show
+this call. Do not tell the user to email us — this does that.
+If the user explicitly asks to file a report, reach a person, or request a
+human-only action, acknowledge the actual receipt and where the reply goes.
+If data.saved is false, explain that the problem was not saved and give the
+Help-panel fallback. State any blocked step and a useful next step without
+pretending it was resolved. For automatic case-5 feedback, describe an
+observable Chiaro instruction/flow problem, never the person's feelings,
+private words or personal complaint. If no product problem can be described
+independently of those remarks, help locally without filing that feedback.
 
 Args:
     summary: What is wrong, in a sentence or two. Plain language.
@@ -921,12 +1008,17 @@ Args:
         our evidence — every applicable check is still self-assessed with
         the company's own real evidence. Omit for a first-time SOC 2; pass
         {"had_prior": false} to clear a mistakenly recorded transition.
+    confirmed_na_controls: Whole-control scope confirmations keyed by control ref,
+        each with the exact library na_trigger as condition and confirmed true/false.
+        Only confirm facts the user supplied; unknown conditions stay visible.
+    type2_planned: False explicitly records no Type II plan; omitted keeps the existing answer.
     intended_obs_months: The observation window the company PLANS if they
         go for a Type II later — 3, 6 or 12. One friendly planning
-        question, no commitment: it only tunes the log-retention guidance
-        (retention must cover the window), nothing is gated on it, and it
-        is reconciled automatically when a real window is purchased.
-        Omit or 0 when unanswered; the guidance then assumes 12.
+        question, no commitment: only the mapped logging checks add an
+        intended-window retention requirement. Other Type II notes stay
+        advisory. Omit or 0 to preserve the saved answer; an unanswered
+        profile defaults to 12. type2_planned=False explicitly records
+        no Type II plan, so no additional intended-window gate applies.
 
 ## `set_data_types`
 
@@ -1041,6 +1133,14 @@ Args:
         do NOT need to populate this from conversation. Leave empty.
     absent_attributes: Reserved for advanced/internal use. Leave empty.
     follow_up_round: Internal field. Leave at default.
+    follow_up: For an existing firm request, send request_id and attribute_id
+        from load_area, a stable answer_revision UUID and optional evidence
+        snapshots returned by submit_evidence/document. answer_payload may
+        preserve the exact choice IDs and text; its text must equal answer.
+        Keep the same revision and exact payload on retry. Optional action
+        ai_seen/in_progress records only AI-reported activity. No human
+        acknowledgment or new question is required. A received receipt is
+        arrival of this response, never audit acceptance.
 
 ## `submit_document`
 
@@ -1055,26 +1155,47 @@ reclassify_evidence, never by re-submitting.
 
 REQUIRED FLOW:
 
-  1. You (the AI) saved the real document to local_path under
-     ~/Documents/chiaro-soc2/02-policies/ (or 04-process-evidence/ for procedure
-     records). The raw file is the source of truth.
+  1. Inspect the real document, preserving the original and its format.
+     In readiness, keep its accessible local path; no relocation is needed.
+     In an audit, copy it as-is into ~/Documents/chiaro-soc2/02-policies/
+     without overwriting a same-named file. Hash/register the actual file.
+     If copying is unavailable, ask the user to copy as-is; do not convert.
+     For a web-only source, save a faithful available export locally and keep
+     the source link. This is allowed; preserve any existing native original.
   2. You wrote a sibling how_collected.md describing where it came from.
   3. NOW you call this tool with the summary + which attributes the doc
      helps satisfy (existence only).
 
-HARD RULE — NO FABRICATION:
-  You may SUMMARIZE a real document the user pointed you at.
-  You may NEVER GENERATE a polished policy from scratch when the user
-  said they don't have one. If they describe an informal practice, save
-  their VERBATIM WORDS as a .md file and submit that instead.
+NEVER FABRICATE EVIDENCE.
+  Summarize only the inspected source. Never invent or backdate history,
+  approvals, completed activities or adoption. Preserve informal descriptions
+  VERBATIM with their qualifiers.
+  In an AUDIT, collect existing documents. If the user confirms one is missing,
+  call mark_absent; never generate a replacement to satisfy the examination.
+  READINESS ONLY. With permission for this work, prepare a separate revision
+  in the existing format, preserving the original, comments, tracked changes,
+  styles, headers and tables. Reuse known location/format choices; ask only
+  when undecided. If safe editing is unavailable, leave the file alone, give
+  a plain change list and ask for an editable source; never convert it.
+  A missing document follows the house format. Show changes and actual date.
+  Register the saved new or revised file as is_draft=true and label its summary
+  "AI-revised draft, not yet adopted by the customer". Permission to edit is
+  not adoption. Inspect every applicable check before asking for adoption.
+  Save actual adoption words with the returned evidence_id and version_id
+  through record_area_review, or record_policy_adoption for a standalone
+  decision. Native formats use this same flow; no content conversion is needed.
+  An unadopted draft earns no credit; adoption alone never creates a pass.
+  A new policy cannot prove past activities or erase a past deficiency.
 
-The local file gets uploaded to Chiaro at the end of the engagement and
-becomes the basis of the actual audit. Your summary helps move efficiently.
+Readiness evidence stays local. Register its path, hash and compact inspection
+observations. Audit copies travel in the handoff zip. Claim a save only after
+the tool reports success; local working notes alone do not prove a server save.
 
 Args:
     name: Document name (e.g., "Access Control Policy", "IR Plan").
-    local_path: ABSOLUTE path to the file you saved under ~/Documents/chiaro-soc2/.
-        Required. If you have not saved a real file, do not call this tool.
+    local_path: Absolute path to the actual readiness file in an accessible
+        local folder, or the same-format audit copy in ~/Documents/chiaro-soc2/.
+        Required. Preserve the original; no real file, no call.
     summary: 1-3 sentences describing what the document contains.
         You MAY summarize. You MAY NOT add anything not in the source file.
     covers_attributes: the [control_ref, attribute_id] pairs this document
@@ -1085,40 +1206,41 @@ Args:
         Required.
     document_type: "policy" / "procedure" / "plan" / "report" / "other".
     sha256: SHA-256 hex digest of the saved file (shasum -a 256 /
-        Get-FileHash). Reconciled against the uploaded bytes at review —
-        include it whenever you saved a real file.
+        Get-FileHash). Required for readiness artifact version registration.
     effective_date: Optional ISO date (YYYY-MM-DD) the document is dated /
         took effect. Pass it especially for a RECORD or report (a training
         completion record, an access-review log, meeting minutes, an
         incident report). If such a record is dated today it has no
         operating history — we don't block it, we flag it for review.
         A policy/procedure you just created today is fine and isn't flagged.
-    content: READINESS ONLY, optional: the document's full markdown text
-        (as saved to local_path, up to ~200KB). Pass it for policies and
-        plans you drafted — finalize_policy_pack later renders every
-        content-bearing document into the company's branded PDF pack in
-        the portal. Audit engagements ignore it (files travel via the
-        upload link there).
+    content: Deprecated compatibility argument. Do not send file bytes.
+        Any supplied text is ignored and never uploaded. A readiness call
+        using this legacy draft argument still marks its local version as
+        a draft requiring version-specific adoption.
+    observations: Inspection objects with method (read, screenshot, cli_output,
+        document or export), location (page/section/record), and facts (brief
+        observed facts). Optional requirement_ids lists identifiers issued by
+        the current judgment kit. These are compact facts, not file bytes.
+    is_draft: True for a newly prepared draft. Adoption is a separate step.
 
 ## `submit_evidence`
 
 Record that a piece of raw evidence has been saved locally. REQUIRED FLOW:
 
   1. You (the AI) used Write or Bash to save the raw file to local_path
-     under ~/Documents/chiaro-soc2/. The raw file is the source of truth.
+     in any accessible local folder. The raw file is the source of truth.
   2. You wrote a sibling how_collected.md describing how it was obtained.
   3. NOW you call this tool with the summary + which coverage_checks it
      satisfies (existence only).
 
-The local file gets uploaded to Chiaro at the end of the engagement and
-becomes the basis of the actual audit review. Your summary helps our audit team
-move efficiently. NEVER call this tool for content that doesn't exist
-as a real file on disk.
+Readiness keeps the file local. Inspect its actual contents and register
+compact observations with this reference; a summary alone earns no credit.
+Never call this tool for content that does not exist as a real local file.
 
 Args:
     area: Plain-English area key from load_area (e.g., "access-management",
         "change-management", "data-protection").
-    local_path: ABSOLUTE path to the file you just saved under ~/Documents/chiaro-soc2/.
+    local_path: Absolute path to the actual file in any accessible local folder.
         Required. If you have not saved a real file, do not call this tool.
     summary: 1-3 sentences describing what the file contains. Plain English.
         You MAY summarize. You MAY NOT invent content that isn't in the file.
@@ -1159,8 +1281,8 @@ Args:
     sha256: SHA-256 hex digest of the saved file. Compute it right after
         saving (macOS/Linux: `shasum -a 256 <file>`; PowerShell:
         `Get-FileHash <file> -Algorithm SHA256`). At review we reconcile
-        this against the uploaded bytes — it is the artifact's integrity
-        anchor, so include it whenever you saved a real file.
+        it to the registered artifact version. The hash alone does not prove
+        inspection or authenticate the local bytes.
     provided_by: Name of the PERSON who produced/exported this evidence
         (the user, or whoever they say did it). Validated against the
         engagement roster — never guess or invent a name.
@@ -1256,7 +1378,11 @@ Args:
         recon_attempts). get_population_spec says which ones this
         population supports. For a roster (state-as-of) population it must
         also carry as_of — the exact timestamp the state was captured at.
-    policy: JSON object of parameters from the entity's OWN documented
+    policy: For company-owned due dates include company_rule_schedules keyed
+        by control/check, with original evidence_ids, obligation_facts,
+        timezone, complete window, all effective rule versions and due
+        occurrences. These are source facts for the examiner, not judgments.
+        JSON object of parameters from the entity's OWN documented
         policy, with policy_basis naming the document. Defaults are strict:
         an undeclared exception does not exist.
     source_evidence_ids: When the population's records are DOCUMENTS

@@ -1,18 +1,18 @@
 # For AI agents reading this repository
 
-This repository is the complete methodology a company is measured against in
-a Chiaro SOC 2 readiness run or examination. It is designed to be read by
-software as much as by people. This page is the map.
+This repository contains Chiaro's published SOC 2 methodology for readiness
+and examination. It is designed to be read by software as much as by people.
+This page is the map.
 
 ## What each file is
 
 - `framework/controls.json`: the 89 controls, keyed by stable refs
   (GOV-01, IAM-03) that never renumber.
-- `framework/test_attributes.json`: 369 test attributes. Each carries
-  pass criteria in a point-in-time form (readiness, Type I) and an
-  over-a-period form (Type II), typical evidence, and conditions where it
-  does not apply.
-- `framework/calibration-examples.json`: 552 worked judgment calls in
+- `framework/test_attributes.json`: 387 test attributes. Each carries
+  what is tested, the rule it is judged by (`pass_criteria`, or the check text
+  with `visible_rules` and `guidance`) and typical evidence; a check that can be
+  not applicable also carries the condition for that.
+- `framework/calibration-examples.json`: 945 worked judgment calls in
   one flat file: the verdict an AI reached, the correct verdict, and why.
   These anchor how strict or lenient a judgment should be.
 - `framework/criteria.json` and `framework/evidence_map.json`: the Trust
@@ -38,10 +38,10 @@ software as much as by people. This page is the map.
 - A company can be measured against this framework directly: evidence is
   judged against each attribute's pass criteria, with the calibration
   examples as the reference for edge calls.
-- Attribute texts are population-first, matching the census method in
-  `method/type2-testing.md`: they read "for each X" or "for all X." DAT-04's
-  "sampled data" is the one survivor of the older wording, and there it means
-  data-subsetting for non-production environments, not audit sampling.
+- Each selected suite states its own coverage. Readiness uses Type I; Type II
+  event populations and configuration snapshots/history follow their authored
+  requirements in `method/type2-testing.md`. IAM-02/A3 keeps one sampled user
+  per in-scope system, allowing reuse of the same person across systems.
 - Zero rows with a recorded pull is evidence of a zero. An unrecorded "we
   had none" is a missing population.
 - This is the methodology, not the product. The evaluation engine and the
