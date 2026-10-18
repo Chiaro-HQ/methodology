@@ -22,6 +22,10 @@ The same 89 controls, with clearer checks and more worked examples.
   kept with its recorded basis and date, or the customer's explicit
   confirmation, labelled as evidence not checked. None of these is an audit
   conclusion.
+- When a user says the thing a criterion names exists somewhere else, the
+  readiness check is `unresolved` until that thing is inspected: it earns no
+  credit, and it is not a `gap` unless the inspection shows the requirement is
+  not met. This replaces v1.8's description of that answer as a `gap`.
 - Work saved before this version is kept: earlier completions keep their
   recorded basis and date, and existing evidence is considered before asking for
   more. An examination already under way keeps the rules and evidence it started
