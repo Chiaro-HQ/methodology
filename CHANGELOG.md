@@ -5,6 +5,57 @@ applied to an examination. Corrections that do not change the method (typos,
 formatting, clearer wording with the same meaning) ship without a version, and
 the commit history on this repo records every one of them.
 
+## v1.12, 2026-10-18
+
+The same 89 controls and 387 checks, with clearer evidence guidance on eight
+checks, and how an audit's scope is set.
+
+- Agreements: for a hosted AI model provider (AI-01 A2) and for a vendor's
+  confidentiality and data processing commitments (VND-01 A8, A9), the
+  governing written agreement or addendum can be signed, or validly accepted
+  electronically as part of the business terms for the company's account,
+  with evidence that the terms cover that account.
+- Training on submitted data (AI-02 A1): where a provider has no setting for
+  it because its commercial terms exclude training, a screenshot from the
+  company's own account showing it is on those terms, together with the
+  terms' no-training clause, counts. So does a signed or electronically
+  executed no-training addendum. A provider's public policy page on its own
+  does not.
+- AI-03 A2 accepts a gateway or filtering service, or code that builds each
+  provider request only from the fields the written data boundary permits,
+  with every provider call going through it.
+- BCP-02 A5 accepts redundancy across zones switched on for the company's own
+  managed service, such as a managed database set to fail over to another
+  zone, alongside standby and failover configurations. A documented manual
+  failover procedure is flagged for review.
+- CHG-04 A3 accepts a free analysis tool or a security linter (for example
+  Semgrep Community Edition, Bandit or eslint-plugin-security) run in CI or in
+  the development workflow with its results available, as well as a
+  commercial scanner.
+- END-02 A4 names, as its evidence, the CI/CD or repository settings that
+  hold every production deploy until it is reviewed, approved and tested (for
+  example branch protection requiring a pull request review and passing
+  checks), shown by a pulled configuration, an export or a screenshot. A
+  written deployment procedure can sit alongside them.
+- Processing integrity: PI1.2 and PI1.3 carry the text the Trust Services
+  Criteria give them, on system inputs and on system processing, and the risk
+  and intent notes for PI1.1 to PI1.4 each describe their own criterion.
+- A new account's first setup asks whether the product sends customer or
+  company data to an AI model service run by another company. "Yes" keeps the
+  AI governance controls (AI-01 to AI-04) in scope whatever the provider is
+  called; "no" leaves them out unless an AI model service is on the system
+  list.
+- On an audit, the first scope confirmation sets the audit's scope and needs
+  the penetration testing answer first. After that, an answer that would
+  change which checks apply is refused; a recorded answer that is wrong is
+  reported through `report_problem`, and the audit team updates the scope and
+  the checklist together.
+- A new tool, `update_system_description`, replaces the recorded description
+  of a system without changing its classification, the scope confirmation or
+  the checklist.
+- `method/tools.md` lists each tool's arguments with the type, whether the
+  argument is required, and the description the server sends with it.
+
 ## v1.11, 2026-09-23
 
 The same 89 controls, with clearer checks and more worked examples.

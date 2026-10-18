@@ -340,25 +340,25 @@
   "PI1.1": {
     "text": "The entity obtains or generates, uses, and communicates relevant, quality information regarding the objectives related to processing, including definitions of data processed and product and service specifications, to support the use of products and services.",
     "category": "Processing Integrity",
-    "intent": "RISK: Data inputs are incomplete, inaccurate, or unauthorized. INTENT: Processing starts with valid, authorized inputs.",
+    "intent": "RISK: Processing objectives, data definitions and product or service specifications are undefined or not communicated, so nobody can tell what correct processing looks like. INTENT: The entity defines and communicates the information processing must meet, including definitions of data processed and product and service specifications.",
     "objective_ids": []
   },
   "PI1.2": {
-    "text": "The entity implements policies and procedures over system processing to result in products, services, and reporting to meet the entity's objectives.",
+    "text": "The entity implements policies and procedures over system inputs, including controls over completeness and accuracy, to result in products, services, and reporting to meet the entity's objectives.",
     "category": "Processing Integrity",
-    "intent": "RISK: Processing produces incorrect or incomplete results. INTENT: Processing logic is controlled and validated.",
+    "intent": "RISK: Data inputs are incomplete, inaccurate, or unauthorized. INTENT: Processing starts with valid, authorized inputs.",
     "objective_ids": []
   },
   "PI1.3": {
-    "text": "The entity implements policies and procedures over system outputs to result in products, services, and reporting to meet the entity's objectives.",
+    "text": "The entity implements policies and procedures over system processing to result in products, services, and reporting to meet the entity's objectives.",
     "category": "Processing Integrity",
-    "intent": "RISK: Outputs are delivered to wrong parties or are incomplete. INTENT: Outputs are distributed accurately and completely.",
+    "intent": "RISK: Processing produces incorrect or incomplete results, or processing errors go undetected and uncorrected. INTENT: Processing logic is controlled and validated, and processing errors are identified and corrected in a timely manner.",
     "objective_ids": []
   },
   "PI1.4": {
     "text": "The entity implements policies and procedures to make available or deliver output completely, accurately, and timely in accordance with specifications to meet the entity's objectives.",
     "category": "Processing Integrity",
-    "intent": "RISK: Processing errors go undetected and uncorrected. INTENT: Errors in processing are identified and corrected in a timely manner.",
+    "intent": "RISK: Outputs are delivered late, incomplete, inaccurate, or to the wrong parties. INTENT: Outputs are made available or delivered completely, accurately and on time, in line with specifications.",
     "objective_ids": []
   },
   "PI1.5": {

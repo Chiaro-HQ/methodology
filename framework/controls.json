@@ -4052,7 +4052,7 @@
           "Pull contract or agreement clauses covering security and privacy requirements for critical vendors",
           "Pull records of periodic reassessment of critical vendors"
         ],
-        "what_good_looks_like": "A maintained vendor register listing each vendor, what data it handles, and a risk tier, with the assessment artifact on file for critical vendors (an audit report, a completed questionnaire, or a signed data processing agreement) and evidence that critical vendors are re-reviewed at least annually.",
+        "what_good_looks_like": "A maintained vendor register listing each vendor, what data it handles, and a risk tier, with the assessment artifact on file for critical vendors (an audit report, a completed questionnaire, or a data processing agreement, signed or bindingly executed electronically as part of the vendor's accepted terms) and evidence that critical vendors are re-reviewed at least annually.",
         "what_bad_looks_like": "A bare list of tool names with no risk rating or assessment on file, or a claim that vendors are vetted with no questionnaires, reports, or contract terms to show it.",
         "red_flags": [
           "No vendor inventory, or a list with no risk tiering",
@@ -5140,7 +5140,7 @@
       "question": "Which hosted AI model providers process your entity or customer data, and how are they inventoried and governed?",
       "follow_ups": [
         "Which hosted AI model providers do you send data to, and what data does each one receive?",
-        "Do you have a signed agreement or data processing addendum with each provider?",
+        "Do you have a governing written agreement or data processing addendum with each provider, signed or validly accepted electronically for your business account?",
         "Have you identified whether each provider uses your data to train its models?",
         "Do the providers that receive customer data appear on your subprocessor list?"
       ],
@@ -5163,14 +5163,14 @@
       "collection_playbook": {
         "evidence_goals": [
           "Obtain the inventory of hosted AI model providers with the data each one receives and the sending system",
-          "Obtain the signed agreement or data processing addendum for each provider that handles customer data",
+          "Obtain the governing written agreement or data processing addendum for each provider that handles customer data, signed or validly accepted electronically, with evidence it covers the account",
           "Obtain the customer subprocessor list and reconcile it against the providers that receive customer data"
         ],
-        "what_good_looks_like": "A per provider inventory naming each hosted model provider, the categories of data it receives, and the system or feature that sends the data, with a signed agreement or data processing addendum on file for each provider that handles customer data, model training and retention terms identified per provider, and every provider that receives customer data listed on the subprocessor list.",
+        "what_good_looks_like": "A per provider inventory naming each hosted model provider, the categories of data it receives, and the system or feature that sends the data, with a governing written agreement or data processing addendum on file, signed or validly accepted electronically, for each provider that handles customer data, model training and retention terms identified per provider, and every provider that receives customer data listed on the subprocessor list.",
         "what_bad_looks_like": "A general statement that AI providers are trusted or compliant with no per provider list. Model training terms asserted verbally or copied from a provider marketing page. Providers present in the codebase or credential store but absent from the inventory.",
         "red_flags": [
           "Hosted AI provider integrated in the codebase but missing from the inventory",
-          "Customer data sent to a provider that has no signed agreement or data processing addendum",
+          "Customer data sent to a provider with no governing written agreement or data processing addendum covering the account, such as a consumer or personal account",
           "Model training or retention terms not identified for a provider",
           "Provider receiving customer data absent from the subprocessor list",
           "Free tier or personal provider accounts used to process customer data"
@@ -5204,7 +5204,7 @@
       "local_save": "ai-governance/",
       "question": "How have you configured your AI model provider accounts to control training on your data and data retention?",
       "follow_ups": [
-        "Where in each provider's console is the setting that controls training on your data?",
+        "Where in each provider's console is the setting that controls training on your data, or, where no such setting exists, which commercial terms govern your account?",
         "What retention window is configured at each provider, or do you have a zero data retention arrangement?",
         "Does the setting apply to every project, workspace, or API key under your organization account?"
       ],
@@ -5226,14 +5226,14 @@
       ],
       "collection_playbook": {
         "evidence_goals": [
-          "Capture, from the entity's own provider account, the setting that controls whether submitted data is used to train the provider's models",
+          "Capture, from the entity's own provider account, the setting that controls whether submitted data is used to train the provider's models or, where no separate setting exists, account-specific evidence of the governing commercial terms and their no-training clause; a signed or electronically executed no-training addendum also counts",
           "Capture the configured retention window from the entity's own provider account, or the signed zero data retention arrangement",
           "Enumerate all projects, workspaces, or API keys under the organization to confirm the organization level setting covers every one"
         ],
-        "what_good_looks_like": "A console screenshot or export from the entity's own provider account showing training on submitted data disabled and the retention window set to the entity's defined period, or a signed zero data retention addendum, plus an enumeration of all projects or workspaces confirming the setting applies organization wide.",
+        "what_good_looks_like": "A console screenshot or export from the entity's own provider account showing training on submitted data disabled (or, where no separate setting exists, account-specific evidence of the governing commercial terms and their no-training clause, or a signed or electronically executed no-training addendum) and the retention window set to the entity's defined period, or a signed zero data retention addendum, plus an enumeration of all projects or workspaces confirming the setting applies organization wide.",
         "what_bad_looks_like": "A provider marketing page or default policy statement offered as proof of this organization's configuration. A screenshot of one project or key while other active projects remain uncovered. A verbal claim that training is off with nothing pulled from the account.",
         "red_flags": [
-          "No training posture supported only by the provider's public policy page rather than the entity's own account settings",
+          "No training posture supported only by the provider's public policy page rather than the entity's own account settings or account-specific proof of the governing terms",
           "Setting shown for one project or key while other active projects or workspaces are not covered",
           "Retention left at a longer default than the entity's defined period with no justification",
           "Personal or free tier provider account processing entity or customer data",

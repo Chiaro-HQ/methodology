@@ -114,7 +114,7 @@ source. mark_absent or submit_note instead.
 ## Sample-type attributes require real artifacts (hard rule)
 
 ```
-82 of 369 attributes are sample-type (most texts start with "For each
+85 of 387 attributes are sample-type (most texts start with "For each
 ..." or "For all ..."). load_area marks these with type: "sample" and
 exposes a typical_evidence field telling you exactly what to ask for.
 

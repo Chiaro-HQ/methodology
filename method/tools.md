@@ -1,6 +1,6 @@
 # The tools
 
-The 51 tools a connected client's AI can call. Generated from the
+The 52 tools a connected client's AI can call. Generated from the
 live server, so this list is exactly what a client sees, including the
 descriptions the AI reads to decide what to do.
 
@@ -20,18 +20,21 @@ whether it's in scope based on SOC 2 scoping criteria:
 Common systems (AWS, GitHub, Okta, etc.) are automatically classified.
 For less common tools, describe what you use it for.
 
-Args:
-    name: System name (e.g. "AWS", "Okta", "GitHub", "Datadog")
-    description: What you use this system for. Helps with classification
-        for less common tools. (e.g. "internal admin dashboards that
-        access production data")
-    category: Optional category hint (e.g. "infrastructure", "auth", "monitoring")
-    in_service_date: YYYY-MM-DD, and ONLY for a system that went into
-        service after a Type II observation period had already started.
-        Ask the user when they started using it. A system adopted
-        mid-period was not there for the earlier part of it, so the
-        report says when it was placed into service and its records only
-        cover from that day.
+Arguments:
+
+- `name` (string, required): System name (e.g. "AWS", "Okta", "GitHub", "Datadog")
+- `description` (string, optional): What you use this system for. Helps with classification
+  for less common tools. (e.g. "internal admin dashboards that
+  access production data")
+- `category` (string, optional): Optional category hint (e.g. "infrastructure", "auth", "monitoring")
+- `in_service_date` (string, optional): YYYY-MM-DD, and ONLY for a system that went into
+  service after a Type II observation period had already started.
+  Ask the user when they started using it. A system adopted
+  mid-period was not there for the earlier part of it, so the
+  report says when it was placed into service and its records only
+  cover from that day. A date already on file for a listed system
+  is not changed here: the audit team updates it when a record
+  shows the right date (report_problem).
 
 ## `answer_question`
 
@@ -49,10 +52,11 @@ The AI classifies each control in the topic as Absent or Exists based
 on the answer. After 2 rounds per topic, remaining controls default
 to Exists (we'll verify with evidence).
 
-Args:
-    topic_key: The topic identifier (from get_questions output data)
-    answer: Your answer — describe how your company handles this area.
-        Be specific about tools, people, frequency, and documentation.
+Arguments:
+
+- `topic_key` (string, required): The topic identifier (from get_questions output data)
+- `answer` (string, required): Your answer — describe how your company handles this area.
+  Be specific about tools, people, frequency, and documentation.
 
 ## `answer_questionnaire`
 
@@ -72,19 +76,11 @@ original is never touched and the buyer's format, wording, and structure
 are never altered. Fill only. Anything still open stays blank until the
 user answers it.
 
-Answer states you will get back:
-  backed            established by the company's independent examination.
-  company_statement the company's own disclosure or a previously given
-                    answer. True, but not something we examined.
-  needs_input       we have nothing that answers it. Ask the user.
+Arguments:
 
-needs_input is a normal and frequent outcome, not a failure. An honest ask
-beats a plausible guess in a document going to a customer.
-
-Args:
-    questions: Every question from the buyer's file, in document order,
-        as plain text. Include the buyer's own numbering if it has one.
-        Up to 300 per call.
+- `questions` (array of string, required): Every question from the buyer's file, in document order,
+  as plain text. Include the buyer's own numbering if it has one.
+  Up to 300 per call.
 
 ## `complete_step`
 
@@ -118,6 +114,18 @@ Runs the full scoping engine:
 Before calling this, review the scope with get_scope_summary to make sure
 product info, systems, and data types are all correct.
 
+On an audit, the first confirmation sets the audit's scope, so it first
+needs the penetration testing answer (set_company_profile
+pen_test_program). Confirming an audit again later keeps what it
+includes and leaves its checklist unchanged; a correction goes through
+report_problem.
+
+While a readiness account has no checklist yet (its first confirmation, or
+a retry of one that built nothing), confirming also needs the hosted-AI
+answer (set_company_profile uses_hosted_ai_models), unless an AI model
+service on the system list already settles it. Once a checklist exists it
+is never asked.
+
 ## `confirm_scope_delta`
 
 Record whether the systems in scope changed during the observation period.
@@ -133,11 +141,12 @@ classification like any other system, and may not be in scope at all),
 then call this with the user's answer in `note`. If nothing changed, call
 it with unchanged=true.
 
-Args:
-    unchanged: True only when the user says nothing was added, dropped or
-        replaced since the period started.
-    note: The user's answer in their own words. Required when unchanged is
-        false — a change with no account of it is a hole in the record.
+Arguments:
+
+- `unchanged` (boolean, optional): True only when the user says nothing was added, dropped or
+  replaced since the period started.
+- `note` (string, optional): The user's answer in their own words. Required when unchanged is
+  false — a change with no account of it is a hole in the record.
 
 ## `confirm_tsc`
 
@@ -159,18 +168,19 @@ saved and restore instantly if the category comes back. Compliance
 add-ons stay editable anytime before the audit is purchased (re-call
 with the SAME categories plus the updated addons).
 
-Args:
-    categories: The categories the client wants in scope.
-        Options: "availability", "confidentiality", "processing_integrity", "privacy"
-        Pass an empty list if the client only wants Security (the default).
-    addons: Optional compliance add-ons to cover alongside SOC 2.
-        Options: "gdpr", "ccpa", "hipaa". GDPR and CCPA require the
-        "privacy" category; HIPAA requires the "availability" category.
-        Pass an empty list to remove all add-ons; omit the argument to
-        leave the client's current add-ons unchanged.
-    confirm_scope_change: Set true only after the client has reviewed
-        the scope-change preview and approved it. Ignored when neither
-        the category set nor scope-moving add-ons (HIPAA) are changing.
+Arguments:
+
+- `categories` (array of string, required): The categories the client wants in scope.
+  Options: "availability", "confidentiality", "processing_integrity", "privacy"
+  Pass an empty list if the client only wants Security (the default).
+- `addons` (array of string or null, optional): Optional compliance add-ons to cover alongside SOC 2.
+  Options: "gdpr", "ccpa", "hipaa". GDPR and CCPA require the
+  "privacy" category; HIPAA requires the "availability" category.
+  Pass an empty list to remove all add-ons; omit the argument to
+  leave the client's current add-ons unchanged.
+- `confirm_scope_change` (boolean, optional): Set true only after the client has reviewed
+  the scope-change preview and approved it. Ignored when neither
+  the category set nor scope-moving add-ons (HIPAA) are changing.
 
 ## `delegate_topic`
 
@@ -181,10 +191,11 @@ own AI agent. Audit invitations also include an evidence upload link.
 
 Only the assigned topic is accessible to the delegate.
 
-Args:
-    topic_key: Topic to delegate (from get_questions output data)
-    delegate_name: Delegate's full name (e.g. "Sarah Chen")
-    delegate_email: Delegate's email address
+Arguments:
+
+- `topic_key` (string, required): Topic to delegate (from get_questions output data)
+- `delegate_name` (string, required): Delegate's full name (e.g. "Sarah Chen")
+- `delegate_email` (string, required): Delegate's email address
 
 ## `finalize_policy_pack`
 
@@ -194,6 +205,10 @@ Kept as a compatibility response for clients that already know this tool.
 If the user requests PDFs, the client AI can render separate local copies
 using its own file tools, preserving originals and their format. No document
 bytes are read, stored or uploaded by this server.
+
+Arguments:
+
+- `confirm` (boolean, optional)
 
 ## `get_judgment_kit`
 
@@ -205,6 +220,11 @@ record_area_review after the end-of-area draft adoption response. Readiness
 grades Type I. No upload or second Type II grade is needed. The client makes
 the assessment; metadata does not independently authenticate local files.
 
+Arguments:
+
+- `control_ref` (string, required)
+- `attribute_id` (string, optional)
+
 ## `get_population_spec`
 
 What a population is, in our definition, and what a pull of it must carry.
@@ -214,9 +234,10 @@ reconciliation later shows a difference, the answer is to re-pull against
 this definition, never to narrow the definition until the difference goes
 away.
 
-Args:
-    population_key: One of the keys this returns when called with no
-        argument (e.g. "changes"). Omit to list them all.
+Arguments:
+
+- `population_key` (string, optional): One of the keys this returns when called with no
+  argument (e.g. "changes"). Omit to list them all.
 
 ## `get_progress`
 
@@ -262,9 +283,10 @@ Use this in TWO places:
    concrete evidence examples to look for. Focus your drill on the
    buckets that apply.
 
-Args:
-    system_name: The system or vendor name (e.g., "Anthropic", "Okta",
-        "Modal", "Pinecone"). Aliases work too.
+Arguments:
+
+- `system_name` (string, required): The system or vendor name (e.g., "Anthropic", "Okta",
+  "Modal", "Pinecone"). Aliases work too.
 
 ## `get_status`
 
@@ -317,14 +339,15 @@ each attribute may carry:
                       not: a written policy is not a record that the thing
                       happened, and citing it again will not close the check.
 
-Args:
-    area: The area to load (e.g., "Access Management", "Governance",
-          "Incident Response"). Required for normal flow. A control
-          TITLE from get_progress / get_scoping_guidance (e.g.
-          "Information Asset Inventory") also works — it loads that
-          control's area. Every checklist entry carries its control_ref
-          for your submit_* calls (never speak it to the user).
-    gating_only: Internal. Leave default.
+Arguments:
+
+- `area` (string, optional): The area to load (e.g., "Access Management", "Governance",
+    "Incident Response"). Required for normal flow. A control
+    TITLE from get_progress / get_scoping_guidance (e.g.
+    "Information Asset Inventory") also works — it loads that
+    control's area. Every checklist entry carries its control_ref
+    for your submit_* calls (never speak it to the user).
+- `gating_only` (boolean, optional): Internal. Leave default.
 
 ## `mark_absent`
 
@@ -340,12 +363,13 @@ During readiness (self-serve prep) this tool redirects: record a practice
 that does not exist with record_self_assessment instead, so it counts
 toward readiness and stays on the fix list.
 
-Args:
-    titles: List of control titles from load_area, e.g.
-        ["Code of Conduct & Ethics", "Background Checks", "Penetration Testing"].
-        Single-element list is fine. Titles must match what load_area returned.
-    note: Optional one-line context shared across these items
-        (e.g., "solo founder, no hires yet").
+Arguments:
+
+- `titles` (array of string, required): List of control titles from load_area, e.g.
+  ["Code of Conduct & Ethics", "Background Checks", "Penetration Testing"].
+  Single-element list is fine. Titles must match what load_area returned.
+- `note` (string, optional): Optional one-line context shared across these items
+  (e.g., "solo founder, no hires yet").
 
 ## `mark_gap`
 
@@ -377,20 +401,21 @@ You cannot make that confirmation on their behalf and there is no argument
 to this tool that grants it. Tell them where to go, and call this tool again
 once they have.
 
-Args:
-    control_ref: Control ref from load_area data (e.g., "IAM-04").
-    attribute_id: Attribute id within the control (e.g., "A3").
-    reason: The user's actual reason, their words, specific. "No log was
-        kept before May 2026" beats "not available". Required.
-    check_ids: specific check ids to gap (from the still_missing
-        payloads), as an array ["review_log_exists"] or a JSON string.
-        Empty = every still-open check on this attribute.
-    contradicts: Optional JSON list anchoring a contradiction this gap
-        embodies to specific attributes, e.g.
-        '[{"control_ref":"IAM-05","attribute_id":"A2","what":"policy promises
-        quarterly access reviews but no review records exist"}]'. When the
-        reason for a gap is that reality conflicts with a stated commitment,
-        anchor it so /review surfaces the contradiction, not just the gap.
+Arguments:
+
+- `control_ref` (string, required): Control ref from load_area data (e.g., "IAM-04").
+- `attribute_id` (string, required): Attribute id within the control (e.g., "A3").
+- `reason` (string, required): The user's actual reason, their words, specific. "No log was
+  kept before May 2026" beats "not available". Required.
+- `check_ids` (string or array, optional): specific check ids to gap (from the still_missing
+  payloads), as an array ["review_log_exists"] or a JSON string.
+  Empty = every still-open check on this attribute.
+- `contradicts` (string or array, optional): Optional JSON list anchoring a contradiction this gap
+  embodies to specific attributes, e.g.
+  '[{"control_ref":"IAM-05","attribute_id":"A2","what":"policy promises
+  quarterly access reviews but no review records exist"}]'. When the
+  reason for a gap is that reality conflicts with a stated commitment,
+  anchor it so /review surfaces the contradiction, not just the gap.
 
 ## `reclassify_evidence`
 
@@ -416,36 +441,43 @@ spreadsheet a system pull. Checks the corrected lane satisfies are
 applied; nothing already satisfied is taken away, and the correction is
 recorded for the reviewer either way.
 
-Args:
-    evidence_id: The evidence id returned at submit time. The file's
-        sha256 or its saved path also work.
-    evidence_type: The corrected label — same vocabulary as
-        submit_evidence: "record" (a log, a ticket, a dated write-up of a
-        completed activity), "policy"/"procedure"/"plan"/"document",
-        "cli_output"/"config"/"api_response"/"scan" (raw command output),
-        "export", "screenshot".
-    why: One sentence: why the original label was wrong. Required.
-    source_system: The corrected system, tool or mailbox the artifact came
-        from ("Linear", "Google Workspace"). Leave empty to change only the
-        evidence_type. Correcting this NEVER strengthens the evidence lane —
-        naming a system does not make a write-up a system pull.
+Arguments:
+
+- `evidence_id` (string, required): The evidence id returned at submit time. The file's
+  sha256 or its saved path also work.
+- `evidence_type` (string, optional): The corrected label — same vocabulary as
+  submit_evidence: "record" (a log, a ticket, a dated write-up of a
+  completed activity), "policy"/"procedure"/"plan"/"document",
+  "cli_output"/"config"/"api_response"/"scan" (raw command output),
+  "export", "screenshot".
+- `why` (string, optional): One sentence: why the original label was wrong. Required.
+- `source_system` (string, optional): The corrected system, tool or mailbox the artifact came
+  from ("Linear", "Google Workspace"). Leave empty to change only the
+  evidence_type. Correcting this NEVER strengthens the evidence lane —
+  naming a system does not make a write-up a system pull.
 
 ## `reclassify_system`
 
-Reclassify a system that was incorrectly classified.
+Reclassify a system that was incorrectly classified, or record why its
+classification stands.
 
-Use this if an auto-classified system doesn't match your setup. Downgrade
-reclassifications (in_scope_tool → vendor, or in_scope_tool →
-infrastructure_dependency) REQUIRE a `reason` field explaining why,
-and the reason is recorded as a context_note for the audit reviewer.
+Use this if an auto-classified system doesn't match your setup. Any
+`reason` you send is recorded as a context_note for the audit reviewer,
+whichever way the system moves. Downgrade reclassifications
+(in_scope_tool → vendor, or in_scope_tool → infrastructure_dependency)
+REQUIRE one. Sending the system's current classification with a reason
+records the reason and changes nothing else (for example when the three
+scope tests confirm the default).
 
-Args:
-    name: System name (must match what was added, e.g. "Stripe")
-    new_classification: One of 'infrastructure_dependency', 'in_scope_tool', 'vendor'
-    reason: Required when downgrading from in_scope_tool. Explain WHY
-        the system shouldn't be tested directly (e.g., "client doesn't
-        configure it, just consumes managed defaults"). Recorded for
-        the auditor's review.
+Arguments:
+
+- `name` (string, required): System name (must match what was added, e.g. "Stripe")
+- `new_classification` (string, required): One of 'infrastructure_dependency', 'in_scope_tool', 'vendor'
+- `reason` (string, optional): Why the system belongs in this classification (e.g. the
+  answers to the three scope tests, or "client doesn't configure
+  it, just consumes managed defaults"). Required when downgrading
+  from in_scope_tool. Recorded for the auditor's review whenever
+  it is sent.
 
 ## `reconcile_scope_inventory`
 
@@ -464,15 +496,16 @@ Run this during collection phase 1 alongside confirm_scope_delta, and
 run it AGAIN in phase 2 — a system adopted in the final three weeks only
 shows up in the re-run.
 
-Args:
-    source: What kind of enumerator this list came from. One of:
-        idp_app_catalog, cloud_service_inventory, dns_zones, saas_spend,
-        other.
-    command: The exact command or export that produced the list,
-        verbatim and re-runnable.
-    names: The enumerated names — a JSON array of strings, or one name
-        per line.
-    note: Anything the user said about the list (optional).
+Arguments:
+
+- `source` (string, required): What kind of enumerator this list came from. One of:
+  idp_app_catalog, cloud_service_inventory, dns_zones, saas_spend,
+  other.
+- `command` (string, required): The exact command or export that produced the list,
+  verbatim and re-runnable.
+- `names` (string or array, required): The enumerated names — a JSON array of strings, or one name
+  per line.
+- `note` (string, optional): Anything the user said about the list (optional).
 
 ## `record_area_review`
 
@@ -494,6 +527,13 @@ review_id: UUID for this response. Reuse with identical answers after a
 Approval cannot create a pass. A refused judgment stays open while a true
 adoption stands. An infrastructure failure rolls back the entire response.
 
+Arguments:
+
+- `area` (string, required)
+- `assessments` (string or array, required)
+- `adoptions` (string or array, required)
+- `review_id` (string, required)
+
 ## `record_bypass_routes`
 
 Ask how else a security setting could be changed, outside the normal process.
@@ -513,13 +553,14 @@ to their security configuration was recorded in the system's own log. These
 answers bound that sentence to what is true, so nobody is asked to stand
 behind something neither of us can check.
 
-Args:
-    confirmed: The keys the user said YES to, from the four sent back. A
-        JSON array of strings, or comma separated.
-    other: Any route they described that the four questions did not cover,
-        in their own words. One per line or a JSON array.
-    none: Pass true when the user said no to all four and named nothing
-        else. Recorded as the answer, never inferred from an empty list.
+Arguments:
+
+- `confirmed` (string or array, optional): The keys the user said YES to, from the four sent back. A
+  JSON array of strings, or comma separated.
+- `other` (string or array, optional): Any route they described that the four questions did not cover,
+  in their own words. One per line or a JSON array.
+- `none` (boolean, optional): Pass true when the user said no to all four and named nothing
+  else. Recorded as the answer, never inferred from an empty list.
 
 ## `record_complementary_controls`
 
@@ -552,18 +593,19 @@ recorded until the user has chosen, changed or replaced them. Every row is
 keyed to a criterion because the report's tables are, and only criteria in
 this examination's scope can be used.
 
-Args:
-    user_entity_controls: What the company relies on its customers to do. A
-        JSON array of objects: [{"criteria": ["CC6.2"], "statement": "User
-        entities are responsible for ..."}].
-    subservice_controls: What it assumes of each carved-out organization. A
-        JSON array of objects, each naming which one: [{"organization":
-        "Amazon Web Services (AWS)", "criteria": ["CC6.4"], "statement":
-        "The subservice organization is responsible for ..."}].
-    no_user_entity_controls: Pass true when the user says their controls
-        assume nothing of their customers. Recorded as the answer.
-    no_subservice_controls_for: The organizations nothing is assumed of. A
-        JSON array of names, or one per line.
+Arguments:
+
+- `user_entity_controls` (string or array, optional): What the company relies on its customers to do. A
+  JSON array of objects: [{"criteria": ["CC6.2"], "statement": "User
+  entities are responsible for ..."}].
+- `subservice_controls` (string or array, optional): What it assumes of each carved-out organization. A
+  JSON array of objects, each naming which one: [{"organization":
+  "Amazon Web Services (AWS)", "criteria": ["CC6.4"], "statement":
+  "The subservice organization is responsible for ..."}].
+- `no_user_entity_controls` (boolean, optional): Pass true when the user says their controls
+  assume nothing of their customers. Recorded as the answer.
+- `no_subservice_controls_for` (string or array, optional): The organizations nothing is assumed of. A
+  JSON array of names, or one per line.
 
 ## `record_hipaa_intake`
 
@@ -577,24 +619,25 @@ an MOU, group health plans), and a recorded answer is what makes skipping
 those provisions a documented determination instead of an assumption. The
 ePHI systems list also seeds the business associate agreement work.
 
-Args:
-    entity_role: "business_associate", "covered_entity", or "both". A
-        software company serving healthcare customers is almost always a
-        business associate.
-    contains_clearinghouse: True if the organization contains or operates
-        a health care clearinghouse (an entity translating health
-        information between standard and nonstandard formats).
-    group_health_plan: True if the organization is, or sponsors, a group
-        health plan whose administration touches the product in scope.
-        Offering ordinary employee health insurance is NOT this.
-    ephi_systems: The systems and data flows where ePHI is created,
-        received, maintained, or transmitted, named the way the client
-        names them (for example "production Postgres", "uploads bucket",
-        "transcription pipeline").
-    cloud_provider_baa: True if a business associate agreement is in
-        place with the cloud infrastructure provider.
-    cloud_provider_baa_note: Optional detail, for example "AWS BAA
-        accepted through Artifact".
+Arguments:
+
+- `entity_role` (string, required): "business_associate", "covered_entity", or "both". A
+  software company serving healthcare customers is almost always a
+  business associate.
+- `contains_clearinghouse` (boolean, required): True if the organization contains or operates
+  a health care clearinghouse (an entity translating health
+  information between standard and nonstandard formats).
+- `group_health_plan` (boolean, required): True if the organization is, or sponsors, a group
+  health plan whose administration touches the product in scope.
+  Offering ordinary employee health insurance is NOT this.
+- `ephi_systems` (array of string, required): The systems and data flows where ePHI is created,
+  received, maintained, or transmitted, named the way the client
+  names them (for example "production Postgres", "uploads bucket",
+  "transcription pipeline").
+- `cloud_provider_baa` (boolean, required): True if a business associate agreement is in
+  place with the cloud infrastructure provider.
+- `cloud_provider_baa_note` (string, optional): Optional detail, for example "AWS BAA
+  accepted through Artifact".
 
 ## `record_policy_adoption`
 
@@ -613,13 +656,15 @@ This records the USER's statement, an assertion without readiness credit: their 
 and their words, dated by the server. It is their decision, never yours, and
 you may not answer it on their behalf.
 
-Args:
-    evidence_id: the drafted document's evidence_id, from the picker.
-    decision: "adopted" (they read it and adopt it) | "changing_first"
-        (they want edits before adopting) | "pre_existing" (the document
-        predates your draft and was already adopted) | "not_yet".
-    adopted_by: who said it — required for "adopted" and "pre_existing".
-    statement: their exact words — required for "adopted" and "pre_existing".
+Arguments:
+
+- `evidence_id` (string, required): the drafted document's evidence_id, from the picker.
+- `decision` (string, required): "adopted" (they read it and adopt it) | "changing_first"
+  (they want edits before adopting) | "pre_existing" (the document
+  predates your draft and was already adopted) | "not_yet".
+- `adopted_by` (string, optional): who said it — required for "adopted" and "pre_existing".
+- `statement` (string, optional): their exact words — required for "adopted" and "pre_existing".
+- `version_id` (string, optional)
 
 ## `record_population_place`
 
@@ -637,18 +682,19 @@ we write those down" is a real answer — record it as kind='none' and the
 affected checks route to a gap with the exact thing to start keeping, rather
 than to a pass nobody can evidence.
 
-Args:
-    population_key: which kind of event, e.g. "incidents", "terminations",
-        "new_hires". The refusal that sent you here names the exact key;
-        get_judgment_kit also returns it for any check that needs one.
-    place: the user's own words for where it lives ("Linear", "the
-        support@ inbox", "we just use email").
-    kind: "system" (a tool with a queue or log) | "inbox" (a mailbox or
-        channel) | "document" (a register or spreadsheet) | "none" (there is
-        no such place).
-    system: the connectable system's name when there is one, so a later pull
-        knows where to point.
-    notes: anything about how to search it that a future pull would need.
+Arguments:
+
+- `population_key` (string, optional): which kind of event, e.g. "incidents", "terminations",
+  "new_hires". The refusal that sent you here names the exact key;
+  get_judgment_kit also returns it for any check that needs one.
+- `place` (string, optional): the user's own words for where it lives ("Linear", "the
+  support@ inbox", "we just use email").
+- `kind` (string, optional): "system" (a tool with a queue or log) | "inbox" (a mailbox or
+  channel) | "document" (a register or spreadsheet) | "none" (there is
+  no such place).
+- `system` (string, optional): the connectable system's name when there is one, so a later pull
+  knows where to point.
+- `notes` (string, optional): anything about how to search it that a future pull would need.
 
 ## `record_prior_report`
 
@@ -685,42 +731,43 @@ Nothing here is added to the scope automatically either. Names that do not
 match come back as questions; for anything the user confirms is real and in
 use, call add_system, which classifies it like any other system.
 
-Args:
-    had_prior: False for a first SOC 2 (nothing else is needed). True when
-        they have a report from another firm.
-    prior_firm: The firm that issued it, as printed on the report.
-    report_type: "type1" or "type2".
-    period: The period or date it covers, as printed (e.g. "January 1,
-        2025 to December 31, 2025").
-    systems: The systems named in its system description. A JSON array of
-        strings, or one name per line.
-    exceptions: Every exception, deviation or qualification the report
-        noted, in ITS words, not yours. A JSON array of objects is best:
-        [{"description": "...", "topic": "access management",
-          "systems": ["AWS"]}]. One per line also works. `topic` is plain
-        English (access management, change management, incident response,
-        vendor management, and so on) and helps me route the extra testing;
-        leave it out if you are unsure rather than guessing, and the
-        exception goes to our reviewer instead. Send an empty list only if
-        the report genuinely noted none.
-    categories: Which trust categories it covered (Security, Availability,
-        Confidentiality, Processing Integrity, Privacy). JSON array or one
-        per line.
-    opinion_modified: True if the opinion was qualified, adverse, or a
-        disclaimer rather than clean.
-    file_note: Which file you read, for the record (e.g. "SOC 2 Type II
-        report 2025, client's own copy, read locally").
-    saved_path: Where you saved their report inside the engagement's
-        evidence folder. Required on BOTH engagement types (readiness
-        included — the same local folder carries into the examination
-        later), because the folder is what gets handed over at the end
-        and the report that raised the assessed risk has to be in the
-        file. Nothing is uploaded when you pass this; it travels with
-        the rest of the evidence at handoff.
-    not_provided: Pass true INSTEAD of saved_path when the user cannot
-        produce the file at all. That is a recordable answer, not a
-        silence, and it goes in the file as one. Put what they described
-        in file_note.
+Arguments:
+
+- `had_prior` (boolean, required): False for a first SOC 2 (nothing else is needed). True when
+  they have a report from another firm.
+- `prior_firm` (string, optional): The firm that issued it, as printed on the report.
+- `report_type` (string, optional): "type1" or "type2".
+- `period` (string, optional): The period or date it covers, as printed (e.g. "January 1,
+  2025 to December 31, 2025").
+- `systems` (string or array, optional): The systems named in its system description. A JSON array of
+  strings, or one name per line.
+- `exceptions` (string or array, optional): Every exception, deviation or qualification the report
+  noted, in ITS words, not yours. A JSON array of objects is best:
+  [{"description": "...", "topic": "access management",
+    "systems": ["AWS"]}]. One per line also works. `topic` is plain
+  English (access management, change management, incident response,
+  vendor management, and so on) and helps me route the extra testing;
+  leave it out if you are unsure rather than guessing, and the
+  exception goes to our reviewer instead. Send an empty list only if
+  the report genuinely noted none.
+- `categories` (string or array, optional): Which trust categories it covered (Security, Availability,
+  Confidentiality, Processing Integrity, Privacy). JSON array or one
+  per line.
+- `opinion_modified` (boolean, optional): True if the opinion was qualified, adverse, or a
+  disclaimer rather than clean.
+- `file_note` (string, optional): Which file you read, for the record (e.g. "SOC 2 Type II
+  report 2025, client's own copy, read locally").
+- `saved_path` (string, optional): Where you saved their report inside the engagement's
+  evidence folder. Required on BOTH engagement types (readiness
+  included — the same local folder carries into the examination
+  later), because the folder is what gets handed over at the end
+  and the report that raised the assessed risk has to be in the
+  file. Nothing is uploaded when you pass this; it travels with
+  the rest of the evidence at handoff.
+- `not_provided` (boolean, optional): Pass true INSTEAD of saved_path when the user cannot
+  produce the file at all. That is a recordable answer, not a
+  silence, and it goes in the file as one. Put what they described
+  in file_note.
 
 ## `record_questionnaire_answers`
 
@@ -734,10 +781,11 @@ Save the user's OWN words, cleaned up into a straight answer. Never save
 a guess, never save something the user did not say, and never save an
 answer that names the audit firm or the platform.
 
-Args:
-    answers: A list of {"question": "...", "answer": "..."} items. Use the
-        buyer's question text exactly as it appeared, and the user's
-        answer. Items missing either field are skipped.
+Arguments:
+
+- `answers` (array of object, required): A list of {"question": "...", "answer": "..."} items. Use the
+  buyer's question text exactly as it appeared, and the user's
+  answer. Items missing either field are skipped.
 
 ## `record_self_assessment`
 
@@ -767,51 +815,58 @@ never created one" is `absent` in their own words; their "yes, it lives
 somewhere else" leaves the assessment `unresolved` until inspected. Both are normal answers; guessing between them
 is not.
 
-Args:
-    control_ref: e.g. "IAM-02".
-    attribute_id: e.g. "A1".
-    verdict: "pass" | "gap" | "absent" | "not_applicable" |
-        "non_occurrence" | "unresolved". unresolved = missing facts or an
-        unsupported acceptance basis; no credit and no confirmed N/A. absent = the practice itself does not exist, on
-        the user's word; an empty search leaves unresolved facts unless evidence
-        establishes a missed requirement. Ask where the actual record is.
-        non_occurrence = an inspected complete source shows the event
-        did not happen in the period (no incidents, no terminations), shown
-        by a look at the place it WOULD have been recorded, empty.
-    reasoning: one or two sentences citing the evidence and the criterion.
-    evidence_ids: the evidence ids (from submit_evidence/submit_document),
-        as an array ["<id>"] or as that array in a JSON string.
-    basis: "evidence" (default) or "attested" (user explicitly confirms
-        without walking through evidence — quote them).
-    attested_by: legacy input; completion uses the name supplied in the human picker.
-    attested_statement: legacy input; a quote alone never grants completion.
-    attestation_reason: for the last-resort attested path, explain the existing
-        evidence route tried and why checking evidence now is impractical.
-        The server presents its own explicit picker; never choose for the user.
-    fix_description: when closing a previously recorded gap — what changed.
-    company_rule_schedules: optional due-date facts recorded once on the owning
-        company-rule check, keyed "control_ref/attribute_id" for its scheduled
-        children. Each value carries window(start/end, timezone-bearing ISO
-        timestamps), effective_from, timezone, complete, occurrences(id/due_at),
-        obligation_facts and evidence_ids from this owner's inspected evidence.
-        If a rule changed, include all versions(version_id, effective_from,
-        effective_until exclusive or null, evidence_ids) across the inspected
-        window, and rule_version_id on each original due occurrence. Keep the
-        original due IDs and dates even when a duty survives its rule version.
-        Cite the original and revised sources already inspected by this owner;
-        reuse those registered files. A gap in rule history stays unresolved.
-        For GOV-01/A9, subject_ids are the roster's stable item_ids; each due
-        occurrence has subject_id. Link each nested renewal_acknowledgments
-        record to its schedule_occurrence_id and actual at timestamp, reusing
-        its source_ref. A person with no duty due needs an evidenced future
-        first occurrence or no_due_subjects(subject_id, reason, evidence_ids)
-        citing this owner's inspected sources. Keep missing history unresolved.
-        The same accepted evidence/version and owner judgment are reused by
-        each child. Missing dates remain unresolved; never invent a cadence.
-    correction: true when overturning your own earlier misjudgment (say why
-        in reasoning).
-    assessments: OPTIONAL batch — JSON list of objects with the fields above
-        (max 10 per call; each item is gated individually).
+Arguments:
+
+- `control_ref` (string, optional): e.g. "IAM-02".
+- `attribute_id` (string, optional): e.g. "A1".
+- `verdict` (string, optional): "pass" | "gap" | "absent" | "not_applicable" |
+  "non_occurrence" | "unresolved". unresolved = missing facts or an
+  unsupported acceptance basis; no credit and no confirmed N/A. absent = the practice itself does not exist, on
+  the user's word; an empty search leaves unresolved facts unless evidence
+  establishes a missed requirement. Ask where the actual record is.
+  non_occurrence = an inspected complete source shows the event
+  did not happen in the period (no incidents, no terminations), shown
+  by a look at the place it WOULD have been recorded, empty.
+- `reasoning` (string, optional): one or two sentences citing the evidence and the criterion.
+- `evidence_ids` (string or array, optional): the evidence ids (from submit_evidence/submit_document),
+  as an array ["\<id>"] or as that array in a JSON string.
+- `basis` (string, optional): "evidence" (default) or "attested" (user explicitly confirms
+  without walking through evidence — quote them).
+- `attested_by` (string, optional): legacy input; completion uses the name supplied in the human picker.
+- `attested_statement` (string, optional): legacy input; a quote alone never grants completion.
+- `attestation_reason` (string, optional): for the last-resort attested path, explain the existing
+  evidence route tried and why checking evidence now is impractical.
+  The server presents its own explicit picker; never choose for the user.
+- `fix_description` (string, optional): when closing a previously recorded gap — what changed.
+- `correction` (boolean, optional): true when overturning your own earlier misjudgment (say why
+  in reasoning).
+- `assessments` (string or array, optional): OPTIONAL batch — JSON list of objects with the fields above
+  (max 10 per call; each item is gated individually).
+- `context_id` (string, optional)
+- `attempt_id` (string, optional)
+- `observations` (array of object or null, optional)
+- `applicability_confirmed` (boolean, optional)
+- `applicability_facts` (object or null, optional)
+- `retention_months` (integer or null, optional)
+- `company_rule_schedules` (object or null, optional): optional due-date facts recorded once on the owning
+  company-rule check, keyed "control_ref/attribute_id" for its scheduled
+  children. Each value carries window(start/end, timezone-bearing ISO
+  timestamps), effective_from, timezone, complete, occurrences(id/due_at),
+  obligation_facts and evidence_ids from this owner's inspected evidence.
+  If a rule changed, include all versions(version_id, effective_from,
+  effective_until exclusive or null, evidence_ids) across the inspected
+  window, and rule_version_id on each original due occurrence. Keep the
+  original due IDs and dates even when a duty survives its rule version.
+  Cite the original and revised sources already inspected by this owner;
+  reuse those registered files. A gap in rule history stays unresolved.
+  For GOV-01/A9, subject_ids are the roster's stable item_ids; each due
+  occurrence has subject_id. Link each nested renewal_acknowledgments
+  record to its schedule_occurrence_id and actual at timestamp, reusing
+  its source_ref. A person with no duty due needs an evidenced future
+  first occurrence or no_due_subjects(subject_id, reason, evidence_ids)
+  citing this owner's inspected sources. Keep missing history unresolved.
+  The same accepted evidence/version and owner judgment are reused by
+  each child. Missing dates remain unresolved; never invent a cadence.
 
 ## `record_subservice_soc2`
 
@@ -824,14 +879,15 @@ answer. complete_step refuses the handoff while any subservice org's
 status is unrecorded, because "we never asked" must never read as "no
 report obtained".
 
-Args:
-    name: The system as it appears in scope (e.g. "AWS", "Stripe").
-    report_obtained: True if the vendor's SOC 2 report is on file
-        (save a copy into 05-subservice-evidence/ so it travels at
-        handoff); False if they do not have it — recorded honestly, the
-        audit team weighs reliance accordingly. Never guess: ask.
-    note: Optional context in the user's words ("reviewed it in March",
-        "requested from the vendor, not received yet").
+Arguments:
+
+- `name` (string, required): The system as it appears in scope (e.g. "AWS", "Stripe").
+- `report_obtained` (boolean, required): True if the vendor's SOC 2 report is on file
+  (save a copy into 05-subservice-evidence/ so it travels at
+  handoff); False if they do not have it — recorded honestly, the
+  audit team weighs reliance accordingly. Never guess: ask.
+- `note` (string, optional): Optional context in the user's words ("reviewed it in March",
+  "requested from the vendor, not received yet").
 
 ## `report_problem`
 
@@ -871,11 +927,12 @@ observable Chiaro instruction/flow problem, never the person's feelings,
 private words or personal complaint. If no product problem can be described
 independently of those remarks, help locally without filing that feedback.
 
-Args:
-    summary: What is wrong, in a sentence or two. Plain language.
-    what_i_tried: The calls you made and what came back.
-    expected: What you expected to happen instead.
-    tool_names: The tools involved, e.g. ["load_area", "get_progress"].
+Arguments:
+
+- `summary` (string, required): What is wrong, in a sentence or two. Plain language.
+- `what_i_tried` (string, optional): The calls you made and what came back.
+- `expected` (string, optional): What you expected to happen instead.
+- `tool_names` (array of string or null, optional): The tools involved, e.g. ["load_area", "get_progress"].
 
 ## `request_upload_link`
 
@@ -907,11 +964,12 @@ The link is single-engagement, time-limited (default 90 days), and revocable.
 Each call creates a NEW link — if you need to re-issue (e.g., the user lost the
 URL), call again and the prior link still works until revoked.
 
-Args:
-    label: Optional human-readable label for the link
-           (e.g., "Mock exam round 1"). Helps the audit team triage.
-    portal_upload_unavailable: The user told you their portal Upload page
-           will not work for them. Set only on their word.
+Arguments:
+
+- `label` (string, optional): Optional human-readable label for the link
+     (e.g., "Mock exam round 1"). Helps the audit team triage.
+- `portal_upload_unavailable` (boolean, optional): The user told you their portal Upload page
+     will not work for them. Set only on their word.
 
 ## `reset_readiness`
 
@@ -924,10 +982,11 @@ changed), the user may want a fresh pass over everything or over specific
 controls. This clears the recorded VERDICTS only — collected evidence and
 the append-only history stay (nothing is destroyed or rewritten).
 
-Args:
-    controls: "all", or a JSON list of control refs (e.g. '["IAM-02","END-03"]').
-    confirm: first call with confirm=false returns what would be cleared;
-        re-call with confirm=true ONLY after the user explicitly confirms.
+Arguments:
+
+- `controls` (string or array, optional): "all", or a JSON list of control refs (e.g. '["IAM-02","END-03"]').
+- `confirm` (boolean, optional): first call with confirm=false returns what would be cleared;
+  re-call with confirm=true ONLY after the user explicitly confirms.
 
 ## `resolve_item`
 
@@ -935,10 +994,11 @@ Reclassify a control's Absent/Exists status.
 
 Use this to correct a classification if the AI got it wrong.
 
-Args:
-    topic_key: The topic containing the control
-    has_it: true = control exists, false = control is absent
-    description: Brief description (required if has_it is true)
+Arguments:
+
+- `topic_key` (string, required): The topic containing the control
+- `has_it` (boolean, required): true = control exists, false = control is absent
+- `description` (string, optional): Brief description (required if has_it is true)
 
 ## `select_product`
 
@@ -949,6 +1009,10 @@ Use when the user wants to work on another product than the current one
 (case-insensitive) or its engagement id. The switch is remembered for
 this user across sessions; call get_status afterwards to load the
 switched product's state.
+
+Arguments:
+
+- `product` (string, required)
 
 ## `set_company_profile`
 
@@ -964,61 +1028,87 @@ Returns audit scope recommendations based on the product, data types, and
 company profile collected so far. The client MUST review and confirm these
 before the scope can be locked.
 
-Args:
-    company_founded_date: When the company was founded (YYYY-MM format, e.g. "2024-06")
-    has_physical_office: Does the company have a physical office, data center, or server room?
-    governance_body: Who oversees security, as a SHORT noun phrase that
-        reads inline in control text (e.g. "the Board of Directors",
-        "the leadership team", "the founding team"). Keep it under six
-        words; put structural detail (advisors, no board yet, titles)
-        in scope notes instead, never in this field.
-    engineering_team_size: How many people write and deploy production code
-        (1 means a single developer maintains the codebase). Leave 0 if unknown.
-        This selects the change-management and review controls that fit the
-        organization's real structure.
-    pen_test_program: "yes" or "no" — does the organization run a penetration
-        testing program (periodic pen tests by a qualified party)? ASK THIS
-        EXPLICITLY. "no" is a normal answer, not a gap: SOC 2 does not require
-        a penetration test, and with "no" the penetration testing control is
-        simply out of scope. Independent evaluation of controls is still
-        tested (a pen test is one way to satisfy it, not the only way).
-        When the answer is no, tell the client this is a scoping
-        determination, not a security recommendation, and that their
-        customer contracts can require a pen test even though the audit
-        criteria do not. Leave "" only if the client could not answer.
-        The answer BRANCHES what you ask next, and the response returns
-        `independent_evaluation_hint` telling you which branch you are on:
-        yes means the same pen test report also answers the independent
-        evaluation check, so collect it once and skip the alternatives
-        question entirely; no means you ask what other independent
-        evaluation they already hold, by name. Do not ask the alternatives
-        question of a client who runs pen tests.
-    prior_soc2: PREFER record_prior_report, which is the tool for this
-        question on both engagement types: it reconciles their system list
-        against ours, banks the exceptions as risk flags, and stops the
-        question being asked again. This argument records the facts and
-        does none of that. Kept for the facts alone.
-        Only when the company is TRANSITIONING from another firm.
-        Facts read from their most recent SOC 2 report (their file, read
-        locally — we never receive it), as a dict:
-        {"had_prior": true, "prior_type": "type1"|"type2",
-         "prior_period": "e.g. 2024-01 to 2024-12", "prior_firm": "name",
-         "focus_areas": ["exceptions or gaps to re-confirm are fixed"]}.
-        This is scope context only. The prior report's verdicts are never
-        our evidence — every applicable check is still self-assessed with
-        the company's own real evidence. Omit for a first-time SOC 2; pass
-        {"had_prior": false} to clear a mistakenly recorded transition.
-    confirmed_na_controls: Whole-control scope confirmations keyed by control ref,
-        each with the exact library na_trigger as condition and confirmed true/false.
-        Only confirm facts the user supplied; unknown conditions stay visible.
-    type2_planned: False explicitly records no Type II plan; omitted keeps the existing answer.
-    intended_obs_months: The observation window the company PLANS if they
-        go for a Type II later — 3, 6 or 12. One friendly planning
-        question, no commitment: only the mapped logging checks add an
-        intended-window retention requirement. Other Type II notes stay
-        advisory. Omit or 0 to preserve the saved answer; an unanswered
-        profile defaults to 12. type2_planned=False explicitly records
-        no Type II plan, so no additional intended-window gate applies.
+On an audit whose scope is already set, an answer that would change which
+checks apply (physical office, remote access, removable media, engineering
+team size, pen testing, hosted AI models, confirmed not-applicable
+controls) is refused and
+nothing in the call is saved: if a recorded answer is wrong, call
+report_problem and the audit team updates the scope and the checklist
+together. Other details save as usual.
+
+Arguments:
+
+- `company_founded_date` (string, optional): When the company was founded (YYYY-MM format, e.g. "2024-06")
+- `has_physical_office` (boolean or null, optional): Does the company have a physical office, data center, or server room?
+- `has_remote_access` (boolean or null, optional)
+- `uses_removable_media` (boolean or null, optional)
+- `governance_body` (string, optional): Who oversees security, as a SHORT noun phrase that
+  reads inline in control text (e.g. "the Board of Directors",
+  "the leadership team", "the founding team"). Keep it under six
+  words; put structural detail (advisors, no board yet, titles)
+  in scope notes instead, never in this field.
+- `engineering_team_size` (integer, optional): How many people write and deploy production code
+  (1 means a single developer maintains the codebase). Leave 0 if unknown.
+  This selects the change-management and review controls that fit the
+  organization's real structure.
+- `pen_test_program` (string, optional): "yes" or "no" — does the organization run a penetration
+  testing program (periodic pen tests by a qualified party)? ASK THIS
+  EXPLICITLY. "no" is a normal answer, not a gap: SOC 2 does not require
+  a penetration test, and with "no" the penetration testing control is
+  simply out of scope. Independent evaluation of controls is still
+  tested (a pen test is one way to satisfy it, not the only way).
+  When the answer is no, tell the client this is a scoping
+  determination, not a security recommendation, and that their
+  customer contracts can require a pen test even though the audit
+  criteria do not. Leave "" only if the client could not answer.
+  The answer BRANCHES what you ask next, and the response returns
+  `independent_evaluation_hint` telling you which branch you are on:
+  yes means the same pen test report also answers the independent
+  evaluation check, so collect it once and skip the alternatives
+  question entirely; no means you ask what other independent
+  evaluation they already hold, by name. Do not ask the alternatives
+  question of a client who runs pen tests.
+- `uses_hosted_ai_models` (string, optional): "yes" or "no": does the product send customer
+  or company data to an AI model service run by another company
+  (OpenAI, Anthropic, AWS Bedrock, Google Gemini or Vertex AI,
+  Azure OpenAI, xAI, Mistral, or any other)? ASK THIS EXPLICITLY at
+  a new account's first setup: confirm_scope waits for it while no
+  checklist exists. Do not ask it on an account that already has a
+  checklist. "yes" keeps the AI governance controls (AI-01 to AI-04)
+  in scope whatever the provider is called; also add each service
+  to the system list. "no" is a normal answer: they stay out of
+  scope unless an AI model service is on the system list. Leave ""
+  only if the client could not answer.
+- `prior_soc2` (object or null, optional): PREFER record_prior_report, which is the tool for this
+  question on both engagement types: it reconciles their system list
+  against ours, banks the exceptions as risk flags, and stops the
+  question being asked again. This argument records the facts and
+  does none of that. Kept for the facts alone.
+  Only when the company is TRANSITIONING from another firm.
+  Facts read from their most recent SOC 2 report (their file, read
+  locally — we never receive it), as a dict:
+  {"had_prior": true, "prior_type": "type1"|"type2",
+   "prior_period": "e.g. 2024-01 to 2024-12", "prior_firm": "name",
+   "focus_areas": ["exceptions or gaps to re-confirm are fixed"]}.
+  This is scope context only. The prior report's verdicts are never
+  our evidence — every applicable check is still self-assessed with
+  the company's own real evidence. Omit for a first-time SOC 2; pass
+  {"had_prior": false} to clear a mistakenly recorded transition.
+- `intended_obs_months` (integer, optional): The observation window the company PLANS if they
+  go for a Type II later — 3, 6 or 12. One friendly planning
+  question, no commitment: only the mapped logging checks add an
+  intended-window retention requirement. Other Type II notes stay
+  advisory. Omit or 0 to preserve the saved answer; an unanswered
+  profile defaults to 12. type2_planned=False explicitly records
+  no Type II plan, so no additional intended-window gate applies.
+- `type2_planned` (boolean or null, optional): False explicitly records no Type II plan; omitted keeps the existing answer.
+- `confirmed_na_controls` (object or null, optional): Whole-control scope confirmations keyed by control ref,
+  each with the exact library na_trigger as condition and confirmed true/false.
+  Only confirm facts the user supplied; unknown conditions stay visible.
+  A record for a fitted variant is refused: NET-04, MON-03, BCP-03
+  and END-03 follow the recorded systems; IAM-09, INC-03 and CHG-06
+  follow engineering_team_size. So is one for VUL-02, which follows
+  pen_test_program.
 
 ## `set_data_types`
 
@@ -1026,18 +1116,9 @@ Set what types of data your product processes.
 
 This determines which data protection controls are relevant for the audit.
 
-Args:
-    data_types: List of data types (e.g. ["Personal info", "Financial", "Usage analytics", "Documents & files"])
+Arguments:
 
-Common data types:
-- Personal info (names, emails, phone numbers)
-- Financial (payment data, billing, transactions)
-- Health & medical (PHI, health records)
-- Documents & files (user-uploaded content)
-- Messages & comms (chat, email content)
-- Usage analytics (behavioral data, logs)
-- System configs (infrastructure settings)
-- Proprietary data (trade secrets, IP)
+- `data_types` (array of string, required): List of data types (e.g. ["Personal info", "Financial", "Usage analytics", "Documents & files"])
 
 ## `set_product_info`
 
@@ -1045,12 +1126,11 @@ Set product/service information for the audit scope.
 
 This defines what product is being audited and who uses it.
 
-Args:
-    product_name: Name of the product or service (e.g. "CloudSync API")
-    description: One-line description of what the product does
-    customers: Who are your customers? (e.g. "B2B SaaS companies, Series A-C startups")
+Arguments:
 
-Returns confirmation and next steps.
+- `product_name` (string, required): Name of the product or service (e.g. "CloudSync API")
+- `description` (string, required): One-line description of what the product does
+- `customers` (string, optional): Who are your customers? (e.g. "B2B SaaS companies, Series A-C startups")
 
 ## `start_audit`
 
@@ -1075,16 +1155,19 @@ installments, the first no earlier than seven days after the client's
 notice). start_date is REQUIRED for a window and is the user's decision to
 make — ask them, never assume. A future date schedules the start; today
 starts now; a date already past is accepted, as long as the period has not
-already ended. Nothing is collected at the start of a window: evidence
-collection happens in two phases, the first opening three weeks before the
-period ends and the second the day after it closes.
+already ended. Scheduling a future date while readiness is not complete
+asks for the same confirm_start_early, and the recorded confirmation is
+what lets the window begin on that date. Nothing is collected at the start
+of a window: evidence collection happens in two phases, the first opening
+three weeks before the period ends and the second the day after it closes.
 
-Args:
-    confirm_start: Set only after the user has seen the amounts and said
-        yes.
-    confirm_start_early: Set only after the user confirms starting before
-        readiness is complete.
-    start_date: The first day of the observation period, YYYY-MM-DD.
+Arguments:
+
+- `confirm_start` (boolean, optional): Set only after the user has seen the amounts and said
+  yes.
+- `confirm_start_early` (boolean, optional): Set only after the user confirms starting, or
+  scheduling the start, before readiness is complete.
+- `start_date` (string, optional): The first day of the observation period, YYYY-MM-DD.
 
 ## `start_engagement`
 
@@ -1093,15 +1176,14 @@ Set up your company and product info to start the SOC 2 engagement.
 This populates an existing engagement (your token is already scoped to one).
 Call get_status first to see current state.
 
-Args:
-    company_name: Your company's legal name (e.g. "Acme Labs Inc.")
-    product_description: One-line description of your product/service
-    team_size: Team size bucket. Valid values (small to large):
-        "Solo founder (1)", "2-5", "6-10", "11-25", "26-50", "51-100",
-        "101-250", "251-500", "500+". Solo and 2-5 are common for early
-        AI startups and unlock tailored UX downstream.
+Arguments:
 
-Returns engagement info and next steps.
+- `company_name` (string, required): Your company's legal name (e.g. "Acme Labs Inc.")
+- `product_description` (string, required): One-line description of your product/service
+- `team_size` (string, optional): Team size bucket. Valid values (small to large):
+  "Solo founder (1)", "2-5", "6-10", "11-25", "26-50", "51-100",
+  "101-250", "251-500", "500+". Solo and 2-5 are common for early
+  AI startups and unlock tailored UX downstream.
 
 ## `start_readiness_check`
 
@@ -1122,25 +1204,26 @@ Use this tool when you need to capture a free-text answer about how
 something works (e.g., "we onboard via Notion + a checklist in Linear,
 here's the link").
 
-Args:
-    title: The control title from load_area. Use the exact title.
-    gating_response: Optional "yes" or "no". If "no", the entire
-        control is marked absent (same effect as mark_absent). If
-        "yes" or empty, the answer is stored as conversational evidence.
-    answer: Free-text content describing what the client does.
-        Stored verbatim for our audit team to read during review. Never paraphrase.
-    per_attribute_coverage: Reserved for advanced/internal use. You
-        do NOT need to populate this from conversation. Leave empty.
-    absent_attributes: Reserved for advanced/internal use. Leave empty.
-    follow_up_round: Internal field. Leave at default.
-    follow_up: For an existing firm request, send request_id and attribute_id
-        from load_area, a stable answer_revision UUID and optional evidence
-        snapshots returned by submit_evidence/document. answer_payload may
-        preserve the exact choice IDs and text; its text must equal answer.
-        Keep the same revision and exact payload on retry. Optional action
-        ai_seen/in_progress records only AI-reported activity. No human
-        acknowledgment or new question is required. A received receipt is
-        arrival of this response, never audit acceptance.
+Arguments:
+
+- `title` (string, required): The control title from load_area. Use the exact title.
+- `gating_response` (string, optional): Optional "yes" or "no". If "no", the entire
+  control is marked absent (same effect as mark_absent). If
+  "yes" or empty, the answer is stored as conversational evidence.
+- `per_attribute_coverage` (string, optional): Reserved for advanced/internal use. You
+  do NOT need to populate this from conversation. Leave empty.
+- `absent_attributes` (string, optional): Reserved for advanced/internal use. Leave empty.
+- `answer` (string, optional): Free-text content describing what the client does.
+  Stored verbatim for our audit team to read during review. Never paraphrase.
+- `follow_up_round` (integer, optional): Internal field. Leave at default.
+- `follow_up` (object or null, optional): For an existing firm request, send request_id and attribute_id
+  from load_area, a stable answer_revision UUID and optional evidence
+  snapshots returned by submit_evidence/document. answer_payload may
+  preserve the exact choice IDs and text; its text must equal answer.
+  Keep the same revision and exact payload on retry. Optional action
+  ai_seen/in_progress records only AI-reported activity. No human
+  acknowledgment or new question is required. A received receipt is
+  arrival of this response, never audit acceptance.
 
 ## `submit_document`
 
@@ -1191,37 +1274,43 @@ Readiness evidence stays local. Register its path, hash and compact inspection
 observations. Audit copies travel in the handoff zip. Claim a save only after
 the tool reports success; local working notes alone do not prove a server save.
 
-Args:
-    name: Document name (e.g., "Access Control Policy", "IR Plan").
-    local_path: Absolute path to the actual readiness file in an accessible
-        local folder, or the same-format audit copy in ~/Documents/chiaro-soc2/.
-        Required. Preserve the original; no real file, no call.
-    summary: 1-3 sentences describing what the document contains.
-        You MAY summarize. You MAY NOT add anything not in the source file.
-    covers_attributes: the [control_ref, attribute_id] pairs this document
-        helps satisfy. Send it as a real array — [["POL-01","A1"],
-        ["POL-01","A2"]] — or as that array in a JSON string. Both work.
-        EXISTENCE TRACKING ONLY — "does the document include the thing the
-        coverage check asks about, yes or no." Quality is the auditor's job.
-        Required.
-    document_type: "policy" / "procedure" / "plan" / "report" / "other".
-    sha256: SHA-256 hex digest of the saved file (shasum -a 256 /
-        Get-FileHash). Required for readiness artifact version registration.
-    effective_date: Optional ISO date (YYYY-MM-DD) the document is dated /
-        took effect. Pass it especially for a RECORD or report (a training
-        completion record, an access-review log, meeting minutes, an
-        incident report). If such a record is dated today it has no
-        operating history — we don't block it, we flag it for review.
-        A policy/procedure you just created today is fine and isn't flagged.
-    content: Deprecated compatibility argument. Do not send file bytes.
-        Any supplied text is ignored and never uploaded. A readiness call
-        using this legacy draft argument still marks its local version as
-        a draft requiring version-specific adoption.
-    observations: Inspection objects with method (read, screenshot, cli_output,
-        document or export), location (page/section/record), and facts (brief
-        observed facts). Optional requirement_ids lists identifiers issued by
-        the current judgment kit. These are compact facts, not file bytes.
-    is_draft: True for a newly prepared draft. Adoption is a separate step.
+Arguments:
+
+- `name` (string, required): Document name (e.g., "Access Control Policy", "IR Plan").
+- `local_path` (string, required): Absolute path to the actual readiness file in an accessible
+  local folder, or the same-format audit copy in ~/Documents/chiaro-soc2/.
+  Required. Preserve the original; no real file, no call.
+- `summary` (string, required): 1-3 sentences describing what the document contains.
+  You MAY summarize. You MAY NOT add anything not in the source file.
+- `covers_attributes` (string or array or null, optional): the [control_ref, attribute_id] pairs this document
+  helps satisfy. Send it as a real array — [["POL-01","A1"],
+  ["POL-01","A2"]] — or as that array in a JSON string. Both work.
+  EXISTENCE TRACKING ONLY — "does the document include the thing the
+  coverage check asks about, yes or no." Quality is the auditor's job.
+  Required.
+- `document_type` (string, optional): "policy" / "procedure" / "plan" / "report" / "other".
+- `sha256` (string, optional): SHA-256 hex digest of the saved file (shasum -a 256 /
+  Get-FileHash). Required for readiness artifact version registration.
+- `provided_by` (string, optional)
+- `effective_date` (string, optional): Optional ISO date (YYYY-MM-DD) the document is dated /
+  took effect. Pass it especially for a RECORD or report (a training
+  completion record, an access-review log, meeting minutes, an
+  incident report). If such a record is dated today it has no
+  operating history — we don't block it, we flag it for review.
+  A policy/procedure you just created today is fine and isn't flagged.
+- `content` (string, optional): Deprecated compatibility argument. Do not send file bytes.
+  Any supplied text is ignored and never uploaded. A readiness call
+  using this legacy draft argument still marks its local version as
+  a draft requiring version-specific adoption.
+- `observations` (array of object or null, optional): Inspection objects with method (read, screenshot, cli_output,
+  document or export), location (page/section/record), and facts (brief
+  observed facts). Optional requirement_ids lists identifiers issued by
+  the current judgment kit. These are compact facts, not file bytes.
+  - `method` (one of "read" | "screenshot" | "cli_output" | "document" | "export", required)
+  - `location` (string, required): Page, section or record location inspected.
+  - `facts` (string, required): Brief facts actually observed; do not include file bytes.
+  - `requirement_ids` (array of string, optional): Optional coverage identifiers issued by the current judgment kit.
+- `is_draft` (boolean, optional): True for a newly prepared draft. Adoption is a separate step.
 
 ## `submit_evidence`
 
@@ -1237,61 +1326,63 @@ Readiness keeps the file local. Inspect its actual contents and register
 compact observations with this reference; a summary alone earns no credit.
 Never call this tool for content that does not exist as a real local file.
 
-Args:
-    area: Plain-English area key from load_area (e.g., "access-management",
-        "change-management", "data-protection").
-    local_path: Absolute path to the actual file in any accessible local folder.
-        Required. If you have not saved a real file, do not call this tool.
-    summary: 1-3 sentences describing what the file contains. Plain English.
-        You MAY summarize. You MAY NOT invent content that isn't in the file.
-    covers_attributes: the [control_ref, attribute_id] pairs this evidence
-        helps satisfy. Send it as a real array — [["IAM-02","A1"],
-        ["IAM-02","A3"]] — or as that array in a JSON string. Both work.
-        This is EXISTENCE TRACKING ONLY — "does the file include the thing
-        the coverage check asks about, yes or no." NOT quality judgment.
-        our audit team judges quality during review later. Required if the evidence
-        corresponds to specific control attributes.
-    source_command: How the file was obtained. One line, mirrors how_collected.md.
-        Examples: "Okta admin > Reports > Users > Export 2026-05-15" or
-        "aws iam get-credential-report --output json on prod 2026-05-15".
-    source_system: Source system (e.g., "okta", "aws-production", "github").
-    evidence_type: What KIND of artifact this is. State it — it decides how
-        strong the evidence counts as, and leaving it blank files the
-        artifact at the weaker end on purpose.
-          system pull  "cli_output" / "config" / "api_response" / "scan"
-                       (raw output of a command you actually ran — pair it
-                       with source_command and source_system)
-          export       "export"  (a file the system generated for you)
-          screenshot   "screenshot_note" / "ui"
-          document     "policy" / "procedure" / "plan" / "document"
-                       (a written document saying what SHOULD happen —
-                       submit_document is the better tool for these)
-          record       "record" — a log, a ticket, a signed form, or a
-                       dated write-up of a COMPLETED activity (an access
-                       review you performed, a DR test with its results,
-                       a deficiency tracker with entries). Proof that
-                       something HAPPENED is a record, never a document,
-                       even when it lives in a .md file — many checks
-                       demand record-strength proof and a "document"
-                       label cannot satisfy them. Fix a wrong label with
-                       reclassify_evidence; do not re-submit the file.
-        A spreadsheet or a Word file is never a system pull, whatever the
-        label says — save the command's raw output instead if that is what
-        you meant.
-    sha256: SHA-256 hex digest of the saved file. Compute it right after
-        saving (macOS/Linux: `shasum -a 256 <file>`; PowerShell:
-        `Get-FileHash <file> -Algorithm SHA256`). At review we reconcile
-        it to the registered artifact version. The hash alone does not prove
-        inspection or authenticate the local bytes.
-    provided_by: Name of the PERSON who produced/exported this evidence
-        (the user, or whoever they say did it). Validated against the
-        engagement roster — never guess or invent a name.
-    effective_date: Optional ISO date (YYYY-MM-DD) the artifact is dated /
-        took effect, if it states one. Pass it for any RECORD of activity
-        (a training-completion record, an access-review log, an incident
-        write-up). If such a record is dated today, it has no operating
-        history — we don't block it, we flag it for review. (A policy you
-        just created today is fine; you don't need a date for it.)
+Arguments:
+
+- `area` (string, required): Plain-English area key from load_area (e.g., "access-management",
+  "change-management", "data-protection").
+- `local_path` (string, required): Absolute path to the actual file in any accessible local folder.
+  Required. If you have not saved a real file, do not call this tool.
+- `summary` (string, required): 1-3 sentences describing what the file contains. Plain English.
+  You MAY summarize. You MAY NOT invent content that isn't in the file.
+- `covers_attributes` (string or array or null, optional): the [control_ref, attribute_id] pairs this evidence
+  helps satisfy. Send it as a real array — [["IAM-02","A1"],
+  ["IAM-02","A3"]] — or as that array in a JSON string. Both work.
+  This is EXISTENCE TRACKING ONLY — "does the file include the thing
+  the coverage check asks about, yes or no." NOT quality judgment.
+  our audit team judges quality during review later. Required if the evidence
+  corresponds to specific control attributes.
+- `source_command` (string, optional): How the file was obtained. One line, mirrors how_collected.md.
+  Examples: "Okta admin > Reports > Users > Export 2026-05-15" or
+  "aws iam get-credential-report --output json on prod 2026-05-15".
+- `source_system` (string, optional): Source system (e.g., "okta", "aws-production", "github").
+- `evidence_type` (string, optional): What KIND of artifact this is. State it — it decides how
+  strong the evidence counts as, and leaving it blank files the
+  artifact at the weaker end on purpose.
+    system pull  "cli_output" / "config" / "api_response" / "scan"
+                 (raw output of a command you actually ran — pair it
+                 with source_command and source_system)
+    export       "export"  (a file the system generated for you)
+    screenshot   "screenshot_note" / "ui"
+    document     "policy" / "procedure" / "plan" / "document"
+                 (a written document saying what SHOULD happen —
+                 submit_document is the better tool for these)
+    record       "record" — a log, a ticket, a signed form, or a
+                 dated write-up of a COMPLETED activity (an access
+                 review you performed, a DR test with its results,
+                 a deficiency tracker with entries). Proof that
+                 something HAPPENED is a record, never a document,
+                 even when it lives in a .md file — many checks
+                 demand record-strength proof and a "document"
+                 label cannot satisfy them. Fix a wrong label with
+                 reclassify_evidence; do not re-submit the file.
+  A spreadsheet or a Word file is never a system pull, whatever the
+  label says — save the command's raw output instead if that is what
+  you meant.
+- `sha256` (string, optional): SHA-256 hex digest of the saved file. Compute it right after
+  saving (macOS/Linux: `shasum -a 256 <file>`; PowerShell:
+  `Get-FileHash <file> -Algorithm SHA256`). At review we reconcile
+  it to the registered artifact version. The hash alone does not prove
+  inspection or authenticate the local bytes.
+- `provided_by` (string, optional): Name of the PERSON who produced/exported this evidence
+  (the user, or whoever they say did it). Validated against the
+  engagement roster — never guess or invent a name.
+- `effective_date` (string, optional): Optional ISO date (YYYY-MM-DD) the artifact is dated /
+  took effect, if it states one. Pass it for any RECORD of activity
+  (a training-completion record, an access-review log, an incident
+  write-up). If such a record is dated today, it has no operating
+  history — we don't block it, we flag it for review. (A policy you
+  just created today is fine; you don't need a date for it.)
+- `observations` (array of object or null, optional)
 
 ## `submit_note`
 
@@ -1310,26 +1401,23 @@ Worth recording (examples):
   - User correcting themselves: "actually I was wrong earlier — we
     don't enforce that on the dev environment"
 
-Not worth recording:
-  - Pleasantries, jokes, scheduling chatter
-  - Things already captured by another submit_* call
+Arguments:
 
-Args:
-    note: The user's verbatim words. Do NOT paraphrase. Include their
-        qualifiers and conditions (e.g., "but only for production",
-        "we used to do this but stopped"). Quote them, prefix with
-        "User said:" if helpful.
-    topic_hint: Optional one-word area this might relate to so our
-        audit team can route it ("people", "vendors", "infra",
-        "access", "policies", "ir", etc.). Leave empty if unsure.
-    contradicts: Optional. If this note records something that CONTRADICTS
-        a specific control attribute (e.g. the policy promises quarterly
-        access reviews but no records exist; the ToS says "we never train
-        on your data" but there's no DPA), pass a JSON list anchoring it:
-        '[{"control_ref":"IAM-05","attribute_id":"A2","what":"policy says
-        quarterly reviews; client confirms zero review records exist"}]'.
-        This writes the contradiction to those attributes so review can't
-        miss it. The goal is never to hide a contradiction — surface it.
+- `note` (string, required): The user's verbatim words. Do NOT paraphrase. Include their
+  qualifiers and conditions (e.g., "but only for production",
+  "we used to do this but stopped"). Quote them, prefix with
+  "User said:" if helpful.
+- `topic_hint` (string, optional): Optional one-word area this might relate to so our
+  audit team can route it ("people", "vendors", "infra",
+  "access", "policies", "ir", etc.). Leave empty if unsure.
+- `contradicts` (string or array, optional): Optional. If this note records something that CONTRADICTS
+  a specific control attribute (e.g. the policy promises quarterly
+  access reviews but no records exist; the ToS says "we never train
+  on your data" but there's no DPA), pass a JSON list anchoring it:
+  '[{"control_ref":"IAM-05","attribute_id":"A2","what":"policy says
+  quarterly reviews; client confirms zero review records exist"}]'.
+  This writes the contradiction to those attributes so review can't
+  miss it. The goal is never to hide a contradiction — surface it.
 
 ## `submit_population`
 
@@ -1344,62 +1432,83 @@ makes the whole exercise worthless.
 If I refuse, the message says what did not reconcile and what to re-pull.
 Fix and resend; do not work around it.
 
-Args:
-    population_key: From get_population_spec (e.g. "changes").
-    source_command: The exact command you ran, verbatim, re-runnable.
-    field_map: JSON object mapping each canonical field to where it comes
-        from in a raw record. A plain dotted path is {"path": "mergedAt"}.
-        For a list, use one of map_where / first_where / min_where /
-        max_where / count_where / any_where / all_where, e.g.
-        {"map_where": {"path": "reviews", "field": "state", "op": "eq",
-        "value": "APPROVED", "take": {"by": "author.login",
-        "at": "submittedAt"}}}.
-    raw: JSON object {"format": "json_array", "records": [...]} holding the
-        unedited output. Prefer the tool's own structured output (--json,
-        --output json) over parsed text. If it is too large I will tell you
-        how to narrow the pull rather than accepting a truncated one.
-    rows: JSON array of the normalized rows. Every row needs a source_ref
-        of the form "<raw_id_path>=<value>" or "raw#<index>".
-    raw_record_count: How many records are in the raw output. I count them
-        myself and refuse on a mismatch.
-    source_system: The system it came from ("github", "rippling", "okta").
-    filter_granularity: "exact_utc" if your filter used exact timestamps,
-        "date_only_widened" if it used dates and you widened the range one
-        day on each side. A bare "date_only" is refused: whether an item at
-        the edge is included would depend on the source's timezone.
-    raw_id_path: Path to each raw record's own identifier ("number", "id").
-    declared_exclusions: JSON array of filters you applied, e.g.
-        [{"field": "state", "op": "eq", "value": "MERGED", "keep": true,
-        "reason": "the population is changes that reached production"}].
-    aux_raw: JSON object of supporting pulls, each {"command": ...,
-        "records": [...]} — the identifier census and any second source.
-    completeness: JSON object declaring which completeness tests apply
-        (sequence, reconciliations, control_total, period_coverage,
-        recon_attempts). get_population_spec says which ones this
-        population supports. For a roster (state-as-of) population it must
-        also carry as_of — the exact timestamp the state was captured at.
-    policy: For company-owned due dates include company_rule_schedules keyed
-        by control/check, with original evidence_ids, obligation_facts,
-        timezone, complete window, all effective rule versions and due
-        occurrences. These are source facts for the examiner, not judgments.
-        JSON object of parameters from the entity's OWN documented
-        policy, with policy_basis naming the document. Defaults are strict:
-        an undeclared exception does not exist.
-    source_evidence_ids: When the population's records are DOCUMENTS
-        rather than command output (review PDFs with signatures, meeting
-        minutes, restore-test write-ups): submit each source document via
-        submit_document FIRST, then cite the returned evidence ids here
-        (JSON list, or comma-separated). The rows are then an extraction
-        the reviewer can check against the papers instead of a
-        transcription with no basis, and source_command honestly
-        describes the manual extraction (e.g. "manual: transcribed from
-        the four quarterly access review PDFs"). Leave empty for a
-        command-pulled population.
+Arguments:
+
+- `population_key` (string, required): From get_population_spec (e.g. "changes").
+- `source_command` (string, required): The exact command you ran, verbatim, re-runnable.
+- `field_map` (string, required): JSON object mapping each canonical field to where it comes
+  from in a raw record. A plain dotted path is {"path": "mergedAt"}.
+  For a list, use one of map_where / first_where / min_where /
+  max_where / count_where / any_where / all_where, e.g.
+  {"map_where": {"path": "reviews", "field": "state", "op": "eq",
+  "value": "APPROVED", "take": {"by": "author.login",
+  "at": "submittedAt"}}}.
+- `raw` (string, required): JSON object {"format": "json_array", "records": [...]} holding the
+  unedited output. Prefer the tool's own structured output (--json,
+  --output json) over parsed text. If it is too large I will tell you
+  how to narrow the pull rather than accepting a truncated one.
+- `rows` (string or array, required): JSON array of the normalized rows. Every row needs a source_ref
+  of the form "\<raw_id_path>=\<value>" or "raw#\<index>".
+- `raw_record_count` (integer, required): How many records are in the raw output. I count them
+  myself and refuse on a mismatch.
+- `source_system` (string, optional): The system it came from ("github", "rippling", "okta").
+- `filter_granularity` (string, optional): "exact_utc" if your filter used exact timestamps,
+  "date_only_widened" if it used dates and you widened the range one
+  day on each side. A bare "date_only" is refused: whether an item at
+  the edge is included would depend on the source's timezone.
+- `raw_id_path` (string, optional): Path to each raw record's own identifier ("number", "id").
+- `declared_exclusions` (string or array, optional): JSON array of filters you applied, e.g.
+  [{"field": "state", "op": "eq", "value": "MERGED", "keep": true,
+  "reason": "the population is changes that reached production"}].
+- `aux_raw` (string, optional): JSON object of supporting pulls, each {"command": ...,
+  "records": [...]} — the identifier census and any second source.
+- `completeness` (string, optional): JSON object declaring which completeness tests apply
+  (sequence, reconciliations, control_total, period_coverage,
+  recon_attempts). get_population_spec says which ones this
+  population supports. For a roster (state-as-of) population it must
+  also carry as_of — the exact timestamp the state was captured at.
+- `policy` (string, optional): JSON object of parameters from the entity's OWN documented
+  policy, with policy_basis naming the document. Defaults are strict:
+  an undeclared exception does not exist. When get_population_spec
+  returns data.company_rule_schedules, the due dates come from the
+  company's own rule: also send company_rule_schedules keyed
+  "CONTROL/ATTR", each with evidence_ids, obligation_facts, window,
+  effective_from, timezone, occurrences and "complete": true (plus
+  versions if the rule changed), every timestamp with its offset.
+  data.company_rule_schedules lists every field with two worked
+  examples. These are source facts for the examiner, not judgments.
+- `source_evidence_ids` (string or array, optional): When the population's records are DOCUMENTS
+  rather than command output (review PDFs with signatures, meeting
+  minutes, restore-test write-ups): submit each source document via
+  submit_document FIRST, then cite the returned evidence ids here
+  (JSON list, or comma-separated). The rows are then an extraction
+  the reviewer can check against the papers instead of a
+  transcription with no basis, and source_command honestly
+  describes the manual extraction (e.g. "manual: transcribed from
+  the four quarterly access review PDFs"). Leave empty for a
+  command-pulled population.
 
 ## `undo_delegate`
 
 Take back a delegated topic. The delegate's token is revoked
 and the topic returns to your queue.
 
-Args:
-    topic_key: The topic to take back (from get_topic_delegation_status output)
+Arguments:
+
+- `topic_key` (string, required): The topic to take back (from get_topic_delegation_status output)
+
+## `update_system_description`
+
+Replace the description of a system already on the engagement.
+
+Use this when a description recorded with add_system is wrong or out of
+date. Only the description changes. The classification (that is
+reclassify_system), the scope confirmation and the checklist stay as
+they are, because no check depends on the description text. add_system
+with a name already on the list changes nothing, so it cannot do this.
+
+Arguments:
+
+- `name` (string, required): The system as it appears in scope (e.g. "AWS", "GitHub").
+- `description` (string, required): The full replacement text: what the system is used for,
+  in the user's terms. It replaces the stored description entirely.
