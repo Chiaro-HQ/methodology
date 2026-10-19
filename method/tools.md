@@ -76,6 +76,15 @@ original is never touched and the buyer's format, wording, and structure
 are never altered. Fill only. Anything still open stays blank until the
 user answers it.
 
+Answer states you will get back (one per question):
+  backed            established by the company's independent examination.
+  company_statement the company's own disclosure or a previously given
+                    answer. True, but not something we examined.
+  needs_input       we have nothing that answers it. Ask the user.
+
+needs_input is a normal and frequent outcome, not a failure. An honest ask
+beats a plausible guess in a document going to a customer.
+
 Arguments:
 
 - `questions` (array of string, required): Every question from the buyer's file, in document order,
@@ -1116,6 +1125,16 @@ Set what types of data your product processes.
 
 This determines which data protection controls are relevant for the audit.
 
+Common data types:
+- Personal info (names, emails, phone numbers)
+- Financial (payment data, billing, transactions)
+- Health & medical (PHI, health records)
+- Documents & files (user-uploaded content)
+- Messages & comms (chat, email content)
+- Usage analytics (behavioral data, logs)
+- System configs (infrastructure settings)
+- Proprietary data (trade secrets, IP)
+
 Arguments:
 
 - `data_types` (array of string, required): List of data types (e.g. ["Personal info", "Financial", "Usage analytics", "Documents & files"])
@@ -1125,6 +1144,8 @@ Arguments:
 Set product/service information for the audit scope.
 
 This defines what product is being audited and who uses it.
+
+Returns confirmation and next steps.
 
 Arguments:
 
@@ -1175,6 +1196,8 @@ Set up your company and product info to start the SOC 2 engagement.
 
 This populates an existing engagement (your token is already scoped to one).
 Call get_status first to see current state.
+
+Returns engagement info and next steps.
 
 Arguments:
 
@@ -1400,6 +1423,10 @@ Worth recording (examples):
   - "We're on the free GitHub plan so branch protection isn't available"
   - User correcting themselves: "actually I was wrong earlier — we
     don't enforce that on the dev environment"
+
+Not worth recording (examples):
+  - Pleasantries, jokes, scheduling chatter
+  - Things already captured by another submit_* call
 
 Arguments:
 
