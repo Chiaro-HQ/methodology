@@ -5,6 +5,95 @@ applied to an examination. Corrections that do not change the method (typos,
 formatting, clearer wording with the same meaning) ship without a version, and
 the commit history on this repo records every one of them.
 
+## v1.13, 2026-10-21
+
+The same 89 controls and 387 checks, with clearer evidence guidance on 32
+checks and in the collection guidance of 15 controls, one new tool, and what
+the examining firm considers in judging a check.
+
+- Managed platforms: the hosting platform's managed edge or its
+  provider-enforced ingress restrictions count as boundary protection, with
+  evidence that the protection is active and bypass paths are controlled
+  (NET-02 A1), and where there is no customer-controlled network,
+  provider-enforced isolation and access rules count when they show
+  least-privilege paths between the relevant segments (NET-01 A3). A
+  resilience consideration can be the provider's managed redundancy, the
+  backup and restore approach, or a documented decision to run in a single
+  region (BCP-01 A4), and backups can be stored in a separate availability
+  zone (BCP-02 A4). The provider's built-in activity log on the current plan
+  counts where it records sign-ins, access changes and admin actions, as does
+  a paid audit-log add-on (MON-03 A1).
+- Agreements accepted online: BAA terms the customer accepted electronically,
+  with the acceptance date (HIP-01 A2), and a subcontractor BAA accepted in
+  the provider's console or online terms, with the acceptance record (HIP-01
+  A3).
+- Small teams: in a team of one to three engineers, each engineer may hold
+  production admin with a documented need for each account, and the CPA-review
+  flag still applies (END-02 A2). Where headcount prevents separating duties,
+  a risk assessment entry that evaluates this as a fraud measure and names the
+  compensating review counts (RSK-01 A9). A confidential email alias reaching
+  a named responsible person, such as an outside advisor, is a reporting
+  channel (COM-02 A3). The outside reviewer can be one outside advisor, with
+  no board seat or equity, and an independent board member counts too (GOV-02
+  A6, A7); one person can cover GOV-02 A3, A6 and A7 and the independent
+  evaluation check when they are independent of day-to-day management, do not
+  build or run the systems, and are not responsible for the controls they
+  evaluate.
+- Records a company may already keep: a dated review that kept the incident
+  response plan unchanged (INC-01 A3); a tabletop walk-through as the disaster
+  recovery test (BCP-01 A6); a tabletop exercise the response team took part
+  in, within the audit period, which also serves as their training record
+  (INC-01 A6); dated manual checklists recording what was checked and found,
+  as ongoing monitoring (EVL-01 A1); merged pull requests and release notes
+  showing that affected personnel were notified or took part (POL-02 A4);
+  dated completion confirmations (PPL-03 A4) and dated course records within
+  the cycle the company's training requirement sets (PPL-03 A5); the building
+  or coworking provider's visitor check-in records, with visitor name, date
+  and host (NET-03 A4); short-lived credentials that expire on their own
+  (IAM-08 A2); each device's automatic update settings, shown for each device
+  under a written update rule (END-01 A4); and, where neither applicable law
+  nor the company's commitments call for telling customers about subprocessor
+  changes, a documented basis for that (VND-04 A3).
+- Intervals: 12 months is named as our audit's own minimum for a recent record
+  (RSK-01 A1 and A12, AST-01 A5, NET-03 A5, VUL-02 A1, BCP-01 A6, INC-01 A3
+  and A6), and a year for manual credential rotation (IAM-08 A2); RSK-01 A1
+  and A12, AST-01 A5, NET-03 A5 and VUL-02 A1 accept a shorter interval the
+  company sets. Access reviews follow the frequency the company's own policy
+  defines (IAM-05 A3), and red flags read against the company's own scanning
+  interval (VUL-01), its backup policy or recovery objectives (BCP-02) and its
+  written policy on workload (PPL-04). A configured log export counts when its
+  destination keeps logs for the longer of the policy period and 90 days
+  (MON-01 A3).
+- What a check covers: one sampled user per in-scope system, drawn from the
+  groups the applicable MFA requirement covers (IAM-02 A3); separate
+  development and production environments, with or without a staging
+  environment (CHG-03 A1); a privacy owner when the Privacy criteria are in
+  scope (GOV-03); a data handling level that may state that an area has no
+  special requirement, such as disposal of public data (AST-02 A2); single
+  sign-on, when any accounts still outside it are listed and justified or the
+  evidence shows there are none (IAM-01 A4); and, for a team without device
+  management, per-device endpoint encryption with evidenced removable-media
+  restrictions, encryption or effective compensating protection (DAT-03 A3).
+- Red flags and examples of weak evidence now match their checks: MFA evidence
+  that leaves out enforcement or a permitted, evidenced exception (IAM-02),
+  capacity (AVL-01), validation at some processing entry points but not others
+  (INT-02), error detection, automated or manual, and code that is not
+  deployed or not active in production (INT-03), and direct write access to
+  the data store (INT-05).
+- A new tool, `remove_system`, takes a system added by mistake off a readiness
+  account's list, with the reason recorded; on an audit, or once one has
+  started, the Chiaro team makes that change through `report_problem`.
+  `set_company_profile` refuses a not-applicable confirmation for a control
+  that follows a trust services category, the HIPAA add-on or physical
+  facilities, and names the answer that decides it. `record_self_assessment`'s
+  `fix_description` asks, on a gap, for what to produce or start doing.
+  `submit_population` takes a pull too long to paste as saved files, and for
+  dated events expects rows from within the window while raw keeps each record
+  the command returned.
+- `method/readiness-and-independence.md` states that, in judging a check, the
+  examining firm considers what SOC 2 itself and the company's own written
+  policy require.
+
 ## v1.12, 2026-10-18
 
 The same 89 controls and 387 checks, with clearer evidence guidance on eight

@@ -43,8 +43,9 @@ customer's AI acts under the customer's direction, and responsibility stays with
 management, including for any document drafted this way.
 
 The examining firm separately evaluates the evidence and decides its audit
-conclusions. Readiness progress and automated checks are not audit conclusions
-and do not authorize a report.
+conclusions. In judging a check, it considers what SOC 2 itself and the
+company's own written policy require. Readiness progress and automated checks
+are not audit conclusions and do not authorize a report.
 
 Reference: [AICPA Code of Professional Conduct, sections 1.295 and
 1.297](https://pub.aicpa.org/codeofconduct/ethicsresources/et-cod.pdf).

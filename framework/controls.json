@@ -125,14 +125,14 @@
       "collection_playbook": {
         "evidence_goals": [
           "Pull the current organizational chart showing reporting lines across the organization",
-          "Pull documentation assigning security, compliance, and privacy responsibilities to named roles, including a designated privacy owner",
+          "Pull documentation assigning security and compliance responsibilities to named roles and, when the Privacy criteria are in scope, a designated privacy owner",
           "Pull evidence that critical functions are separated between different people, or where headcount prevents this, the documented compensating controls such as review or approval workflows",
           "Pull documentation assigning ownership of key external relationships"
         ],
-        "what_good_looks_like": "A dated org chart with clear reporting lines plus a responsibility document or matrix naming who owns security, compliance, privacy, and key vendor relationships, and where separation of duties is not feasible a written description of the compensating review or approval controls.",
-        "what_bad_looks_like": "A verbal description of who does what with no chart or written assignment, or an org chart with no security or privacy ownership defined anywhere.",
+        "what_good_looks_like": "A dated org chart with clear reporting lines plus a responsibility document or matrix naming who owns security, compliance, key vendor relationships and, when the Privacy criteria are in scope, privacy, and where separation of duties is not feasible a written description of the compensating review or approval controls.",
+        "what_bad_looks_like": "A verbal description of who does what with no chart or written assignment, or an org chart with no security ownership (or, when the Privacy criteria are in scope, privacy ownership) defined anywhere.",
         "red_flags": [
-          "No designated privacy owner",
+          "No designated privacy owner when the Privacy criteria are in scope",
           "Security responsibility is assumed but never assigned in writing",
           "One person holds conflicting duties with no documented compensating control",
           "Org chart is undated or clearly stale",
@@ -300,14 +300,14 @@
           "Pull completion records for all personnel showing training was completed within the required period",
           "Pull evidence of role specific training or continuing education for all security role personnel"
         ],
-        "what_good_looks_like": "The training content or platform course outline, a policy stating when training is due, and per person completion records exported from the training platform showing names and completion dates inside the required window, plus certificates or course records for specialized roles.",
+        "what_good_looks_like": "The training content or platform course outline, a policy stating when training is due, and per person completion records, such as a training platform export, course certificates or dated completion confirmations showing names and completion dates inside the required window, plus certificates or course records for specialized roles.",
         "what_bad_looks_like": "A statement that training happens with no course content or completion records, completion figures with no per person dates, or a client authored spreadsheet asserting everyone was trained.",
         "red_flags": [
           "Completion records missing for a meaningful share of active personnel",
           "Training completion dates fall outside the required period",
           "No onboarding training requirement for new hires",
           "Role specific technical training is required on paper but never evidenced",
-          "Completion is tracked only in a client authored spreadsheet with no platform export behind it"
+          "Completion is tracked only in a client authored spreadsheet with no certificate, platform export or other dated completion record behind it"
         ],
         "platform_hints": {
           "knowbe4": "Pull the training campaign completion report showing per user status and completion date.",
@@ -356,7 +356,7 @@
           "No completed reviews for personnel within the period",
           "Consequences for violations including privacy violations are undefined",
           "Violations occurred but no corrective action was documented",
-          "Reviews exist but excessive workload pressures on personnel are never assessed"
+          "Known excessive workload pressures have not received the response required by the company's own written policy"
         ],
         "platform_hints": {
           "lattice": "Pull the review cycle report showing completion status and dates, and the template showing security or control criteria.",
@@ -1138,7 +1138,7 @@
           "Pull the list of allowed authentication factors (authenticator app, hardware key, SMS, etc.)"
         ],
         "what_good_looks_like": "Raw policy config or API output showing the enforcement setting (required vs optional) plus a user-level report showing enrollment status per user. Actual settings, not a summary.",
-        "what_bad_looks_like": "Verbal confirmation that MFA is enabled without config proof. A screenshot. A summary without the enforcement setting or per-user status.",
+        "what_bad_looks_like": "Verbal confirmation that MFA is enabled, with no configuration or status evidence behind it. A screenshot or summary that leaves out what the check being assessed asks for: enforcement, or a permitted and evidenced application exception, for A1; MFA enforcement on remote network access for A2; or the sampled user's MFA enrollment and active status on each in-scope system for A3.",
         "red_flags": [
           "MFA set to optional or prompted but not enforced",
           "Service accounts or shared accounts excluded from MFA requirement",
@@ -1347,7 +1347,7 @@
       "local_save": "access-management/",
       "question": "Do you conduct periodic reviews of user access across your systems?",
       "follow_ups": [
-        "How often are reviews performed (quarterly, semi-annually)?",
+        "How often does your policy say reviews are performed (for example quarterly, semi-annually or annually)?",
         "Who performs the review?",
         "What happens when inappropriate access is found?",
         "Are review results documented?"
@@ -1917,7 +1917,7 @@
         "red_flags": [
           "Inbound rules allowing 0.0.0.0/0 on non-standard ports",
           "SSH or RDP open to the internet",
-          "No WAF on internet-facing applications",
+          "No boundary protection (firewall, security groups, WAF or the hosting platform's managed edge) on internet-facing applications",
           "Remote access without MFA",
           "Unaccounted public IP addresses"
         ],
@@ -2252,12 +2252,12 @@
           "Pull removable media and endpoint device protection configuration",
           "Pull data deletion or sanitization configuration for end-of-life devices"
         ],
-        "what_good_looks_like": "Config showing removable media restrictions (USB blocking, encryption requirement). Device decommissioning process config (wipe, destroy, certificate).",
-        "what_bad_looks_like": "Policy document about media handling without showing enforcement config.",
+        "what_good_looks_like": "Config showing removable media restrictions (USB blocking, encryption requirement), or, for teams without device management, per-device evidence of endpoint encryption plus evidenced removable-media restrictions, encryption or effective compensating protection. Device decommissioning process config (wipe, destroy, certificate).",
+        "what_bad_looks_like": "Policy document about media handling with no evidence of endpoint encryption and of removable-media restrictions, encryption or effective compensating protection.",
         "red_flags": [
           "No restrictions on removable media",
           "No device sanitization process for decommissioned equipment",
-          "USB ports unrestricted on production endpoints"
+          "USB ports unrestricted on production endpoints with no removable-media encryption or effective compensating protection"
         ]
       }
     },
@@ -2666,7 +2666,7 @@
         "red_flags": [
           "In-scope systems excluded from scan scope",
           "No regular scan schedule (ad-hoc only)",
-          "Last scan more than 90 days ago",
+          "Last scan outside the company's defined scanning interval",
           "Critical findings from recent scans with no remediation timeline",
           "Scanning tool not configured for all asset types (infra, containers, code)"
         ],
@@ -3516,7 +3516,7 @@
         }
       ],
       "local_save": "change-management/",
-      "question": "Are your development, staging, and production environments separate?",
+      "question": "Are your development and production environments separate (at least those two, with or without a separate staging environment)?",
       "follow_ups": [
         "Are they in different accounts, VPCs, or clusters?",
         "Does production have different access controls than development?",
@@ -3527,7 +3527,7 @@
       ],
       "collection_playbook": {
         "evidence_goals": [
-          "Pull environment configuration showing separate development, staging, and production",
+          "Pull environment configuration showing at least separate development and production environments",
           "Pull access controls showing production is more restricted than non-production",
           "Pull configuration showing whether production data can flow to non-production"
         ],
@@ -3927,13 +3927,13 @@
           "Pull backup monitoring or alerting configuration",
           "Pull backup storage location (same region vs cross-region)"
         ],
-        "what_good_looks_like": "Raw backup config showing: automated schedule, retention period, cross-region storage, success/failure alerting. Per-system backup settings.",
+        "what_good_looks_like": "Raw backup config showing: automated schedule, retention period, storage separate from production (another region, another availability zone, or off-site), success/failure alerting. Per-system backup settings.",
         "what_bad_looks_like": "Statement that backups exist without showing config. Backup policy document without actual system settings.",
         "red_flags": [
           "No automated backup schedule (manual only)",
-          "Backups stored in same region as production",
+          "Backups stored in the same location as production, so one outage or loss would take both",
           "No monitoring or alerting on backup failures",
-          "Retention period less than 30 days",
+          "Retention period shorter than the entity's own backup policy or recovery objectives",
           "Some critical data stores not included in backup scope"
         ],
         "platform_hints": {
@@ -4198,7 +4198,7 @@
         "Has anyone outside your company checked your security or your controls in the last year? It counts when all three are true: the person or firm who did it does not run the systems they checked, they wrote down what they looked at and what they found with a date on it, and you have a record of what you did about what they found. Anything meeting all three counts, whatever it is called. If nothing comes to mind, these checks usually turn up in one of two ways: someone required it of you (a customer before signing, an app store, a platform), or someone offered it (a cloud provider's partner program, an advisor). Apply the three tests to whatever the client names."
       ],
       "documents": [
-        "Vulnerability Scanner (Qualys / Nessus / etc.)",
+        "Monitoring records (scanner output, dashboards, or dated manual checklists)",
         "Independent Assessment Report (pen test, cloud security review, or third-party assessment)",
         "Deficiency & Issue Tracking"
       ],
@@ -4225,10 +4225,10 @@
           "Pull examples of monitoring output (log summaries, compliance dashboards, control health reports)",
           "Where an outside party checked the company's security or controls, pull that party's written output and the company's response to it. Judge it against the test rather than against a list of instrument names: the party is outside the company and does not run what they checked, the record is dated and states scope and findings, and the company's response to those findings exists. The instrument can be anything meeting that test. Before submitting a customer's review of the company, confirm the company is permitted to share it."
         ],
-        "what_good_looks_like": "Config showing automated monitoring of key controls (access reviews, backup success, vulnerability scan completion). Dashboard or report config that tracks control health over time. For the outside check: a dated record from a party who does not run the systems they examined, stating what was looked at and what was found, plus the company's written response to the findings.",
+        "what_good_looks_like": "Automated monitoring config, or dated manual checklists recording what was checked and found, covering key controls (access reviews, backup success, vulnerability scan completion). Dashboard or report config that tracks control health over time. For the outside check: a dated record from a party who does not run the systems they examined, stating what was looked at and what was found, plus the company's written response to the findings.",
         "what_bad_looks_like": "Statement that controls are monitored without showing how. One-time audit results instead of ongoing monitoring config. Anything the company or its own service provider ran on itself offered as the outside check: a scan, an AI tool, a self-assessment, or a review by the provider that operates the systems being reviewed. A certificate or badge with no scope, no method and no findings.",
         "red_flags": [
-          "No ongoing monitoring (only periodic manual checks)",
+          "No ongoing monitoring (no dated automated or manual checks)",
           "Monitoring exists but no one reviews the output",
           "Key controls not included in monitoring scope"
         ]
@@ -4342,7 +4342,7 @@
         "red_flags": [
           "No alerts configured for capacity metrics",
           "Thresholds set unreasonably high (90%+ before alert)",
-          "No auto-scaling or manual-only capacity management",
+          "No auto-scaling and no documented capacity expansion procedure",
           "Some production systems not covered by monitoring"
         ],
         "platform_hints": {
@@ -4514,7 +4514,7 @@
           "No input validation on user-facing endpoints",
           "API inputs not logged",
           "Invalid inputs silently accepted (no rejection or flagging)",
-          "No rate limiting on input endpoints"
+          "Validation applied at some processing entry points but not others"
         ],
         "platform_hints": {
           "stripe": "Pull webhook endpoint configuration. Pull API key restrictions (allowed IPs, permissions). Pull event logging config. Pull Radar fraud rules if applicable."
@@ -4562,9 +4562,9 @@
           "Pull processing activity logs or audit trail configuration showing traceability"
         ],
         "what_good_looks_like": "Config showing automated error detection (checksums, validation rules, reconciliation). Processing logs with timestamps, input/output records, and error flags.",
-        "what_bad_looks_like": "Statement that processing is accurate without showing error detection config. Application code instead of running configuration.",
+        "what_bad_looks_like": "Statement that processing is accurate without showing error detection config. Code that is not deployed or not active in production.",
         "red_flags": [
-          "No automated error detection for critical processing",
+          "No error detection, automated or manual, for critical processing",
           "Processing logs missing timestamps or source identifiers",
           "No reconciliation between input and output"
         ]
@@ -4668,7 +4668,7 @@
           "Pull storage activity logging configuration"
         ],
         "what_good_looks_like": "Database or storage ACL config showing write access is restricted. Integrity check config (replication lag monitoring, checksum verification). Archival settings with retention periods. Storage access audit logs.",
-        "what_bad_looks_like": "Statement that data is protected without showing access controls. Application-level auth instead of storage-level config.",
+        "what_bad_looks_like": "Statement that data is protected without showing access controls. Application-level checks with no restriction on who holds direct write access to the data store.",
         "red_flags": [
           "Broad write access to production data stores",
           "No integrity checks on stored data",

@@ -1,6 +1,6 @@
 # The tools
 
-The 52 tools a connected client's AI can call. Generated from the
+The 53 tools a connected client's AI can call. Generated from the
 live server, so this list is exactly what a client sees, including the
 descriptions the AI reads to decide what to do.
 
@@ -846,7 +846,8 @@ Arguments:
 - `attestation_reason` (string, optional): for the last-resort attested path, explain the existing
   evidence route tried and why checking evidence now is impractical.
   The server presents its own explicit picker; never choose for the user.
-- `fix_description` (string, optional): when closing a previously recorded gap — what changed.
+- `fix_description` (string, optional): on a gap, the exact thing to produce or start doing;
+  when closing a previously recorded gap, what changed.
 - `correction` (boolean, optional): true when overturning your own earlier misjudgment (say why
   in reasoning).
 - `assessments` (string or array, optional): OPTIONAL batch — JSON list of objects with the fields above
@@ -897,6 +898,29 @@ Arguments:
   audit team weighs reliance accordingly. Never guess: ask.
 - `note` (string, optional): Optional context in the user's words ("reviewed it in March",
   "requested from the vendor, not received yet").
+
+## `remove_system`
+
+Take a system off a readiness account's system list when it does not belong there.
+
+Use this when a system was added by mistake: the user says the company does
+not use it, or it was confused with another one. The reason is recorded with
+the removal, and notes already saved about the system stay as they are. A
+system the company does use but that is classified wrongly is moved with
+reclassify_system instead, and a wrong description is replaced with
+update_system_description.
+
+Removing any system other than a vendor can change the scope, and the answer
+says what to do next. Removing a vendor leaves the scope and the checklist
+unchanged. On an audit, or once an audit has started, the Chiaro team makes
+this change: use report_problem.
+
+Arguments:
+
+- `name` (string, required): The system as it appears in scope (e.g. "Iron City IT Advisors").
+- `reason` (string, required): One sentence, in the user's terms, on why it comes off the list
+  (e.g. "added by mistake; our security is handled in house").
+  Required, and recorded.
 
 ## `report_problem`
 
@@ -1117,7 +1141,9 @@ Arguments:
   A record for a fitted variant is refused: NET-04, MON-03, BCP-03
   and END-03 follow the recorded systems; IAM-09, INC-03 and CHG-06
   follow engineering_team_size. So is one for VUL-02, which follows
-  pen_test_program.
+  pen_test_program, and one for a control that follows a trust
+  services category or the HIPAA add-on (confirm_tsc decides those)
+  or physical facilities (has_physical_office).
 
 ## `set_data_types`
 
@@ -1472,10 +1498,18 @@ Arguments:
   "at": "submittedAt"}}}.
 - `raw` (string, required): JSON object {"format": "json_array", "records": [...]} holding the
   unedited output. Prefer the tool's own structured output (--json,
-  --output json) over parsed text. If it is too large I will tell you
-  how to narrow the pull rather than accepting a truncated one.
-- `rows` (string or array, required): JSON array of the normalized rows. Every row needs a source_ref
-  of the form "\<raw_id_path>=\<value>" or "raw#\<index>".
+  --output json) over parsed text. Too long to paste into this call:
+  send it as a saved file through files and leave this "". Output
+  over the server's own size limit is refused with how to narrow the
+  pull, never truncated.
+- `rows` (string or array, required): JSON array of the normalized rows, one for each raw record left
+  after your declared exclusions. When field_map maps occurred_at
+  (dated events), only the records inside the window: raw still
+  keeps every record the command returned, and I apply the window
+  to it myself. A roster or a history keeps a row for every record.
+  Every row needs a source_ref of the form "\<raw_id_path>=\<value>"
+  or "raw#\<index>". Too long to paste: send it through files and
+  leave this "".
 - `raw_record_count` (integer, required): How many records are in the raw output. I count them
   myself and refuse on a mismatch.
 - `source_system` (string, optional): The system it came from ("github", "rippling", "okta").
@@ -1514,6 +1548,17 @@ Arguments:
   describes the manual extraction (e.g. "manual: transcribed from
   the four quarterly access review PDFs"). Leave empty for a
   command-pulled population.
+- `files` (string or object, optional): For a pull too long to paste into this call (as a rule, more
+  than a few dozen records): save raw, rows or aux_raw as a JSON
+  file and name it here instead, {"raw": {"path": "\<where it is
+  saved>", "sha256": "\<its sha256>"}, "rows": {...}}, sending that
+  argument itself as "". The raw file may be the command's own JSON
+  output as it printed it. The first call answers upload_needed
+  with one upload command per shell for each file I do not hold
+  yet: run the one for this machine (it sends that saved file, byte
+  for byte, to this engagement's evidence store), then call again
+  with exactly the same arguments. I check each file against its
+  sha256 before reading it.
 
 ## `undo_delegate`
 
