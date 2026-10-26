@@ -866,10 +866,10 @@ EXACT ORDER:
     with your results (with a prioritized fix plan) in about 3 business
     days if no more follow-up is needed."
 
-DO NOT verify the upload yourself, ask the user if they uploaded, or
-keep the session open waiting. The web page handles the file transfer
-and notifies the audit team automatically. Once you've opened the page,
-the session is done.
+When the user says the zip is uploaded, call get_status once: it compares
+the upload with every file you registered and lists anything missing. Do
+not keep the session open waiting, and do not ask more than once. If
+nothing is missing, the session is done.
 
 ══════════════════════════════════════════════════════════════════
 FILLING A CUSTOMER'S SECURITY QUESTIONNAIRE

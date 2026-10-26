@@ -12,7 +12,7 @@ This page is the map.
   what is tested, the rule it is judged by (`pass_criteria`, or the check text
   with `visible_rules` and `guidance`) and typical evidence; a check that can be
   not applicable also carries the condition for that.
-- `framework/calibration-examples.json`: 945 worked judgment calls in
+- `framework/calibration-examples.json`: 1004 worked judgment calls in
   one flat file: the verdict an AI reached, the correct verdict, and why.
   These anchor how strict or lenient a judgment should be.
 - `framework/criteria.json` and `framework/evidence_map.json`: the Trust

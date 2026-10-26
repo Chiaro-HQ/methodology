@@ -100,10 +100,10 @@
     "attribute": "A7",
     "mode": "type_i",
     "id": "rule-gov-01-a7-type_i-e26945ba6913",
-    "evidence_summary": "The accepted documented schedule requires Code review every 18 months from its actual issue or last review. Dated records establish review exactly at the due date and no missed earlier deadline. The evidence described here does not identify the source acceptance bound or inspect the operating safeguards needed to establish this company rule's adequacy.",
+    "evidence_summary": "The documented and approved schedule requires Code review every 18 months from its actual issue or last review. Dated records establish review exactly at the due date and no missed earlier deadline. The evidence described here identifies no obligation or operating measurement supporting this longer interval and inspects no safeguards relied on over the gap.",
     "correct_verdict": "unresolved",
     "ai_verdict": "unresolved",
-    "reasoning": "The preserved facts do not establish the required acceptance bound or complete supporting evidence. Withhold a pass; this is not an invented numerical failure.",
+    "reasoning": "An interval longer than a year is outside the approved yearly route, so it needs a cited bound or inspected safeguards, and neither is shown. Withhold a pass; this is not an invented numerical failure.",
     "source": "approved_company_rules_20260909",
     "weight": 0.5
   },
@@ -123,18 +123,6 @@
     "control": "GOV-01",
     "attribute": "A7",
     "mode": "type_i",
-    "id": "rule-gov-01-a7-type_i-e115bb60f0c8",
-    "evidence_summary": "The Code is issued. Its accepted schedule and actual issue date establish a future first due date, and no required review is overdue. The evidence described here does not identify the source acceptance bound or inspect the operating safeguards needed to establish this company rule's adequacy.",
-    "correct_verdict": "unresolved",
-    "ai_verdict": "unresolved",
-    "reasoning": "The preserved facts do not establish the required acceptance bound or complete supporting evidence. Withhold a pass; this is not an invented numerical failure.",
-    "source": "approved_company_rules_20260909",
-    "weight": 0.5
-  },
-  {
-    "control": "GOV-01",
-    "attribute": "A7",
-    "mode": "type_i",
     "id": "rule-gov-01-a7-type_i-source-bound",
     "evidence_summary": "Synthetic source-bound case: customer agreement C1 clause 4 explicitly requires review at least every 18 months for every in-scope item covered by this check. The complete obligations register shows no stricter applicable requirement. Company rule R1 version 1, effective before the assessed activity, assigns the operations owner and uses that exact requirement. Its due-date worksheet retains the actual origin dates from the actual Code issue or completed review date, the first due date, every later due date and the named calendar; inspected original timestamps reconcile with that worksheet. The issued Code and dated review log show issue on January 1, 2025 and substantive review on June 30, 2026, before the July 1, 2026 first deadline. No earlier review was due. No stronger obligation is missed. The rule does not rely on an uninspected compensating safeguard.",
     "ai_verdict": "pass",
@@ -148,10 +136,10 @@
     "attribute": "A7",
     "mode": "type_i",
     "id": "rule-gov-01-a7-type_i-unsupported-bound",
-    "evidence_summary": "The company documents a 100-year rule for Code of Conduct review. Its record shows compliance with that company-written rule, but provides no external acceptance requirement or measured protective operation establishing adequacy. Its owner merely signs a rationale that the interval is convenient.",
+    "evidence_summary": "The company documents a 100-year rule for Code of Conduct review. Its record shows compliance with that company-written rule, but provides no obligation or operating measurement supporting an interval longer than a year. Its owner merely signs a rationale that the interval is convenient.",
     "ai_verdict": "unresolved",
     "correct_verdict": "unresolved",
-    "reasoning": "The current facts leave the acceptance bound, owning result or complete factual selection unresolved; no pass is established.",
+    "reasoning": "A schedule longer than a year has no cited bound or inspected safeguards; no pass is established.",
     "weight": 0.5,
     "source": "approved_company_rules_20260909"
   },
@@ -175,7 +163,7 @@
     "evidence_summary": "A prior adequacy result refers to R1 and the previous scope. The company now uses R2 for a newly added production system, and the supporting obligation or operating evidence has not been inspected for that system. The old pass is copied into the new result.",
     "ai_verdict": "unresolved",
     "correct_verdict": "unresolved",
-    "reasoning": "The current facts leave the acceptance bound, owning result or complete factual selection unresolved; no pass is established.",
+    "reasoning": "The current facts leave the owning result or complete factual selection unresolved for the changed scope; no pass is established.",
     "weight": 0.5,
     "source": "approved_company_rules_20260909"
   },
@@ -196,7 +184,7 @@
     "attribute": "A7",
     "mode": "type_i",
     "id": "recovered-gov-01-a7-type_i-1",
-    "evidence_summary": "The company documents a 100-year review cycle and follows it. No accepted adequacy criteria or supporting facts establish that this cycle meets the control objective.",
+    "evidence_summary": "The company documents a 100-year review cycle and follows it. No obligation, operating measurement or inspected safeguard supports a cycle longer than a year.",
     "correct_verdict": "unresolved",
     "ai_verdict": "unresolved",
     "reasoning": "Required timing or adequacy facts are missing; age and a written schedule alone do not establish compliance or a missed deadline.",
@@ -206,12 +194,24 @@
   {
     "control": "GOV-01",
     "attribute": "A7",
+    "mode": "type_i",
+    "id": "rule-gov-01-a7-type_i-annual-schedule",
+    "evidence_summary": "The Code is issued. Its documented and approved schedule requires review every 12 months from the actual issue date; the first review is not yet due and no review is overdue.",
+    "ai_verdict": "unresolved",
+    "correct_verdict": "pass",
+    "reasoning": "The documented, approved yearly schedule establishes adequacy, and no review is overdue.",
+    "weight": 0.5,
+    "source": "words_batch1_2026_10"
+  },
+  {
+    "control": "GOV-01",
+    "attribute": "A7",
     "mode": "type_ii",
     "id": "rule-gov-01-a7-type_ii-26c010d778b3",
-    "evidence_summary": "The accepted documented schedule requires Code review every 18 months from its actual issue or last review. Dated records establish review exactly at the due date and no missed earlier deadline. Complete period version and due-date records establish this for every required review throughout the period, including any overdue obligation at its start. The evidence described here does not identify the source acceptance bound or inspect the operating safeguards needed to establish this company rule's adequacy.",
+    "evidence_summary": "The documented and approved schedule requires Code review every 18 months from its actual issue or last review. Dated records establish review exactly at the due date and no missed earlier deadline. Complete period version and due-date records establish this for every required review throughout the period, including any overdue obligation at its start. The evidence described here identifies no obligation or operating measurement supporting this longer interval and inspects no safeguards relied on over the gap.",
     "correct_verdict": "unresolved",
     "ai_verdict": "unresolved",
-    "reasoning": "The preserved facts do not establish the required acceptance bound or complete supporting evidence. Withhold a pass; this is not an invented numerical failure.",
+    "reasoning": "An interval longer than a year is outside the approved yearly route, so it needs a cited bound or inspected safeguards, and neither is shown. Withhold a pass; this is not an invented numerical failure.",
     "source": "approved_company_rules_20260909",
     "weight": 0.5
   },
@@ -231,18 +231,6 @@
     "control": "GOV-01",
     "attribute": "A7",
     "mode": "type_ii",
-    "id": "rule-gov-01-a7-type_ii-6385aa6020bd",
-    "evidence_summary": "The Code is issued. Its accepted schedule and actual issue date establish a future first due date, and no required review is overdue. Complete period version and due-date records establish this for every required review throughout the period, including any overdue obligation at its start. The evidence described here does not identify the source acceptance bound or inspect the operating safeguards needed to establish this company rule's adequacy.",
-    "correct_verdict": "unresolved",
-    "ai_verdict": "unresolved",
-    "reasoning": "The preserved facts do not establish the required acceptance bound or complete supporting evidence. Withhold a pass; this is not an invented numerical failure.",
-    "source": "approved_company_rules_20260909",
-    "weight": 0.5
-  },
-  {
-    "control": "GOV-01",
-    "attribute": "A7",
-    "mode": "type_ii",
     "id": "rule-gov-01-a7-type_ii-source-bound",
     "evidence_summary": "Synthetic source-bound case: customer agreement C1 clause 4 explicitly requires review at least every 18 months for every in-scope item covered by this check. The complete obligations register shows no stricter applicable requirement. Company rule R1 version 1, effective before the assessed activity, assigns the operations owner and uses that exact requirement. Its due-date worksheet retains the actual origin dates from the actual Code issue or completed review date, the first due date, every later due date and the named calendar; inspected original timestamps reconcile with that worksheet. The issued Code and dated review log show issue on January 1, 2025 and substantive review on June 30, 2026, before the July 1, 2026 first deadline. No earlier review was due. No stronger obligation is missed. The rule does not rely on an uninspected compensating safeguard. Complete scope, obligation, rule-version and underlying artifact histories establish the stated facts for every effective version in the period, including departures, retired items and obligations due before period end.",
     "ai_verdict": "pass",
@@ -256,10 +244,10 @@
     "attribute": "A7",
     "mode": "type_ii",
     "id": "rule-gov-01-a7-type_ii-unsupported-bound",
-    "evidence_summary": "The company documents a 100-year rule for Code of Conduct review. Its record shows compliance with that company-written rule, but provides no external acceptance requirement or measured protective operation establishing adequacy. Its owner merely signs a rationale that the interval is convenient.",
+    "evidence_summary": "The company documents a 100-year rule for Code of Conduct review. Its record shows compliance with that company-written rule, but provides no obligation or operating measurement supporting an interval longer than a year. Its owner merely signs a rationale that the interval is convenient.",
     "ai_verdict": "unresolved",
     "correct_verdict": "unresolved",
-    "reasoning": "The current facts leave the acceptance bound, owning result or complete factual selection unresolved; no pass is established.",
+    "reasoning": "A schedule longer than a year has no cited bound or inspected safeguards; no pass is established.",
     "weight": 0.5,
     "source": "approved_company_rules_20260909"
   },
@@ -283,9 +271,21 @@
     "evidence_summary": "A prior adequacy result refers to R1 and the previous scope. The company now uses R2 for a newly added production system, and the supporting obligation or operating evidence has not been inspected for that system. The old pass is copied into the new result.",
     "ai_verdict": "unresolved",
     "correct_verdict": "unresolved",
-    "reasoning": "The current facts leave the acceptance bound, owning result or complete factual selection unresolved; no pass is established.",
+    "reasoning": "The current facts leave the owning result or complete factual selection unresolved for the changed scope; no pass is established.",
     "weight": 0.5,
     "source": "approved_company_rules_20260909"
+  },
+  {
+    "control": "GOV-01",
+    "attribute": "A7",
+    "mode": "type_ii",
+    "id": "rule-gov-01-a7-type_ii-annual-schedule",
+    "evidence_summary": "The Code is issued. Its documented and approved schedule requires review every 12 months from the actual issue date. Complete period version and due-date records establish that every review due in the period was completed by its due date, including any overdue obligation at its start.",
+    "ai_verdict": "unresolved",
+    "correct_verdict": "pass",
+    "reasoning": "The documented, approved yearly schedule establishes adequacy, and every review due in the period was timely.",
+    "weight": 0.5,
+    "source": "words_batch1_2026_10"
   },
   {
     "control": "GOV-01",
@@ -795,18 +795,6 @@
     "control": "GOV-01",
     "attribute": "A9",
     "mode": "type_i",
-    "id": "rule-gov-01-a9-type_i-fe888260c8e2",
-    "evidence_summary": "A current employee\u2019s renewal is dated exactly 12 months after the previous acknowledgment; the accepted documented cycle is 12 months. The evidence described here does not identify the source acceptance bound or inspect the operating safeguards needed to establish this company rule's adequacy.",
-    "ai_verdict": "unresolved",
-    "correct_verdict": "unresolved",
-    "reasoning": "The preserved facts do not establish the required acceptance bound or complete supporting evidence. Withhold a pass; this is not an invented numerical failure.",
-    "weight": 0.5,
-    "source": "approved_company_rules_20260909"
-  },
-  {
-    "control": "GOV-01",
-    "attribute": "A9",
-    "mode": "type_i",
     "id": "gov-01-a9-suites1-type_i-2",
     "evidence_summary": "A current employee\u2019s latest acknowledgment is 13 months old; the accepted documented cycle is 12 months.",
     "ai_verdict": "gap",
@@ -814,18 +802,6 @@
     "reasoning": "The documented renewal deadline has passed.",
     "weight": 0.5,
     "source": "rewrite_1_1_0_batch1"
-  },
-  {
-    "control": "GOV-01",
-    "attribute": "A9",
-    "mode": "type_i",
-    "id": "rule-gov-01-a9-type_i-080240be938d",
-    "evidence_summary": "An actual initial acknowledgment is eight months old and the accepted documented renewal cycle is 12 months; the first renewal is not yet due. The evidence described here does not identify the source acceptance bound or inspect the operating safeguards needed to establish this company rule's adequacy.",
-    "ai_verdict": "unresolved",
-    "correct_verdict": "unresolved",
-    "reasoning": "The preserved facts do not establish the required acceptance bound or complete supporting evidence. Withhold a pass; this is not an invented numerical failure.",
-    "weight": 0.5,
-    "source": "approved_company_rules_20260909"
   },
   {
     "control": "GOV-01",
@@ -856,10 +832,10 @@
     "attribute": "A9",
     "mode": "type_i",
     "id": "rule-gov-01-a9-type_i-unsupported-bound",
-    "evidence_summary": "The company documents a 100-year rule for Code acknowledgment renewal. Its record shows compliance with that company-written rule, but provides no external acceptance requirement or measured protective operation establishing adequacy. Its owner merely signs a rationale that the interval is convenient.",
+    "evidence_summary": "The company documents a 100-year rule for Code acknowledgment renewal. Its record shows compliance with that company-written rule, but provides no obligation or operating measurement supporting an interval longer than a year. Its owner merely signs a rationale that the interval is convenient.",
     "ai_verdict": "unresolved",
     "correct_verdict": "unresolved",
-    "reasoning": "The current facts leave the acceptance bound, owning result or complete factual selection unresolved; no pass is established.",
+    "reasoning": "A schedule longer than a year has no cited bound or inspected safeguards; no pass is established.",
     "weight": 0.5,
     "source": "approved_company_rules_20260909"
   },
@@ -883,7 +859,7 @@
     "evidence_summary": "A prior adequacy result refers to R1 and the previous scope. The company now uses R2 for a newly added production system, and the supporting obligation or operating evidence has not been inspected for that system. The old pass is copied into the new result.",
     "ai_verdict": "unresolved",
     "correct_verdict": "unresolved",
-    "reasoning": "The current facts leave the acceptance bound, owning result or complete factual selection unresolved; no pass is established.",
+    "reasoning": "The current facts leave the owning result or complete factual selection unresolved for the changed scope; no pass is established.",
     "weight": 0.5,
     "source": "approved_company_rules_20260909"
   },
@@ -914,14 +890,26 @@
   {
     "control": "GOV-01",
     "attribute": "A9",
-    "mode": "type_ii",
-    "id": "rule-gov-01-a9-type_ii-2c3ac4dd7fc2",
-    "evidence_summary": "Complete period records show all due renewals on time, including a contractor who left before period end. The evidence described here does not identify the source acceptance bound or inspect the operating safeguards needed to establish this company rule's adequacy.",
+    "mode": "type_i",
+    "id": "rule-gov-01-a9-type_i-annual-cycle",
+    "evidence_summary": "A current employee's renewal is dated exactly 12 months after the previous acknowledgment; the documented and approved renewal cycle is 12 months.",
     "ai_verdict": "unresolved",
-    "correct_verdict": "unresolved",
-    "reasoning": "The preserved facts do not establish the required acceptance bound or complete supporting evidence. Withhold a pass; this is not an invented numerical failure.",
+    "correct_verdict": "pass",
+    "reasoning": "The documented, approved yearly cycle establishes adequacy, and the renewal was on time.",
     "weight": 0.5,
-    "source": "approved_company_rules_20260909"
+    "source": "words_batch1_2026_10"
+  },
+  {
+    "control": "GOV-01",
+    "attribute": "A9",
+    "mode": "type_i",
+    "id": "rule-gov-01-a9-type_i-first-not-due",
+    "evidence_summary": "An actual initial acknowledgment is eight months old and the documented and approved renewal cycle is 12 months; the first renewal is not yet due.",
+    "ai_verdict": "unresolved",
+    "correct_verdict": "pass",
+    "reasoning": "The first renewal under an adequate yearly cycle is not yet due.",
+    "weight": 0.5,
+    "source": "words_batch1_2026_10"
   },
   {
     "control": "GOV-01",
@@ -939,18 +927,6 @@
     "control": "GOV-01",
     "attribute": "A9",
     "mode": "type_ii",
-    "id": "rule-gov-01-a9-type_ii-16268acaf565",
-    "evidence_summary": "Two isolated late renewals among 50 people were promptly corrected; investigation supports effective operation and both exceptions are disclosed. The evidence described here does not identify the source acceptance bound or inspect the operating safeguards needed to establish this company rule's adequacy.",
-    "ai_verdict": "unresolved",
-    "correct_verdict": "unresolved",
-    "reasoning": "The preserved facts do not establish the required acceptance bound or complete supporting evidence. Withhold a pass; this is not an invented numerical failure.",
-    "weight": 0.5,
-    "source": "approved_company_rules_20260909"
-  },
-  {
-    "control": "GOV-01",
-    "attribute": "A9",
-    "mode": "type_ii",
     "id": "gov-01-a9-suites1-type_ii-4",
     "evidence_summary": "Two of 50 renewals were late because the same failed reminder process recurred after correction and remains unresolved.",
     "ai_verdict": "gap",
@@ -958,18 +934,6 @@
     "reasoning": "A low percentage does not override repeated unresolved failures.",
     "weight": 0.5,
     "source": "rewrite_1_1_0_batch1"
-  },
-  {
-    "control": "GOV-01",
-    "attribute": "A9",
-    "mode": "type_ii",
-    "id": "rule-gov-01-a9-type_ii-51efe88a4f5a",
-    "evidence_summary": "Inspected actual acknowledgment dates and the accepted documented 12-month renewal cycle establish that no first renewal was due. The evidence described here does not identify the source acceptance bound or inspect the operating safeguards needed to establish this company rule's adequacy.",
-    "ai_verdict": "unresolved",
-    "correct_verdict": "unresolved",
-    "reasoning": "The preserved facts do not establish the required acceptance bound or complete supporting evidence. Withhold a pass; this is not an invented numerical failure.",
-    "weight": 0.5,
-    "source": "approved_company_rules_20260909"
   },
   {
     "control": "GOV-01",
@@ -988,10 +952,10 @@
     "attribute": "A9",
     "mode": "type_ii",
     "id": "rule-gov-01-a9-type_ii-unsupported-bound",
-    "evidence_summary": "The company documents a 100-year rule for Code acknowledgment renewal. Its record shows compliance with that company-written rule, but provides no external acceptance requirement or measured protective operation establishing adequacy. Its owner merely signs a rationale that the interval is convenient.",
+    "evidence_summary": "The company documents a 100-year rule for Code acknowledgment renewal. Its record shows compliance with that company-written rule, but provides no obligation or operating measurement supporting an interval longer than a year. Its owner merely signs a rationale that the interval is convenient.",
     "ai_verdict": "unresolved",
     "correct_verdict": "unresolved",
-    "reasoning": "The current facts leave the acceptance bound, owning result or complete factual selection unresolved; no pass is established.",
+    "reasoning": "A schedule longer than a year has no cited bound or inspected safeguards; no pass is established.",
     "weight": 0.5,
     "source": "approved_company_rules_20260909"
   },
@@ -1015,9 +979,45 @@
     "evidence_summary": "A prior adequacy result refers to R1 and the previous scope. The company now uses R2 for a newly added production system, and the supporting obligation or operating evidence has not been inspected for that system. The old pass is copied into the new result.",
     "ai_verdict": "unresolved",
     "correct_verdict": "unresolved",
-    "reasoning": "The current facts leave the acceptance bound, owning result or complete factual selection unresolved; no pass is established.",
+    "reasoning": "The current facts leave the owning result or complete factual selection unresolved for the changed scope; no pass is established.",
     "weight": 0.5,
     "source": "approved_company_rules_20260909"
+  },
+  {
+    "control": "GOV-01",
+    "attribute": "A9",
+    "mode": "type_ii",
+    "id": "rule-gov-01-a9-type_ii-annual-cycle",
+    "evidence_summary": "The documented and approved renewal cycle is 12 months. Complete period records show every renewal due in the period on time, including a contractor who left before period end.",
+    "ai_verdict": "unresolved",
+    "correct_verdict": "pass",
+    "reasoning": "An adequate yearly cycle was met for the whole period population.",
+    "weight": 0.5,
+    "source": "words_batch1_2026_10"
+  },
+  {
+    "control": "GOV-01",
+    "attribute": "A9",
+    "mode": "type_ii",
+    "id": "rule-gov-01-a9-type_ii-isolated-late",
+    "evidence_summary": "The documented and approved renewal cycle is 12 months. Two isolated late renewals among 50 people were promptly corrected; investigation supports effective operation and both exceptions are disclosed.",
+    "ai_verdict": "unresolved",
+    "correct_verdict": "pass",
+    "reasoning": "Isolated, corrected and disclosed exceptions under an adequate yearly cycle can pass.",
+    "weight": 0.5,
+    "source": "words_batch1_2026_10"
+  },
+  {
+    "control": "GOV-01",
+    "attribute": "A9",
+    "mode": "type_ii",
+    "id": "rule-gov-01-a9-type_ii-first-not-due",
+    "evidence_summary": "Inspected actual acknowledgment dates and the documented and approved 12-month renewal cycle establish that no first renewal was due in the period.",
+    "ai_verdict": "unresolved",
+    "correct_verdict": "pass",
+    "reasoning": "No renewal was due under an adequate yearly cycle.",
+    "weight": 0.5,
+    "source": "words_batch1_2026_10"
   },
   {
     "control": "GOV-01",
@@ -1155,13 +1155,25 @@
     "control": "GOV-02",
     "attribute": "A6",
     "mode": "legacy",
-    "id": "gov-02-a6-capfix-1",
-    "evidence_summary": "Solo founder: agreement names an outside advisor and security and internal-control topics, but requires written reviews only annually.",
+    "id": "gov-02-a6-yearly",
+    "evidence_summary": "Solo founder: agreement names an outside advisor and security and internal-control topics, and requires written reviews once a year.",
     "ai_verdict": "gap",
-    "correct_verdict": "gap",
-    "reasoning": "Authored regression for round3 design and execution cadence consistency.",
+    "correct_verdict": "pass",
+    "reasoning": "A yearly review frequency the company sets meets the check.",
     "weight": 0.5,
-    "source": "rewrite_1_1_0_batch1"
+    "source": "words_batch2_2026_11"
+  },
+  {
+    "control": "GOV-02",
+    "attribute": "A6",
+    "mode": "legacy",
+    "id": "gov-02-a6-two-yearly",
+    "evidence_summary": "Solo founder: agreement names an outside advisor and security and internal-control topics, and requires written reviews every two years.",
+    "ai_verdict": "pass",
+    "correct_verdict": "gap",
+    "reasoning": "The review frequency is longer than once a year, our audit's own minimum.",
+    "weight": 0.5,
+    "source": "words_batch2_2026_11"
   },
   {
     "control": "GOV-02",
@@ -1287,18 +1299,6 @@
     "control": "GOV-02",
     "attribute": "A7",
     "mode": "legacy",
-    "id": "gov-02-a7-revision3-1",
-    "evidence_summary": "Founder-run company with three employees: the outside reviewer last reviewed security and internal controls four months ago under an annual review policy.",
-    "ai_verdict": "gap",
-    "correct_verdict": "gap",
-    "reasoning": "Authored boundary case for the clarified review scope or clock.",
-    "weight": 0.5,
-    "source": "rewrite_1_1_0_batch1"
-  },
-  {
-    "control": "GOV-02",
-    "attribute": "A7",
-    "mode": "legacy",
     "id": "gov-02-a7-revision3-2",
     "evidence_summary": "Founder-run company with three employees: this quarter's outside review covers security but omits the internal controls assigned to the reviewer.",
     "ai_verdict": "gap",
@@ -1318,6 +1318,30 @@
     "reasoning": "Authored boundary case for the clarified review scope or clock.",
     "weight": 0.5,
     "source": "rewrite_1_1_0_batch1"
+  },
+  {
+    "control": "GOV-02",
+    "attribute": "A7",
+    "mode": "legacy",
+    "id": "gov-02-a7-yearly",
+    "evidence_summary": "Founder-run company with three employees: the outside reviewer last reviewed security and internal controls four months ago under an annual review policy.",
+    "ai_verdict": "gap",
+    "correct_verdict": "pass",
+    "reasoning": "Under the company's yearly cycle the next review is not yet due.",
+    "weight": 0.5,
+    "source": "words_batch2_2026_11"
+  },
+  {
+    "control": "GOV-02",
+    "attribute": "A7",
+    "mode": "legacy",
+    "id": "gov-02-a7-yearly-overdue",
+    "evidence_summary": "Founder-run company with three employees: the outside reviewer last reviewed security and internal controls fourteen months ago under an annual review policy.",
+    "ai_verdict": "pass",
+    "correct_verdict": "gap",
+    "reasoning": "The yearly review is overdue.",
+    "weight": 0.5,
+    "source": "words_batch2_2026_11"
   },
   {
     "control": "GOV-02",
@@ -1366,6 +1390,30 @@
     "reasoning": "Authored boundary case for this requirement.",
     "weight": 0.5,
     "source": "rewrite_1_1_0_batch1"
+  },
+  {
+    "control": "GOV-02",
+    "attribute": "A4",
+    "mode": "legacy",
+    "id": "gov-02-a4-yearly",
+    "evidence_summary": "The company's governance document sets a yearly review; this year's review covers security risks.",
+    "ai_verdict": "gap",
+    "correct_verdict": "pass",
+    "reasoning": "A yearly cycle the company defines meets the check when its review covers security.",
+    "weight": 0.5,
+    "source": "words_batch2_2026_11"
+  },
+  {
+    "control": "GOV-02",
+    "attribute": "A4",
+    "mode": "legacy",
+    "id": "gov-02-a4-monthly-policy",
+    "evidence_summary": "The company's governance document sets a monthly review, but reviews happen about once a quarter; the last documented review was two months ago.",
+    "ai_verdict": "pass",
+    "correct_verdict": "gap",
+    "reasoning": "The company's own monthly cycle sets the bar, so the review due last month was missed, even though a quarterly pace would meet our audit's yearly minimum.",
+    "weight": 0.5,
+    "source": "words_small_team_d289_2026_10"
   },
   {
     "control": "GOV-02",
@@ -1627,7 +1675,7 @@
     "evidence_summary": "Complete duty and permission inventories establish that every other critical conflicting duty is separated between different people. Production release duties cannot be separated. The binding release rule requires an independent approval before deployment. The defined arrangement names the independent reviewer, applies to every production release, and an inspected deployment configuration blocks release until that approval exists.",
     "ai_verdict": "pass",
     "correct_verdict": "pass",
-    "reasoning": "The defined arrangement addresses the stated objective with an evidenced trigger, responsible reviewer and acceptance bound.",
+    "reasoning": "The defined arrangement addresses the duty's risk with an evidenced trigger and responsible reviewer.",
     "weight": 0.5,
     "source": "objectivity_additional_20260909"
   },
@@ -1670,12 +1718,24 @@
   {
     "control": "GOV-03",
     "attribute": "A4",
+    "mode": "type_i",
+    "id": "gov-03-a4-objective-type_i-small-team",
+    "evidence_summary": "Complete duty and permission inventories establish that in a two-person company either founder can deploy and also approve a release; every other critical conflicting duty is separated. A written rule covers that duty: the other founder reviews each week's deployment log and records the review.",
+    "ai_verdict": "unresolved",
+    "correct_verdict": "pass",
+    "reasoning": "A written compensating review naming what it covers, who performs it and when addresses the risk of the unseparated duty; A8 tests that the reviews happen.",
+    "weight": 0.5,
+    "source": "words_batch1_2026_10"
+  },
+  {
+    "control": "GOV-03",
+    "attribute": "A4",
     "mode": "type_ii",
     "id": "gov-03-a4-objective-type_ii-defined",
     "evidence_summary": "Complete period-effective duty assignments, arrangement versions and supporting records establish these facts throughout their applicable dates; every other critical conflicting duty is separated between different people. Production release duties cannot be separated. The binding release rule requires an independent approval before deployment. The defined arrangement names the independent reviewer, applies to every production release, and an inspected deployment configuration blocks release until that approval exists.",
     "ai_verdict": "pass",
     "correct_verdict": "pass",
-    "reasoning": "The defined arrangement addresses the stated objective with an evidenced trigger, responsible reviewer and acceptance bound.",
+    "reasoning": "The defined arrangement addresses the duty's risk with an evidenced trigger and responsible reviewer.",
     "weight": 0.5,
     "source": "objectivity_additional_20260909"
   },
@@ -1714,6 +1774,18 @@
     "reasoning": "Actual separation meets the ordinary alternative.",
     "weight": 0.5,
     "source": "objectivity_additional_20260909"
+  },
+  {
+    "control": "GOV-03",
+    "attribute": "A4",
+    "mode": "type_ii",
+    "id": "gov-03-a4-objective-type_ii-small-team",
+    "evidence_summary": "Complete period-effective duty assignments, arrangement versions and supporting records establish these facts throughout their applicable dates: in a two-person company either founder can deploy and also approve a release, every other critical conflicting duty is separated, and a written rule in effect all period says the other founder reviews each week's deployment log and records the review.",
+    "ai_verdict": "unresolved",
+    "correct_verdict": "pass",
+    "reasoning": "A written compensating review naming what it covers, who performs it and when addresses the risk of the unseparated duty for the period; A8 tests that the reviews happened.",
+    "weight": 0.5,
+    "source": "words_batch1_2026_10"
   },
   {
     "control": "GOV-03",
@@ -2200,10 +2272,10 @@
     "attribute": "A4",
     "mode": "type_i",
     "id": "ppl01a4-yuan-6",
-    "evidence_summary": "The founder started an employee role; the policy deadline passed with no completed background check.",
+    "evidence_summary": "A person the company calls a co-founder, whom its ownership records do not name as a founder, started an employee role; the policy deadline passed with no completed background check.",
     "correct_verdict": "fail",
     "ai_verdict": "fail",
-    "reasoning": "The founder entered the hiring population.",
+    "reasoning": "A title alone does not make a founder; only the ownership records do, so this start counts.",
     "weight": 0.5,
     "source": "rewrite_1_1_0_five_controls"
   },
@@ -2278,6 +2350,18 @@
     "reasoning": "The selected record cannot establish implementation of the current process.",
     "weight": 0.5,
     "source": "rewrite_1_1_0_five_controls"
+  },
+  {
+    "control": "PPL-01",
+    "attribute": "A4",
+    "mode": "type_i",
+    "id": "ppl01a4-cofounder-salaried",
+    "evidence_summary": "The cap table names two co-founders. One of them began drawing a salary this year with no background check; complete dated payroll and contractor history shows no other start.",
+    "ai_verdict": "fail",
+    "correct_verdict": "non_occurrence",
+    "reasoning": "Founders and co-founders named in the ownership records are not new hires, and the history proves no other start.",
+    "weight": 0.5,
+    "source": "words_small_team_d289_2026_10"
   },
   {
     "control": "PPL-01",
@@ -2464,10 +2548,10 @@
     "attribute": "A5",
     "mode": "type_i",
     "id": "ppl01a5-founder-scope",
-    "evidence_summary": "The founder started an employee role, but the report omits required employment verification.",
+    "evidence_summary": "A person the company calls a co-founder, whom its ownership records do not name as a founder, started an employee role, but the report omits required employment verification.",
     "correct_verdict": "fail",
     "ai_verdict": "fail",
-    "reasoning": "A founder who starts an employee role is covered by the report requirement.",
+    "reasoning": "A title alone does not make a founder; this start counts, and its report misses a required component.",
     "weight": 0.5,
     "source": "rewrite_1_1_0_five_controls"
   },
@@ -3999,30 +4083,6 @@
     "control": "POL-01",
     "attribute": "A5",
     "mode": "type_i",
-    "id": "rule-pol-01-a5-type_i-61081a19f252",
-    "evidence_summary": "Each policy has an accepted documented review and approval schedule. Dated evidence establishes that all required reviews and approvals occurred by their due dates. The evidence described here does not identify the source acceptance bound or inspect the operating safeguards needed to establish this company rule's adequacy.",
-    "correct_verdict": "unresolved",
-    "ai_verdict": "unresolved",
-    "reasoning": "The preserved facts do not establish the required acceptance bound or complete supporting evidence. Withhold a pass; this is not an invented numerical failure.",
-    "source": "approved_company_rules_20260909",
-    "weight": 0.5
-  },
-  {
-    "control": "POL-01",
-    "attribute": "A5",
-    "mode": "type_i",
-    "id": "rule-pol-01-a5-type_i-7a2f1bbfa352",
-    "evidence_summary": "Policies were issued and approved. Actual approval dates and their accepted documented schedules establish future first due dates; no required review or approval is overdue. The evidence described here does not identify the source acceptance bound or inspect the operating safeguards needed to establish this company rule's adequacy.",
-    "correct_verdict": "unresolved",
-    "ai_verdict": "unresolved",
-    "reasoning": "The preserved facts do not establish the required acceptance bound or complete supporting evidence. Withhold a pass; this is not an invented numerical failure.",
-    "source": "approved_company_rules_20260909",
-    "weight": 0.5
-  },
-  {
-    "control": "POL-01",
-    "attribute": "A5",
-    "mode": "type_i",
     "id": "objectivity-a5-type_i-overdue",
     "evidence_summary": "A policy review and approval were due June 30 under the accepted schedule. On July 1 the required review and approval have not occurred.",
     "correct_verdict": "fail",
@@ -4039,7 +4099,7 @@
     "evidence_summary": "A policy was issued last month with no approval evidence. Its first periodic review is not yet due. The described missing evidence does not establish actual nonperformance or a contradicted binding requirement; obtain the missing facts before concluding.",
     "correct_verdict": "unresolved",
     "ai_verdict": "unresolved",
-    "reasoning": "The preserved facts do not establish the required acceptance bound or complete supporting evidence. Withhold a pass; this is not an invented numerical failure.",
+    "reasoning": "The missing approval evidence establishes neither an approval nor a missed deadline; withhold a pass until it is obtained.",
     "source": "approved_company_rules_20260909",
     "weight": 0.5
   },
@@ -4060,10 +4120,10 @@
     "attribute": "A5",
     "mode": "type_i",
     "id": "rule-pol-01-a5-type_i-unsupported-bound",
-    "evidence_summary": "The company documents a 100-year rule for policy review and approval. Its record shows compliance with that company-written rule, but provides no external acceptance requirement or measured protective operation establishing adequacy. Its owner merely signs a rationale that the interval is convenient.",
+    "evidence_summary": "The company documents a 100-year rule for policy review and approval. Its record shows compliance with that company-written rule, but provides no obligation or operating measurement supporting an interval longer than a year. Its owner merely signs a rationale that the interval is convenient.",
     "ai_verdict": "unresolved",
     "correct_verdict": "unresolved",
-    "reasoning": "The current facts leave the acceptance bound, owning result or complete factual selection unresolved; no pass is established.",
+    "reasoning": "A schedule longer than a year has no cited bound or inspected safeguards; no pass is established.",
     "weight": 0.5,
     "source": "approved_company_rules_20260909"
   },
@@ -4087,7 +4147,7 @@
     "evidence_summary": "A prior adequacy result refers to R1 and the previous scope. The company now uses R2 for a newly added production system, and the supporting obligation or operating evidence has not been inspected for that system. The old pass is copied into the new result.",
     "ai_verdict": "unresolved",
     "correct_verdict": "unresolved",
-    "reasoning": "The current facts leave the acceptance bound, owning result or complete factual selection unresolved; no pass is established.",
+    "reasoning": "The current facts leave the owning result or complete factual selection unresolved for the changed scope; no pass is established.",
     "weight": 0.5,
     "source": "approved_company_rules_20260909"
   },
@@ -4106,26 +4166,26 @@
   {
     "control": "POL-01",
     "attribute": "A5",
-    "mode": "type_ii",
-    "id": "rule-pol-01-a5-type_ii-196e2d17860f",
-    "evidence_summary": "Each policy has an accepted documented review and approval schedule. Dated evidence establishes that all required reviews and approvals occurred by their due dates. Complete period records cover every effective policy version and every due review and approval, including continuing overdue obligations; none is omitted. The evidence described here does not identify the source acceptance bound or inspect the operating safeguards needed to establish this company rule's adequacy.",
-    "correct_verdict": "unresolved",
+    "mode": "type_i",
+    "id": "rule-pol-01-a5-type_i-annual-schedule",
+    "evidence_summary": "Each policy's documented and approved schedule requires review and approval every 12 months. Dated evidence establishes that all required reviews and approvals occurred by their due dates.",
     "ai_verdict": "unresolved",
-    "reasoning": "The preserved facts do not establish the required acceptance bound or complete supporting evidence. Withhold a pass; this is not an invented numerical failure.",
-    "source": "approved_company_rules_20260909",
-    "weight": 0.5
+    "correct_verdict": "pass",
+    "reasoning": "The documented, approved yearly schedule establishes adequacy, and every review and approval was on time.",
+    "weight": 0.5,
+    "source": "words_batch1_2026_10"
   },
   {
     "control": "POL-01",
     "attribute": "A5",
-    "mode": "type_ii",
-    "id": "rule-pol-01-a5-type_ii-e92434122d4e",
-    "evidence_summary": "Policies were issued and approved. Actual approval dates and their accepted documented schedules establish future first due dates; no required review or approval is overdue. Complete period records cover every effective policy version and every due review and approval, including continuing overdue obligations; none is omitted. The evidence described here does not identify the source acceptance bound or inspect the operating safeguards needed to establish this company rule's adequacy.",
-    "correct_verdict": "unresolved",
+    "mode": "type_i",
+    "id": "rule-pol-01-a5-type_i-first-cycle",
+    "evidence_summary": "Policies were issued and approved. Their documented and approved schedules require review and approval every 12 months, and the actual approval dates establish future first due dates; no required review or approval is overdue.",
     "ai_verdict": "unresolved",
-    "reasoning": "The preserved facts do not establish the required acceptance bound or complete supporting evidence. Withhold a pass; this is not an invented numerical failure.",
-    "source": "approved_company_rules_20260909",
-    "weight": 0.5
+    "correct_verdict": "pass",
+    "reasoning": "Policies within their first yearly cycle are not yet due.",
+    "weight": 0.5,
+    "source": "words_batch1_2026_10"
   },
   {
     "control": "POL-01",
@@ -4147,7 +4207,7 @@
     "evidence_summary": "A policy was issued last month with no approval evidence. Its first periodic review is not yet due. The missing required review or approval occurs during the assessed period and is unresolved in it. The described missing evidence does not establish actual nonperformance or a contradicted binding requirement; obtain the missing facts before concluding.",
     "correct_verdict": "unresolved",
     "ai_verdict": "unresolved",
-    "reasoning": "The preserved facts do not establish the required acceptance bound or complete supporting evidence. Withhold a pass; this is not an invented numerical failure.",
+    "reasoning": "The missing approval evidence establishes neither an approval nor a missed deadline; withhold a pass until it is obtained.",
     "source": "approved_company_rules_20260909",
     "weight": 0.5
   },
@@ -4168,10 +4228,10 @@
     "attribute": "A5",
     "mode": "type_ii",
     "id": "rule-pol-01-a5-type_ii-unsupported-bound",
-    "evidence_summary": "The company documents a 100-year rule for policy review and approval. Its record shows compliance with that company-written rule, but provides no external acceptance requirement or measured protective operation establishing adequacy. Its owner merely signs a rationale that the interval is convenient.",
+    "evidence_summary": "The company documents a 100-year rule for policy review and approval. Its record shows compliance with that company-written rule, but provides no obligation or operating measurement supporting an interval longer than a year. Its owner merely signs a rationale that the interval is convenient.",
     "ai_verdict": "unresolved",
     "correct_verdict": "unresolved",
-    "reasoning": "The current facts leave the acceptance bound, owning result or complete factual selection unresolved; no pass is established.",
+    "reasoning": "A schedule longer than a year has no cited bound or inspected safeguards; no pass is established.",
     "weight": 0.5,
     "source": "approved_company_rules_20260909"
   },
@@ -4195,9 +4255,33 @@
     "evidence_summary": "A prior adequacy result refers to R1 and the previous scope. The company now uses R2 for a newly added production system, and the supporting obligation or operating evidence has not been inspected for that system. The old pass is copied into the new result.",
     "ai_verdict": "unresolved",
     "correct_verdict": "unresolved",
-    "reasoning": "The current facts leave the acceptance bound, owning result or complete factual selection unresolved; no pass is established.",
+    "reasoning": "The current facts leave the owning result or complete factual selection unresolved for the changed scope; no pass is established.",
     "weight": 0.5,
     "source": "approved_company_rules_20260909"
+  },
+  {
+    "control": "POL-01",
+    "attribute": "A5",
+    "mode": "type_ii",
+    "id": "rule-pol-01-a5-type_ii-annual-schedule",
+    "evidence_summary": "Each policy's documented and approved schedule requires review and approval every 12 months. Complete period records cover every effective policy version and every review and approval due in the period, including continuing overdue obligations, and all occurred by their due dates.",
+    "ai_verdict": "unresolved",
+    "correct_verdict": "pass",
+    "reasoning": "The documented, approved yearly schedule establishes adequacy, and every review and approval due in the period was timely.",
+    "weight": 0.5,
+    "source": "words_batch1_2026_10"
+  },
+  {
+    "control": "POL-01",
+    "attribute": "A5",
+    "mode": "type_ii",
+    "id": "rule-pol-01-a5-type_ii-first-cycle",
+    "evidence_summary": "Policies were issued and approved. Their documented and approved schedules require review and approval every 12 months, and complete period records establish that no first review or approval fell due in the period.",
+    "ai_verdict": "unresolved",
+    "correct_verdict": "pass",
+    "reasoning": "Policies within their first yearly cycle had nothing due in the period.",
+    "weight": 0.5,
+    "source": "words_batch1_2026_10"
   },
   {
     "control": "POL-01",
@@ -5333,7 +5417,7 @@
     "attribute": "A3",
     "mode": "type_i",
     "id": "iam02a3-sample-missing-system",
-    "evidence_summary": "The company has three in-scope systems. One user has active MFA on the only system inspected; neither other system has user-status evidence.",
+    "evidence_summary": "The company has three in-scope systems, each with its own login. One user has active MFA on the only system inspected; neither other system has user-status evidence.",
     "ai_verdict": "fail",
     "correct_verdict": "fail",
     "reasoning": "One user on one system does not cover the other in-scope systems.",
@@ -5351,6 +5435,30 @@
     "reasoning": "The same person can satisfy the one-user sample on each system.",
     "weight": 0.5,
     "source": "rewrite_1_1_0_representative_2026_09_07"
+  },
+  {
+    "control": "IAM-02",
+    "attribute": "A3",
+    "mode": "type_i",
+    "id": "iam02a3-federated",
+    "evidence_summary": "The company has three in-scope systems: its identity provider, which requires MFA for every user, and two applications users can sign in to only through it. One sampled user has MFA enrolled and active at the identity provider.",
+    "ai_verdict": "unresolved",
+    "correct_verdict": "pass",
+    "reasoning": "Systems reached only through the MFA-enforced identity provider are covered by the user sampled there and the provider's enforcement evidence.",
+    "weight": 0.5,
+    "source": "words_batch1_2026_10"
+  },
+  {
+    "control": "IAM-02",
+    "attribute": "A3",
+    "mode": "type_i",
+    "id": "iam02a3-federated-local-login",
+    "evidence_summary": "Two applications sign in through the company's identity provider, which requires MFA, but one of them also keeps local password accounts. Only a user at the identity provider was sampled.",
+    "ai_verdict": "pass",
+    "correct_verdict": "fail",
+    "reasoning": "An application that keeps its own login needs its own sampled user.",
+    "weight": 0.5,
+    "source": "words_batch1_2026_10"
   },
   {
     "control": "IAM-02",
@@ -5387,6 +5495,18 @@
     "reasoning": "Actual uncontrolled access establishes an ineffective period practice.",
     "weight": 0.5,
     "source": "rewrite_1_1_0_sampling_configuration_2026_09_08"
+  },
+  {
+    "control": "IAM-02",
+    "attribute": "A3",
+    "mode": "type_ii",
+    "id": "iam02a3-period-federated",
+    "evidence_summary": "One sampled user has MFA enrolled and active at the company's identity provider, the only way to sign in to two other period in-scope systems. The provider's period enforcement and security-change history show all access required active MFA.",
+    "ai_verdict": "unresolved",
+    "correct_verdict": "pass",
+    "reasoning": "Systems reached only through the MFA-enforced identity provider are covered by the user sampled there for the period.",
+    "weight": 0.5,
+    "source": "words_batch1_2026_10"
   },
   {
     "control": "IAM-03",
@@ -5442,6 +5562,39 @@
     "reasoning": "Requester and approver are different people here, so the event passes on its own terms. A one-person company's procedure names the founder as the authorized approver for any access granted to someone else, which is a defined approver role; the founder's own owner accounts exist because the founder created the systems and are inventoried under privileged access, not requested and approved as provisioning events.",
     "weight": 0.5,
     "source": "synthetic_taste_v1"
+  },
+  {
+    "control": "IAM-03",
+    "attribute": "A4",
+    "mode": "legacy",
+    "evidence_summary": "The access approval procedure was adopted in writing on 1 August. Two grants in June were approved by the person who received the access; the three grants since 1 August each show the system owner's approval before access, and the assessment names the June grants and the adoption date.",
+    "ai_verdict": "gap",
+    "correct_verdict": "pass",
+    "reasoning": "A process adopted partway passes for readiness from its dated written adoption when every event since then followed it and the earlier events are named.",
+    "weight": 0.5,
+    "source": "words_batch1b_2026_11"
+  },
+  {
+    "control": "IAM-03",
+    "attribute": "A4",
+    "mode": "legacy",
+    "evidence_summary": "The founder says access approvals by the system owner started in August, but nothing written or dated shows it. Two grants in June were approved by the person who received the access, and no grant has been made since.",
+    "ai_verdict": "pass",
+    "correct_verdict": "gap",
+    "reasoning": "A stated start is not a written, dated adoption, so the June self-approvals still fail the check. With a dated written adoption, its approval step in place, the access log showing no grant since and the assessment naming the June grants and the adoption date, it would pass.",
+    "weight": 0.5,
+    "source": "words_batch1b_2026_11"
+  },
+  {
+    "control": "IAM-03",
+    "attribute": "A4",
+    "mode": "legacy",
+    "evidence_summary": "The access approval procedure was adopted in writing on 1 August. Two grants in June were approved by the person who received the access, and a grant in September was approved by its own requester too.",
+    "ai_verdict": "pass",
+    "correct_verdict": "gap",
+    "reasoning": "A provisioning event since adoption skipped the authorized approval, so the adoption route does not apply and the check is a gap.",
+    "weight": 0.5,
+    "source": "words_batch1b_2026_11"
   },
   {
     "control": "IAM-03",
@@ -5530,6 +5683,39 @@
     "reasoning": "Attribute-boundary discipline: the criteria only require timestamps for the minimum key deprovisioning steps, IdP disable and systems access revocation, both of which are present; a missing timestamp on an unrelated checklist item like equipment return is outside this attribute's scope.",
     "weight": 0.5,
     "source": "synthetic_taste_v1"
+  },
+  {
+    "control": "IAM-04",
+    "attribute": "A5",
+    "mode": "legacy",
+    "evidence_summary": "Timestamped offboarding tickets were adopted in writing on 15 July. One contractor who left in May has no timestamps; the two people who left since 15 July each have a ticket timestamping the identity provider disable and every other removal, and the assessment names the May leaver and the adoption date.",
+    "ai_verdict": "gap",
+    "correct_verdict": "pass",
+    "reasoning": "Tracking adopted partway passes for readiness from its dated written adoption when every termination since then carries the timestamps and the earlier one is named.",
+    "weight": 0.5,
+    "source": "words_batch1b_2026_11"
+  },
+  {
+    "control": "IAM-04",
+    "attribute": "A5",
+    "mode": "legacy",
+    "evidence_summary": "The team says it began timestamping offboarding in July, but nothing written or dated shows when. The contractor who left in May has no timestamps, and nobody has left since.",
+    "ai_verdict": "pass",
+    "correct_verdict": "gap",
+    "reasoning": "A stated start is not a written, dated adoption, so the May record without timestamps still fails the check. With a dated written adoption, its checklist in place, the HR system showing no departure since and the assessment naming the May leaver and the adoption date, it would pass.",
+    "weight": 0.5,
+    "source": "words_batch1b_2026_11"
+  },
+  {
+    "control": "IAM-04",
+    "attribute": "A5",
+    "mode": "legacy",
+    "evidence_summary": "Timestamped offboarding tickets were adopted in writing on 15 July. The May leaver has no timestamps, and the ticket for an engineer who left in September was closed with no timestamp for any removal step.",
+    "ai_verdict": "pass",
+    "correct_verdict": "gap",
+    "reasoning": "A termination since adoption carries none of the required timestamps, so the adoption route does not apply and the check is a gap.",
+    "weight": 0.5,
+    "source": "words_batch1b_2026_11"
   },
   {
     "control": "IAM-05",
@@ -5664,6 +5850,17 @@
     "source": "synthetic_taste_v1"
   },
   {
+    "control": "IAM-06",
+    "attribute": "A3",
+    "mode": "legacy",
+    "evidence_summary": "No job descriptions exist. A team roster lists each person's duties: the CEO also handles billing and holds billing administration, the only engineer holds production administration, and a contract designer holds the design tools only.",
+    "ai_verdict": "gap",
+    "correct_verdict": "pass",
+    "reasoning": "A roster of each person's duties documents their responsibilities, and every assignment matches them.",
+    "weight": 0.5,
+    "source": "words_batch1_2026_10"
+  },
+  {
     "control": "IAM-07",
     "attribute": "A1",
     "mode": "legacy",
@@ -5783,6 +5980,17 @@
     "reasoning": "Verbal confirmation is never config evidence. The rotation schedule or automatic rotation setting must be shown in the actual system configuration or in dated manual rotation records, not asserted verbally.",
     "weight": 0.5,
     "source": "synthetic_taste_v1"
+  },
+  {
+    "control": "IAM-08",
+    "attribute": "A2",
+    "mode": "legacy",
+    "evidence_summary": "Every service workload uses cloud role credentials that expire after one hour; inspected configuration shows no long-lived access keys for service accounts.",
+    "ai_verdict": "gap",
+    "correct_verdict": "pass",
+    "reasoning": "Short-lived credentials that expire on their own meet the check.",
+    "weight": 0.5,
+    "source": "words_batch1_2026_10"
   },
   {
     "control": "IAM-08",
@@ -6039,6 +6247,28 @@
   },
   {
     "control": "DAT-01",
+    "attribute": "A1",
+    "mode": "legacy",
+    "evidence_summary": "A company that runs no servers cites its HR system provider's SOC 2 report, which states that customer data is encrypted at rest with AES-256. The HR system's admin console has no encryption setting to show.",
+    "ai_verdict": "gap",
+    "correct_verdict": "pass",
+    "reasoning": "When only the provider runs a store's encryption and the company has no setting to see, the provider's own statement naming the encryption and an algorithm that meets the minimum takes the place of configuration output. A console capture that cannot exist is never the bar.",
+    "weight": 0.5,
+    "source": "words_fb027_2026_10"
+  },
+  {
+    "control": "DAT-01",
+    "attribute": "A1",
+    "mode": "legacy",
+    "evidence_summary": "A company that runs its own PostgreSQL database on a cloud virtual machine cites its cloud provider's SOC 2 report for encryption at rest, with no capture of the machine's disk encryption or the database's own encryption setting.",
+    "ai_verdict": "pass",
+    "correct_verdict": "gap",
+    "reasoning": "The provider's report covers the provider's platform, never a disk or database the company configures itself. Encryption the company can see or set is shown from its own console, API or configuration.",
+    "weight": 0.5,
+    "source": "words_fb027_2026_10"
+  },
+  {
+    "control": "DAT-01",
     "attribute": "A2",
     "mode": "legacy",
     "evidence_summary": "A TLS scan of the production API endpoint shows only TLS 1.2 and 1.3 as supported protocols; the report doesn't include a separate line explicitly stating SSLv3 is disabled.",
@@ -6058,6 +6288,17 @@
     "reasoning": "Verbal confirmation is never configuration evidence. The TLS-version claim needs an actual scan output or configuration export.",
     "weight": 0.5,
     "source": "synthetic_taste_v1"
+  },
+  {
+    "control": "DAT-01",
+    "attribute": "A2",
+    "mode": "legacy",
+    "evidence_summary": "Scans of the company's own website and API show only TLS 1.2 and 1.3. A scan of its email provider's mail servers grades B because the provider still accepts TLS 1.0 and 1.1 from older clients.",
+    "ai_verdict": "gap",
+    "correct_verdict": "pass",
+    "reasoning": "A server a provider runs for its own service, which the company only connects to, is the provider's and is not tested by this check. The company's own endpoints enforce TLS 1.2 or higher.",
+    "weight": 0.5,
+    "source": "words_fb027_2026_10"
   },
   {
     "control": "DAT-01",
@@ -6083,6 +6324,28 @@
   },
   {
     "control": "DAT-01",
+    "attribute": "A3",
+    "mode": "legacy",
+    "evidence_summary": "The company's website scan shows TLS 1.2 with RSA 2048-bit keys and AES-GCM suites. Each SaaS provider holding its data states AES-256 encryption at rest in its SOC 2 report, and none offers an encryption setting to capture.",
+    "ai_verdict": "gap",
+    "correct_verdict": "pass",
+    "reasoning": "Encryption the company controls is shown from configuration output, and encryption only the provider runs is shown by the provider's own statement of the algorithm and key length.",
+    "weight": 0.5,
+    "source": "words_fb027_2026_10"
+  },
+  {
+    "control": "DAT-01",
+    "attribute": "A3",
+    "mode": "legacy",
+    "evidence_summary": "A storage bucket's console page shows it uses the provider's default encryption keys, and the provider's encryption documentation states those keys are AES-256. The console never shows an algorithm.",
+    "ai_verdict": "gap",
+    "correct_verdict": "pass",
+    "reasoning": "Each fact comes from where it lives: the visible setting from the console, and the algorithm the console never shows from the provider's own statement.",
+    "weight": 0.5,
+    "source": "words_fb027_2026_10"
+  },
+  {
+    "control": "DAT-01",
     "attribute": "A4",
     "mode": "legacy",
     "evidence_summary": "A code repository search for common secret patterns shows zero hits, and a separate secrets-manager dashboard screenshot shows the production signing key stored there; the two captures come from different tools rather than one unified report.",
@@ -6105,6 +6368,17 @@
   },
   {
     "control": "DAT-01",
+    "attribute": "A4",
+    "mode": "legacy",
+    "evidence_summary": "The company's SaaS providers state in their SOC 2 reports that the keys encrypting its stored data are kept in a managed key service. The one signing key the company holds sits in its cloud secrets manager, shown in a screenshot, and a repository scan finds no plaintext keys.",
+    "ai_verdict": "gap",
+    "correct_verdict": "pass",
+    "reasoning": "Keys a provider holds inside its own service are shown by the provider's own statement; keys the company holds itself are shown by configuration and the scan.",
+    "weight": 0.5,
+    "source": "words_fb027_2026_10"
+  },
+  {
+    "control": "DAT-01",
     "attribute": "A5",
     "mode": "legacy",
     "evidence_summary": "A KMS console screenshot shows automatic key rotation toggled on for the production key; there is no separate rotation history log showing a completed rotation event yet.",
@@ -6124,6 +6398,28 @@
     "reasoning": "Verbal confirmation is never configuration evidence. The rotation claim needs an actual KMS config screenshot or a dated rotation log.",
     "weight": 0.5,
     "source": "synthetic_taste_v1"
+  },
+  {
+    "control": "DAT-01",
+    "attribute": "A5",
+    "mode": "legacy",
+    "evidence_summary": "The company's cloud storage uses the provider's default keys, which the company cannot rotate itself, and the provider's encryption documentation states those keys are rotated automatically at least every 90 days. The company holds no keys of its own.",
+    "ai_verdict": "gap",
+    "correct_verdict": "pass",
+    "reasoning": "For keys a provider holds and rotates inside its own service, the provider's own statement of automatic rotation takes the place of KMS configuration.",
+    "weight": 0.5,
+    "source": "words_fb027_2026_10"
+  },
+  {
+    "control": "DAT-01",
+    "attribute": "A5",
+    "mode": "legacy",
+    "evidence_summary": "The company created a key in its own cloud key management service with automatic rotation off and no rotation record in the past year, and cites the provider's documentation that the provider rotates its default keys.",
+    "ai_verdict": "pass",
+    "correct_verdict": "gap",
+    "reasoning": "A key the company creates in its own key management service is the company's to rotate. The provider's statement covers only the keys the provider holds and rotates.",
+    "weight": 0.5,
+    "source": "words_fb027_2026_10"
   },
   {
     "control": "DAT-02",
@@ -6231,9 +6527,20 @@
     "evidence_summary": "The retention policy describes deletion at the end of each retention period clearly and by data category. The cloud console shows no lifecycle rules on the buckets holding the archived permit files, no scheduled deletion job exists, and no owner is named for carrying it out manually.",
     "ai_verdict": "pass",
     "correct_verdict": "gap",
-    "reasoning": "This attribute requires the process and an enforcement mechanism behind it, so a policy describing deletion with nothing arranged to perform it fails. A manual route can satisfy the enforcement half, but only with a named owner and evidence it happens, and neither is present here.",
+    "reasoning": "This attribute requires the process and an enforcement mechanism behind it, so a policy describing deletion with nothing arranged to perform it fails. A manual route can satisfy the enforcement half, but only with a named owner and, once a retention period has expired, evidence it happens, and neither is present here.",
     "weight": 0.5,
     "source": "synthetic_taste_v1"
+  },
+  {
+    "control": "DAT-03",
+    "attribute": "A4",
+    "mode": "legacy",
+    "evidence_summary": "A five-month-old company's deletion procedure assigns its operations lead to delete customer records 12 months after a contract ends; no contract has ended yet, so no deletion has come due.",
+    "ai_verdict": "gap",
+    "correct_verdict": "pass",
+    "reasoning": "A documented manual process with an assigned owner is an enforcement mechanism; evidence of execution is asked once a retention period has expired.",
+    "weight": 0.5,
+    "source": "words_batch1_2026_10"
   },
   {
     "control": "DAT-03",
@@ -6775,6 +7082,28 @@
     "source": "synthetic_taste_v1"
   },
   {
+    "control": "MON-01",
+    "attribute": "A4",
+    "mode": "legacy",
+    "evidence_summary": "A company's security logs are its email and HR providers' own admin audit logs. Each provider's SOC 2 report states that customers can view but cannot edit or delete these logs, and an admin roles screenshot shows that two administrators can view them.",
+    "ai_verdict": "gap",
+    "correct_verdict": "pass",
+    "reasoning": "A log a provider keeps inside its own service is protected by the provider, and the provider's own statement shows it; who can view it is the company's setting, shown from its console.",
+    "weight": 0.5,
+    "source": "words_fb027_2026_10"
+  },
+  {
+    "control": "MON-01",
+    "attribute": "A4",
+    "mode": "legacy",
+    "evidence_summary": "The company exports its cloud audit logs to a storage bucket it manages, and cites the cloud provider's documentation that the provider's own audit logs are immutable, with no capture of the bucket's access or retention lock settings.",
+    "ai_verdict": "pass",
+    "correct_verdict": "gap",
+    "reasoning": "Once the company stores logs itself, their protection is the company's setting to show; the provider's statement covers only the log the provider keeps.",
+    "weight": 0.5,
+    "source": "words_fb027_2026_10"
+  },
+  {
     "control": "MON-02",
     "attribute": "A1",
     "mode": "legacy",
@@ -7040,6 +7369,61 @@
   },
   {
     "control": "CHG-01",
+    "attribute": "A4",
+    "mode": "legacy",
+    "evidence_summary": "A three-developer team's written policy defines small changes and a monthly look-back. Last month a second developer reviewed every small change shipped, recording a dated comment on each merged pull request that also confirms it qualified as small; the most recent change is a small styling fix whose look-back is due at month end.",
+    "ai_verdict": "gap",
+    "correct_verdict": "pass",
+    "reasoning": "A review after the change ships counts: the small change's look-back is not yet due, and every look-back that has come due is on record.",
+    "weight": 0.5,
+    "source": "words_batch1_2026_10"
+  },
+  {
+    "control": "CHG-01",
+    "attribute": "A4",
+    "mode": "legacy",
+    "evidence_summary": "A pull request carries no formal approval. Another developer's comment on it records the review: 'checked the migration and the rollback script; fine to merge'.",
+    "ai_verdict": "gap",
+    "correct_verdict": "pass",
+    "reasoning": "A review recorded as a pull-request comment by another developer counts as a change review, as an approval does.",
+    "weight": 0.5,
+    "source": "words_batch1_2026_10"
+  },
+  {
+    "control": "CHG-01",
+    "attribute": "A4",
+    "mode": "legacy",
+    "evidence_summary": "A two-developer team's change policy: every change goes through a pull request whose automated checks must pass before it merges, and the second developer reviews each change after it ships, at least once a month, leaving an approval or a comment saying they reviewed it on the merged pull request. The most recent change, a database migration, shipped this week and its review is due at month end; every review that has come due is on record.",
+    "ai_verdict": "gap",
+    "correct_verdict": "pass",
+    "reasoning": "A review after the change ships counts. The most recent change's look-back is not yet due, and every look-back that has come due is on record.",
+    "weight": 0.5,
+    "source": "words_batch1_2026_10"
+  },
+  {
+    "control": "CHG-01",
+    "attribute": "A4",
+    "mode": "legacy",
+    "evidence_summary": "A two-developer team keeps its monthly look-back in a review log outside the repository. The log names each change, the second developer as reviewer and the date; the most recent change's pull request has no approval, and its look-back, now complete, is in the log.",
+    "ai_verdict": "gap",
+    "correct_verdict": "pass",
+    "reasoning": "A review record naming the change, the reviewer and the date counts as a review by someone other than the author.",
+    "weight": 0.5,
+    "source": "words_batch1_2026_10"
+  },
+  {
+    "control": "CHG-01",
+    "attribute": "A4",
+    "mode": "legacy",
+    "evidence_summary": "A two-developer team's policy says the second developer reviews each change after it ships, at least once a month. No review is on record for the changes shipped two months ago, and the most recent change has no review yet.",
+    "ai_verdict": "pass",
+    "correct_verdict": "gap",
+    "reasoning": "A review after the change ships counts once it is on record. Look-backs that came due are missing, so the most recent change, still awaiting its look-back, does not pass.",
+    "weight": 0.5,
+    "source": "words_batch1_2026_10"
+  },
+  {
+    "control": "CHG-01",
     "attribute": "A5",
     "mode": "legacy",
     "evidence_summary": "The GitHub Actions run log shows the test suite executing and passing on every push, timestamped before the deployment step in the same pipeline, with no separately authored test report document.",
@@ -7059,6 +7443,17 @@
     "reasoning": "A compensating-control pass must rest on a real, documented basis, not be assumed or silently waived just because the team is small. With no enforced checks and no post-deploy review evidence, there is no compensating control to point to, so unreviewed self-approval is a gap.",
     "weight": 0.5,
     "source": "synthetic_taste_v1"
+  },
+  {
+    "control": "CHG-01",
+    "attribute": "A6",
+    "mode": "legacy",
+    "evidence_summary": "The company's written change policy defines small changes as ones that never touch sign-in and permissions, keys and secrets, customer data and the database, infrastructure and configuration, the deployment pipeline or third-party dependencies, and sets a look-back at each month's end. The most recent change, a copy fix, went through a pull request, passed its automated tests and was deployed this month without a second approval; its month-end look-back is not yet due. Last month's look-back was completed by its deadline by someone other than each change's author, covered every small change shipped, checked whether each qualified as small, and recorded each change, the reviewer and the date.",
+    "ai_verdict": "gap",
+    "correct_verdict": "pass",
+    "reasoning": "A small change under the written small-change policy may be deployed after its pull request and passing tests; its own look-back is not yet due, and the one that came due is on record.",
+    "weight": 0.5,
+    "source": "words_batch1_2026_10"
   },
   {
     "control": "CHG-02",
@@ -7475,6 +7870,17 @@
     "source": "synthetic_taste_v1"
   },
   {
+    "control": "CHG-03",
+    "attribute": "A3",
+    "mode": "legacy",
+    "evidence_summary": "A two-engineer team: both engineers hold staging and production access, each with a documented need for both (they deploy and share on-call), and the cloud console requires MFA for every production sign-in.",
+    "ai_verdict": "gap",
+    "correct_verdict": "pass",
+    "reasoning": "Equal membership passes where everyone with non-production access has a documented need for production and production access is limited to those people and protected by MFA.",
+    "weight": 0.5,
+    "source": "words_batch1_2026_10"
+  },
+  {
     "control": "CHG-04",
     "attribute": "A2",
     "mode": "legacy",
@@ -7751,6 +8157,28 @@
   },
   {
     "control": "BCP-02",
+    "attribute": "A4",
+    "mode": "legacy",
+    "evidence_summary": "A company that runs no servers keeps its data in an email suite and an HR system. Each provider's SOC 2 report states that customer data is backed up to a data center in another region, and neither admin console offers a backup location setting.",
+    "ai_verdict": "gap",
+    "correct_verdict": "pass",
+    "reasoning": "Backups a provider keeps inside its own service are shown by the provider's own statement of where they are stored; the company has no setting to capture.",
+    "weight": 0.5,
+    "source": "words_fb027_2026_10"
+  },
+  {
+    "control": "BCP-02",
+    "attribute": "A4",
+    "mode": "legacy",
+    "evidence_summary": "The company's own database takes nightly snapshots stored in the same region as the database, and the company cites its cloud provider's SOC 2 report on data center redundancy.",
+    "ai_verdict": "pass",
+    "correct_verdict": "gap",
+    "reasoning": "Backups the company configures are the company's to place; the provider's report covers the provider's platform, never where the company keeps its own snapshots.",
+    "weight": 0.5,
+    "source": "words_fb027_2026_10"
+  },
+  {
+    "control": "BCP-02",
     "attribute": "A5",
     "mode": "legacy",
     "evidence_summary": "For a small SaaS company, the compute layer runs in an auto-scaling group configured to automatically relaunch instances in a different availability zone if the primary zone becomes unavailable, rather than a full active-active multi-region deployment.",
@@ -7770,6 +8198,28 @@
     "reasoning": "A drawn diagram is not system proof of an actual failover capability. Config attributes require the real cloud configuration to show alternate processing infrastructure, and here the console contradicts the diagram.",
     "weight": 0.5,
     "source": "synthetic_taste_v1"
+  },
+  {
+    "control": "BCP-02",
+    "attribute": "A5",
+    "mode": "legacy",
+    "evidence_summary": "A company that runs no servers of its own does all its processing in an email suite and a phone system. Each provider's SOC 2 report describes the service running across several data centers with automatic failover.",
+    "ai_verdict": "gap",
+    "correct_verdict": "pass",
+    "reasoning": "Processing a provider runs inside its own service is shown by the provider's own statement of its redundancy; the company has no setting to capture.",
+    "weight": 0.5,
+    "source": "words_fb027_2026_10"
+  },
+  {
+    "control": "BCP-02",
+    "attribute": "A5",
+    "mode": "legacy",
+    "evidence_summary": "The company's API runs on a single cloud virtual machine with no standby, and the company cites its cloud provider's SOC 2 report on data center redundancy.",
+    "ai_verdict": "pass",
+    "correct_verdict": "gap",
+    "reasoning": "A provider's redundancy covers the provider's platform, never a single machine the company runs; the company's own processing needs its own standby or failover shown.",
+    "weight": 0.5,
+    "source": "words_fb027_2026_10"
   },
   {
     "control": "BCP-02",
@@ -7872,6 +8322,39 @@
   },
   {
     "control": "VND-01",
+    "attribute": "A6",
+    "mode": "legacy",
+    "evidence_summary": "Vendor due diligence was adopted in writing on 1 September. The payment processor and the email provider were onboarded in March without it; the one critical vendor onboarded since, an AI provider, has a dated review of its SOC 2 report before onboarding, and the assessment names the two earlier vendors and the adoption date.",
+    "ai_verdict": "gap",
+    "correct_verdict": "pass",
+    "reasoning": "Due diligence adopted partway passes for readiness from its dated written adoption when every critical vendor onboarded since then was assessed first and the earlier ones are named.",
+    "weight": 0.5,
+    "source": "words_batch1b_2026_11"
+  },
+  {
+    "control": "VND-01",
+    "attribute": "A6",
+    "mode": "legacy",
+    "evidence_summary": "The founder says new critical vendors have been reviewed first since September, but no written requirement or adoption date exists. The payment processor and the email provider were onboarded in March without a review, and no critical vendor has been onboarded since.",
+    "ai_verdict": "pass",
+    "correct_verdict": "gap",
+    "reasoning": "A stated practice is not a written, dated adoption, and the most recent critical vendor had no assessment before onboarding, so this is a gap. With a dated written requirement, its steps in place, complete dated vendor onboarding history showing no critical or high-risk vendor onboarded since the adoption date and the assessment naming the two March vendors and the adoption date, it would pass.",
+    "weight": 0.5,
+    "source": "words_batch1b_2026_11"
+  },
+  {
+    "control": "VND-01",
+    "attribute": "A6",
+    "mode": "legacy",
+    "evidence_summary": "Vendor due diligence was adopted in writing on 1 September. The two March vendors were onboarded without it, and an AI provider onboarded in October was connected to production two weeks before its SOC 2 report was reviewed.",
+    "ai_verdict": "pass",
+    "correct_verdict": "gap",
+    "reasoning": "The most recent critical vendor, onboarded after adoption, was assessed only after onboarding, so the adoption route does not apply and the check is a gap.",
+    "weight": 0.5,
+    "source": "words_batch1b_2026_11"
+  },
+  {
+    "control": "VND-01",
     "attribute": "A7",
     "mode": "legacy",
     "evidence_summary": "The last manual reassessment note for a critical vendor is 14 months old, but the entity uses an automated vendor-risk platform that continuously monitors that vendor's SOC 2 report expiry and would flag any lapse.",
@@ -7921,9 +8404,31 @@
     "evidence_summary": "The cloud provider's public trust page states 'SOC 2 Type II certified,' and that page was accepted as the vendor's report without the actual PDF report being obtained or on file.",
     "ai_verdict": "pass",
     "correct_verdict": "gap",
-    "reasoning": "A provider's marketing or trust page is not this org's actual audit report. The attribute requires the report itself on file, not a public certification claim.",
+    "reasoning": "A provider's marketing or trust page is not this org's actual audit report, and accepting it records no risks, conclusion or responsibilities, so it is not a documented alternative assessment either. The check needs the report itself on file or, where the entity has not obtained it, a documented alternative assessment.",
     "weight": 0.5,
     "source": "synthetic_taste_v1"
+  },
+  {
+    "control": "VND-02",
+    "attribute": "A2",
+    "mode": "legacy",
+    "evidence_summary": "Two dependent vendors: the cloud provider's SOC 2 Type II report is on file; the email delivery vendor offers no SOC report or equivalent attestation, and a dated review of its published security documentation records the risks assessed, the conclusion and the controls the entity runs itself (it sends the vendor only non-sensitive notification text).",
+    "ai_verdict": "gap",
+    "correct_verdict": "pass",
+    "reasoning": "A dependent vendor that offers no report is covered by a documented alternative assessment recording the risks, the conclusion and the entity's own responsibilities.",
+    "weight": 0.5,
+    "source": "words_batch1_2026_10"
+  },
+  {
+    "control": "VND-02",
+    "attribute": "A2",
+    "mode": "legacy",
+    "evidence_summary": "The payment processor shares its SOC 2 report only under a mutual NDA the entity has not signed. The entity's dated review of the processor's published security documentation records the risks assessed, the conclusion and the controls the entity runs itself.",
+    "ai_verdict": "gap",
+    "correct_verdict": "pass",
+    "reasoning": "A documented alternative assessment covers a dependent vendor whose report the entity has not obtained.",
+    "weight": 0.5,
+    "source": "words_batch1_2026_10"
   },
   {
     "control": "VND-02",
@@ -9427,9 +9932,42 @@
   },
   {
     "control": "IAM-09",
+    "attribute": "A2",
+    "mode": "legacy",
+    "evidence_summary": "The access policy says the founder reviews access once a year. One dated self-review, anchored on exports from each system, was done five months ago.",
+    "ai_verdict": "gap",
+    "correct_verdict": "pass",
+    "reasoning": "A yearly schedule the company sets meets the check while the next review is not yet due.",
+    "weight": 0.5,
+    "source": "words_small_team_d289_2026_10"
+  },
+  {
+    "control": "IAM-09",
+    "attribute": "A2",
+    "mode": "legacy",
+    "evidence_summary": "The access policy says the founder reviews access once a year. The last dated self-review was fourteen months ago, so the yearly review is overdue.",
+    "ai_verdict": "pass",
+    "correct_verdict": "gap",
+    "reasoning": "The company's own yearly review is overdue, which is also past our audit's own yearly minimum.",
+    "weight": 0.5,
+    "source": "words_small_team_d289_2026_10"
+  },
+  {
+    "control": "IAM-09",
+    "attribute": "A2",
+    "mode": "legacy",
+    "evidence_summary": "The access policy says the founder reviews access every month, but dated self-reviews happen about once a quarter; the last one was two months ago.",
+    "ai_verdict": "pass",
+    "correct_verdict": "gap",
+    "reasoning": "The company's own monthly schedule sets the bar, so the review due last month was missed, even though a quarterly pace would meet our audit's yearly minimum.",
+    "weight": 0.5,
+    "source": "words_small_team_d289_2026_10"
+  },
+  {
+    "control": "IAM-09",
     "attribute": "A3",
     "mode": "legacy",
-    "evidence_summary": "The quarterly self-review is based on a spreadsheet the founder typed from memory listing current employees and their access, which happens to match the actual production user list.",
+    "evidence_summary": "The latest self-review is based on a spreadsheet the founder typed from memory listing current employees and their access, which happens to match the actual production user list.",
     "ai_verdict": "pass",
     "correct_verdict": "gap",
     "reasoning": "A founder-authored spreadsheet is not a system-generated export, even when its contents happen to be accurate. The attribute requires the review to be anchored on output pulled from the system itself, such as an API result or admin console export, not a hand-typed list.",
@@ -9440,7 +9978,7 @@
     "control": "IAM-09",
     "attribute": "A4",
     "mode": "legacy",
-    "evidence_summary": "An unexpected admin grant found during the quarterly review was revoked directly in the identity provider the same day, evidenced by a timestamped screenshot of the access removal, with no separate remediation ticket filed.",
+    "evidence_summary": "An unexpected admin grant found during the latest review was revoked directly in the identity provider the same day, evidenced by a timestamped screenshot of the access removal, with no separate remediation ticket filed.",
     "ai_verdict": "gap",
     "correct_verdict": "pass",
     "reasoning": "No over-literalism: a timestamped system screenshot showing the access was actually removed is a dated record of remediation and does not require a separate ticket to be credible. The substance, dated removal of the unexpected access, is what the attribute tests.",
@@ -9718,9 +10256,20 @@
     "evidence_summary": "An internal IT note states 'no one can delete our audit logs,' but no screenshot of the provider's actual role or permission configuration was submitted.",
     "ai_verdict": "pass",
     "correct_verdict": "gap",
-    "reasoning": "Verbal or written assertions are never config evidence; the provider's own permission settings must be captured to confirm logs cannot be altered or deleted.",
+    "reasoning": "The company's own verbal or written assertions are never config evidence; where the provider offers permission settings, they must be captured to confirm logs cannot be altered or deleted.",
     "weight": 0.5,
     "source": "synthetic_taste_v1"
+  },
+  {
+    "control": "MON-03",
+    "attribute": "A3",
+    "mode": "legacy",
+    "evidence_summary": "The provider's documentation states that audit log events cannot be edited or deleted by any customer user, administrators included, and its console offers no deletion or retention lock setting to capture.",
+    "ai_verdict": "gap",
+    "correct_verdict": "pass",
+    "reasoning": "Where the provider leaves its customers no way to edit or delete the log, there is no setting to capture, and the provider's own statement shows the protection.",
+    "weight": 0.5,
+    "source": "words_fb027_2026_10"
   },
   {
     "control": "MON-03",
@@ -9894,9 +10443,20 @@
     "evidence_summary": "An internal security policy states 'AI logs are retained no longer than 30 days,' and this policy statement was accepted as proof of the provider-side retention configuration with no provider console or export actually pulled.",
     "ai_verdict": "pass",
     "correct_verdict": "gap",
-    "reasoning": "An internal policy claim is not proof of the provider's actual configuration. The attribute requires the retention setting shown from the entity's own provider account or a signed arrangement, not a self-declared internal policy.",
+    "reasoning": "An internal policy claim is not proof of the retention that applies at the provider. Show the account setting, the provider's business terms for the account type, or a zero data retention arrangement covering the account, not a self-declared internal policy.",
     "weight": 0.5,
     "source": "synthetic_taste_v1"
+  },
+  {
+    "control": "AI-02",
+    "attribute": "A2",
+    "mode": "legacy",
+    "evidence_summary": "The model provider's API has no retention setting; its business terms for the entity's account type keep inputs and outputs for 30 days for abuse monitoring. The entity's approved retention policy names that window as a permitted provider period, and no customer commitment or applicable law requires a shorter one.",
+    "ai_verdict": "gap",
+    "correct_verdict": "pass",
+    "reasoning": "The business terms show the retention that applies, and the longer fixed window is documented and permitted by the approved retention policy.",
+    "weight": 0.5,
+    "source": "words_batch1_2026_10"
   },
   {
     "control": "AI-02",
@@ -10531,6 +11091,39 @@
     "source": "synthetic_taste_v1"
   },
   {
+    "control": "DAT-05",
+    "attribute": "A3",
+    "mode": "legacy",
+    "evidence_summary": "The customer deletion runbook and its job were adopted in writing on 1 August. One account deleted in May still had records in a reporting table until a later clean-up; the two deletions since 1 August removed every record within the 30-day window, and the assessment names the May deletion and the adoption date.",
+    "ai_verdict": "gap",
+    "correct_verdict": "pass",
+    "reasoning": "A deletion process adopted partway passes for readiness from its dated written adoption when every deletion since then met the window and the earlier one is named.",
+    "weight": 0.5,
+    "source": "words_batch1b_2026_11"
+  },
+  {
+    "control": "DAT-05",
+    "attribute": "A3",
+    "mode": "legacy",
+    "evidence_summary": "The team says a deletion runbook was introduced in August, but nothing written or dated shows it. The one deletion this year, in May, left records in a reporting table until a later clean-up, and no deletion has happened since.",
+    "ai_verdict": "pass",
+    "correct_verdict": "gap",
+    "reasoning": "A stated start is not a written, dated adoption, and the only deletion example kept data beyond the window, so this is a gap. With a dated written adoption, the runbook or job in place, the deletion log showing none since and the assessment naming the May deletion and the adoption date, it would pass.",
+    "weight": 0.5,
+    "source": "words_batch1b_2026_11"
+  },
+  {
+    "control": "DAT-05",
+    "attribute": "A3",
+    "mode": "legacy",
+    "evidence_summary": "The customer deletion runbook and its job were adopted in writing on 1 August. The May deletion was cleaned up later, and a deletion in September left the customer's files in object storage past the 30-day window.",
+    "ai_verdict": "pass",
+    "correct_verdict": "gap",
+    "reasoning": "A deletion since adoption kept data beyond the window, so the adoption route does not apply and the check is a gap.",
+    "weight": 0.5,
+    "source": "words_batch1b_2026_11"
+  },
+  {
     "control": "VND-04",
     "attribute": "A1",
     "mode": "legacy",
@@ -10565,6 +11158,39 @@
   },
   {
     "control": "VND-04",
+    "attribute": "A2",
+    "mode": "legacy",
+    "evidence_summary": "The subprocessor review step was adopted in writing on 10 August. A transcription API added in June was never reviewed; the analytics vendor added in September was reviewed and approved before it received customer data, and the assessment names the June addition and the adoption date.",
+    "ai_verdict": "gap",
+    "correct_verdict": "pass",
+    "reasoning": "A review step adopted partway passes for readiness from its dated written adoption when every addition since then was reviewed first and the earlier one is named.",
+    "weight": 0.5,
+    "source": "words_batch1b_2026_11"
+  },
+  {
+    "control": "VND-04",
+    "attribute": "A2",
+    "mode": "legacy",
+    "evidence_summary": "The team says subprocessor reviews began in August, but nothing written or dated shows the review step. A transcription API added in June was never reviewed, and no subprocessor has been added since.",
+    "ai_verdict": "pass",
+    "correct_verdict": "gap",
+    "reasoning": "A review step with no written, dated adoption does not open the adoption route, and the most recent addition was never reviewed, so this is a gap. With a dated written adoption, its steps in place, the subprocessor list's history showing no addition since and the assessment naming the June addition and the adoption date, it would pass.",
+    "weight": 0.5,
+    "source": "words_batch1b_2026_11"
+  },
+  {
+    "control": "VND-04",
+    "attribute": "A2",
+    "mode": "legacy",
+    "evidence_summary": "The subprocessor review step was adopted in writing on 10 August. The June addition was never reviewed, and an analytics vendor added in October received customer data before anyone reviewed it.",
+    "ai_verdict": "pass",
+    "correct_verdict": "gap",
+    "reasoning": "An addition since adoption handled customer data before its review, so the adoption route does not apply and the check is a gap.",
+    "weight": 0.5,
+    "source": "words_batch1b_2026_11"
+  },
+  {
+    "control": "VND-04",
     "attribute": "A3",
     "mode": "legacy",
     "evidence_summary": "The team states that customers were emailed when a new subprocessor was added, but no copy of the notification email, changelog entry, or send log was pulled as evidence.",
@@ -10573,6 +11199,39 @@
     "reasoning": "Verbal confirmation is never adequate evidence of an actual notification event. The attribute requires a record of the notice itself, such as the sent email or changelog entry, not a claim that it was sent.",
     "weight": 0.5,
     "source": "synthetic_taste_v1"
+  },
+  {
+    "control": "VND-04",
+    "attribute": "A3",
+    "mode": "legacy",
+    "evidence_summary": "Subprocessor change notices were adopted in writing on 10 August with a subscribe page. Two changes in June were never announced; the one change since, in September, went to subscribers 30 days ahead as the customer terms commit, and the assessment names the June changes and the adoption date.",
+    "ai_verdict": "gap",
+    "correct_verdict": "pass",
+    "reasoning": "A notification mechanism adopted partway passes for readiness from its dated written adoption when every change since then was notified as committed and the earlier ones are named.",
+    "weight": 0.5,
+    "source": "words_batch1b_2026_11"
+  },
+  {
+    "control": "VND-04",
+    "attribute": "A3",
+    "mode": "legacy",
+    "evidence_summary": "The team says subprocessor change notices began in August, but nothing written or dated shows the mechanism. The two June changes were never announced despite customer terms requiring notice, and nothing has changed since.",
+    "ai_verdict": "pass",
+    "correct_verdict": "gap",
+    "reasoning": "A mechanism with no written, dated adoption does not open the adoption route, and the most recent changes went out with no notice, so this is a gap. With a dated written adoption, the mechanism in place, the change history showing none since and the assessment naming the June changes and the adoption date, it would pass.",
+    "weight": 0.5,
+    "source": "words_batch1b_2026_11"
+  },
+  {
+    "control": "VND-04",
+    "attribute": "A3",
+    "mode": "legacy",
+    "evidence_summary": "Subprocessor change notices were adopted in writing on 10 August with a subscribe page. The two June changes were never announced, and a change in October went live with no notice although the customer terms commit to 30 days' notice.",
+    "ai_verdict": "pass",
+    "correct_verdict": "gap",
+    "reasoning": "A change since adoption was not notified as committed, so the adoption route does not apply and the check is a gap.",
+    "weight": 0.5,
+    "source": "words_batch1b_2026_11"
   },
   {
     "control": "INC-03",

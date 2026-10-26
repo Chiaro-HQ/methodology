@@ -1,6 +1,6 @@
 # The tools
 
-The 53 tools a connected client's AI can call. Generated from the
+The 54 tools a connected client's AI can call. Generated from the
 live server, so this list is exactly what a client sees, including the
 descriptions the AI reads to decide what to do.
 
@@ -18,7 +18,9 @@ whether it's in scope based on SOC 2 scoping criteria:
 - Does it implement security controls for the product?
 
 Common systems (AWS, GitHub, Okta, etc.) are automatically classified.
-For less common tools, describe what you use it for.
+For less common tools, describe what you use it for. On a Type I audit
+whose scope confirmation has finished, the Chiaro team adds a system:
+use report_problem.
 
 Arguments:
 
@@ -35,6 +37,34 @@ Arguments:
   cover from that day. A date already on file for a listed system
   is not changed here: the audit team updates it when a record
   shows the right date (report_problem).
+
+## `answer_audit_question`
+
+Answer one question your audit's own record raises before handover.
+
+load_area shows each check's open questions (before_handover, each with its
+key and the shape of its answer) and get_progress counts them; complete_step
+waits until each is answered, because each is a question the auditor would
+otherwise send back after the handover. Answer from the files the company
+holds: register a new file with submit_evidence first, then name its
+evidence_id here. A count, a date or a file can come from the company's
+records; an outcome, a classification, a member's result, a reason a check
+does not apply, or that the company cannot provide something is the user's
+decision: ask them, and record their words. Never choose one for them. If
+the company cannot provide what a question asks, cannot_provide=true with
+the reason in statement always counts, and the reason goes to the auditor
+with the handover. An answer never changes a check's status or your
+progress; a later answer to the same question replaces the earlier one,
+except that lists, systems, vendors and file names you answered before are
+kept.
+
+Arguments:
+
+- `key` (string, required): The question's key exactly as it was shown (load_area, complete_step or this tool), including the part after #.
+- `statement` (string, optional): The answer in the user's words, or with cannot_provide, the reason.
+- `evidence_ids` (string or array, optional): Registered files the answer rests on, as evidence ids.
+- `details` (string or object, optional): The structured part the question asks for, as a JSON object (load_area's answer_details gives its fields).
+- `cannot_provide` (boolean, optional): True when the company cannot provide what the question asks.
 
 ## `answer_question`
 
@@ -133,7 +163,10 @@ While a readiness account has no checklist yet (its first confirmation, or
 a retry of one that built nothing), confirming also needs the hosted-AI
 answer (set_company_profile uses_hosted_ai_models), unless an AI model
 service on the system list already settles it. Once a checklist exists it
-is never asked.
+is never asked. At that first confirmation, the questions still open (each
+tool category not yet answered, and the engineering team size when no
+answer settles it) come back together as needs_input, one picker per
+question with its options and how to record the answer.
 
 ## `confirm_scope_delta`
 
@@ -228,6 +261,8 @@ with the version-bound observations in record_self_assessment, or in
 record_area_review after the end-of-area draft adoption response. Readiness
 grades Type I. No upload or second Type II grade is needed. The client makes
 the assessment; metadata does not independently authenticate local files.
+A saved answer marked given_under_earlier_wording keeps its credit as given
+(current_rule_satisfied null: unknown, not failed); a new save uses this kit.
 
 Arguments:
 
@@ -320,6 +355,9 @@ Get items needing quick yes/no confirmation before evidence collection.
 Returns controls where the conversation couldn't determine classification.
 For each, ask the user a simple yes/no.
 
+On a readiness account it also lists the checks whose answer is unresolved,
+each with the reason saved for it and the judgment kit to open.
+
 Must be called after conversation is complete.
 
 ## `load_area`
@@ -347,6 +385,10 @@ each attribute may carry:
                       clears the bar for what is open. Very often it does
                       not: a written policy is not a record that the thing
                       happened, and citing it again will not close the check.
+
+Current audit follow-up areas also include saved_answers: legacy conversation
+text within explicit limits. If complete is false, do not infer missing
+customer work or ask for repeated answers from that incomplete view.
 
 Arguments:
 
@@ -673,7 +715,9 @@ Arguments:
   predates your draft and was already adopted) | "not_yet".
 - `adopted_by` (string, optional): who said it — required for "adopted" and "pre_existing".
 - `statement` (string, optional): their exact words — required for "adopted" and "pre_existing".
-- `version_id` (string, optional)
+- `version_id` (string, optional): the exact version they read, as returned with the draft
+  (status's drafts_awaiting_adoption lists each document's
+  evidence_id and version_id). Required: adoption is of that version.
 
 ## `record_population_place`
 
@@ -877,6 +921,26 @@ Arguments:
   citing this owner's inspected sources. Keep missing history unresolved.
   The same accepted evidence/version and owner judgment are reused by
   each child. Missing dates remain unresolved; never invent a cadence.
+- `open_item` (object or string or null, optional): optional, only on a gap or absent that cannot be fixed before the audit: an object saying why.
+  {"kind": "written_decision", "decision_ref": where it is written and who decided} when the company decided in
+  writing not to do this (ask the user where); {"kind": "next_real_case", "practice_started": "YYYY-MM-DD",
+  "no_case_since": true, "earlier_cases_done": true} on a gap whose step must come before or at a specific event
+  (such as onboarding a vendor, granting access, a leaver, a new hire or a customer's deletion request), when the
+  practice is in place, no such event has happened since it started, and nothing about earlier events is left to do
+  (data deleted, access removed, checks completed, records completed from the logs that exist), so only what cannot
+  be recovered remains; {"kind": "audit_period", "depends_on": what the audit's date or period must settle} on a gap
+  that only the audit period can settle, such as whether a vendor's report covers it. Never for work the company can
+  still do before the audit: scheduled work it can run now (an access review, a yearly vendor review, a restore
+  test, training), open items it can still fix, or records it can still write. The item goes on the readiness short
+  list; it stays open and never counts as a pass. To change the reason, save the check again. On IAM-03/A4,
+  IAM-04/A5, VND-01/A6, VND-04/A2 and DAT-05/A3 the check's own words pass a practice adopted in writing with a
+  date, its steps in place, when every case since followed it or the place such cases are recorded shows none
+  since (on DAT-05/A3 also no data from an earlier deletion left past its window): judge that against the kit
+  first, and use next_real_case only where those words do not pass it.
+- `open_items` (string or array, optional): optional, instead of saving a verdict: a JSON list of {control_ref, attribute_id,
+  accepted_history_id, open_item} for checks whose saved gap or absent has no open_item yet, with the
+  accepted_history_id get_status listed for each. It adds the reason to that saved judgment only; if the check was
+  saved again since, nothing changes and the reply says so. Set once: to change a reason, save the check again.
 
 ## `record_subservice_soc2`
 
@@ -893,11 +957,12 @@ Arguments:
 
 - `name` (string, required): The system as it appears in scope (e.g. "AWS", "Stripe").
 - `report_obtained` (boolean, required): True if the vendor's SOC 2 report is on file
-  (save a copy into 05-subservice-evidence/ so it travels at
-  handoff); False if they do not have it — recorded honestly, the
-  audit team weighs reliance accordingly. Never guess: ask.
+  (register it with submit_evidence and pass its evidence_id, so it
+  travels at handoff); False if they do not have it — recorded
+  honestly, the audit team weighs reliance accordingly. Never guess: ask.
 - `note` (string, optional): Optional context in the user's words ("reviewed it in March",
   "requested from the vendor, not received yet").
+- `evidence_id` (string, optional): The report file's evidence id from submit_evidence, when the report is on file. A report recorded without it is not part of the handover until its file is registered.
 
 ## `remove_system`
 
@@ -1054,6 +1119,11 @@ Set company profile details for scoping.
 These answers determine which controls apply and how they're customized.
 All fields are optional — sensible defaults are used for first-time startups.
 
+It also records the planned Type II observation window (type2_planned, and
+intended_obs_months of 3, 6 or 12). The log-retention checks ask for at least
+that many months of log retention, 12 when it was never answered; after it
+changes, open those checks' judgment kits again.
+
 Don't ask about policy review frequency, training frequency, or scan frequency
 here — those are discovered during the walkthrough conversation.
 
@@ -1061,10 +1131,19 @@ Returns audit scope recommendations based on the product, data types, and
 company profile collected so far. The client MUST review and confirm these
 before the scope can be locked.
 
+Whether the company's devices are managed by an MDM or endpoint management
+tool is the uses_mdm answer: "yes" applies the MDM-managed endpoint control
+(END-01) instead of the founder-managed one (END-03), whatever the tool is
+called. Whether the company administers any server, virtual machine,
+dedicated host or cloud account itself is the self_managed_infrastructure
+answer: "yes" applies the self-managed network, logging and backup controls
+(NET-01, MON-01, BCP-02) instead of the managed-platform ones (NET-04,
+MON-03, BCP-03).
+
 On an audit whose scope is already set, an answer that would change which
 checks apply (physical office, remote access, removable media, engineering
-team size, pen testing, hosted AI models, confirmed not-applicable
-controls) is refused and
+team size, pen testing, hosted AI models, device management, self-managed
+infrastructure, confirmed not-applicable controls) is refused and
 nothing in the call is saved: if a recorded answer is wrong, call
 report_problem and the audit team updates the scope and the checklist
 together. Other details save as usual.
@@ -1112,6 +1191,24 @@ Arguments:
   to the system list. "no" is a normal answer: they stay out of
   scope unless an AI model service is on the system list. Leave ""
   only if the client could not answer.
+- `uses_mdm` (string, optional): "yes" or "no": are the company's work devices managed by an
+  MDM or endpoint management tool (Jamf, Kandji, Intune, Mosyle,
+  Addigy, NetLock, Hexnode, or any other)? "yes" applies the
+  MDM-managed endpoint control (END-01) instead of the
+  founder-managed one (END-03); also add the tool to the system list.
+  "no" is a normal answer: END-03 applies unless an MDM is on the
+  system list. Leave "" only if the client could not answer.
+- `self_managed_infrastructure` (string, optional): "yes" or "no": does the company administer
+  any server, virtual machine, dedicated host or cloud account itself
+  (a Hetzner or DigitalOcean server, an AWS, GCP or Azure account, its
+  own hardware), rather than running only on managed platforms such as
+  Vercel, Render, Railway, Heroku, Netlify or Fly.io? "yes" applies the
+  self-managed network, logging and backup controls (NET-01, MON-01,
+  BCP-02) instead of the managed-platform ones (NET-04, MON-03,
+  BCP-03); also add each server or account to the system list. "no" is
+  a normal answer: the managed-platform controls apply where every
+  production platform on the system list is a managed one. Leave ""
+  only if the client could not answer.
 - `prior_soc2` (object or null, optional): PREFER record_prior_report, which is the tool for this
   question on both engagement types: it reconciles their system list
   against ours, banks the exceptions as risk flags, and stops the
@@ -1138,8 +1235,9 @@ Arguments:
 - `confirmed_na_controls` (object or null, optional): Whole-control scope confirmations keyed by control ref,
   each with the exact library na_trigger as condition and confirmed true/false.
   Only confirm facts the user supplied; unknown conditions stay visible.
-  A record for a fitted variant is refused: NET-04, MON-03, BCP-03
-  and END-03 follow the recorded systems; IAM-09, INC-03 and CHG-06
+  A record for a fitted variant is refused: NET-04, MON-03 and BCP-03
+  follow self_managed_infrastructure and the recorded systems; END-03
+  follows uses_mdm and the recorded systems; IAM-09, INC-03 and CHG-06
   follow engineering_team_size. So is one for VUL-02, which follows
   pen_test_program, and one for a control that follows a trust
   services category or the HIPAA add-on (confirm_tsc decides those)
@@ -1185,10 +1283,10 @@ Begin the purchased SOC 2 audit examination, or a purchased Type II
 observation window.
 
 Use when the audit has been bought (the portal's SOC 2 Audit card) and the
-user wants the examination to begin. Starting is a BILLING event: per the
-engagement letter, the first installment charges the card on file when
-the examination begins. The first call therefore starts NOTHING — it
-returns the exact amounts; show them to the user, get an explicit yes,
+user wants the examination to begin. Starting is a BILLING event: the
+first call starts NOTHING and quotes any remaining charges per the
+engagement letter, accounting for an installment already paid. Show
+those amounts to the user, get an explicit yes,
 then call again with confirm_start=true. When readiness is NOT complete
 it additionally asks for confirm_start_early=true — set that ONLY after
 the user explicitly confirms starting before readiness is done. The audit

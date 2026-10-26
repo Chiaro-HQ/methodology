@@ -60,10 +60,10 @@
     "can_be_na": false,
     "na_trigger": "",
     "collection": {
-      "gating_question": "Does your organization have a governance body (such as a board of directors, advisory board, security committee, or leadership team) that meets to discuss security or risk topics? (Yes/No, informal arrangements count as yes)",
+      "gating_question": "Does your organization have a governance body (such as a board of directors, advisory board, security committee, or leadership team) that meets to discuss security or risk topics, or an outside advisor who reviews them in writing? (Yes/No, informal arrangements count as yes)",
       "absent_reason_template": "Entity does not have governance oversight practices in place. All attributes for this control marked absent. This is a structural gap requiring implementation.",
       "local_save": "governance/",
-      "question": "Who provides oversight of your security and internal controls program, and how often do they meet?",
+      "question": "Who provides oversight of your security and internal controls program, and how often do they meet or review it in writing?",
       "follow_ups": [
         "Is this a board, advisory board, leadership team, or single person?",
         "How often do they review security matters (quarterly, annually)?",
@@ -77,17 +77,17 @@
       "collection_playbook": {
         "evidence_goals": [
           "Pull documentation identifying the governance body and its defined oversight responsibilities for security and internal controls",
-          "Pull a roster or bios showing member expertise and at least one member independent from day to day management",
-          "Pull minutes or notes from the period's meetings showing security topics on the agenda and decisions or action items recorded and tracked to closure"
+          "Pull a roster or bios showing member expertise and at least one member or outside advisor independent from day to day management",
+          "Pull minutes or notes from the period's meetings, or the outside reviewer's dated written reviews, showing the security topics covered and decisions or action items recorded and tracked to closure"
         ],
-        "what_good_looks_like": "A charter or terms of reference naming the governance body and its security oversight duties, a roster showing member backgrounds and at least one member independent of daily operations, plus dated meeting minutes where a security topic appears and action items are assigned and later followed up.",
+        "what_good_looks_like": "A charter or terms of reference naming the governance body and its security oversight duties, a roster showing member backgrounds and at least one member or outside advisor independent of daily operations, plus dated meeting minutes or written reviews where a security topic appears and action items are assigned and later followed up.",
         "what_bad_looks_like": "A claim that leadership discusses security with no minutes, minutes with no security content, or a body with no identified expertise or independence from management.",
         "red_flags": [
           "No written minutes or notes for any meeting",
           "Security never appears on any agenda across the meetings",
           "Action items are recorded but never tracked to closure",
           "Every member is part of daily management with no independent voice",
-          "The body exists on paper but has not met within the last 12 months"
+          "The body exists on paper but has not met or reviewed in writing within the last 12 months"
         ],
         "platform_hints": {
           "notion": "Agendas and minutes are commonly kept as dated Notion pages; pull the pages showing security topics and tracked action items.",
@@ -322,7 +322,7 @@
   "PPL-04": {
     "title": "Performance & Accountability",
     "category": "PEOPLE",
-    "description": "Security and internal control responsibilities are included in performance evaluation criteria, and corrective action is taken when they are not met. Excessive workload pressures are evaluated and adjusted.",
+    "description": "Security and internal control responsibilities are included in performance evaluation criteria, and corrective action is taken when they are not met. Excessive workload pressures, when identified, are addressed as the company's own written policy requires.",
     "criteria_mappings": [
       "CC1.5"
     ],
@@ -1138,7 +1138,7 @@
           "Pull the list of allowed authentication factors (authenticator app, hardware key, SMS, etc.)"
         ],
         "what_good_looks_like": "Raw policy config or API output showing the enforcement setting (required vs optional) plus a user-level report showing enrollment status per user. Actual settings, not a summary.",
-        "what_bad_looks_like": "Verbal confirmation that MFA is enabled, with no configuration or status evidence behind it. A screenshot or summary that leaves out what the check being assessed asks for: enforcement, or a permitted and evidenced application exception, for A1; MFA enforcement on remote network access for A2; or the sampled user's MFA enrollment and active status on each in-scope system for A3.",
+        "what_bad_looks_like": "Verbal confirmation that MFA is enabled, with no configuration or status evidence behind it. A screenshot or summary that leaves out what the check being assessed asks for: enforcement, or a permitted and evidenced application exception, for A1; MFA enforcement on remote network access for A2; or the sampled user's MFA enrollment and active status on each in-scope system that has its own login for A3.",
         "red_flags": [
           "MFA set to optional or prompted but not enforced",
           "Service accounts or shared accounts excluded from MFA requirement",
@@ -1608,7 +1608,7 @@
         "what_bad_looks_like": "Statement that service accounts are managed without showing the list. Total count without per-account details.",
         "red_flags": [
           "Service accounts without documented owner",
-          "API keys with no expiration set",
+          "API keys with no expiration and no rotation under the company's own schedule",
           "Credentials found in source code or config files",
           "Service accounts with admin-level permissions",
           "Unused or stale service accounts still active"
@@ -2113,13 +2113,13 @@
       ],
       "collection_playbook": {
         "evidence_goals": [
-          "Pull encryption-at-rest configuration for all data stores (databases, object storage, block storage)",
-          "Pull encryption-in-transit configuration (TLS settings, certificate config)",
-          "Pull encryption algorithm and key length settings",
-          "Pull key management configuration (where keys are stored, rotation schedule)"
+          "Pull encryption-at-rest configuration for all data stores (databases, object storage, block storage); for a store whose encryption only the provider runs, the provider's SOC 2 report section, published encryption documentation or written answer instead",
+          "Pull encryption-in-transit configuration (TLS settings, certificate config) for the company's own endpoints and any TLS setting a provider lets it set",
+          "Pull encryption algorithm and key length settings the company can see; where only the provider runs the encryption or never shows them, the provider's statement of them",
+          "Pull key management configuration (where keys are stored, rotation schedule) for keys the company holds; for keys a provider holds inside its own service, the provider's statement of how they are stored and rotated"
         ],
-        "what_good_looks_like": "Raw config per data store showing: encryption enabled, algorithm (AES-256, etc.), key source (KMS, managed, etc.), TLS version enforced. Key rotation schedule if configured.",
-        "what_bad_looks_like": "Statement that encryption is enabled without showing per-system config. Summary without algorithm or key details.",
+        "what_good_looks_like": "Raw config per data store the company can see or set, showing: encryption enabled, algorithm where the configuration shows it (AES-256, etc.), key source (KMS, managed, etc.), TLS version enforced. Key rotation schedule if configured. For a store, key or fact only the provider runs or never shows (such as an email, HR or phone system's own encryption, or the algorithm behind a provider's default encryption), the provider's SOC 2 report section, published encryption documentation or written answer naming the encryption, algorithm, key storage and rotation.",
+        "what_bad_looks_like": "The company's own statement that encryption is enabled, without per-system config or the provider's own statement. Summary without algorithm or key details. A provider's report cited in place of a setting the company can see on its own database, bucket, disk or key.",
         "red_flags": [
           "Any data store with encryption disabled",
           "TLS version below 1.2 accepted",
@@ -2880,10 +2880,10 @@
         "evidence_goals": [
           "Pull logging configuration showing which event types are captured",
           "Pull log retention period settings",
-          "Pull log storage and protection configuration (immutability, access controls)",
+          "Pull log storage and protection configuration (immutability, access controls); for a log a provider keeps that its customers cannot edit or delete, the provider's statement of that",
           "Pull centralized logging or SIEM integration config"
         ],
-        "what_good_looks_like": "Raw logging config per system showing: what events are logged (auth, access, changes, errors), retention period, where logs are stored, whether logs are protected from tampering.",
+        "what_good_looks_like": "Raw logging config per system showing: what events are logged (auth, access, changes, errors), retention period, where logs are stored, whether logs are protected from tampering (for a log a provider keeps that its customers cannot edit or delete, the provider's own statement of that).",
         "what_bad_looks_like": "Statement that logging is enabled without showing what is logged or retention settings. Summary without per-system config.",
         "red_flags": [
           "Authentication or access events not logged",
@@ -3032,10 +3032,10 @@
         "evidence_goals": [
           "Pull the logging configuration for each in scope provider showing audit logging enabled",
           "Pull the retention setting for each provider alongside the entity's documented retention period",
-          "Pull the configuration showing who can delete or alter logs",
+          "Pull the configuration showing who can delete or alter logs; where a provider offers no such setting because its customers cannot edit or delete the log, the provider's statement of that",
           "Pull dated review records or the configuration routing logs into alerting"
         ],
-        "what_good_looks_like": "Provider settings showing audit logging enabled, retention meeting the entity's policy, deletion restricted, and either dated review notes or a routing configuration into an alerting destination.",
+        "what_good_looks_like": "Provider settings showing audit logging enabled, retention meeting the entity's policy, deletion restricted (or, where the provider offers no deletion setting, its own statement that customers cannot edit or delete the log), and either dated review notes or a routing configuration into an alerting destination.",
         "what_bad_looks_like": "A claim that logs are collected without provider settings. A client authored description of what is logged. Retention left at a short default with no policy comparison.",
         "red_flags": [
           "Audit logging disabled on an in scope provider",
@@ -3384,12 +3384,12 @@
           "Pull branch protection or merge rules for production branches",
           "Pull change tracking configuration (issue linking, PR requirements)"
         ],
-        "what_good_looks_like": "Branch protection rules showing: required reviews, status checks, no direct pushes to main. PR templates or issue linking requirements. Change history showing traceability.",
+        "what_good_looks_like": "Branch protection rules showing: required reviews (under a written small-change policy, at least on changes outside it, for example code-owner review on sensitive paths, with each look-back recorded once due; for a team with fewer than 3 developers, documented compensating controls), status checks, no direct pushes to main. PR templates or issue linking requirements. Change history showing traceability.",
         "what_bad_looks_like": "Statement that changes go through PRs without showing branch protection config. Process document without system enforcement.",
         "red_flags": [
           "No branch protection on production branches",
           "Direct pushes to main allowed",
-          "No required reviewers",
+          "No required reviewers for changes outside a written small-change route or a small team's documented compensating controls",
           "Admin bypass enabled without restrictions"
         ],
         "platform_hints": {
@@ -3528,14 +3528,14 @@
       "collection_playbook": {
         "evidence_goals": [
           "Pull environment configuration showing at least separate development and production environments",
-          "Pull access controls showing production is more restricted than non-production",
+          "Pull access controls showing production is more restricted than non-production, or limited to named people with a documented need and protected by MFA",
           "Pull configuration showing whether production data can flow to non-production"
         ],
-        "what_good_looks_like": "Config showing distinct environments with different access levels. Production access restricted to a smaller group. Data flow controls preventing production data in dev.",
+        "what_good_looks_like": "Config showing distinct environments, each with its own access controls. Production access restricted to a smaller group or, where everyone working in non-production also needs production, limited to those named people with a documented need and protected by MFA. Data flow controls preventing production data in dev.",
         "what_bad_looks_like": "Statement that environments are separate without showing config. Architecture diagram without access control details.",
         "red_flags": [
           "Production and staging sharing the same database or resources",
-          "Same access level for all environments",
+          "Same access level for all environments, with no documented need for each person's production access or no MFA on production",
           "Production data used in development without anonymization",
           "No clear boundary between environments"
         ],
@@ -3925,9 +3925,9 @@
           "Pull backup configuration for all critical data stores (databases, file storage, object storage)",
           "Pull backup schedule and retention settings",
           "Pull backup monitoring or alerting configuration",
-          "Pull backup storage location (same region vs cross-region)"
+          "Pull backup storage location (same region vs cross-region); for backups a provider keeps inside its own service, the provider's statement of where they are stored"
         ],
-        "what_good_looks_like": "Raw backup config showing: automated schedule, retention period, storage separate from production (another region, another availability zone, or off-site), success/failure alerting. Per-system backup settings.",
+        "what_good_looks_like": "Raw backup config showing: automated schedule, retention period, storage separate from production (another region, another availability zone, or off-site), success/failure alerting. Per-system backup settings. For backups or processing a provider runs inside its own service, the provider's SOC 2 report section, published documentation or written answer stating where backups are stored and how the service fails over.",
         "what_bad_looks_like": "Statement that backups exist without showing config. Backup policy document without actual system settings.",
         "red_flags": [
           "No automated backup schedule (manual only)",
@@ -4073,7 +4073,7 @@
   "VND-02": {
     "title": "Subservice Organization Monitoring",
     "category": "VENDOR MANAGEMENT",
-    "description": "Vendors whose controls the product depends on are identified, their SOC 2 reports (or equivalent) obtained and reviewed periodically, and the controls they operate documented.",
+    "description": "Vendors whose controls the product depends on are identified, their SOC 2 reports (or equivalent, or, for a vendor that offers none or whose report the entity has not obtained, a documented alternative assessment) obtained and reviewed periodically, and the controls they operate documented.",
     "criteria_mappings": [
       "CC9.2"
     ],
@@ -4096,14 +4096,14 @@
       "collection_playbook": {
         "evidence_goals": [
           "Pull the list of vendors whose controls the product depends on (infrastructure, authentication, payments, and similar subservice organizations)",
-          "Pull the current audit reports obtained for those vendors covering the relevant period, or the equivalent certification",
+          "Pull the current audit reports obtained for those vendors covering the relevant period, or the equivalent certification, or, for a vendor that offers none or whose report the entity has not obtained, the documented alternative assessment",
           "Pull the review record showing who reviewed each report, when, the report opinion, and any exceptions or complementary user-entity control responsibilities noted",
           "Pull documentation of the controls those vendors operate on the entity's behalf"
         ],
-        "what_good_looks_like": "For each critical infrastructure vendor, a current audit report on file covering a period that overlaps the audit period, plus a short review note recording the report opinion and the complementary controls the entity itself is responsible for.",
-        "what_bad_looks_like": "Naming a vendor as certified without the actual report on file, relying on a report whose period has expired, or obtaining reports with no evidence anyone reviewed them or identified the entity's own responsibilities.",
+        "what_good_looks_like": "For each critical infrastructure vendor, a current audit report on file covering a period that overlaps the audit period, plus a short review note recording the report opinion and the complementary controls the entity itself is responsible for; for a vendor that offers no report or whose report the entity has not obtained, a dated alternative assessment recording its conclusion and the controls the vendor operates for the entity.",
+        "what_bad_looks_like": "Relying only on a vendor's certification claim, with neither its report nor a documented alternative assessment on file, relying on a report whose period has expired, or obtaining reports with no evidence anyone reviewed them or identified the entity's own responsibilities.",
         "red_flags": [
-          "Critical infrastructure vendors named but no audit report obtained",
+          "Critical infrastructure vendors named with neither an audit report nor a dated alternative assessment",
           "Audit reports on file but from an expired or non-overlapping period",
           "Reports obtained but no evidence of review",
           "Complementary user-entity controls not identified or acted on",
@@ -4112,7 +4112,7 @@
         "platform_hints": {
           "aws": "Obtain the current audit reports from AWS Artifact. Check the report period covers the audit period and note the complementary user-entity controls listed.",
           "google_drive": "Pull the folder of collected vendor audit reports and any review memos. Check report dates and reviewer notes.",
-          "notion": "Pull the subservice organization list and review notes. Check each vendor has a current report and a recorded review."
+          "notion": "Pull the subservice organization list and review notes. Check each vendor has a current report or equivalent with a recorded review, or, where the vendor offers none or its report has not been obtained, a dated alternative assessment recording the relevant risks, the conclusion, the controls the vendor operates and the entity's own responsibilities."
         }
       }
     },
@@ -5188,7 +5188,7 @@
   "AI-02": {
     "title": "Model Provider Data-Use Configuration",
     "category": "AI & MODEL GOVERNANCE",
-    "description": "{company_name} verifies that organization-level settings at each hosted AI provider prevent submitted inputs and outputs from training the provider's models, with retention windows set to the defined period, including zero-data-retention arrangements where in effect.",
+    "description": "{company_name} verifies that organization-level settings at each hosted AI provider prevent submitted inputs and outputs from training the provider's models, with the retention that applies identified and fitting the defined period, including zero-data-retention arrangements where in effect.",
     "criteria_mappings": [
       "C1.1",
       "CC9.2"
@@ -5227,17 +5227,17 @@
       "collection_playbook": {
         "evidence_goals": [
           "Capture, from the entity's own provider account, the setting that controls whether submitted data is used to train the provider's models or, where no separate setting exists, account-specific evidence of the governing commercial terms and their no-training clause; a signed or electronically executed no-training addendum also counts",
-          "Capture the configured retention window from the entity's own provider account, or the signed zero data retention arrangement",
+          "Capture the retention that applies from the entity's own provider account, or the provider's business terms stating the retention for the account type, or the zero data retention arrangement on record",
           "Enumerate all projects, workspaces, or API keys under the organization to confirm the organization level setting covers every one"
         ],
-        "what_good_looks_like": "A console screenshot or export from the entity's own provider account showing training on submitted data disabled (or, where no separate setting exists, account-specific evidence of the governing commercial terms and their no-training clause, or a signed or electronically executed no-training addendum) and the retention window set to the entity's defined period, or a signed zero data retention addendum, plus an enumeration of all projects or workspaces confirming the setting applies organization wide.",
+        "what_good_looks_like": "A console screenshot or export from the entity's own provider account showing training on submitted data disabled (or, where no separate setting exists, account-specific evidence of the governing commercial terms and their no-training clause, or a signed or electronically executed no-training addendum) and the retention that applies fitting the entity's defined period (an account setting, the provider's business terms for the account, or a zero data retention arrangement, a signed addendum included), plus an enumeration of all projects or workspaces confirming the setting applies organization wide.",
         "what_bad_looks_like": "A provider marketing page or default policy statement offered as proof of this organization's configuration. A screenshot of one project or key while other active projects remain uncovered. A verbal claim that training is off with nothing pulled from the account.",
         "red_flags": [
           "No training posture supported only by the provider's public policy page rather than the entity's own account settings or account-specific proof of the governing terms",
           "Setting shown for one project or key while other active projects or workspaces are not covered",
-          "Retention left at a longer default than the entity's defined period with no justification",
+          "Retention left at a longer default than the entity's defined period with no permission in the entity's approved retention policy",
           "Personal or free tier provider account processing entity or customer data",
-          "Zero data retention claimed but no signed arrangement on file"
+          "Zero data retention claimed but no arrangement on record for the account"
         ],
         "platform_hints": {
           "openai": "The setting that disables training on API data lives under Settings then Data Controls in the OpenAI dashboard. Capture that panel from the entity's own organization. Use the Admin API projects endpoint to enumerate the projects the organization level setting covers. API data is not used to train models by default, but capture the account setting rather than citing the policy page.",

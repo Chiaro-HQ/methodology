@@ -5,6 +5,144 @@ applied to an examination. Corrections that do not change the method (typos,
 formatting, clearer wording with the same meaning) ship without a version, and
 the commit history on this repo records every one of them.
 
+## v1.14, 2026-10-26
+
+The same 89 controls and 387 checks, with changes to 42 checks and 12 controls,
+59 more worked examples, and one new tool.
+
+- Governance reviews (GOV-02), security status in leadership updates (GOV-04)
+  and a founder's own access self-review (IAM-09) follow the company's own
+  schedule, at least once a year (our audit's own minimum), in place of a fixed
+  quarterly cycle. A stricter schedule the company sets still applies, and a
+  founder-run company's governance still needs its named outside reviewer,
+  whose dated written reviews the evidence guidance now names beside a
+  governance body's meetings.
+- Founders and co-founders named in the company's ownership records are not
+  new hires for background screening (PPL-01); anyone else starting an
+  employee or contractor role counts, and dated history still has to show no
+  other start.
+- Changes (CHG-01): a small change, as the company's written policy defines
+  one (it never touches sign-in and permissions, keys and secrets, customer
+  data and the database, infrastructure and configuration, the deployment
+  pipeline or third-party dependencies), may go live once it has gone through
+  a pull request and its automated tests pass, when someone other than its
+  author looks back on every small change at least once a month, or on the
+  shorter schedule the policy sets, including whether it qualified as small
+  (A6). A review recorded as a pull-request comment by another developer, or a
+  review record naming the change, the reviewer and the date, counts as
+  review, before or after the change ships; over a Type II period, a review
+  after shipping is on record before testing of the period closes (A4). For
+  readiness and Type I, A4 also passes a latest change whose look-back is not
+  yet due, where the process reviews changes after they ship in a look-back
+  due at least once a month (for example for small changes, or for every
+  change on a two-developer team), covering every change since the last one,
+  and every look-back that has come due is on record. Where a team has fewer
+  than 3 developers and no other developer can review a change, documented
+  compensating controls addressing the same risks, such as required automated
+  tests and a periodic after-the-fact review by a second person, are
+  acceptable, and over a Type II period they operate (A4). A3's questions ask
+  whether a change was documented on or before it was implemented, and leave
+  who reviewed it to A4.
+- Production access limited to named people, each with a documented need, and
+  protected by MFA counts as restricted where everyone with non-production
+  access also needs production (CHG-03 A3).
+- A documented and approved schedule of at least once a year (our audit's own
+  minimum) that meets applicable legal, contractual and regulatory
+  requirements is adequate on its own for reviewing the Code of Conduct
+  (GOV-01 A7), renewing its acknowledgments (GOV-01 A9) and reviewing and
+  approving policies (POL-01 A5); a longer interval still needs a cited
+  requirement or inspected safeguards. Manual credential rotation is checked
+  against the company's own schedule, at least once a year, and short-lived
+  credentials or a configured expiration pass (IAM-08 A2).
+- A dependent vendor that offers no SOC 2 report or equivalent, or whose
+  report the company has not obtained, can be covered by a documented
+  alternative assessment (a completed security questionnaire, a review of the
+  vendor's published security documentation, or controls the company runs to
+  cover the gap) that records the risks assessed, the conclusion, the
+  vendor-operated controls relied upon and the company's own responsibilities.
+  It stands in for the report's review notes and has no report period to test
+  (VND-02 A2, A3, A4). A SOC 3 is named among the equivalent attestations.
+- What a provider runs inside its own service, with no setting the company can see
+  or change, is shown by the provider's own statement (its SOC 2 report, published
+  security documentation, or a written answer from the provider) naming what the
+  check asks; over a Type II period, by its report covering the period with a
+  bridge letter for any gap. What the company can see or set still needs its
+  configuration. This applies to encryption at rest, algorithms and key lengths,
+  key storage and key rotation (automatic, or dated within 12 months) (DAT-01 A1,
+  A3 to A5), audit logs a provider keeps that customers cannot edit or delete
+  (MON-01 A4, MON-03 A3), and backups and redundancy or failover a provider runs
+  (BCP-02 A4, A5).
+  For encryption in transit, the endpoints in scope are the company's own,
+  wherever they are hosted; a provider's own servers that the company only
+  connects to are the provider's (DAT-01 A2).
+- A company with no endpoint or TLS setting of its own shows encryption in
+  transit by scans of the providers' endpoints it connects to, or by those
+  providers' own statements (in their SOC 2 reports, published security
+  documentation or a written answer from each provider) that they encrypt
+  those connections with TLS; over a Type II period, a provider's statement is
+  its report covering the period, with a bridge letter for any gap (DAT-01 A2).
+- For readiness and Type I, a practice adopted partway through passes from its
+  written adoption date, once its steps are in place, when every case since
+  followed it (or the record of such cases shows none since) and the earlier
+  cases are named: approval of access grants (IAM-03 A4), offboarding
+  timestamps (IAM-04 A5), a pre-engagement vendor assessment (VND-01 A6),
+  review of a new subprocessor (VND-04 A2), notice of subprocessor changes
+  (VND-04 A3), and deletion within the defined window, with no data from an
+  earlier deletion left past its window (DAT-05 A3). Type II still tests every
+  case in its period.
+- Also: at a hosted AI provider, the retention that applies passes when it is
+  no longer than the company's defined period (it need not match it), shown by
+  the account setting, the provider's business terms for the account type or a
+  zero data retention arrangement on record (a signed one counts), and a
+  longer fixed provider period, such as an abuse monitoring window, passes
+  when documented and permitted by the company's approved retention policy,
+  its customer commitments and applicable law (AI-02 A2). A configured
+  lifecycle policy or deletion job passes before any retention period has
+  expired; a manual process shows a deletion carried out once one has (DAT-03
+  A4). Role assignments may match a person's documented responsibilities and
+  business need where a job title does not describe them, and a team roster or
+  access review record listing duties counts (IAM-06 A3). A written
+  compensating control for a duty that is not separated names what it covers,
+  who performs it and when, and must address that duty's risk (GOV-03 A4). One
+  user is sampled per system that has its own login; a system reached only
+  through an identity provider that enforces MFA is covered by the user
+  sampled there, with the provider's enforcement evidence (IAM-02 A3). A
+  documented assessment of the applicable legal and contractual duties to tell
+  customers about subprocessor changes, and how they are met, counts as
+  evidence for those notices (VND-04 A3). Workload pressure, when identified,
+  is addressed as the company's own written policy requires (PPL-04).
+- Worked examples grow from 945 to 1004. 343 of them correct an AI that was too
+  strict and 215 one that was too lenient, and the README now says what each
+  means.
+- A new tool, `answer_audit_question`, answers a question the audit's own
+  record raises before handover, from the company's files or in the user's
+  words; `complete_step` waits until each is answered, and an answer never
+  changes a check's status. At a readiness account's first scope confirmation,
+  while it has no checklist, `confirm_scope` returns the questions still open
+  (each tool category not yet answered, and the engineering team size when no
+  answer settles it) together, one picker per question. `set_company_profile`
+  records whether devices are managed by an MDM (`uses_mdm`, which decides
+  between END-01 and END-03) and whether the company administers any server or
+  cloud account itself (`self_managed_infrastructure`, which decides between
+  the self-managed and managed-platform network, logging and backup controls),
+  and the planned Type II observation window, which sets the log retention the
+  log-retention checks ask for. `record_self_assessment` takes an `open_item`
+  reason for a gap that cannot be fixed before the audit (it stays open and
+  never counts as a pass), or `open_items` to add one to a saved gap.
+  `record_policy_adoption` needs the `version_id` the user read, and
+  `record_subservice_soc2` takes an obtained report's `evidence_id`, so the
+  file travels at handover. `get_unresolved` lists a readiness account's
+  unresolved checks with their reasons, a saved answer marked
+  `given_under_earlier_wording` keeps its credit, `load_area` includes an
+  audit's earlier conversation answers within stated limits (an incomplete
+  view is never read as missing work), and `start_audit` quotes the remaining
+  charges, accounting for an installment already paid. On a Type I audit whose
+  scope confirmation has finished, the Chiaro team adds a system through
+  `report_problem`.
+- When the user says the evidence zip is uploaded, the AI calls `get_status`
+  once, which compares the upload with every registered file and lists
+  anything missing (`method/collection-rules.md`).
+
 ## v1.13, 2026-10-21
 
 The same 89 controls and 387 checks, with clearer evidence guidance on 32
