@@ -5,6 +5,38 @@ applied to an examination. Corrections that do not change the method (typos,
 formatting, clearer wording with the same meaning) ship without a version, and
 the commit history on this repo records every one of them.
 
+## v1.15, 2026-10-28
+
+The same 89 controls and 387 checks, with changes to 4 checks and 2 controls,
+8 more worked examples, and clearer wording in two tool descriptions.
+
+- Governance (CC1.2): in a small owner-run company, the owner can be the
+  person who oversees security and internal controls, in place of an outside
+  member or advisor. The governance records name the owner in that role
+  (GOV-02 A3); a founder-run company with fewer than five employees records
+  who reviews (the owner or a named outside reviewer), the topics, and a
+  frequency it sets, at least once a year (A6); and each review is written
+  and dated, saying what was reviewed and the decisions and actions, or that
+  none arose (A7). A signature approving one's own work, or a statement of
+  ownership, does not pass. The auditor judges at the examination whether the
+  owner's oversight is enough for the company. The CC1.2 intent in
+  `framework/criteria.json` and both controls' collection guidance name the
+  owner route.
+- Security status updates (GOV-04 A1): in a small owner-run company the owner
+  may be the recipient, even when the owner also writes code, when someone
+  else in the company prepares the status and reports it to the owner. A
+  founder with nobody else in the company still needs one recipient outside
+  day-to-day engineering, and the person who prepared the report is never its
+  only recipient. The control's description says the same.
+- Worked examples grow from 1004 to 1012. 347 of them correct an AI that was
+  too strict and 219 one that was too lenient.
+- Tools: `reclassify_evidence` says that on an audit a file carried over from
+  readiness is not relabeled; another kind of evidence is registered with its
+  own evidence_type, and any other correction goes in submit_note.
+  `submit_population`'s `source_system` names the in-scope system as
+  `get_scope_summary` names it, and a settings-change log counts only under
+  one in-scope system's name.
+
 ## v1.14, 2026-10-26
 
 The same 89 controls and 387 checks, with changes to 42 checks and 12 controls,

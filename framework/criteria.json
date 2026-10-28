@@ -11,7 +11,7 @@
   "CC1.2": {
     "text": "The board of directors demonstrates independence from management and exercises oversight of the development and performance of internal control.",
     "category": "Control Environment",
-    "intent": "RISK: Management operates without independent oversight, allowing control weaknesses to go undetected. INTENT: Someone independent of management oversees the development and performance of internal control. For startups without a board, this can be an advisory board or an external advisor.",
+    "intent": "RISK: Management operates without independent oversight, allowing control weaknesses to go undetected. INTENT: Someone independent of management oversees the development and performance of internal control. For startups without a board, this can be an advisory board or an external advisor. In a small owner-run company it can instead be the owner, named as overseeing security and internal controls, with dated written reviews of what was looked at, what was decided and what happened to the last to-dos; the auditor judges at the examination whether that oversight is enough for the company.",
     "objective_ids": [
       "OBJ-1.2.1",
       "OBJ-1.2.2"

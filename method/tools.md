@@ -492,6 +492,12 @@ spreadsheet a system pull. Checks the corrected lane satisfies are
 applied; nothing already satisfied is taken away, and the correction is
 recorded for the reviewer either way.
 
+On an audit, a file carried over from readiness is not relabeled: if it is
+another kind of evidence (command output, an export, a screenshot, a record
+or a document), register it with that evidence_type, which saves the audit's
+own record; any other correction, a different label of the same kind
+included, goes in submit_note.
+
 Arguments:
 
 - `evidence_id` (string, required): The evidence id returned at submit time. The file's
@@ -1610,7 +1616,12 @@ Arguments:
   leave this "".
 - `raw_record_count` (integer, required): How many records are in the raw output. I count them
   myself and refuse on a mismatch.
-- `source_system` (string, optional): The system it came from ("github", "rippling", "okta").
+- `source_system` (string, optional): The system it came from, named as get_scope_summary names the
+  in-scope system ("GitHub", "Microsoft Azure"). A settings-change log
+  (config_changes) counts only under one in-scope system's name: send
+  that name (case and separators do not matter); a name holding one
+  whole in-scope name ("Google Workspace audit log") is filed under it,
+  and anything else is asked about before anything is saved.
 - `filter_granularity` (string, optional): "exact_utc" if your filter used exact timestamps,
   "date_only_widened" if it used dates and you widened the range one
   day on each side. A bare "date_only" is refused: whether an item at

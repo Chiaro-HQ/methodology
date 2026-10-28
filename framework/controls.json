@@ -60,7 +60,7 @@
     "can_be_na": false,
     "na_trigger": "",
     "collection": {
-      "gating_question": "Does your organization have a governance body (such as a board of directors, advisory board, security committee, or leadership team) that meets to discuss security or risk topics, or an outside advisor who reviews them in writing? (Yes/No, informal arrangements count as yes)",
+      "gating_question": "Does your organization have a governance body (such as a board of directors, advisory board, security committee, or leadership team) that meets to discuss security or risk topics, an outside advisor who reviews them in writing, or, in a small owner-run company, an owner who reviews them in writing? (Yes/No, informal arrangements count as yes)",
       "absent_reason_template": "Entity does not have governance oversight practices in place. All attributes for this control marked absent. This is a structural gap requiring implementation.",
       "local_save": "governance/",
       "question": "Who provides oversight of your security and internal controls program, and how often do they meet or review it in writing?",
@@ -77,16 +77,16 @@
       "collection_playbook": {
         "evidence_goals": [
           "Pull documentation identifying the governance body and its defined oversight responsibilities for security and internal controls",
-          "Pull a roster or bios showing member expertise and at least one member or outside advisor independent from day to day management",
-          "Pull minutes or notes from the period's meetings, or the outside reviewer's dated written reviews, showing the security topics covered and decisions or action items recorded and tracked to closure"
+          "Pull a roster or bios showing member expertise and at least one member or outside advisor independent from day to day management, or, in a small owner-run company, a governance note naming the owner as the person who oversees security and internal controls",
+          "Pull minutes or notes from the period's meetings, or the outside reviewer's or the owner's dated written reviews, showing the security topics covered and decisions or action items recorded and tracked to closure"
         ],
-        "what_good_looks_like": "A charter or terms of reference naming the governance body and its security oversight duties, a roster showing member backgrounds and at least one member or outside advisor independent of daily operations, plus dated meeting minutes or written reviews where a security topic appears and action items are assigned and later followed up.",
-        "what_bad_looks_like": "A claim that leadership discusses security with no minutes, minutes with no security content, or a body with no identified expertise or independence from management.",
+        "what_good_looks_like": "A charter or terms of reference naming the governance body and its security oversight duties, a roster showing member backgrounds and at least one member or outside advisor independent of daily operations (or, in a small owner-run company, the owner named as overseeing security and internal controls), plus dated meeting minutes or written reviews where a security topic appears and action items are assigned and later followed up.",
+        "what_bad_looks_like": "A claim that leadership discusses security with no minutes, minutes with no security content, a body with no identified expertise or independence from management and no owner named to oversee security, or an owner's signature approving their own work with no review record.",
         "red_flags": [
           "No written minutes or notes for any meeting",
           "Security never appears on any agenda across the meetings",
           "Action items are recorded but never tracked to closure",
-          "Every member is part of daily management with no independent voice",
+          "Every member is part of daily management with no independent voice, outside a small owner-run company whose owner is named to oversee security and internal controls",
           "The body exists on paper but has not met or reviewed in writing within the last 12 months"
         ],
         "platform_hints": {
@@ -151,17 +151,17 @@
   "GOV-04": {
     "title": "Leadership & Advisor Oversight of Security",
     "category": "GOVERNANCE & ETHICS",
-    "description": "{company_name} reports security and compliance status to leadership, advisors, or investors on a recurring cadence, keeping someone independent of day-to-day engineering informed of the security program.",
+    "description": "{company_name} reports security and compliance status to leadership, advisors, or investors on a recurring cadence, keeping someone independent of day-to-day engineering, or in a small owner-run company the owner who oversees security, informed of the security program.",
     "criteria_mappings": [
       "CC1.2"
     ],
     "can_be_na": false,
     "na_trigger": "",
     "collection": {
-      "gating_question": "Does someone outside your day-to-day engineering work, such as a founder, an advisor, or your investors, receive updates on your security and compliance status on a regular basis? (Yes/No, informal updates count as yes)",
+      "gating_question": "Does someone outside your day-to-day engineering work (such as a founder, an advisor, or your investors), or, in a small owner-run company, the owner who oversees security, receive updates on your security and compliance status on a regular basis? (Yes/No, informal updates count as yes)",
       "absent_reason_template": "Entity does not have leadership and advisor oversight of security practices in place. All attributes for this control marked absent. This is a structural gap requiring implementation.",
       "local_save": "governance/",
-      "question": "Who outside of day-to-day engineering is kept informed about your security and compliance status, and how often?",
+      "question": "Who is kept informed about your security and compliance status (someone outside day-to-day engineering or, in a small owner-run company, the owner who oversees security), and how often?",
       "follow_ups": [
         "Is this a founder, a chief executive, an external advisor, an advisory board, or your investors?",
         "How often do they receive security or compliance updates (monthly, quarterly, alongside investor updates)?",

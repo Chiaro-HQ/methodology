@@ -1108,10 +1108,10 @@
     "attribute": "A6",
     "mode": "legacy",
     "id": "gov-02-a6-revision2-2",
-    "evidence_summary": "Solo founder: governance charter names only the founder; no outside reviewer.",
+    "evidence_summary": "Solo founder: governance charter names only the founder, with no review topics and no review frequency.",
     "ai_verdict": "gap",
     "correct_verdict": "gap",
-    "reasoning": "Authored boundary case for this requirement.",
+    "reasoning": "A note naming the owner with no topics or frequency fails.",
     "weight": 0.5,
     "source": "rewrite_1_1_0_batch1"
   },
@@ -1174,6 +1174,30 @@
     "reasoning": "The review frequency is longer than once a year, our audit's own minimum.",
     "weight": 0.5,
     "source": "words_batch2_2026_11"
+  },
+  {
+    "control": "GOV-02",
+    "attribute": "A6",
+    "mode": "legacy",
+    "id": "gov-02-a6-owner-route",
+    "evidence_summary": "Two-founder company where the CTO reports to the CEO, who also writes code: the governance note names the CEO as the reviewer, lists access, changes, incidents and vendors as the security and internal-control topics, and sets a yearly review.",
+    "ai_verdict": "gap",
+    "correct_verdict": "pass",
+    "reasoning": "Owner route: the note names the owner, the topics and the frequency.",
+    "weight": 0.5,
+    "source": "words_owner_oversight_d301_2026_10"
+  },
+  {
+    "control": "GOV-02",
+    "attribute": "A6",
+    "mode": "legacy",
+    "id": "gov-02-a6-owner-no-topics",
+    "evidence_summary": "Founder-run company with three employees: the governance note names the owner as the reviewer but lists no topics and no review frequency.",
+    "ai_verdict": "pass",
+    "correct_verdict": "gap",
+    "reasoning": "A note naming the owner with no topics or frequency fails.",
+    "weight": 0.5,
+    "source": "words_owner_oversight_d301_2026_10"
   },
   {
     "control": "GOV-02",
@@ -1249,6 +1273,30 @@
   },
   {
     "control": "GOV-02",
+    "attribute": "A3",
+    "mode": "legacy",
+    "id": "gov-02-a3-owner-named",
+    "evidence_summary": "Two-founder company: the CEO also writes code, and the CTO reports to the CEO. The governance note names the CEO as the person who oversees security and internal controls.",
+    "ai_verdict": "gap",
+    "correct_verdict": "pass",
+    "reasoning": "In a small owner-run company, governance records naming the owner as overseeing security and internal controls meet the owner route; the owner's reviews are judged by the review checks.",
+    "weight": 0.5,
+    "source": "words_owner_oversight_d301_2026_10"
+  },
+  {
+    "control": "GOV-02",
+    "attribute": "A3",
+    "mode": "legacy",
+    "id": "gov-02-a3-owner-signature-only",
+    "evidence_summary": "Founder-run company with three employees: the only governance record is the founder's signature approving the security policy; nothing names who oversees security and internal controls.",
+    "ai_verdict": "pass",
+    "correct_verdict": "gap",
+    "reasoning": "A signature or a statement of ownership alone does not pass.",
+    "weight": 0.5,
+    "source": "words_owner_oversight_d301_2026_10"
+  },
+  {
+    "control": "GOV-02",
     "attribute": "A7",
     "mode": "legacy",
     "id": "gov-02-a7-revision3-4",
@@ -1264,10 +1312,10 @@
     "attribute": "A7",
     "mode": "legacy",
     "id": "gov-02-a7-revision2-2",
-    "evidence_summary": "Solo founder sent an update; the outside advisor wrote no review.",
+    "evidence_summary": "Solo founder sent the outside advisor a short update; neither the advisor nor the founder wrote a review of security and internal controls.",
     "ai_verdict": "gap",
     "correct_verdict": "gap",
-    "reasoning": "Authored boundary case for this requirement.",
+    "reasoning": "Neither route has a written review.",
     "weight": 0.5,
     "source": "rewrite_1_1_0_batch1"
   },
@@ -1276,10 +1324,10 @@
     "attribute": "A7",
     "mode": "legacy",
     "id": "gov-02-a7-revision2-3",
-    "evidence_summary": "One-month-old company has an advisor agreement but no written outside review.",
+    "evidence_summary": "One-month-old company has an advisor agreement but no written review yet, by the advisor or by the owner.",
     "ai_verdict": "gap",
     "correct_verdict": "gap",
-    "reasoning": "Authored boundary case for this requirement.",
+    "reasoning": "The first review is required immediately on either route.",
     "weight": 0.5,
     "source": "rewrite_1_1_0_batch1"
   },
@@ -1342,6 +1390,30 @@
     "reasoning": "The yearly review is overdue.",
     "weight": 0.5,
     "source": "words_batch2_2026_11"
+  },
+  {
+    "control": "GOV-02",
+    "attribute": "A7",
+    "mode": "legacy",
+    "id": "gov-02-a7-owner-review",
+    "evidence_summary": "Two-founder company where the CTO reports to the CEO, who also writes code: the CEO's dated written review of security and internal controls names what was looked at (access, changes, incidents and vendors), the decisions made, who does what next, and what happened to the last review's to-dos.",
+    "ai_verdict": "gap",
+    "correct_verdict": "pass",
+    "reasoning": "Owner route: a dated review by the owner naming what was reviewed and the decisions and actions meets the check.",
+    "weight": 0.5,
+    "source": "words_owner_oversight_d301_2026_10"
+  },
+  {
+    "control": "GOV-02",
+    "attribute": "A7",
+    "mode": "legacy",
+    "id": "gov-02-a7-owner-self-approval",
+    "evidence_summary": "Founder-run company with three employees: the owner signed the quarter's access export and change log as approved; there is no written review of what was looked at or decided.",
+    "ai_verdict": "pass",
+    "correct_verdict": "gap",
+    "reasoning": "A signature approving your own work with no review record does not count.",
+    "weight": 0.5,
+    "source": "words_owner_oversight_d301_2026_10"
   },
   {
     "control": "GOV-02",
@@ -10638,6 +10710,28 @@
     "reasoning": "The attribute asks for a specific person or body outside day-to-day engineering who receives security information, and the note under the pass criteria already lists an external advisor or an investor for a very small company. A named advisor with a written cadence and a thread proving receipt is the proportionate design for a company of one; the absence of a non-technical co-founder or board is not a gap when that outside recipient exists.",
     "weight": 0.5,
     "source": "synthetic_taste_v1"
+  },
+  {
+    "control": "GOV-04",
+    "attribute": "A1",
+    "mode": "legacy",
+    "evidence_summary": "Two-founder company: the CEO also writes production code and oversees security; the CTO prepares a written security and compliance status each quarter and emails it to the CEO, shown by a dated thread over the past year.",
+    "ai_verdict": "gap",
+    "correct_verdict": "pass",
+    "reasoning": "In a small owner-run company the owner may be the recipient even when the owner also writes code, as long as someone else in the company prepares the status and reports it to the owner.",
+    "weight": 0.5,
+    "source": "words_owner_oversight_d301_2026_10"
+  },
+  {
+    "control": "GOV-04",
+    "attribute": "A1",
+    "mode": "legacy",
+    "evidence_summary": "A solo founder who writes all the production code names themselves as the recipient of the security and compliance updates they write; nobody else receives them.",
+    "ai_verdict": "pass",
+    "correct_verdict": "gap",
+    "reasoning": "A founder with nobody else in the company still needs one recipient outside day-to-day engineering; the only recipient is the person who prepared the report.",
+    "weight": 0.5,
+    "source": "words_owner_oversight_d301_2026_10"
   },
   {
     "control": "GOV-04",

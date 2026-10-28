@@ -49,7 +49,7 @@ anyone is reading this.
 
 ## The calibration examples
 
-The attributes carry 1004 worked examples of a
+The attributes carry 1012 worked examples of a
 judgment call between them, each recording a verdict an AI reached, the verdict
 that was correct, and why. They exist to calibrate judgment, and they are the part of this
 repository we would least like a competitor to have.
@@ -65,8 +65,8 @@ What is published here is the lesson: the distinction being drawn and the
 reasoning behind it. The companies, systems, numbers and people in the scenarios
 are not real and are not any client of ours.
 
-**Which way do they push?** 343 of them correct an AI that was too strict
-(it said gap, fail or unresolved where the answer is pass), and 215
+**Which way do they push?** 347 of them correct an AI that was too strict
+(it said gap, fail or unresolved where the answer is pass), and 219
 correct one that was too lenient (it said pass where the answer is gap or
 fail). We are publishing that ratio
 because anyone with the file can compute it, and because the honest reading is

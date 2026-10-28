@@ -2950,10 +2950,10 @@
       },
       {
         "id": "A6",
-        "text": "A founder-run company with fewer than five employees documents a named outside reviewer, the security and internal-control topics reviewed, and a review frequency the company sets, at least once a year (our audit's own minimum).",
+        "text": "A founder-run company with fewer than five employees documents who reviews security and internal controls (a named outside reviewer, or the owner), the topics reviewed, and a review frequency the company sets, at least once a year (our audit's own minimum).",
         "attr_type": "document",
-        "typical_evidence": "What counts here: an outside-reviewer agreement or a short governance note that names one person outside the company as the reviewer, the security and internal-control topics they review, and a review frequency the company sets, at least once a year (our audit's own minimum). An outside advisor is enough, with no board seat or equity; an independent board member counts too. Someone inside the company does not count here, even when kept apart from technical operations, and neither does the SOC 2 examination. One person can cover A3, A6 and A7 in this control and the independent evaluation check if they are independent of day-to-day management, do not build or run your systems, and are not responsible for the controls they evaluate. Evidence must meet each check's own requirements. If no one is named yet, this check stays open; move on to the other checks.",
-        "pass_criteria": "The reviewer may be an independent board member or advisor; titles and roster placement do not change the requirement. Readiness/Type I: current document. Type II: versions effective during the period.",
+        "typical_evidence": "A short governance note covers it: who reviews (an outside advisor or independent board member, or the owner), the security and internal-control topics, and how often, at least once a year (our audit's own minimum). Someone else inside the company does not count as an outside reviewer, and neither does the SOC 2 examination. If the outside route is used, one person can also cover the other independence checks, as long as they do not build or run your systems.",
+        "pass_criteria": "Outside route: the reviewer may be an independent board member or advisor; titles and roster placement do not change that. Owner route: the note names the owner, the topics and the frequency. A note naming the owner with no topics or frequency fails. Readiness/Type I: current document. Type II: versions effective during the period.",
         "na_condition": "",
         "can_be_na": false,
         "calibration_examples": [
@@ -2968,10 +2968,10 @@
           },
           {
             "id": "gov-02-a6-revision2-2",
-            "evidence_summary": "Solo founder: governance charter names only the founder; no outside reviewer.",
+            "evidence_summary": "Solo founder: governance charter names only the founder, with no review topics and no review frequency.",
             "ai_verdict": "gap",
             "correct_verdict": "gap",
-            "reasoning": "Authored boundary case for this requirement.",
+            "reasoning": "A note naming the owner with no topics or frequency fails.",
             "weight": 0.5,
             "source": "rewrite_1_1_0_batch1"
           },
@@ -3019,13 +3019,31 @@
             "reasoning": "The review frequency is longer than once a year, our audit's own minimum.",
             "weight": 0.5,
             "source": "words_batch2_2026_11"
+          },
+          {
+            "id": "gov-02-a6-owner-route",
+            "evidence_summary": "Two-founder company where the CTO reports to the CEO, who also writes code: the governance note names the CEO as the reviewer, lists access, changes, incidents and vendors as the security and internal-control topics, and sets a yearly review.",
+            "ai_verdict": "gap",
+            "correct_verdict": "pass",
+            "reasoning": "Owner route: the note names the owner, the topics and the frequency.",
+            "weight": 0.5,
+            "source": "words_owner_oversight_d301_2026_10"
+          },
+          {
+            "id": "gov-02-a6-owner-no-topics",
+            "evidence_summary": "Founder-run company with three employees: the governance note names the owner as the reviewer but lists no topics and no review frequency.",
+            "ai_verdict": "pass",
+            "correct_verdict": "gap",
+            "reasoning": "A note naming the owner with no topics or frequency fails.",
+            "weight": 0.5,
+            "source": "words_owner_oversight_d301_2026_10"
           }
         ],
         "collection_hint": {
           "coverage_checks": [
             {
               "id": "governance_body_named",
-              "question": "Where this founder arrangement applies, does the record name the outside reviewer and define security and internal-control topics with a review frequency the company sets, at least once a year?",
+              "question": "Where this founder arrangement applies, does the record name who reviews (the outside reviewer, or the owner) and define security and internal-control topics with a review frequency the company sets, at least once a year?",
               "lane": "document",
               "alt_lanes": [
                 "record"
@@ -3045,7 +3063,7 @@
           },
           {
             "id": "gov-02-a6-revision2-2",
-            "scenario": "Solo founder: governance charter names only the founder; no outside reviewer.",
+            "scenario": "Solo founder: governance charter names only the founder, with no review topics and no review frequency.",
             "expect": "fail",
             "exercises": "R6:GOV-02/A1"
           },
@@ -3072,6 +3090,16 @@
           {
             "id": "gov-02-a6-two-yearly",
             "scenario": "Solo founder: agreement names an outside advisor and security and internal-control topics, and requires written reviews every two years.",
+            "expect": "fail"
+          },
+          {
+            "id": "gov-02-a6-owner-route",
+            "scenario": "Two-founder company where the CTO reports to the CEO, who also writes code: the governance note names the CEO as the reviewer, lists access, changes, incidents and vendors as the security and internal-control topics, and sets a yearly review.",
+            "expect": "pass"
+          },
+          {
+            "id": "gov-02-a6-owner-no-topics",
+            "scenario": "Founder-run company with three employees: the governance note names the owner as the reviewer but lists no topics and no review frequency.",
             "expect": "fail"
           }
         ],
@@ -3152,10 +3180,10 @@
       },
       {
         "id": "A3",
-        "text": "Governance records name a member or advisor independent of day-to-day management.",
+        "text": "Governance records name a member or advisor independent of day-to-day management, or, in a small owner-run company, name the owner as the person who oversees security and internal controls.",
         "attr_type": "document",
-        "typical_evidence": "What counts here, and both are needed: your governance records name a person who is independent of day to day work, and there is a short written note of what their role is. A signed advisory agreement naming an outside security advisor is enough. No board seat and no equity are needed, and a title does not decide it: someone who builds or runs your systems is not independent, whatever they are called. One outside person may cover both this check and the independent evaluation check, as long as they do not build or run your systems. The written security update itself, the first one and how often it repeats, is asked by the other governance checks in this control, not by this one, so a named advisor with a written role settles this check on its own. Record why the person is competent and why this arrangement fits you. This check does not have to close for readiness to finish.",
-        "pass_criteria": "Readiness/Type I: current document. Type II: versions effective during the period.",
+        "typical_evidence": "Either route works. Outside route: an agreement or governance note names an advisor or board member who does not build or run your systems, with a short written role; no board seat or equity is needed. Owner route: in a small company its founders own and run, a governance note names the owner as the person who oversees security and internal controls. The owner's dated reviews are asked by the review checks in this control. A note saying the founder approves everything, with no review records, does not count. Record why the person is competent. This check does not have to close for readiness to finish.",
+        "pass_criteria": "PASS on either route. Outside route: a named member or advisor independent of day-to-day management, with a written role. Owner route: in a small owner-run company, the governance records name the owner as overseeing security and internal controls. A signature or a statement of ownership alone does not pass. The auditor judges at the examination whether the owner's oversight is enough for the company. Readiness/Type I: current document. Type II: versions effective during the period.",
         "na_condition": "",
         "can_be_na": false,
         "calibration_examples": [
@@ -3194,13 +3222,31 @@
             "reasoning": "Authored regression case for actual Fable round2 feedback.",
             "weight": 0.5,
             "source": "rewrite_1_1_0_batch1"
+          },
+          {
+            "id": "gov-02-a3-owner-named",
+            "evidence_summary": "Two-founder company: the CEO also writes code, and the CTO reports to the CEO. The governance note names the CEO as the person who oversees security and internal controls.",
+            "ai_verdict": "gap",
+            "correct_verdict": "pass",
+            "reasoning": "In a small owner-run company, governance records naming the owner as overseeing security and internal controls meet the owner route; the owner's reviews are judged by the review checks.",
+            "weight": 0.5,
+            "source": "words_owner_oversight_d301_2026_10"
+          },
+          {
+            "id": "gov-02-a3-owner-signature-only",
+            "evidence_summary": "Founder-run company with three employees: the only governance record is the founder's signature approving the security policy; nothing names who oversees security and internal controls.",
+            "ai_verdict": "pass",
+            "correct_verdict": "gap",
+            "reasoning": "A signature or a statement of ownership alone does not pass.",
+            "weight": 0.5,
+            "source": "words_owner_oversight_d301_2026_10"
           }
         ],
         "collection_hint": {
           "coverage_checks": [
             {
               "id": "members_and_roles_shown",
-              "question": "Do governance records identify the member or advisor and their role?",
+              "question": "Do governance records identify the member or advisor and their role, or, in a small owner-run company, name the owner as the person who oversees security and internal controls?",
               "lane": "document",
               "alt_lanes": [
                 "record"
@@ -3211,7 +3257,7 @@
             },
             {
               "id": "at_least_one_independent",
-              "question": "Is at least one named member or advisor independent of day-to-day management?",
+              "question": "Is at least one named member or advisor independent of day-to-day management, or, in a small owner-run company, do the governance records name the owner as overseeing security and internal controls?",
               "lane": "document",
               "alt_lanes": [
                 "record"
@@ -3242,16 +3288,26 @@
             "id": "gov-02-a3-revision3-1",
             "scenario": "Stock purchase agreement names an outside investor as a board member with no operational role; it does not assign security duties.",
             "expect": "pass"
+          },
+          {
+            "id": "gov-02-a3-owner-named",
+            "scenario": "Two-founder company: the CEO also writes code, and the CTO reports to the CEO. The governance note names the CEO as the person who oversees security and internal controls.",
+            "expect": "pass"
+          },
+          {
+            "id": "gov-02-a3-owner-signature-only",
+            "scenario": "Founder-run company with three employees: the only governance record is the founder's signature approving the security policy; nothing names who oversees security and internal controls.",
+            "expect": "fail"
           }
         ],
         "criteria_contract": "text_primary_v1"
       },
       {
         "id": "A7",
-        "text": "A founder-run company with fewer than five employees has a written independent review of security and internal controls by its named outside reviewer, with the first review required immediately and further reviews on the cycle the company sets, at least once a year (our audit's own minimum).",
+        "text": "A founder-run company with fewer than five employees has a written review of security and internal controls by its named outside reviewer or by the owner, with the first review required immediately and further reviews on the cycle the company sets, at least once a year (our audit's own minimum).",
         "attr_type": "sample",
-        "typical_evidence": "What counts here: a dated written review of security and internal controls by the outside reviewer named for A6. Readiness and Type I need the latest required review, which at the start is the first one; further reviews follow on the cycle the company sets, at least once a year (our audit's own minimum). The reviewer is one person outside the company: an outside advisor is enough, with no board seat or equity, and an independent board member counts too. Someone inside the company does not count here, even when kept apart from technical operations, and neither does the SOC 2 examination. One person can cover A3, A6 and A7 in this control and the independent evaluation check if they are independent of day-to-day management, do not build or run your systems, and are not responsible for the controls they evaluate. Evidence must meet each check's own requirements. If no one is named yet, this check stays open; move on to the other checks.",
-        "pass_criteria": "Readiness and Type I: the latest required outside review. Type II: every required review in the period; audit deviations follow Type II assessment rules.",
+        "typical_evidence": "A dated written review of security and internal controls. Outside route: written by the reviewer named in the governance note. Owner route: written by the owner, saying what was looked at (for example access, changes, incidents, vendors and open problems), what was decided, and who does what next, or that nothing needed action. A signature approving your own work with no review record does not count. Readiness and Type I need the latest required review, which at the start is the first one; further reviews follow the company's cycle, at least once a year (our audit's own minimum).",
+        "pass_criteria": "Readiness and Type I: the latest required review, by the outside reviewer or by the owner, dated, naming what was reviewed and the decisions and actions, or that none arose. Type II: every required review in the period; audit deviations follow Type II assessment rules. The auditor judges at the examination whether owner oversight is enough for the company.",
         "na_condition": "",
         "can_be_na": false,
         "calibration_examples": [
@@ -3266,19 +3322,19 @@
           },
           {
             "id": "gov-02-a7-revision2-2",
-            "evidence_summary": "Solo founder sent an update; the outside advisor wrote no review.",
+            "evidence_summary": "Solo founder sent the outside advisor a short update; neither the advisor nor the founder wrote a review of security and internal controls.",
             "ai_verdict": "gap",
             "correct_verdict": "gap",
-            "reasoning": "Authored boundary case for this requirement.",
+            "reasoning": "Neither route has a written review.",
             "weight": 0.5,
             "source": "rewrite_1_1_0_batch1"
           },
           {
             "id": "gov-02-a7-revision2-3",
-            "evidence_summary": "One-month-old company has an advisor agreement but no written outside review.",
+            "evidence_summary": "One-month-old company has an advisor agreement but no written review yet, by the advisor or by the owner.",
             "ai_verdict": "gap",
             "correct_verdict": "gap",
-            "reasoning": "Authored boundary case for this requirement.",
+            "reasoning": "The first review is required immediately on either route.",
             "weight": 0.5,
             "source": "rewrite_1_1_0_batch1"
           },
@@ -3326,13 +3382,31 @@
             "reasoning": "The yearly review is overdue.",
             "weight": 0.5,
             "source": "words_batch2_2026_11"
+          },
+          {
+            "id": "gov-02-a7-owner-review",
+            "evidence_summary": "Two-founder company where the CTO reports to the CEO, who also writes code: the CEO's dated written review of security and internal controls names what was looked at (access, changes, incidents and vendors), the decisions made, who does what next, and what happened to the last review's to-dos.",
+            "ai_verdict": "gap",
+            "correct_verdict": "pass",
+            "reasoning": "Owner route: a dated review by the owner naming what was reviewed and the decisions and actions meets the check.",
+            "weight": 0.5,
+            "source": "words_owner_oversight_d301_2026_10"
+          },
+          {
+            "id": "gov-02-a7-owner-self-approval",
+            "evidence_summary": "Founder-run company with three employees: the owner signed the quarter's access export and change log as approved; there is no written review of what was looked at or decided.",
+            "ai_verdict": "pass",
+            "correct_verdict": "gap",
+            "reasoning": "A signature approving your own work with no review record does not count.",
+            "weight": 0.5,
+            "source": "words_owner_oversight_d301_2026_10"
           }
         ],
         "collection_hint": {
           "coverage_checks": [
             {
               "id": "members_and_roles_shown",
-              "question": "Where this founder arrangement applies, are current written security and internal-control reviews by the named outside reviewer provided?",
+              "question": "Where this founder arrangement applies, is the latest required dated written review of security and internal controls, by the named outside reviewer or by the owner, provided, naming what was reviewed and the decisions and actions, or that none arose?",
               "lane": "record",
               "alt_lanes": [
                 "export",
@@ -3343,6 +3417,10 @@
               "command_ref": "",
               "evidence_strength": "record"
             }
+          ],
+          "accepted_oversight_routes": [
+            "independent_reviewer",
+            "evidenced_owner_oversight_v1"
           ]
         },
         "implements_flag": "GOV-02/A3",
@@ -3354,13 +3432,13 @@
           },
           {
             "id": "gov-02-a7-revision2-2",
-            "scenario": "Solo founder sent an update; the outside advisor wrote no review.",
+            "scenario": "Solo founder sent the outside advisor a short update; neither the advisor nor the founder wrote a review of security and internal controls.",
             "expect": "fail",
             "exercises": "R6:GOV-02/A3"
           },
           {
             "id": "gov-02-a7-revision2-3",
-            "scenario": "One-month-old company has an advisor agreement but no written outside review.",
+            "scenario": "One-month-old company has an advisor agreement but no written review yet, by the advisor or by the owner.",
             "expect": "fail",
             "exercises": "R7:young"
           },
@@ -3387,6 +3465,16 @@
           {
             "id": "gov-02-a7-yearly-overdue",
             "scenario": "Founder-run company with three employees: the outside reviewer last reviewed security and internal controls fourteen months ago under an annual review policy.",
+            "expect": "fail"
+          },
+          {
+            "id": "gov-02-a7-owner-review",
+            "scenario": "Two-founder company where the CTO reports to the CEO, who also writes code: the CEO's dated written review of security and internal controls names what was looked at (access, changes, incidents and vendors), the decisions made, who does what next, and what happened to the last review's to-dos.",
+            "expect": "pass"
+          },
+          {
+            "id": "gov-02-a7-owner-self-approval",
+            "scenario": "Founder-run company with three employees: the owner signed the quarter's access export and change log as approved; there is no written review of what was looked at or decided.",
             "expect": "fail"
           }
         ],
@@ -29007,10 +29095,10 @@
     "attributes": [
       {
         "id": "A1",
-        "text": "A person or body independent of day-to-day engineering is identified as a recipient of security and compliance information",
+        "text": "A person or body is identified as the recipient of security and compliance information: someone independent of day-to-day engineering or, in a small owner-run company, the owner who oversees security.",
         "attr_type": "document",
-        "typical_evidence": "Organization description, advisor engagement letter, or the distribution list of a recurring update identifying who outside engineering receives security information",
-        "pass_criteria": "PASS: Evidence such as an organization description, an advisor or board engagement letter, or the distribution list of a recurring update names a specific person or body outside day-to-day engineering who receives security and compliance information. FAIL: No recipient of security information is identified, or the only recipients are the engineers who run the systems. NOTE: In a very small company the independent recipient may be a founder or chief executive who does not write production code, an external advisor, an advisory board, or an investor.",
+        "typical_evidence": "Organization description, advisor engagement letter, or the distribution list of a recurring update identifying who outside engineering receives security information, or, in a small owner-run company, the security and compliance status a co-founder, CTO or staff member prepares and reports to the owner",
+        "pass_criteria": "PASS: Evidence such as an organization description, an advisor or board engagement letter, or the distribution list of a recurring update names a specific person or body outside day-to-day engineering, or the owner under the OWNER ROUTE below, who receives security and compliance information. FAIL: No recipient of security information is identified, or the only recipients are the engineers who run the systems, other than an owner who meets the OWNER ROUTE below. NOTE: In a very small company the recipient may be a founder or chief executive who does not write production code, an external advisor, an advisory board, or an investor. OWNER ROUTE: in a small owner-run company, the owner may be the recipient even when the owner also writes code, as long as someone else in the company (a co-founder, CTO or staff member) prepares the security and compliance status and reports it to the owner. A founder with nobody else in the company still needs one recipient outside day-to-day engineering. FAIL if the only recipient is the person who prepared the report.",
         "na_condition": "",
         "can_be_na": false,
         "calibration_examples": [
@@ -29029,6 +29117,22 @@
             "reasoning": "The attribute asks for a specific person or body outside day-to-day engineering who receives security information, and the note under the pass criteria already lists an external advisor or an investor for a very small company. A named advisor with a written cadence and a thread proving receipt is the proportionate design for a company of one; the absence of a non-technical co-founder or board is not a gap when that outside recipient exists.",
             "weight": 0.5,
             "source": "synthetic_taste_v1"
+          },
+          {
+            "evidence_summary": "Two-founder company: the CEO also writes production code and oversees security; the CTO prepares a written security and compliance status each quarter and emails it to the CEO, shown by a dated thread over the past year.",
+            "ai_verdict": "gap",
+            "correct_verdict": "pass",
+            "reasoning": "In a small owner-run company the owner may be the recipient even when the owner also writes code, as long as someone else in the company prepares the status and reports it to the owner.",
+            "weight": 0.5,
+            "source": "words_owner_oversight_d301_2026_10"
+          },
+          {
+            "evidence_summary": "A solo founder who writes all the production code names themselves as the recipient of the security and compliance updates they write; nobody else receives them.",
+            "ai_verdict": "pass",
+            "correct_verdict": "gap",
+            "reasoning": "A founder with nobody else in the company still needs one recipient outside day-to-day engineering; the only recipient is the person who prepared the report.",
+            "weight": 0.5,
+            "source": "words_owner_oversight_d301_2026_10"
           }
         ],
         "collection_hint": {
@@ -29046,7 +29150,7 @@
             },
             {
               "id": "recipient_independent_of_engineering",
-              "question": "Does that recipient sit outside day-to-day engineering work (for example a founder not writing production code, an advisor, a board, or an investor)?",
+              "question": "Does that recipient sit outside day-to-day engineering work (for example a founder not writing production code, an advisor, a board, or an investor), or, in a small owner-run company, is it the owner who oversees security, receiving a status someone else in the company prepared?",
               "lane": "document",
               "alt_lanes": [
                 "record"
