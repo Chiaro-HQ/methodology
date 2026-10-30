@@ -5,6 +5,38 @@ applied to an examination. Corrections that do not change the method (typos,
 formatting, clearer wording with the same meaning) ship without a version, and
 the commit history on this repo records every one of them.
 
+## v1.16, 2026-10-30
+
+The same 89 controls and 387 checks, with changes to 8 checks and 3 controls.
+
+- Written evidence: where a check's pass criteria already accept a written
+  document as a passing route, the check's coverage now accepts that document
+  too (the `document` lane in `framework/test_attributes.json`). This applies
+  to a documented capacity expansion procedure with trigger criteria and
+  expansion steps (AVL-01 A3), an acceptable use policy that governs removable
+  media (END-02 A3), a document listing the vendors whose controls the product
+  depends on, with their control areas (VND-02 A1), a vendor inventory
+  document with a risk tier for each vendor (VND-01 A1), a documented
+  request-based correction process (PRI-05 A3), a documented and maintained
+  list of external access points (NET-02 A3), a document describing how
+  personal information is kept accurate and complete, including validation at
+  collection and how data subjects update their information (PRI-09 A1), and a
+  document accessible to customers that lists their responsibilities, such as
+  a contract clause (COM-01 A3). Every kind of evidence each check accepted
+  before is still accepted, and the pass and fail criteria are unchanged.
+- Seven coverage questions now ask what their check's pass criteria ask
+  (AVL-01 A3, END-02 A3, NET-02 A3, PRI-05 A3, PRI-09 A1 twice and COM-01 A3):
+  four named only the system configuration, and three had been cut off
+  mid-phrase. PRI-05 A3's now also asks whether corrections reach third
+  parties that were given the data.
+- Collection guidance in `framework/controls.json`: AVL-01's names the
+  documented capacity expansion procedure where capacity is expanded by hand,
+  END-02's names the acceptable use policy where no device management enforces
+  it, and PRI-09's names the request-based correction process beside the
+  self-service path. PRI-09's description of what good looks like now names a
+  documented periodic review process, with dated records once reviews have run
+  and, for a company under a year old, its first review scheduled.
+
 ## v1.15, 2026-10-28
 
 The same 89 controls and 387 checks, with changes to 4 checks and 2 controls,

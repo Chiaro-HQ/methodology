@@ -11777,10 +11777,11 @@
             },
             {
               "id": "available_customers",
-              "question": "Does the evidence show that available to customers?",
+              "question": "Is the document listing customer responsibilities accessible to customers (a contract clause, trust page, shared responsibility model, or documentation site)?",
               "lane": "screenshot",
               "alt_lanes": [
-                "export"
+                "export",
+                "document"
               ],
               "corroboration_required": true,
               "command_ref": "",
@@ -16134,10 +16135,11 @@
           "coverage_checks": [
             {
               "id": "external_access_points_inventoried",
-              "question": "Does the system configuration show that external access points are inventoried?",
+              "question": "Is a list of the external access points (public-facing endpoints, domains, IP addresses) documented and maintained?",
               "lane": "export",
               "alt_lanes": [
-                "screenshot"
+                "screenshot",
+                "document"
               ],
               "corroboration_required": true,
               "command_ref": "",
@@ -17510,11 +17512,12 @@
           "coverage_checks": [
             {
               "id": "removable_media_usage_restricted",
-              "question": "Does the system configuration show that removable media usage is restricted or governed by policy?",
+              "question": "Does the system configuration show that removable media usage is restricted, or does an acceptable use policy govern removable media usage?",
               "lane": "auto_pull",
               "alt_lanes": [
                 "screenshot",
-                "export"
+                "export",
+                "document"
               ],
               "corroboration_required": true,
               "command_ref": "mdm_usb_restriction_config",
@@ -22098,7 +22101,8 @@
               "question": "Does the evidence show that vendor inventory is maintained with risk tiering?",
               "lane": "export",
               "alt_lanes": [
-                "screenshot"
+                "screenshot",
+                "document"
               ],
               "corroboration_required": true,
               "command_ref": "",
@@ -22562,7 +22566,8 @@
               "question": "Does the evidence include a list of vendors whose controls the product depends on?",
               "lane": "export",
               "alt_lanes": [
-                "screenshot"
+                "screenshot",
+                "document"
               ],
               "corroboration_required": true,
               "command_ref": "",
@@ -22573,7 +22578,8 @@
               "question": "Are the dependent vendors named with their relevant control areas?",
               "lane": "export",
               "alt_lanes": [
-                "screenshot"
+                "screenshot",
+                "document"
               ],
               "corroboration_required": true,
               "command_ref": "",
@@ -23185,11 +23191,12 @@
           "coverage_checks": [
             {
               "id": "capacity_scaled_expanded_when",
-              "question": "Does the system configuration show that capacity is scaled or expanded when usage approaches tolerances?",
+              "question": "Does the system configuration show that capacity is scaled or expanded when usage approaches tolerances, or does a documented capacity expansion procedure describe the trigger criteria and expansion steps?",
               "lane": "record",
               "alt_lanes": [
                 "export",
-                "screenshot"
+                "screenshot",
+                "document"
               ],
               "corroboration_required": true,
               "command_ref": "",
@@ -25498,11 +25505,12 @@
           "coverage_checks": [
             {
               "id": "data_subjects_can_update",
-              "question": "Does the system configuration show that data subjects can update or correct their personal information through self-service or request?",
+              "question": "Does the system configuration show that data subjects can update or correct their personal information through self-service, or does a documented request-based correction process describe how they can ask, and are corrections propagated to third parties previously provided the data?",
               "lane": "record",
               "alt_lanes": [
                 "export",
-                "screenshot"
+                "screenshot",
+                "document"
               ],
               "corroboration_required": true,
               "command_ref": "",
@@ -26225,10 +26233,11 @@
             },
             {
               "id": "completeness_validation_at_collection",
-              "question": "Does the evidence show that completeness (validation at collection?",
+              "question": "Does the evidence show data validation at the points where personal information is collected?",
               "lane": "screenshot",
               "alt_lanes": [
-                "export"
+                "export",
+                "document"
               ],
               "corroboration_required": true,
               "command_ref": "",
@@ -26236,10 +26245,11 @@
             },
             {
               "id": "self_service_updates",
-              "question": "Does the evidence show that self-service updates)?",
+              "question": "Does the evidence show a mechanism for data subjects to update their information, self-service or request-based?",
               "lane": "screenshot",
               "alt_lanes": [
-                "export"
+                "export",
+                "document"
               ],
               "corroboration_required": true,
               "command_ref": "",

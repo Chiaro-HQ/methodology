@@ -2498,7 +2498,7 @@
         "evidence_goals": [
           "Pull software installation restrictions for production systems",
           "Pull list of production admin accounts with justification",
-          "Pull removable media usage policy enforcement configuration"
+          "Pull removable media usage policy enforcement configuration, or, where no device management enforces it, the acceptable use policy that governs removable media usage"
         ],
         "what_good_looks_like": "Config showing who can install software on production. Per-user list of production admin accounts with documented need. Removable media restriction settings.",
         "what_bad_looks_like": "Statement that installation is restricted without showing config. Admin list without justification for each account.",
@@ -4335,7 +4335,7 @@
         "evidence_goals": [
           "Pull capacity monitoring configuration for production systems (CPU, memory, disk, network)",
           "Pull alert or threshold configuration for capacity metrics",
-          "Pull auto-scaling or capacity expansion configuration"
+          "Pull auto-scaling or capacity expansion configuration, or, where capacity is expanded by hand, the documented capacity expansion procedure with its trigger criteria and expansion steps"
         ],
         "what_good_looks_like": "Raw monitoring config showing which metrics are tracked, what thresholds trigger alerts, and whether auto-scaling is configured. Actual settings and values.",
         "what_bad_looks_like": "Statement that monitoring is in place without showing config. Dashboard screenshot without underlying settings.",
@@ -5050,11 +5050,11 @@
       "evidence_commands": [],
       "collection_playbook": {
         "evidence_goals": [
-          "Pull the data quality controls documentation showing validation applied at collection and the self-service capability for data subjects to view and correct their own information",
+          "Pull the data quality controls documentation showing validation applied at collection and the self-service capability or request-based process for data subjects to view and correct their own information",
           "Pull dated records of periodic data relevance or retention reviews showing that personal information no longer needed for the stated purposes is identified and removed",
-          "Pull a walkthrough or screenshot of the product path where a data subject updates or corrects their own information"
+          "Pull a walkthrough or screenshot of the product path where a data subject updates or corrects their own information, or, where corrections are made on request, the documented request process"
         ],
-        "what_good_looks_like": "Documentation of validation at collection plus a working self-service update path for data subjects, backed by dated records of periodic reviews that identified and removed personal information no longer relevant to the stated purposes.",
+        "what_good_looks_like": "Documentation of validation at collection plus a working self-service update path or a documented request-based correction process for data subjects, and a documented periodic review process that removes or archives personal information no longer relevant to the stated purposes, backed by dated records of the reviews once they have run (for a company under a year old, its first review scheduled).",
         "what_bad_looks_like": "A claim that data is kept accurate with no evidence of validation rules, no user-facing correction path, and no record that any relevance or retention review actually happened.",
         "red_flags": [
           "No validation at collection, so any value is accepted for emails, identifiers, or key fields",
