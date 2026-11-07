@@ -10570,7 +10570,7 @@
     "evidence_summary": "Every hosted-model call in the codebase routes through a single internal llm_client wrapper that strips flagged fields (secrets, full card numbers) before the provider SDK call; a grep confirms no direct SDK imports on any other path, but no branded commercial AI-gateway product is deployed.",
     "ai_verdict": "gap",
     "correct_verdict": "pass",
-    "reasoning": "An enforced redaction layer in the entity's own middleware satisfies the technical-control requirement regardless of whether a branded AI-gateway product is used. The pass criteria accept source code or middleware showing payloads pass through a redaction filter with all provider calls routed through it, which the wrapper plus the clean grep demonstrate.",
+    "reasoning": "An enforced redaction layer in the entity's own middleware satisfies the technical-control requirement regardless of whether a branded AI-gateway product is used. The pass criteria accept source code or middleware showing payloads pass through a redaction filter on every provider call path, which the wrapper plus the clean grep demonstrate.",
     "weight": 0.5,
     "source": "synthetic_taste_v1"
   },
@@ -10581,9 +10581,31 @@
     "evidence_summary": "The codebase contains a comment reading '// TODO: redact PII before AI call' next to the provider SDK call, cited as evidence of an enforced redaction step, but no redaction function is actually implemented or wired into that call path.",
     "ai_verdict": "pass",
     "correct_verdict": "gap",
-    "reasoning": "A planned or commented intention is not an enforced technical control. The attribute requires a working filter or allowlist that payloads actually pass through, not a note describing what should happen.",
+    "reasoning": "A planned or commented intention is not an enforced technical control. The attribute requires a working control in the code path (a filter, an allowlist, or payloads built only from permitted fields), not a note describing what should happen.",
     "weight": 0.5,
     "source": "synthetic_taste_v1"
+  },
+  {
+    "control": "AI-03",
+    "attribute": "A2",
+    "mode": "legacy",
+    "evidence_summary": "No shared filter or gateway sits in front of the model provider. The product reads documents its customers upload, and a search of the codebase lists three places that call the provider: extracting fields, classifying the document and drafting a summary. Each builds its request from that customer's own uploaded document and the fields the task needs, and reads nothing else. The written rule names a customer's own uploaded documents, as uploaded, as data that may go to the listed provider when reading them is the service; what it excludes is the company's own credentials and keys and any other customer's data, and none of the three calls reads either.",
+    "ai_verdict": "gap",
+    "correct_verdict": "pass",
+    "reasoning": "Each request is built only from data the written rule permits, an allowlist by construction, and every provider call path is listed and covered, so the boundary is enforced on every path. A shared filter or gateway is one way to enforce it, and requests built per call from permitted data are another. A whole document is within the boundary here because the rule names the customer's own documents as permitted data; had the rule excluded something such documents can contain, sending them whole would not be.",
+    "weight": 0.5,
+    "source": "words_batch3_2026_11"
+  },
+  {
+    "control": "AI-03",
+    "attribute": "A2",
+    "mode": "legacy",
+    "evidence_summary": "No shared filter sits in front of the model provider. A search of the codebase lists four places that call the provider; three build their requests from the customer's uploaded document and the fields the task needs, and the fourth, a debugging helper, sends the whole account record, including its stored integration tokens, which the written rule excludes.",
+    "ai_verdict": "pass",
+    "correct_verdict": "gap",
+    "reasoning": "Every provider call path has to be covered. Three payloads are built only from permitted fields, but the fourth can carry an excluded category with nothing in its code path keeping it out, so the boundary is not enforced on that path.",
+    "weight": 0.5,
+    "source": "words_batch3_2026_11"
   },
   {
     "control": "AI-03",

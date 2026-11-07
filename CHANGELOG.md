@@ -5,6 +5,94 @@ applied to an examination. Corrections that do not change the method (typos,
 formatting, clearer wording with the same meaning) ship without a version, and
 the commit history on this repo records every one of them.
 
+## v1.17, 2026-11-07
+
+The same 89 controls and 387 checks, with changes to 1 check and 1 control,
+2 more worked examples, and changes to 11 tools and the collection rules.
+
+- Data sent to AI providers (AI-03 A2): the check passes when payloads to
+  hosted model providers can carry only the categories the written rule
+  permits, on every provider call path. A path is covered by a redaction or
+  allowlist step, or because the code that builds its payloads draws only on
+  permitted fields (an allowlist by construction), so the calls need not
+  share one filter or gateway. A path that bypasses a filter fails only when
+  its payloads can carry excluded categories. Both coverage questions and
+  the help text say the same, and the second takes either way of showing
+  it: every call going through a filter or gateway, or a search of the
+  codebase listing every place the code calls a model provider, each one
+  covered. The check's two earlier worked examples reason the same way.
+- AI-03's collection guidance in `framework/controls.json` (what good looks
+  like, two evidence goals, a red flag, the Cloudflare and GitHub hints and
+  one evidence command's description) follows the same reading. It also
+  names accepted business terms, beside provider settings and a signed or
+  executed agreement, as showing that submitted data is excluded from
+  training.
+- Worked examples grow from 1012 to 1014. 348 of them correct an AI that was
+  too strict and 220 one that was too lenient. The two new ones are on AI-03
+  A2: requests built per call from permitted data, with every call place
+  listed, pass with no shared filter, and a call place whose payload can
+  carry excluded data is a gap.
+- Type I hand-off: once the AI has done all it can, checks the client is
+  still working on go along at hand-off as still open, never as gaps.
+  `complete_step` takes them in `still_open`, each with one short line on
+  what is coming, written from what the AI already knows. A check that
+  passed readiness with a file on record that meets what it still needs is
+  not one of them: that file is submitted first, unless it is no longer on
+  the computer or no longer shows what the check needs. The corroboration
+  floor and the progress rules in `method/collection-rules.md` say the
+  same. When `complete_step` refuses, the AI first submits any file already
+  on record that the refusal names, and uses `mark_gap` only when the user
+  confirms an item cannot be produced. On an audit, `complete_step` also
+  needs the audit's own scope confirmed (`confirm_scope`).
+- Scoping: `add_system` takes two answers about each system, each with what
+  the AI looked at: whether it keeps or processes the company's customers'
+  data, and whether a few hours of outage would stop the company serving
+  its customers. Before a readiness account's first scope confirmation,
+  `confirm_scope` asks the client both as two questions over their systems,
+  with the AI's picks pre-selected from the company's code, config and
+  accounts, and the answers decide each system's classification: customer
+  data makes it a Critical Dependency, no customer data with the product
+  not relying on it makes it Not in Scope, and an In Scope system keeps its
+  classification. After that confirmation, and on an audit, the answers are
+  recorded and the classification changes only through `reclassify_system`.
+  `get_scoping_guidance` leaves out a question the company's saved answers
+  about the system already settle, and returns the saved answer instead.
+- Checks that cannot apply, and checks that are stuck: `report_problem`
+  takes two kinds of request beside a problem report. `not_applicable`
+  names every check one fact about the company rules out (code checks at a
+  company that writes no software of its own, say), with the fact, what was
+  looked at and since when. In readiness the Chiaro team reviews it and may
+  add a not-applicable condition to the checklist for every company; in a
+  running audit it is a scope-change request the auditor decides. The
+  checks stay open meanwhile, a practice the company could have and does
+  not is recorded as absent, and trust categories never change by request.
+  `stuck` parks readiness checks the AI would otherwise ask the user about
+  again, or save again with the same answer, because the check will not
+  take the answer the user already gave or what it still needs sits outside
+  the company. The AI then asks nothing more about them and saves them
+  again only on a new file or fact, and the Chiaro team answers with a team
+  note in `get_status`. `record_self_assessment`'s `written_decision` open
+  item also records a decision to accept a shortfall, a saved note of the
+  user's own words counts as the written record, and such a decision may
+  cover work the company could still do before the audit.
+- Files and other tools: `submit_evidence`, `submit_document` and
+  `record_prior_report` take a file on the user's computer and refuse a
+  path in a chat or temporary AI workspace, and a file the AI saves for
+  `submit_evidence` goes under `~/Documents/chiaro-soc2/`.
+  `request_upload_link` has a third case: when the files sit in more than
+  one place and someone else uses the computer that holds one of them,
+  `get_status` lists each place after the handoff, and a link for that
+  place (`computer`) comes with its own list. `reset_readiness` resets
+  everything, one area or chosen controls, for admins, after two pickers
+  that are never skipped or preselected (what to reset, then a final yes
+  naming exactly what clears and what stays). It clears the saved answers
+  there, puts back the checks marked not applicable and closes open kits
+  for them; every file, note and the history of earlier answers stay, and
+  in the fresh pass each file and note from before the reset shows its date
+  and is checked again. Nothing is reset without the final picker's
+  `confirmation`, or when saved answers changed since. `start_audit` takes
+  back the `quote_id` of the charges shown to the user, with their yes.
+
 ## v1.16, 2026-10-30
 
 The same 89 controls and 387 checks, with changes to 8 checks and 3 controls.

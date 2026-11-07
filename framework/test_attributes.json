@@ -28633,8 +28633,8 @@
         "id": "A2",
         "text": "The data boundary is enforced before data is sent to model provider APIs through a technical control such as field redaction or an allowlist of fields",
         "attr_type": "config",
-        "typical_evidence": "Source code or gateway configuration showing a redaction or field allowlist step applied to payloads before they reach the model provider client: a gateway or filtering service, or code that builds each provider request only from the fields the written data boundary permits, with every provider call going through it",
-        "pass_criteria": "PASS: Source code, an AI gateway configuration, or middleware output shows that payloads to hosted model providers pass through an enforced filter, redaction of excluded fields or an allowlist of permitted fields, on the path to the provider client, and provider calls route through that layer. FAIL: Payloads are assembled and sent to the provider with no enforced filtering, or a filter exists in code but the provider is also called directly on paths that bypass it. NOTE: A documented human review before sending qualifies only if the reviewed artifact and the reviewer are recorded for each send.",
+        "typical_evidence": "Source code or gateway configuration showing excluded data kept out of payloads before they reach the model provider client (a redaction or field allowlist step, a gateway or filtering service, or code that builds each provider request only from the fields the written data boundary permits), and showing that no provider call bypasses it: every call going through the filter or gateway, or a search of the codebase that lists every place the code calls a model provider, each one covered",
+        "pass_criteria": "PASS: Source code, an AI gateway configuration, or middleware output shows that payloads to hosted model providers can carry only the categories the rule permits before they reach the provider client, either through a redaction or allowlist step or because the code that builds each payload draws only on permitted fields (an allowlist by construction), and every provider call path is covered. FAIL: Payloads can carry excluded categories to the provider with nothing in the code path keeping them out, or a filter exists in code but the provider is also called directly on paths that bypass it and whose payloads can carry excluded categories. NOTE: A documented human review before sending qualifies only if the reviewed artifact and the reviewer are recorded for each send.",
         "na_condition": "",
         "can_be_na": false,
         "calibration_examples": [
@@ -28642,7 +28642,7 @@
             "evidence_summary": "Every hosted-model call in the codebase routes through a single internal llm_client wrapper that strips flagged fields (secrets, full card numbers) before the provider SDK call; a grep confirms no direct SDK imports on any other path, but no branded commercial AI-gateway product is deployed.",
             "ai_verdict": "gap",
             "correct_verdict": "pass",
-            "reasoning": "An enforced redaction layer in the entity's own middleware satisfies the technical-control requirement regardless of whether a branded AI-gateway product is used. The pass criteria accept source code or middleware showing payloads pass through a redaction filter with all provider calls routed through it, which the wrapper plus the clean grep demonstrate.",
+            "reasoning": "An enforced redaction layer in the entity's own middleware satisfies the technical-control requirement regardless of whether a branded AI-gateway product is used. The pass criteria accept source code or middleware showing payloads pass through a redaction filter on every provider call path, which the wrapper plus the clean grep demonstrate.",
             "weight": 0.5,
             "source": "synthetic_taste_v1"
           },
@@ -28650,16 +28650,32 @@
             "evidence_summary": "The codebase contains a comment reading '// TODO: redact PII before AI call' next to the provider SDK call, cited as evidence of an enforced redaction step, but no redaction function is actually implemented or wired into that call path.",
             "ai_verdict": "pass",
             "correct_verdict": "gap",
-            "reasoning": "A planned or commented intention is not an enforced technical control. The attribute requires a working filter or allowlist that payloads actually pass through, not a note describing what should happen.",
+            "reasoning": "A planned or commented intention is not an enforced technical control. The attribute requires a working control in the code path (a filter, an allowlist, or payloads built only from permitted fields), not a note describing what should happen.",
             "weight": 0.5,
             "source": "synthetic_taste_v1"
+          },
+          {
+            "evidence_summary": "No shared filter or gateway sits in front of the model provider. The product reads documents its customers upload, and a search of the codebase lists three places that call the provider: extracting fields, classifying the document and drafting a summary. Each builds its request from that customer's own uploaded document and the fields the task needs, and reads nothing else. The written rule names a customer's own uploaded documents, as uploaded, as data that may go to the listed provider when reading them is the service; what it excludes is the company's own credentials and keys and any other customer's data, and none of the three calls reads either.",
+            "ai_verdict": "gap",
+            "correct_verdict": "pass",
+            "reasoning": "Each request is built only from data the written rule permits, an allowlist by construction, and every provider call path is listed and covered, so the boundary is enforced on every path. A shared filter or gateway is one way to enforce it, and requests built per call from permitted data are another. A whole document is within the boundary here because the rule names the customer's own documents as permitted data; had the rule excluded something such documents can contain, sending them whole would not be.",
+            "weight": 0.5,
+            "source": "words_batch3_2026_11"
+          },
+          {
+            "evidence_summary": "No shared filter sits in front of the model provider. A search of the codebase lists four places that call the provider; three build their requests from the customer's uploaded document and the fields the task needs, and the fourth, a debugging helper, sends the whole account record, including its stored integration tokens, which the written rule excludes.",
+            "ai_verdict": "pass",
+            "correct_verdict": "gap",
+            "reasoning": "Every provider call path has to be covered. Three payloads are built only from permitted fields, but the fourth can carry an excluded category with nothing in its code path keeping it out, so the boundary is not enforced on that path.",
+            "weight": 0.5,
+            "source": "words_batch3_2026_11"
           }
         ],
         "collection_hint": {
           "coverage_checks": [
             {
               "id": "boundary_technically_enforced",
-              "question": "Does the code or gateway configuration show excluded data is redacted or an allowlist is applied before payloads reach the model provider?",
+              "question": "Does the code or gateway configuration show excluded data is kept out of payloads, by redaction, an allowlist step, or payloads built only from permitted fields, before they reach the model provider?",
               "lane": "auto_pull",
               "alt_lanes": [
                 "screenshot",
@@ -28671,7 +28687,7 @@
             },
             {
               "id": "all_calls_route_through_filter",
-              "question": "Does the evidence show model provider calls route through the filtering layer rather than bypassing it?",
+              "question": "Does the evidence show that no model provider call bypasses the boundary, either because every call is shown to go through a filter or gateway, or because every place the code calls a provider is listed and each one is covered?",
               "lane": "auto_pull",
               "alt_lanes": [
                 "screenshot"

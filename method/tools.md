@@ -22,6 +22,20 @@ For less common tools, describe what you use it for. On a Type I audit
 whose scope confirmation has finished, the Chiaro team adds a system:
 use report_problem.
 
+Also send the two answers about the system, each with what you looked
+at: whether it keeps or processes the company's customers' data, and
+whether a few hours of outage would stop the company serving its
+customers. Before a readiness account's first scope confirmation,
+confirm_scope asks the client both as two questions over their systems,
+with your picks pre-selected from the company's code, config and
+accounts; record what the client picks by sending each listed system's
+name again with its answers. Until that confirmation they decide its
+classification: customer data makes it a Critical Dependency, and no
+customer data with the product not relying on it makes it Not in
+Scope; an In Scope system keeps its classification. After that
+confirmation, and on an audit, they are recorded and the classification
+changes only through reclassify_system.
+
 Arguments:
 
 - `name` (string, required): System name (e.g. "AWS", "Okta", "GitHub", "Datadog")
@@ -37,6 +51,18 @@ Arguments:
   cover from that day. A date already on file for a listed system
   is not changed here: the audit team updates it when a record
   shows the right date (report_problem).
+- `touches_customer_data` (string, optional): yes or no. Does the system keep or process
+  the company's customers' data, that is, are customer records
+  sent to it or kept in it to deliver the service? Send
+  customer_data_basis with it.
+- `customer_data_basis` (string, optional): What you looked at to answer
+  touches_customer_data, for example "src/chat.ts sends each user
+  message to it".
+- `relied_on_in_production` (string, optional): yes or no. Would a few hours of outage
+  stop the company serving its customers? Send production_basis
+  with it.
+- `production_basis` (string, optional): What you looked at to answer
+  relied_on_in_production.
 
 ## `answer_audit_question`
 
@@ -126,7 +152,10 @@ Arguments:
 Complete evidence collection and hand off to CPA review.
 
 GATED: collection must be complete before this succeeds. The gates:
-  1. Every in-scope attribute is in a terminal state (collected, absent, or N/A)
+  0. On an audit, its own scope has been confirmed (confirm_scope)
+  1. Every in-scope attribute is in a terminal state (collected, absent, or N/A),
+     or, in a Type I, is one the client is still working on, listed in
+     still_open
   2. Every in_scope_tool system has at least one real (non-conversation)
      evidence artifact referencing it
   3. Every collected sample-type attribute has a real artifact, not just
@@ -137,6 +166,20 @@ GATED: collection must be complete before this succeeds. The gates:
 
 On success, marks the engagement as awaiting_upload. The client uploads
 their evidence zip, which flips status to ready_for_review.
+
+still_open is for a Type I only, once you have done all you can: the checks
+the client is still working on that go along at hand-off, as a list of
+objects with control_ref, attribute_id and note, the note one short line on
+what is coming, written from what you already know (never ask the user
+again). Not a check that passed readiness with a file already on record
+that meets what it still needs: submit that file first (the refusal names
+it), unless the file is not on this computer any more or no longer shows
+what the check needs; then add held_file_unusable true and say why in its
+note. Leave it empty when nothing is still being worked on.
+
+Arguments:
+
+- `still_open` (string or array, optional)
 
 ## `confirm_scope`
 
@@ -320,6 +363,9 @@ Use this in TWO places:
    verification questions (typically 3-4) to ask the user — does
    customer data flow through them, would an outage affect commitments,
    is there a SOC 2 report on file. Capture answers via submit_answer.
+   A question the company's saved answers about the system already
+   settle is left out, with the saved answer in already_answered: do
+   not ask it again.
 
 2) During evidence drill (Phase 2B) for each In Scope system. Call this
    with the system name. The response tells you which GITC buckets
@@ -817,7 +863,8 @@ Arguments:
 - `file_note` (string, optional): Which file you read, for the record (e.g. "SOC 2 Type II
   report 2025, client's own copy, read locally").
 - `saved_path` (string, optional): Where you saved their report inside the engagement's
-  evidence folder. Required on BOTH engagement types (readiness
+  evidence folder on the user's computer (a path in a chat or
+  temporary AI workspace is refused). Required on BOTH engagement types (readiness
   included — the same local folder carries into the examination
   later), because the folder is what gets handed over at the end
   and the report that raised the assessed risk has to be in the
@@ -929,14 +976,15 @@ Arguments:
   each child. Missing dates remain unresolved; never invent a cadence.
 - `open_item` (object or string or null, optional): optional, only on a gap or absent that cannot be fixed before the audit: an object saying why.
   {"kind": "written_decision", "decision_ref": where it is written and who decided} when the company decided in
-  writing not to do this (ask the user where); {"kind": "next_real_case", "practice_started": "YYYY-MM-DD",
+  writing not to do this, or to accept the shortfall (your saved note of the user's own words counts; ask the
+  user where only if you hold neither); {"kind": "next_real_case", "practice_started": "YYYY-MM-DD",
   "no_case_since": true, "earlier_cases_done": true} on a gap whose step must come before or at a specific event
   (such as onboarding a vendor, granting access, a leaver, a new hire or a customer's deletion request), when the
   practice is in place, no such event has happened since it started, and nothing about earlier events is left to do
   (data deleted, access removed, checks completed, records completed from the logs that exist), so only what cannot
   be recovered remains; {"kind": "audit_period", "depends_on": what the audit's date or period must settle} on a gap
-  that only the audit period can settle, such as whether a vendor's report covers it. Never for work the company can
-  still do before the audit: scheduled work it can run now (an access review, a yearly vendor review, a restore
+  that only the audit period can settle, such as whether a vendor's report covers it. Unless the company decided not
+  to do it (written_decision), never for work the company can still do before the audit: scheduled work it can run now (an access review, a yearly vendor review, a restore
   test, training), open items it can still fix, or records it can still write. The item goes on the readiness short
   list; it stays open and never counts as a pass. To change the reason, save the check again. On IAM-03/A4,
   IAM-04/A5, VND-01/A6, VND-04/A2 and DAT-05/A3 the check's own words pass a practice adopted in writing with a
@@ -1012,7 +1060,14 @@ Report any of the following.
   4. you genuinely do not know what to do next, and get_status,
      get_scope_summary and get_progress did not tell you;
   5. the user reports confusing, repetitive or broken product behavior.
-     Preserve their complaint without requiring them to reproduce it.
+     Preserve their complaint without requiring them to reproduce it;
+  6. in readiness, a check you would otherwise ask the user about again, or
+     save again with the same answer, because it will not take the answer
+     the user already gave, or because what it still needs sits outside the
+     company (for example, only a provider holds it). Use category "stuck",
+     below. (A decision the user already made is recorded as theirs instead:
+     a gap with open_item written_decision. Something of the company's own
+     that the user confirms cannot be produced is a gap.)
 
 One report per problem. For product feedback, describe only the confusing
 Chiaro step and relevant tool outcomes. Do not copy private conversations,
@@ -1031,12 +1086,37 @@ observable Chiaro instruction/flow problem, never the person's feelings,
 private words or personal complaint. If no product problem can be described
 independently of those remarks, help locally without filing that feedback.
 
+When what a check examines cannot exist at this company (code checks at a
+company that writes no software of its own, say), send category
+"not_applicable" naming every check one fact rules out, with fact,
+looked_at and since. In readiness the Chiaro team reviews it and may add a
+not-applicable condition to the checklist for every company; in a running
+audit it is a scope-change request your auditor decides. The checks stay
+open meanwhile; carry on with the other available checks. If the company could have the practice
+and does not, the answer is absent instead. Trust categories never change
+by request.
+
+When a readiness check is stuck that way (case 6), send category "stuck" once,
+naming the checks, with fact (what the user already said, or why what is
+missing sits outside the company) and looked_at (what you already hold). It
+parks only those checks: leave them as saved, ask the user nothing more about
+them, save them again only if a new file or a new fact arrives, and keep
+working on everything else. The Chiaro team answers with a team note in
+get_status that says what, if anything, to tell the user. If the user asks
+about a parked check, say: "That one is with the Chiaro team. Nothing else is
+needed from you for it."
+
 Arguments:
 
-- `summary` (string, required): What is wrong, in a sentence or two. Plain language.
+- `summary` (string, required): What is wrong, in a sentence or two. Plain language. For a not_applicable or stuck request, one line naming the checks and why.
 - `what_i_tried` (string, optional): The calls you made and what came back.
 - `expected` (string, optional): What you expected to happen instead.
 - `tool_names` (array of string or null, optional): The tools involved, e.g. ["load_area", "get_progress"].
+- `category` (string, optional): Empty for a problem report; not_applicable for checks that cannot fit the company (scope_change is the same request in an audit); stuck for readiness checks you park instead of asking or saving them again.
+- `checks` (array of string or null, optional): For a not_applicable or stuck request, the check ids such as CHG-04/A2, or a control id such as VUL-04 for all of its checks.
+- `fact` (string, optional): For a not_applicable request, the fact about the company that rules the checks out. For a stuck request, what the user already said, or why what is missing sits outside the company.
+- `looked_at` (string, optional): For a not_applicable request, what you inspected that shows the fact, and where it can be seen. For a stuck request, what you already hold for these checks.
+- `since` (string, optional): For a not_applicable request, since when the fact holds (a date, or since the company started).
 
 ## `request_upload_link`
 
@@ -1048,7 +1128,7 @@ in. Send them there. get_status and complete_step both hand you that URL
 and the zip commands, and a link minted for that person only makes them
 retype the identity we already hold.
 
-Call this in two cases, and no others:
+Call this in three cases, and no others:
 
   the portal page will not work for them — it does not load, or they are
   not signed in and cannot be right now. Set
@@ -1059,6 +1139,12 @@ Call this in two cases, and no others:
   you are helping as a contributor or a delegate — a helper's upload is
   inbound evidence for their topics rather than the engagement handoff, so
   the link is their door at any stage and no flag is needed.
+
+  the files sit in more than one place and someone else uses the
+  computer that holds one of them. After the handoff, get_status lists
+  each place in data.handover_computers. Set computer to that place's
+  name: the link comes with that place's own list, for the person who
+  uses that computer.
 
 Save what is being shared into ~/Documents/chiaro-soc2/, zip it
 (data.zip_commands), and the user drags the zip onto the page
@@ -1074,23 +1160,27 @@ Arguments:
      (e.g., "Mock exam round 1"). Helps the audit team triage.
 - `portal_upload_unavailable` (boolean, optional): The user told you their portal Upload page
      will not work for them. Set only on their word.
+- `computer` (string, optional): The name of a place in data.handover_computers, when the
+     link is for the person who uses the computer that holds it.
 
 ## `reset_readiness`
 
-Clear recorded readiness self-assessments so the company can re-verify
-ahead of its NEXT audit.
+Reset readiness for a fresh pass before the next audit: everything, one area, or chosen controls.
 
-Readiness is rolling: it always describes the company's current posture
-toward the next examination. After an audit completes (or when things have
-changed), the user may want a fresh pass over everything or over specific
-controls. This clears the recorded VERDICTS only — collected evidence and
-the append-only history stay (nothing is destroyed or rewritten).
+A reset clears the saved answers in what the user picks, puts back the checks they marked not applicable there,
+and closes your open kits for them. It never deletes what the company gave us: every file, note and the history
+of earlier answers stay, and in the fresh pass each file and note from before the reset shows its date and is
+checked again. Admins only. Two pickers, never skipped and never preselected: call with no controls for the choices of
+what to reset, then with the user's choice for the final yes, which names exactly what clears and what stays
+(nothing changes yet). Reset only with confirm=true and that call's confirmation, after the user picks the yes.
 
 Arguments:
 
-- `controls` (string or array, optional): "all", or a JSON list of control refs (e.g. '["IAM-02","END-03"]').
-- `confirm` (boolean, optional): first call with confirm=false returns what would be cleared;
-  re-call with confirm=true ONLY after the user explicitly confirms.
+- `controls` (string or array, optional): what to reset: "all", one area's name as the choices list it (for example "Access Management"),
+  or a JSON list of control refs (for example '["IAM-02","END-03"]'). Leave it empty for the choices.
+- `confirm` (boolean, optional): true only after the user picked the yes in the final picker.
+- `confirmation` (string, optional): the confirmation value the final picker's call returned. Without it, or when saved answers
+  changed since, nothing is reset and the current numbers come back to ask again.
 
 ## `resolve_item`
 
@@ -1319,6 +1409,8 @@ Arguments:
 - `confirm_start_early` (boolean, optional): Set only after the user confirms starting, or
   scheduling the start, before readiness is complete.
 - `start_date` (string, optional): The first day of the observation period, YYYY-MM-DD.
+- `quote_id` (string, optional): The quote_id of the charges you showed the user, when the
+  previous answer named one; send it back with their yes.
 
 ## `start_engagement`
 
@@ -1392,9 +1484,11 @@ reclassify_evidence, never by re-submitting.
 REQUIRED FLOW:
 
   1. Inspect the real document, preserving the original and its format.
-     In readiness, keep its accessible local path; no relocation is needed.
-     In an audit, copy it as-is into ~/Documents/chiaro-soc2/02-policies/
+     In readiness, keep its path on the user's computer; no relocation is
+     needed. In an audit, copy it as-is into ~/Documents/chiaro-soc2/02-policies/
      without overwriting a same-named file. Hash/register the actual file.
+     A path in a chat or temporary AI workspace (/mnt/data/, /mnt/user-data/,
+     /home/claude/, /tmp/claude-\<n>/) is refused.
      If copying is unavailable, ask the user to copy as-is; do not convert.
      For a web-only source, save a faithful available export locally and keep
      the source link. This is allowed; preserve any existing native original.
@@ -1430,9 +1524,10 @@ the tool reports success; local working notes alone do not prove a server save.
 Arguments:
 
 - `name` (string, required): Document name (e.g., "Access Control Policy", "IR Plan").
-- `local_path` (string, required): Absolute path to the actual readiness file in an accessible
-  local folder, or the same-format audit copy in ~/Documents/chiaro-soc2/.
-  Required. Preserve the original; no real file, no call.
+- `local_path` (string, required): Absolute path to the actual readiness file in its folder on
+  the user's computer, or the same-format audit copy in
+  ~/Documents/chiaro-soc2/. Required. Preserve the original; no real
+  file, no call. A path in a chat or temporary AI workspace is refused.
 - `summary` (string, required): 1-3 sentences describing what the document contains.
   You MAY summarize. You MAY NOT add anything not in the source file.
 - `covers_attributes` (string or array or null, optional): the [control_ref, attribute_id] pairs this document
@@ -1470,7 +1565,10 @@ Arguments:
 Record that a piece of raw evidence has been saved locally. REQUIRED FLOW:
 
   1. You (the AI) used Write or Bash to save the raw file to local_path
-     in any accessible local folder. The raw file is the source of truth.
+     on the user's computer, under ~/Documents/chiaro-soc2/ (in readiness
+     an existing file may stay in its own folder there). A path in a chat
+     or temporary AI workspace (/mnt/data/, /mnt/user-data/, /home/claude/,
+     /tmp/claude-\<n>/) is refused. The raw file is the source of truth.
   2. You wrote a sibling how_collected.md describing how it was obtained.
   3. NOW you call this tool with the summary + which coverage_checks it
      satisfies (existence only).
@@ -1483,8 +1581,10 @@ Arguments:
 
 - `area` (string, required): Plain-English area key from load_area (e.g., "access-management",
   "change-management", "data-protection").
-- `local_path` (string, required): Absolute path to the actual file in any accessible local folder.
-  Required. If you have not saved a real file, do not call this tool.
+- `local_path` (string, required): Absolute path to the actual file on the user's computer,
+  under ~/Documents/chiaro-soc2/ for anything you save. Required. If
+  you have not saved a real file, do not call this tool. A path in a
+  chat or temporary AI workspace is refused.
 - `summary` (string, required): 1-3 sentences describing what the file contains. Plain English.
   You MAY summarize. You MAY NOT invent content that isn't in the file.
 - `covers_attributes` (string or array or null, optional): the [control_ref, attribute_id] pairs this evidence

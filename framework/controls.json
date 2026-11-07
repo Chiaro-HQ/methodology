@@ -5288,7 +5288,7 @@
         {
           "system": "github",
           "command": "gh api -X GET search/code -f q='openai OR anthropic org:{org} language:python' --jq '.items[].path'",
-          "shows": "Lists every file that references the model provider SDKs so you can confirm all provider calls route through the boundary or redaction layer and none bypass it."
+          "shows": "Lists every file that references the model provider SDKs so you can confirm every provider call is covered by the boundary and none bypasses it."
         },
         {
           "system": "cloudflare",
@@ -5304,23 +5304,23 @@
       "collection_playbook": {
         "evidence_goals": [
           "Obtain the written rule naming which data categories may and may not be sent to hosted model providers",
-          "Obtain source code or gateway configuration showing the redaction or allowlist enforced before provider calls",
-          "Obtain provider account data-control settings or executed agreements showing submitted data is excluded from training",
+          "Obtain source code or gateway configuration showing excluded data kept out of payloads before every provider call, by redaction, an allowlist, or payloads built only from permitted fields",
+          "Obtain provider account data-control settings, accepted business terms or an executed agreement showing submitted data is excluded from training",
           "Obtain the list of fine-tuning or training runs and, where customer data was used, the authorization on file"
         ],
-        "what_good_looks_like": "A dated rule listing allowed and excluded categories, code showing an enforced redaction or allowlist on the single path to the provider client, provider settings or a signed agreement excluding submitted data from training, and either no customer-data training or an authorization record per run.",
+        "what_good_looks_like": "A dated rule listing allowed and excluded categories; code showing excluded data kept out of payloads on every path to the provider client, by a redaction or allowlist step or by payloads built only from permitted fields; provider settings, accepted business terms or a signed agreement excluding submitted data from training; and either no customer-data training or an authorization record per run.",
         "what_bad_looks_like": "A general statement that sensitive data is not sent, with no rule and no enforcement in code. Provider defaults assumed rather than shown. A client-authored spreadsheet asserting configuration state.",
         "red_flags": [
           "Secrets, full payment card numbers, or regulated personal data reaching provider payloads",
-          "A redaction function that exists in code but is bypassed on some provider call paths",
+          "A redaction function that exists in code but is bypassed on some provider call paths whose payloads can still carry excluded data",
           "Reliance on a consumer chat plan setting as evidence for API data handling",
           "Fine-tuning jobs on customer data with no authorization on file"
         ],
         "platform_hints": {
           "openai": "Check organization data controls for training on API data. List fine-tuning jobs and their training files. Confirm the account, not a consumer plan, is what production uses.",
           "anthropic": "Confirm API usage is covered by terms that exclude submitted data from training, and check for an executed commercial agreement or zero-retention arrangement where applicable.",
-          "github": "Search for the provider SDK usage and the redaction or allowlist wrapper. Confirm every call site routes through it.",
-          "cloudflare": "If an AI Gateway fronts provider calls, pull its logging and data control settings and confirm all traffic is routed through it.",
+          "github": "Search for every provider SDK call and for what keeps excluded data out of each payload: a redaction or allowlist wrapper, or code that builds the payload only from permitted fields. Confirm every call site is covered.",
+          "cloudflare": "If an AI Gateway fronts provider calls, pull its logging and data control settings and confirm which calls go through it; a provider call that does not go through it is covered only if its own path keeps excluded data out.",
           "azure": "For Azure OpenAI, confirm the deployment and content filtering configuration and that submitted data is not used to train foundation models per the service terms."
         }
       }
