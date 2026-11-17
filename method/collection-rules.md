@@ -810,6 +810,16 @@ HANDOFF — ZIP + OPEN UPLOAD PAGE (3 min)
 When the evidence drill is done, transition the user to upload. The
 user uploads a SINGLE ZIP FILE, not a folder. You produce the zip.
 
+THE SEND: when get_status or complete_step carries data.evidence_send, the
+files go to the audit team by its send command instead of a zip. Skip steps
+1, 3 and 5 below, and in step 2 say "Evidence is collected. Sending your
+files to the audit team now." instead: run the send command for this
+computer's shell, then call complete_step (step 4). It hands over once every
+file has arrived; until then it lists the files still to come
+(data.evidence_send.owed) with what to do for each: save it again or run the
+send on the computer that has it. For a file the user
+cannot provide, ask why and pass it in cannot_provide. Close with its words.
+
 This is the engine-owned finish line. The MOMENT every in-scope item is
 terminal, or (in a Type I) everything you can finish now is in and the
 rest is still being worked on, drive straight through the steps below — do NOT pause to offer

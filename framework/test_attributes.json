@@ -16428,8 +16428,8 @@
         "id": "A1",
         "text": "Data at rest is encrypted on all in-scope systems",
         "attr_type": "config",
-        "typical_evidence": "Database encryption settings (RDS encryption status, S3 default encryption, disk encryption config); for a store whose encryption only the provider runs, the provider's SOC 2 report section, published encryption documentation or written answer",
-        "pass_criteria": "PASS: System configuration output shows encryption at rest enabled on all databases and storage systems containing sensitive data, using AES-256 or equivalent (AES-128 minimum). A store whose encryption only the provider runs, with no encryption setting the company can see or change (such as an email, HR or phone system), is shown instead by the provider's own statement, in its SOC 2 report or published security or encryption documentation or a written answer from the provider, that the company's data is encrypted at rest, naming an algorithm that meets the same minimum. Over a Type II period, that statement is the provider's report covering the period, with a bridge letter for any gap, because the company's own logs cannot show what the provider does inside its service. A store whose encryption the company can see or set in its own console, API or configuration (such as a cloud database, bucket or disk) still needs its configuration output. Reviewing that provider's report is part of the company's dependent vendor review and is judged there. FAIL: Any database or storage system containing sensitive data has encryption at rest disabled, or uses a deprecated algorithm (DES, 3DES, RC4).",
+        "typical_evidence": "Database encryption settings (RDS encryption status, S3 default encryption, disk encryption config); for data the company keeps at a provider to use later, in a store whose encryption only the provider runs, the provider's SOC 2 report section, published encryption documentation or written answer already on file, naming the algorithm",
+        "pass_criteria": "PASS: System configuration output shows encryption at rest enabled on all databases and storage systems containing sensitive data, using AES-256 or equivalent (AES-128 minimum). For this check, a provider's own statement is needed only for data the company keeps at a provider to use later (kept data), such as support conversations, product analytics, customer billing records, source code, internal messages, or media kept in a provider account. A request the company's app sends to a provider for an answer (such as an AI model call, a map or weather lookup, or sign-in with Google or Apple) needs no provider statement, even if the provider keeps a copy to deliver the answer or for its own safety checks. Data that is public by design (such as posts on a public feedback board) and a provider's own records of the company as its customer (such as the company's account and invoices with that provider) need none either. Copies a provider keeps only to deliver an answer or for its own safety checks are left out, while files saved in a provider account and private records kept there count. Each use is judged separately, so if one provider has both kinds of use, the kept data still needs the statement. A store whose encryption only the provider runs, with no encryption setting the company can see or change (such as an email, HR or phone system), is shown instead by the provider's own statement, in its SOC 2 report or published security or encryption documentation or a written answer from the provider, that the company's data is encrypted at rest, naming an algorithm that meets the same minimum. Over a Type II period, that statement is the provider's report covering the period, with a bridge letter for any gap, because the company's own logs cannot show what the provider does inside its service. The statement is taken from what the provider publishes or from a report or written answer the company already holds; over a Type II period it is the period report, with a bridge letter for any gap, and where those are not on file that provider's part stays open. Nobody is asked to email a provider or to request a gated document for these facts. Where those sources name no algorithm for the kept data, this check stays unresolved for that provider only. That is a missing fact outside the company. It earns no pass and establishes no gap. What is already shown stays shown, and the user is asked nothing more about it. A store whose encryption the company can see or set in its own console, API or configuration (such as a cloud database, bucket or disk) still needs its configuration output. Reviewing that provider's report is part of the company's dependent vendor review and is judged there. Needing a provider's statement here does not decide which providers belong in the company's dependent vendor review. FAIL: Any database or storage system containing sensitive data has encryption at rest disabled, or uses a deprecated algorithm (DES, 3DES, RC4).",
         "na_condition": "",
         "can_be_na": false,
         "calibration_examples": [
@@ -16464,13 +16464,53 @@
             "reasoning": "The provider's report covers the provider's platform, never a disk or database the company configures itself. Encryption the company can see or set is shown from its own console, API or configuration.",
             "weight": 0.5,
             "source": "words_fb027_2026_10"
+          },
+          {
+            "evidence_summary": "The company's app sends each customer question to an AI model provider and shows the answer. The company keeps no data in an account at that provider to use later. The provider says it holds a copy of each request for 30 days for its own safety checks, and it publishes no encryption algorithm. The company's own database and storage buckets show encryption at rest enabled in configuration output.",
+            "ai_verdict": "unresolved",
+            "correct_verdict": "pass",
+            "reasoning": "A request the company's app sends to a provider for an answer needs no provider statement, even if the provider keeps a copy for its own safety checks. What the provider does with that copy is the provider's and is not tested here. The company's own stores are shown by configuration output, so the check passes.",
+            "weight": 0.5,
+            "source": "words_d549_2026_11"
+          },
+          {
+            "evidence_summary": "The company keeps its customer billing records at a payments provider, which has no encryption setting to show. The provider's public security page states that customer data is encrypted at rest with AES-256. The company's own database and storage buckets show encryption at rest enabled in configuration output.",
+            "ai_verdict": "unresolved",
+            "correct_verdict": "pass",
+            "reasoning": "Customer billing records are data the company keeps at a provider to use later, so the provider's own statement is needed, and this one names an algorithm that meets the minimum. For a Type I, a public security page is a published statement, and no email to the provider or gated document is needed. Over a Type II period, the provider's report for the period counts instead.",
+            "weight": 0.5,
+            "source": "words_d549_2026_11"
+          },
+          {
+            "evidence_summary": "The company keeps its support conversations at a support inbox provider, which has no encryption setting to show. The provider's public security page says customer data is encrypted at rest. It names no algorithm or key length and says nothing about key storage or key rotation. Nothing else the company holds names an algorithm. The company's own database and storage buckets show encryption at rest enabled in configuration output.",
+            "ai_verdict": "pass",
+            "correct_verdict": "unresolved",
+            "reasoning": "Support conversations are data the company keeps at a provider to use later, and for this check the provider's statement has to name an algorithm that meets the minimum. With none named, the check stays unresolved for that provider only. It earns no pass and establishes no gap, and nobody emails the provider or asks the user for it.",
+            "weight": 0.5,
+            "source": "words_d549_2026_11"
+          },
+          {
+            "evidence_summary": "The company's app sends text to a media generation API, which keeps each generated file for one hour so the app can download it. The app saves every file in the company's own storage bucket, which shows encryption at rest enabled in configuration output. The API provider publishes no encryption algorithm.",
+            "ai_verdict": "unresolved",
+            "correct_verdict": "pass",
+            "reasoning": "A copy a provider keeps only to deliver an answer is left out, so no provider statement is needed for it. The file the company keeps is in its own bucket, which configuration output shows encrypted.",
+            "weight": 0.5,
+            "source": "words_d549_2026_11"
+          },
+          {
+            "evidence_summary": "The company calls a voice provider's API to generate audio for customers and also keeps a library of generated voice projects in its provider account to reuse later. The provider's trust center says nothing about its encryption algorithm. The company's own stores show encryption at rest enabled in configuration output.",
+            "ai_verdict": "pass",
+            "correct_verdict": "unresolved",
+            "reasoning": "The saved voice projects are data the company keeps at a provider to use later, so they need the provider's statement naming the algorithm, even though the request calls do not. With none named, the check stays unresolved for that provider only, and nobody asks the provider or the user for it.",
+            "weight": 0.5,
+            "source": "words_d549_2026_11"
           }
         ],
         "collection_hint": {
           "coverage_checks": [
             {
               "id": "data_at_rest_encrypted",
-              "question": "Is data at rest shown encrypted on every in-scope store: by the system's configuration where the company can see or set the encryption, and by the provider's own statement where only the provider runs it?",
+              "question": "Is data at rest shown encrypted on every in-scope store: by the system's configuration where the company can see or set the encryption, and, for data the company keeps at a provider to use later, by the provider's own statement naming the algorithm where only the provider runs it?",
               "lane": "auto_pull",
               "alt_lanes": [
                 "screenshot",
@@ -16540,8 +16580,8 @@
         "id": "A3",
         "text": "Encryption algorithms and key lengths meet current standards",
         "attr_type": "config",
-        "typical_evidence": "Encryption configuration showing algorithm and key length (e.g., AES-256, RSA-2048+); where only the provider runs the encryption or never shows the algorithm, the provider's SOC 2 report section, published encryption documentation or written answer naming them",
-        "pass_criteria": "PASS: Configuration output shows AES-256 (or AES-128 minimum) for data at rest, RSA-2048+ (or ECDSA P-256+) for key exchange, TLS 1.2+ for transit. Zero deprecated algorithms in use (DES, 3DES, MD5, SHA-1 for signatures, RC4). Each fact is shown from where it lives. A setting the company can see or set (its own endpoints, its own keys, and the encryption on its own databases, buckets and disks) is shown by configuration output. A fact only a provider runs or never shows the company (such as the algorithm behind a provider's default encryption, or the encryption of the company's data in an email, HR or phone system) is shown by the provider's own statement, in its SOC 2 report or published security or encryption documentation or a written answer from the provider, naming the algorithm and key length. Over a Type II period, that statement is the provider's report covering the period, with a bridge letter for any gap, because the company's own logs cannot show what the provider does inside its service. For encryption in transit, a server a provider runs for its own service, which the company only connects to, is the provider's and is not tested here. FAIL: Any deprecated algorithm is in use, or key lengths are below minimum (RSA <2048, AES <128).",
+        "typical_evidence": "Encryption configuration showing algorithm and key length (e.g., AES-256, RSA-2048+); for data the company keeps at a provider to use later, where only the provider runs the encryption or never shows the algorithm, the provider's SOC 2 report section, published encryption documentation or written answer already on file, naming them",
+        "pass_criteria": "PASS: Configuration output shows AES-256 (or AES-128 minimum) for data at rest, RSA-2048+ (or ECDSA P-256+) for key exchange, TLS 1.2+ for transit. Zero deprecated algorithms in use (DES, 3DES, MD5, SHA-1 for signatures, RC4). Each fact is shown from where it lives. A setting the company can see or set (its own endpoints, its own keys, and the encryption on its own databases, buckets and disks) is shown by configuration output. For this check, a provider's own statement is needed only for data the company keeps at a provider to use later (kept data), such as support conversations, product analytics, customer billing records, source code, internal messages, or media kept in a provider account. A request the company's app sends to a provider for an answer (such as an AI model call, a map or weather lookup, or sign-in with Google or Apple) needs no provider statement, even if the provider keeps a copy to deliver the answer or for its own safety checks. Data that is public by design (such as posts on a public feedback board) and a provider's own records of the company as its customer (such as the company's account and invoices with that provider) need none either. Copies a provider keeps only to deliver an answer or for its own safety checks are left out, while files saved in a provider account and private records kept there count. Each use is judged separately, so if one provider has both kinds of use, the kept data still needs the statement. A fact only a provider runs or never shows the company (such as the algorithm behind a provider's default encryption, or the encryption of the company's data in an email, HR or phone system) is shown by the provider's own statement, in its SOC 2 report or published security or encryption documentation or a written answer from the provider, naming the algorithm and key length. Over a Type II period, that statement is the provider's report covering the period, with a bridge letter for any gap, because the company's own logs cannot show what the provider does inside its service. The statement is taken from what the provider publishes or from a report or written answer the company already holds; over a Type II period it is the period report, with a bridge letter for any gap, and where those are not on file that provider's part stays open. Nobody is asked to email a provider or to request a gated document for these facts. A statement naming AES with no key length meets the key-length minimum, because every AES key is at least 128 bits. Where those sources do not establish the algorithm and a key length that meets the minimum for the kept data, this check stays unresolved for that provider only. That is a missing fact outside the company. It earns no pass and establishes no gap. What is already shown stays shown, and the user is asked nothing more about it. Needing a provider's statement here does not decide which providers belong in the company's dependent vendor review. For encryption in transit, a server a provider runs for its own service, which the company only connects to, is the provider's and is not tested here. FAIL: Any deprecated algorithm is in use, or key lengths are below minimum (RSA <2048, AES <128).",
         "na_condition": "",
         "can_be_na": false,
         "calibration_examples": [
@@ -16576,13 +16616,29 @@
             "reasoning": "Each fact comes from where it lives: the visible setting from the console, and the algorithm the console never shows from the provider's own statement.",
             "weight": 0.5,
             "source": "words_fb027_2026_10"
+          },
+          {
+            "evidence_summary": "The company keeps its support conversations at a support inbox provider, which has no encryption setting to show. The provider's public security page says customer data is encrypted at rest. It names no algorithm or key length and says nothing about key storage or key rotation. The company's own endpoints, keys and stores show current algorithms and key lengths in configuration output.",
+            "ai_verdict": "gap",
+            "correct_verdict": "unresolved",
+            "reasoning": "Support conversations are data the company keeps at a provider to use later, and for this check the provider's statement has to name the algorithm and key length. It names neither. That is a missing fact outside the company, so the check stays unresolved for that provider only. A missing provider fact establishes no gap, and the user is asked nothing more about it.",
+            "weight": 0.5,
+            "source": "words_d549_2026_11"
+          },
+          {
+            "evidence_summary": "The company keeps internal documents at a file storage provider. The provider's encryption documentation, saved on file, states that stored files are encrypted at rest with 3DES. The company's own endpoints, keys and stores show current algorithms in configuration output.",
+            "ai_verdict": "pass",
+            "correct_verdict": "gap",
+            "reasoning": "A provider's statement is on file, and it shows a deprecated algorithm for data the company keeps at a provider to use later. A deprecated algorithm on file counts against the check, whoever runs the encryption.",
+            "weight": 0.5,
+            "source": "words_d549_2026_11"
           }
         ],
         "collection_hint": {
           "coverage_checks": [
             {
               "id": "encryption_algorithms",
-              "question": "Do the encryption algorithms in use meet current standards, each shown by configuration output where the company can see or set it and by the provider's own statement where only the provider runs it or never shows it?",
+              "question": "Do the encryption algorithms in use meet current standards, each shown by configuration output where the company can see or set it and, for data the company keeps at a provider to use later, by the provider's own statement where only the provider runs it or never shows it?",
               "lane": "auto_pull",
               "alt_lanes": [
                 "screenshot",
@@ -16595,7 +16651,7 @@
             },
             {
               "id": "key_lengths_meet_current",
-              "question": "Do the key lengths in use meet current standards, each shown by configuration output where the company can see or set it and by the provider's own statement where only the provider runs it or never shows it?",
+              "question": "Do the key lengths in use meet current standards, each shown by configuration output where the company can see or set it and, for data the company keeps at a provider to use later, by the provider's own statement where only the provider runs it or never shows it?",
               "lane": "auto_pull",
               "alt_lanes": [
                 "screenshot",
@@ -16613,8 +16669,8 @@
         "id": "A4",
         "text": "Cryptographic keys are stored securely (not in source code or plaintext)",
         "attr_type": "config",
-        "typical_evidence": "KMS configuration, secrets manager setup, or code scan results showing no plaintext keys; for keys a provider holds inside its own service, the provider's SOC 2 report section, published encryption documentation or written answer",
-        "pass_criteria": "PASS: Configuration shows cryptographic keys stored in a KMS, secrets manager, or HSM. Code scan results or repository search confirms no plaintext keys in source code or config files. A company with no source code shows that search over the folders and drives where it keeps configuration and key files. For keys a provider holds inside its own service, which the company never handles (such as the keys that encrypt its data in an email, HR or phone system), the provider's own statement, in its SOC 2 report or published security or encryption documentation or a written answer from the provider, that those keys are kept in a key management service or HSM takes the place of configuration. Over a Type II period, that statement is the provider's report covering the period, with a bridge letter for any gap, because the company's own logs cannot show what the provider does inside its service. Keys the company creates, downloads or holds itself (such as a service account key file, a signing key, or a key in its own KMS) still need the configuration and the scan or search above. FAIL: Keys found in source code, config files, or stored in plaintext outside a secrets management system.",
+        "typical_evidence": "KMS configuration, secrets manager setup, or code scan results showing no plaintext keys; for data the company keeps at a provider to use later, whose keys the provider holds inside its own service, the provider's SOC 2 report section, published encryption documentation or written answer already on file, stating that the data is encrypted at rest",
+        "pass_criteria": "PASS: Configuration shows cryptographic keys stored in a KMS, secrets manager, or HSM. Code scan results or repository search confirms no plaintext keys in source code or config files. A company with no source code shows that search over the folders and drives where it keeps configuration and key files. For this check, a provider's own statement is needed only for data the company keeps at a provider to use later (kept data), such as support conversations, product analytics, customer billing records, source code, internal messages, or media kept in a provider account. A request the company's app sends to a provider for an answer (such as an AI model call, a map or weather lookup, or sign-in with Google or Apple) needs no provider statement, even if the provider keeps a copy to deliver the answer or for its own safety checks. Data that is public by design (such as posts on a public feedback board) and a provider's own records of the company as its customer (such as the company's account and invoices with that provider) need none either. Copies a provider keeps only to deliver an answer or for its own safety checks are left out, while files saved in a provider account and private records kept there count. Each use is judged separately, so if one provider has both kinds of use, the kept data still needs the statement. For keys a provider holds inside its own service, which the company never handles (such as the keys that encrypt its data in an email, HR or phone system), the provider's own statement, in its SOC 2 report or published security or encryption documentation or a written answer from the provider, that those keys are kept in a key management service or HSM takes the place of configuration. So does its statement, in the same sources, that the company's data is encrypted at rest, which covers those keys. Over a Type II period, that statement is the provider's report covering the period, with a bridge letter for any gap, because the company's own logs cannot show what the provider does inside its service. For those keys, that report needs to show one of these two facts. Any key storage the provider states is recorded, and a statement that the data is encrypted at rest still covers those keys when it says nothing about key storage. Anything in that statement or report, or otherwise on file, showing those keys exposed, such as kept in plaintext or in source code, still counts against this check. The statement is taken from what the provider publishes or from a report or written answer the company already holds; over a Type II period it is the period report, with a bridge letter for any gap, and where those are not on file that provider's part stays open. Nobody is asked to email a provider or to request a gated document for these facts. Where those sources show neither for the kept data, this check stays unresolved for that provider only. That is a missing fact outside the company. It earns no pass and establishes no gap. What is already shown stays shown, and the user is asked nothing more about it. Needing a provider's statement here does not decide which providers belong in the company's dependent vendor review. Keys the company creates, downloads or holds itself (such as a service account key file, a signing key, or a key in its own KMS) still need the configuration and the scan or search above. FAIL: Keys found in source code, config files, or stored in plaintext outside a secrets management system.",
         "na_condition": "",
         "can_be_na": false,
         "calibration_examples": [
@@ -16641,13 +16697,29 @@
             "reasoning": "Keys a provider holds inside its own service are shown by the provider's own statement; keys the company holds itself are shown by configuration and the scan.",
             "weight": 0.5,
             "source": "words_fb027_2026_10"
+          },
+          {
+            "evidence_summary": "The company keeps its support conversations at a support inbox provider, which has no encryption setting to show. The provider's public security page says customer data is encrypted at rest. It names no algorithm or key length and says nothing about key storage or key rotation. The keys the company holds itself sit in its cloud secrets manager, shown in a screenshot, and a repository scan finds no plaintext keys.",
+            "ai_verdict": "unresolved",
+            "correct_verdict": "pass",
+            "reasoning": "For keys a provider holds inside its own service, the provider's own statement that the data is encrypted at rest covers those keys. The statement need not name an algorithm or say where the keys are kept for this check, and its silence on key storage is no fail and no red flag. The keys the company holds itself are shown by configuration and the scan. Over a Type II period, the provider's report for the period would be needed instead.",
+            "weight": 0.5,
+            "source": "words_d549_2026_11"
+          },
+          {
+            "evidence_summary": "The company keeps customer records at a provider whose security page says customer data is encrypted at rest. The same provider's technical documentation, saved on file, says the encryption keys for that data are stored in plaintext in a configuration file on its application servers. The company's own keys sit in its secrets manager and a repository scan finds no plaintext keys.",
+            "ai_verdict": "pass",
+            "correct_verdict": "gap",
+            "reasoning": "The provider's statement that the data is encrypted at rest covers the keys it holds only while nothing on file shows those keys exposed. Here a document on file shows plaintext key storage for data the company keeps at a provider to use later, and that counts against the check.",
+            "weight": 0.5,
+            "source": "words_d549_2026_11"
           }
         ],
         "collection_hint": {
           "coverage_checks": [
             {
               "id": "cryptographic_keys_stored_securely",
-              "question": "Are cryptographic keys shown stored securely (not in source code or plaintext): by configuration and a code scan or search for keys the company holds, and by the provider's own statement for keys a provider holds inside its own service?",
+              "question": "Are cryptographic keys shown stored securely (not in source code or plaintext): by configuration and a code scan or search for keys the company holds, with keys a provider holds inside its own service covered by the provider's own statement that data the company keeps at a provider to use later is encrypted at rest?",
               "lane": "auto_pull",
               "alt_lanes": [
                 "screenshot",
@@ -16665,8 +16737,8 @@
         "id": "A5",
         "text": "Key rotation is performed or scheduled",
         "attr_type": "config",
-        "typical_evidence": "KMS key rotation settings or key rotation log showing rotation history; for keys a provider holds and rotates inside its own service, the provider's statement of automatic rotation or of its last rotation date",
-        "pass_criteria": "PASS: KMS configuration shows automatic key rotation enabled, OR manual rotation log shows rotation performed at least annually (rotation date within past 12 months). For keys a provider holds and rotates inside its own service, which the company cannot rotate itself (such as the keys that encrypt its data in an email, HR or phone system, or a provider's default key in its cloud account), the provider's own statement, in its SOC 2 report or published security or encryption documentation or a written answer from the provider, takes the place of KMS configuration when it shows that the provider rotates those keys automatically, or gives the date it last rotated them within the past 12 months. Over a Type II period, that statement is the provider's report covering the period, with a bridge letter for any gap, because the company's own logs cannot show what the provider does inside its service. Keys the company creates, downloads or holds itself still need the configuration or rotation log above. FAIL: No key rotation configured and no manual rotation evidence within the past 12 months.",
+        "typical_evidence": "KMS key rotation settings or key rotation log showing rotation history; for data the company keeps at a provider to use later, whose keys the provider holds and rotates inside its own service, the provider's statement that the data is encrypted at rest, with any rotation it states",
+        "pass_criteria": "PASS: KMS configuration shows automatic key rotation enabled, OR manual rotation log shows rotation performed at least annually (rotation date within past 12 months). For this check, a provider's own statement is needed only for data the company keeps at a provider to use later (kept data), such as support conversations, product analytics, customer billing records, source code, internal messages, or media kept in a provider account. A request the company's app sends to a provider for an answer (such as an AI model call, a map or weather lookup, or sign-in with Google or Apple) needs no provider statement, even if the provider keeps a copy to deliver the answer or for its own safety checks. Data that is public by design (such as posts on a public feedback board) and a provider's own records of the company as its customer (such as the company's account and invoices with that provider) need none either. Copies a provider keeps only to deliver an answer or for its own safety checks are left out, while files saved in a provider account and private records kept there count. Each use is judged separately, so if one provider has both kinds of use, the kept data still needs the statement. For keys a provider holds and rotates inside its own service, which the company cannot rotate itself (such as the keys that encrypt its data in an email, HR or phone system, or a provider's default key in its cloud account), the provider's own statement, in its SOC 2 report or published security or encryption documentation or a written answer from the provider, takes the place of KMS configuration when it shows that the provider rotates those keys automatically, or gives the date it last rotated them within the past 12 months. So does its statement, in the same sources, that the company's data is encrypted at rest, which covers the rotation of those keys and takes the place of KMS configuration and the rotation log. Over a Type II period, that statement is the provider's report covering the period, with a bridge letter for any gap, because the company's own logs cannot show what the provider does inside its service. For those keys, that report needs to show one of these. Any rotation the provider states is recorded, and a statement that the data is encrypted at rest still covers those keys when it says nothing about rotation. Where the company holds no key itself, this check's 12-month clock is read from a provider's statement of automatic rotation or of a rotation in the past 12 months, and with none on file this check stays unresolved. Anything in that statement or report, or otherwise on file, showing that the provider does not rotate those keys still counts against this check. The statement is taken from what the provider publishes or from a report or written answer the company already holds; over a Type II period it is the period report, with a bridge letter for any gap, and where those are not on file that provider's part stays open. Nobody is asked to email a provider or to request a gated document for these facts. Where those sources show none of these for the kept data, this check stays unresolved for that provider only. That is a missing fact outside the company. It earns no pass and establishes no gap. What is already shown stays shown, and the user is asked nothing more about it. Needing a provider's statement here does not decide which providers belong in the company's dependent vendor review. Keys the company creates, downloads or holds itself still need the configuration or rotation log above. FAIL: No key rotation configured and no manual rotation evidence within the past 12 months.",
         "na_condition": "",
         "can_be_na": false,
         "calibration_examples": [
@@ -16701,13 +16773,37 @@
             "reasoning": "A key the company creates in its own key management service is the company's to rotate. The provider's statement covers only the keys the provider holds and rotates.",
             "weight": 0.5,
             "source": "words_fb027_2026_10"
+          },
+          {
+            "evidence_summary": "The company keeps its support conversations at a support inbox provider, which has no encryption setting to show. The provider's public security page says customer data is encrypted at rest. It names no algorithm or key length and says nothing about key storage or key rotation. The one key the company holds itself is in its cloud key management service with automatic rotation enabled, shown in a console capture.",
+            "ai_verdict": "gap",
+            "correct_verdict": "pass",
+            "reasoning": "For keys a provider holds and rotates inside its own service, the provider's own statement that the data is encrypted at rest covers their rotation. The statement need not name an algorithm or describe rotation for this check, and its silence on rotation is no fail and no red flag. The key the company holds itself is shown by its configuration. Over a Type II period, the provider's report for the period would be needed instead.",
+            "weight": 0.5,
+            "source": "words_d549_2026_11"
+          },
+          {
+            "evidence_summary": "The company's app sends each customer question to an AI model provider and shows the answer. The company keeps no data at that provider to use later, and the provider's published documents say nothing about how it rotates its own keys. The one key the company holds itself is in its cloud key management service with automatic rotation enabled, shown in a console capture.",
+            "ai_verdict": "unresolved",
+            "correct_verdict": "pass",
+            "reasoning": "A request the company's app sends to a provider for an answer needs no provider statement, so how that provider rotates its own keys is the provider's and is not tested here. The key the company holds itself is shown by its configuration.",
+            "weight": 0.5,
+            "source": "words_d549_2026_11"
+          },
+          {
+            "evidence_summary": "The company keeps its files at a storage provider whose security page says they are encrypted at rest. The provider's written answer, already on file, says the keys for that data are fixed and are never rotated. The one key the company holds itself rotates automatically, shown in a console capture.",
+            "ai_verdict": "pass",
+            "correct_verdict": "gap",
+            "reasoning": "The provider's statement that the data is encrypted at rest covers rotation only while nothing on file shows that the provider does not rotate those keys. Here a written answer on file shows no rotation for data the company keeps at a provider to use later, and that counts against the check. The company's own rotating key does not change that.",
+            "weight": 0.5,
+            "source": "words_d549_2026_11"
           }
         ],
         "collection_hint": {
           "coverage_checks": [
             {
               "id": "key_rotation_performed_scheduled",
-              "question": "Is key rotation shown performed or scheduled: by KMS configuration or a rotation log for keys the company holds, and by the provider's own statement of automatic rotation or a dated rotation for keys a provider holds and rotates inside its own service?",
+              "question": "Is key rotation shown performed or scheduled: by KMS configuration or a rotation log for keys the company holds, with keys a provider holds and rotates inside its own service covered by the provider's own statement that data the company keeps at a provider to use later is encrypted at rest?",
               "lane": "auto_pull",
               "alt_lanes": [
                 "screenshot",
@@ -17567,35 +17663,82 @@
     "attributes": [
       {
         "id": "A1",
-        "text": "All in-scope systems are included in scan scope",
+        "text": "All in-scope scan targets at the layers the company operates or configures are covered",
         "attr_type": "config",
-        "typical_evidence": "Scan target configuration showing all in-scope IPs, domains, or systems",
-        "pass_criteria": "PASS: Scan target configuration lists all in-scope systems (compare against entity's in-scope system list), zero in-scope systems excluded. FAIL: Any in-scope system is missing from the scan target configuration.",
+        "typical_evidence": "Scanner configuration, exports or live screenshots showing coverage of the company-operated or configured scan targets for the systems in scope",
+        "pass_criteria": "PASS: Scanner configuration covers all in-scope scan targets at the layers the company operates or configures. Compare that coverage with the existing in-scope system list. A repository, project or workload entry can cover its deployed applications or functions when system evidence, such as the scanner's project list or the hosting platform's build settings, shows those applications or functions are built from that repository or project; this check does not prescribe a separate target entry or scan technology for each URL or function. A container image the company builds remains its own workload target, including its base image and installed packages. Where in scope, targets include the company's own code and dependencies, the workloads it deploys, and hosts or devices it manages. Provider-operated underlying infrastructure and shared-service internals are outside this scan-target boundary. A SaaS account or admin setting alone does not make the provider's software a company scan target. Using managed services or having no servers does not remove the company's own scan targets. FAIL: Any in-scope company-operated or configured scan target is missing from scanner coverage, or coverage is supported only by a policy, inventory or statement without scanner-side evidence.",
         "na_condition": "",
         "can_be_na": false,
         "calibration_examples": [
           {
-            "evidence_summary": "A live screenshot of the vulnerability scanner's target configuration shows every in-scope repository and cloud account listed, but it was tagged as a plain screenshot rather than an auto-pulled export.",
+            "id": "vul-scope-hosted-covered",
+            "evidence_summary": "A company uses managed hosting and hosted development services. Scanner exports and live configuration screenshots cover all of its in-scope website, backend and admin application code and dependencies through repository and project entries. The hosting platform's build settings show which repositories build its deployed applications and serverless functions. The scanner itself provides no deployment mapping, and there is no separate scan technology or target entry for every URL or function. One live screenshot was tagged as a screenshot rather than an export. It manages no hosts or devices in scope. Its office SaaS accounts also appear on the system list, but their account settings alone create no company application or infrastructure target. The providers' underlying infrastructure and shared-service internals are absent from the targets.",
             "ai_verdict": "gap",
             "correct_verdict": "pass",
-            "reasoning": "Live system screenshots are system evidence regardless of how they were labeled at submission, so judge what the capture shows, not its lane tag. The scan target list plainly covers every in-scope system, satisfying the attribute.",
+            "reasoning": "Scanner-side evidence establishes repository and project coverage, and the hosting platform's build settings connect that coverage to the deployed applications and functions. Both are system evidence. The scanner need not produce the deployment mapping itself. A separate scan technology or target entry for every deployed URL or function would add a requirement this check does not set. Provider-operated infrastructure and shared-service internals sit outside the boundary. The office SaaS accounts and their admin settings alone do not make the providers' software company scan targets. A live system screenshot can prove coverage just as an export can, regardless of how it was tagged at submission. This passes the scan-scope check only, without deciding scan frequency, findings or remediation.",
             "weight": 0.5,
-            "source": "synthetic_taste_v1"
+            "source": "words_vul_scan_scope_2026_11"
           },
           {
-            "evidence_summary": "A client-authored spreadsheet titled 'systems we scan' lists all in-scope assets, but no screenshot or export from the scanning tool itself was provided.",
+            "id": "vul-scope-document-only",
+            "evidence_summary": "A client-authored spreadsheet lists every company-operated scan target and explains which infrastructure the providers operate, but no scanner configuration, export or live screenshot corroborates coverage.",
             "ai_verdict": "pass",
             "correct_verdict": "gap",
-            "reasoning": "A client-authored spreadsheet is not system proof for a configuration claim; it needs provenance from the tool itself or corroboration against a system view. Without a scanner-side capture, coverage cannot be verified.",
+            "reasoning": "A correct responsibility boundary does not prove scanning coverage. The inventory or explanation alone is document evidence for a system-configuration claim; scanner-side evidence must show coverage.",
             "weight": 0.5,
-            "source": "synthetic_taste_v1"
+            "source": "words_vul_scan_scope_2026_11"
+          },
+          {
+            "id": "vul-scope-missing-company-target",
+            "evidence_summary": "Scanner exports cover a hosted product's public website repository and dependencies. Its in-scope admin application has a separate codebase and dependency manifest that are absent from every scanner's scope. The company says the hosting provider manages the underlying servers.",
+            "ai_verdict": "pass",
+            "correct_verdict": "gap",
+            "reasoning": "The admin application's code and dependencies are demonstrably outside every configured scan target. This is missing coverage of a company-managed target, rather than a missing separate URL entry for code already covered. Provider-managed hosting does not excuse that gap.",
+            "weight": 0.5,
+            "source": "words_vul_scan_scope_2026_11"
+          },
+          {
+            "id": "vul-scope-no-servers",
+            "evidence_summary": "A company runs its own in-scope application code and dependencies on managed serverless services. It provides no scanner-side evidence and asks to mark scan coverage not applicable because it has no servers.",
+            "ai_verdict": "na",
+            "correct_verdict": "gap",
+            "reasoning": "Having no servers leaves the company's own in-scope application and dependencies to cover. This check has no not-applicable route, and managed hosting alone cannot establish coverage.",
+            "weight": 0.5,
+            "source": "words_vul_scan_scope_2026_11"
+          },
+          {
+            "id": "vul-scope-managed-hosts-missing",
+            "evidence_summary": "A company has scanner evidence covering its hosted applications and dependencies, but an in-scope virtual machine and managed workstation that the company operates are missing from coverage.",
+            "ai_verdict": "pass",
+            "correct_verdict": "gap",
+            "reasoning": "The boundary excludes infrastructure operated by providers. It retains hosts and devices the company manages when they are in scope, so the omitted company-managed targets are coverage gaps.",
+            "weight": 0.5,
+            "source": "words_vul_scan_scope_2026_11"
+          },
+          {
+            "id": "vul-scope-mapping-statement-only",
+            "evidence_summary": "Scanner output shows code and dependency scanning for one repository. The company says its website and serverless functions deploy from that repository, but neither scanner nor hosting or build settings show which repository those applications use.",
+            "ai_verdict": "pass",
+            "correct_verdict": "gap",
+            "reasoning": "The scans prove coverage of the repository, but the statement alone does not connect it to the deployed applications. System evidence may come from the hosting or build settings; it does not have to come from the scanner. Without that connection, full scan coverage remains unverified.",
+            "weight": 0.5,
+            "source": "words_vul_scan_scope_2026_11"
+          },
+          {
+            "id": "vul-scope-company-image-unscanned",
+            "evidence_summary": "A company builds a container image from its repository and deploys it to a managed container service. Scanner exports show code and application dependency scanning for the repository. Build and deployment settings connect the running image to that repository. No scanner covers the image's base operating system or the system packages installed in it.",
+            "ai_verdict": "pass",
+            "correct_verdict": "gap",
+            "reasoning": "The company-built container image remains a company-managed workload target, including its base image and installed packages. Repository code and application dependency scanning plus a deployment mapping does not prove coverage of those additional image components. The provider operates the underlying hosting infrastructure, but that does not remove the company-built image from scan coverage.",
+            "weight": 0.5,
+            "source": "words_vul_scan_scope_2026_11"
           }
         ],
         "collection_hint": {
           "coverage_checks": [
             {
               "id": "scope_systems_included_scan",
-              "question": "Does the system configuration show that all in-scope systems are included in scan scope?",
+              "question": "Does scanner-side evidence show coverage of all in-scope scan targets at the layers the company operates or configures, including its own code and dependencies, the workloads it deploys, and any hosts or devices it manages, while excluding provider-operated underlying infrastructure and shared-service internals? Repository, project or workload scope can cover deployed applications or functions when system evidence, such as the scanner's project list or the hosting platform's build settings, shows those applications or functions are built from that repository or project. A container image the company builds remains its own workload target, including its base image and installed packages.",
               "lane": "auto_pull",
               "alt_lanes": [
                 "screenshot",
@@ -22642,13 +22785,13 @@
         "id": "A3",
         "text": "Reports cover the examination period",
         "attr_type": "document",
-        "typical_evidence": "SOC 2 report cover pages showing report period, or bridge letters covering any gaps",
-        "pass_criteria": "PASS: Each dependent vendor's SOC 2 report period overlaps with the entity's examination period, OR bridge letters cover any gap between the report period end and the examination period end. A vendor covered by a documented alternative assessment instead of a report (it offers none, or the entity has not obtained it) has no report period to test here. FAIL: Any dependent vendor's report period does not cover the examination period and no bridge letter covers the gap.",
+        "typical_evidence": "SOC 2 report cover pages showing each report period, overlapping the examination period or ending in the 12 months up to the examination date (for a Type II, the last day of the examination period), or bridge letters covering the time since an earlier report period end",
+        "pass_criteria": "PASS: Each dependent vendor's SOC 2 report period overlaps with the entity's examination period, or ended in the 12 months up to the examination date (for a Type II, the last day of the examination period), OR bridge letters cover any gap between the report period end and the examination period end. A vendor covered by a documented alternative assessment instead of a report (it offers none, or the entity has not obtained it) has no report period to test here. FAIL: For any dependent vendor, the report period does not overlap the examination period, it did not end in the 12 months up to the examination date (for a Type II, the last day of the examination period), and no bridge letter covers the gap.",
         "na_condition": "",
         "can_be_na": false,
         "calibration_examples": [
           {
-            "evidence_summary": "A dependent vendor's SOC 2 report period ended three months before the entity's examination period began, but a signed bridge letter from the vendor covers the intervening gap through the examination end date.",
+            "evidence_summary": "A dependent vendor's SOC 2 report period ended fourteen months before the examination date, but a signed bridge letter from the vendor covers the time since, through the examination date.",
             "ai_verdict": "gap",
             "correct_verdict": "pass",
             "reasoning": "Attribute-boundary discipline: the pass criteria explicitly allow a bridge letter to cover a gap between report period and examination period, so this clause must not be skipped when it is present. The bridge letter satisfies coverage of the examination period.",
@@ -22657,18 +22800,34 @@
           },
           {
             "evidence_summary": "SOC 2 reports are on file for both dependent vendors. The cloud provider's report period runs through two months before the examination date. The payment processor's report period ended eight months before it, and no bridge letter covering the interval was requested or provided.",
-            "ai_verdict": "pass",
-            "correct_verdict": "gap",
-            "reasoning": "Holding a vendor's report is not the same as being covered for the period under examination, which is what this attribute tests. An eight month uncovered interval needs a bridge letter, and its absence leaves the entity relying on controls nobody has reported on for most of the period.",
+            "ai_verdict": "gap",
+            "correct_verdict": "pass",
+            "reasoning": "Both report periods ended in the 12 months up to the examination date (two and eight months before it), so each meets the check on its own. A bridge letter is the route for a report period that ended earlier than that.",
             "weight": 0.5,
             "source": "synthetic_taste_v1"
+          },
+          {
+            "evidence_summary": "SOC 2 reports are on file for both dependent vendors. The hosting provider's report period ended four months before the examination date. The email delivery provider's most recent report period ended fifteen months before it; the entity holds no newer report from that vendor, no bridge letter for the months since, and no documented alternative assessment in place of the report.",
+            "ai_verdict": "pass",
+            "correct_verdict": "gap",
+            "reasoning": "The email delivery provider's report period ended more than 12 months before the examination date, and nothing covers the months since, so for that vendor the check is not met. A newer report whose period overlaps the examination period or ended in the 12 months up to the examination date, a bridge letter covering the months since, or a documented alternative assessment in place of the report would each meet it.",
+            "weight": 0.5,
+            "source": "words_vnd02_d458_2026_11"
+          },
+          {
+            "evidence_summary": "The entity's Type II examination period runs from February 1 to July 31. Its hosting provider's most recent SOC 2 report period ended the previous September 30, ten months before the last day of the examination period, so the report period does not overlap the examination period, and no bridge letter is on file.",
+            "ai_verdict": "gap",
+            "correct_verdict": "pass",
+            "reasoning": "For a Type II the 12 months count back from the last day of the examination period. This report period ended ten months before it, which meets the check on its own even though it does not overlap the period; a bridge letter is the route for a report period that ended earlier than that.",
+            "weight": 0.5,
+            "source": "words_vnd02_d458_2026_11"
           }
         ],
         "collection_hint": {
           "coverage_checks": [
             {
               "id": "reports_cover_examination_period",
-              "question": "Does the evidence show that reports cover the examination period (a vendor covered by a documented alternative assessment instead of a report has no report period to test)?",
+              "question": "Does the evidence show, for each dependent vendor, that its report period overlaps the examination period or ended in the 12 months up to the examination date (for a Type II, the last day of the examination period), or that bridge letters cover the gap (a vendor covered by a documented alternative assessment instead of a report has no report period to test)?",
               "lane": "document",
               "alt_lanes": [
                 "record"

@@ -101,8 +101,8 @@ advised.
 | Contingency operations (facility access) | 164.310(a)(2)(i) | Addressable | Provider-inherited, monitored | VND-02, BCP-01 |
 | Facility security plan | 164.310(a)(2)(ii) | Addressable | Provider-inherited, monitored | NET-03, VND-02 |
 | Access control and validation procedures | 164.310(a)(2)(iii) | Addressable | Provider-inherited, monitored | NET-03, VND-02 |
-| Maintenance records | 164.310(a)(2)(iv) | Addressable | Provider-inherited, monitored | VND-02, NET-03 |
-| Workstation use | 164.310(b) | Required | Carried by the library | POL-01, END-02 |
+| Maintenance records | 164.310(a)(2)(iv) | Addressable | Provider-inherited, monitored | VND-02 |
+| Workstation use | 164.310(b) | Required | Carried by the library | POL-01 |
 | Workstation security | 164.310(c) | Required | Carried by the library | END-01 |
 | Device and media controls | 164.310(d)(1) | Required | Met through its specifications | DAT-02, AST-01, DAT-03 |
 | Disposal | 164.310(d)(2)(i) | Required | Carried by the library | DAT-02 |
@@ -112,7 +112,7 @@ advised.
 | Access control | 164.312(a)(1) | Required | Met through its specifications | IAM-01, IAM-02, IAM-06, IAM-07 |
 | Unique user identification | 164.312(a)(2)(i) | Required | Carried by the library | IAM-01 |
 | Emergency access procedure | 164.312(a)(2)(ii) | Required | Resolved by a HIPAA control | HIP-02, IAM-07 |
-| Automatic logoff | 164.312(a)(2)(iii) | Addressable | Carried, with prep guidance | END-01, IAM-01 |
+| Automatic logoff | 164.312(a)(2)(iii) | Addressable | Carried, with prep guidance | END-01 |
 | Encryption and decryption (at rest) | 164.312(a)(2)(iv) | Addressable | Carried by the library | DAT-01 |
 | Audit controls | 164.312(b) | Required | Carried by the library | MON-01, IAM-07 |
 | Integrity | 164.312(c)(1) | Required | Carried, with prep guidance | DAT-01, MON-01, BCP-02 |

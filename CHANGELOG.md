@@ -5,6 +5,130 @@ applied to an examination. Corrections that do not change the method (typos,
 formatting, clearer wording with the same meaning) ship without a version, and
 the commit history on this repo records every one of them.
 
+## v1.18, 2026-11-17
+
+The same 89 controls and 387 checks, with changes to 6 checks and 3 controls,
+19 more worked examples, one new tool, and changes to 9 tools, the collection
+rules and the HIPAA crosswalk.
+
+- Provider encryption statements (DAT-01 A1, A3, A4, A5): a provider's own
+  statement is needed only for data the company keeps at a provider to use
+  later (kept data), such as support conversations, customer billing
+  records, source code or files kept in a provider account. A request the
+  company's app sends to a provider for an answer (an AI model call, a map
+  lookup, a third-party sign-in) needs none, even when the provider keeps a
+  copy to deliver the answer or for its own safety checks, and neither does
+  data that is public by design or a provider's own records of the company
+  as its customer. Each use is judged separately. A1 and A3 still need the
+  statement to name the algorithm, and A3 a key length that meets the
+  minimum; AES named with no key length meets it, because every AES key is
+  at least 128 bits. For A4, a provider's statement that the data is
+  encrypted at rest also covers how the provider stores the keys it holds
+  for that data. For A5, the same statement covers the rotation of those
+  keys, and where the company holds no key itself, A5 reads its 12-month
+  clock from a provider's statement of automatic rotation or of a rotation
+  in the past 12 months, staying unresolved with none on file. Anything on
+  file showing those keys exposed, or not rotated, still counts against the
+  check. The statement comes from what the provider publishes or from a
+  report or written answer the company already holds; over a Type II period
+  it is the provider's report covering the period, with a bridge letter for
+  any gap. Nobody is asked to email a provider or to request a gated
+  document. Where those are not on file, or do not establish what the check
+  needs, the check stays unresolved for that provider only: no pass and no
+  gap, what is already shown stays shown, and the user is asked nothing
+  more about it. Needing a statement here does not decide which providers
+  belong in the dependent vendor review. DAT-01's collection guidance in
+  `framework/controls.json` says the same, and 12 new worked examples cover
+  kept data, requests for an answer, and a provider with both.
+- Vendor report periods (VND-02 A3): a dependent vendor's SOC 2 report also
+  meets the check when its period ended in the 12 months up to the
+  examination date (for a Type II, the last day of the examination period),
+  beside a period that overlaps the examination period or a bridge letter
+  covering the time since. The check's coverage question and typical
+  evidence, and VND-02's collection guidance, say the same. Of the check's
+  two earlier worked examples, the one with report periods that ended two
+  and eight months before the examination date now passes with no bridge
+  letter, and the bridge letter one now has a report that ended fourteen
+  months before. Two new ones: a report that ended fifteen months before,
+  with nothing covering the months since, is a gap, and a Type II counts
+  its 12 months back from the last day of the period.
+- Scan coverage (VUL-01 A1): the check reads "All in-scope scan targets at
+  the layers the company operates or configures are covered". Those targets
+  are the company's own code and dependencies, the workloads it deploys and
+  the hosts or devices it manages. Provider-operated underlying
+  infrastructure and shared-service internals are outside them, a SaaS
+  account or admin setting alone does not make a provider's software a
+  target, and using managed services or having no servers does not remove
+  the company's own. A repository, project or workload entry covers the
+  applications or functions deployed from it when system evidence, such as
+  the scanner's project list or the hosting platform's build settings,
+  shows that link, and a container image the company builds stays its own
+  target, base image and installed packages included. Coverage shown only
+  by a policy, inventory or statement, with no scanner-side evidence,
+  fails. VUL-01's questions and collection guidance say the same, and seven
+  new worked examples take the place of the check's two earlier ones.
+- Worked examples grow from 1014 to 1033, all on the checks above. 356 of
+  them correct an AI that was too strict and 227 one that was too lenient.
+- HIPAA crosswalk (`framework/hipaa-crosswalk.json`): each row keeps
+  `controls`, the controls that carry the requirement, which the prep-phase
+  HIPAA coverage view counts, and 32 rows gain `related`, further controls
+  whose own attributes address the rule's text. The report's mapping cites
+  them after the row's controls, and the coverage view does not count them.
+  Three links leave `controls`: NET-03 from maintenance records
+  (164.310(a)(2)(iv)), END-02 from workstation use (164.310(b)) and IAM-01
+  from automatic logoff (164.312(a)(2)(iii)), and those rows' rationales
+  name what carries each. 38 rationales and three notes are reworded: they
+  name the related controls, and they describe the checks they cite as
+  those checks are written, among them PPL-01, PPL-03, IAM-02, the POL-01
+  attributes and the checks under 164.312(c)(2). The checks themselves do
+  not change. A scope note explains the two lists, and
+  `method/hipaa-crosswalk.md` shows the narrower control lists. Rows,
+  citations, names and resolutions are unchanged.
+- Sending evidence on an audit: where `get_status` or `complete_step`
+  carries `data.evidence_send`, the files go to the audit team by its send
+  command instead of a zip. `complete_step` then hands over once every file
+  has arrived; until then it names the files still to come
+  (`data.evidence_send.owed`) and what to do for each, and it takes
+  `cannot_provide`, each file the user cannot provide with the user's
+  reason in their words. There, `request_upload_link` makes no link,
+  `submit_document`'s audit copies travel at the handoff by the send, and
+  `record_prior_report` takes `saved_sha256`, the saved copy's fingerprint,
+  which the sent report is checked against. `method/collection-rules.md`
+  gains the same finish (THE SEND).
+- The evidence folder: a new tool, `record_folder_copies`, reports what the
+  commands in a reply's `data.evidence_folder.next` did: copies of saved
+  files in the evidence folder (the originals are never moved, renamed or
+  changed) and the folder's START HERE.txt. It records where the copies are
+  and whether START HERE.txt is written, and changes no saved file, answer
+  or score. On an audit, `answer_audit_question`'s one question about files
+  from readiness holds the handover only while it lists a file that names a
+  system. It takes no `cannot_provide` (a file that no longer applies goes
+  in `except`), and a file it confirms can count as collected once it
+  arrives unchanged.
+- Helpers: `delegate_topic` takes several topics at once, separated by
+  commas, for one email with one access link. One person keeps one link,
+  so more topics for someone who has one are added to it, and a teammate
+  who is already an admin or member gets no link, only a short note of what
+  was asked. `undo_delegate` takes `delegate_email` to take a topic back
+  from one person; a teammate keeps access for the topics they still cover,
+  and it ends once they cover none. `get_topic_delegation_status` shows each
+  person's topics, how many of each topic's checks are done and whether
+  they have connected their AI, counted from the same checklist the
+  helper's own AI sees.
+- Scope answers: `set_company_profile` says what `has_remote_access` and
+  `uses_removable_media` mean. Remote access is a VPN (a mesh VPN counts), a
+  zero-trust access tool used in its place, a bastion or jump host, a cloud
+  provider's shell or tunnel service into servers, or SSH or RDP into a
+  server that runs production, can reach it or holds its keys. Working from
+  home and signing in only to SaaS tools and cloud consoles is not remote
+  access. `false` makes IAM-02 A2 and NET-02 A4 not applicable. Removable
+  media is USB drives, external disks and memory cards used for company
+  work, and `false` makes END-02 A3 not applicable. A recorded answer
+  changes only when the user confirms it is wrong. On a readiness account,
+  the checks an answer decides follow the saved answer at their next
+  judgment kit or save, and if progress still counts a check its kit
+  withholds, the AI sends `report_problem` naming the check and the answer.
+
 ## v1.17, 2026-11-07
 
 The same 89 controls and 387 checks, with changes to 1 check and 1 control,

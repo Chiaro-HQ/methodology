@@ -1,6 +1,6 @@
 # The tools
 
-The 54 tools a connected client's AI can call. Generated from the
+The 55 tools a connected client's AI can call. Generated from the
 live server, so this list is exactly what a client sees, including the
 descriptions the AI reads to decide what to do.
 
@@ -70,8 +70,9 @@ Answer one question your audit's own record raises before handover.
 
 load_area shows each check's open questions (before_handover, each with its
 key and the shape of its answer) and get_progress counts them; complete_step
-waits until each is answered, because each is a question the auditor would
-otherwise send back after the handover. Answer from the files the company
+waits until each is answered (the one question about files from readiness
+holds it only while it lists a file that names a system), because each is a
+question the auditor would otherwise send back after the handover. Answer from the files the company
 holds: register a new file with submit_evidence first, then name its
 evidence_id here. A count, a date or a file can come from the company's
 records; an outcome, a classification, a member's result, a reason a check
@@ -79,8 +80,11 @@ does not apply, or that the company cannot provide something is the user's
 decision: ask them, and record their words. Never choose one for them. If
 the company cannot provide what a question asks, cannot_provide=true with
 the reason in statement always counts, and the reason goes to the auditor
-with the handover. An answer never changes a check's status or your
-progress; a later answer to the same question replaces the earlier one,
+with the handover (the files-from-readiness question takes none: a file that
+no longer applies goes in except). An answer never changes a check's status
+or your progress, except that a file the files-from-readiness question
+confirms can count as collected once it arrives unchanged; a later answer to
+the same question replaces the earlier one,
 except that lists, systems, vendors and file names you answered before are
 kept.
 
@@ -165,7 +169,11 @@ GATED: collection must be complete before this succeeds. The gates:
   4. Every subservice org has its SOC 2 status recorded (yes or no)
 
 On success, marks the engagement as awaiting_upload. The client uploads
-their evidence zip, which flips status to ready_for_review.
+their evidence zip, which flips status to ready_for_review. On an audit
+whose replies carry data.evidence_send there is no zip: its AI runs the
+send command while collecting, and this call hands over once every file
+has arrived, straight to review; until then it says which files are still
+to come (data.evidence_send.owed) and what to do for each.
 
 still_open is for a Type I only, once you have done all you can: the checks
 the client is still working on that go along at hand-off, as a list of
@@ -177,9 +185,16 @@ it), unless the file is not on this computer any more or no longer shows
 what the check needs; then add held_file_unusable true and say why in its
 note. Leave it empty when nothing is still being worked on.
 
+cannot_provide is for an audit whose replies carry data.evidence_send: the
+files still to come that the user cannot provide, as a list of objects
+with file (its evidence_id or path from data.evidence_send.owed) and why
+(the user's reason, in their words). Ask the user; never assume. Leave it
+empty otherwise.
+
 Arguments:
 
 - `still_open` (string or array, optional)
+- `cannot_provide` (string or array, optional)
 
 ## `confirm_scope`
 
@@ -269,17 +284,20 @@ Arguments:
 
 ## `delegate_topic`
 
-Delegate a conversation topic to a team member.
+Assign one or more topics to a teammate, who works on them from their own AI.
 
-The delegate receives a scoped token and instructions to connect their
-own AI agent. Audit invitations also include an evidence upload link.
-
-Only the assigned topic is accessible to the delegate.
+Pass several topics at once, separated by commas, to send one email with
+one access link. One person keeps one link: assigning more topics to
+someone who already has a link adds them to it, and they get a short
+note with nothing new to set up. A teammate who is already an admin or
+member of the account already reaches every topic with their own
+sign-in, so no link is made; they get a short note saying what was
+asked. Audit invitations also include an evidence upload link.
 
 Arguments:
 
-- `topic_key` (string, required): Topic to delegate (from get_questions output data)
-- `delegate_name` (string, required): Delegate's full name (e.g. "Sarah Chen")
+- `topic_key` (string, required): A topic key from get_questions, or several separated by commas, for example "privacy, governance"
+- `delegate_name` (string, required): Delegate's full name, for example "Sarah Chen"
 - `delegate_email` (string, required): Delegate's email address
 
 ## `finalize_policy_pack`
@@ -389,10 +407,11 @@ this session is working on (switch with select_product).
 
 ## `get_topic_delegation_status`
 
-Check progress on all delegated conversation topics.
+Check how your helpers are doing on the topics you assigned them.
 
-Shows which topics have been assigned, to whom, and whether
-their questions are answered.
+For each person: their topics, how many of each topic's checks are
+done, and whether they have connected their AI yet. Counts come from
+the same checklist the helper's own AI sees.
 
 ## `get_unresolved`
 
@@ -710,6 +729,27 @@ Arguments:
 - `no_subservice_controls_for` (string or array, optional): The organizations nothing is assumed of. A
   JSON array of names, or one per line.
 
+## `record_folder_copies`
+
+Report evidence-folder work a Chiaro reply gave you: copies of saved files, and the folder's START HERE.txt.
+
+A reply's data.evidence_folder.next gives you a command for your shell: a move or a tidy check copies files
+already saved into the evidence folder (it never moves, renames or changes the originals), and a write writes the
+folder's START HERE.txt. Each prints one line per file. Pass those printed lines as output, unedited. The reply
+carries the next batch, if any. This records only where the copies are and whether START HERE.txt is written: no
+saved file, answer or score changes.
+
+Arguments:
+
+- `output` (string, optional): The command's printed lines, exactly as printed.
+- `copies` (array of object or string or null, optional): Instead of output, a list of {evidence_id, state, folder_path, sha256}. state is copied, deferred
+  (you cannot write into the folder now) or unreachable (the original is not on this computer).
+- `screenshot_paste` (object or string or null, optional): After asking the person to paste a screenshot: {check, outcome}, check as "IAM-02 A3",
+  outcome "saved", "failed" (a wrong picture, or the paste did not arrive) or "unsaved" (no picture could
+  be saved).
+- `listing` (string or null, optional): At audit start, the file list the tidy check's listing command printed, unedited ("" when it
+  printed nothing).
+
 ## `record_hipaa_intake`
 
 Record the HIPAA intake answers (asked when the HIPAA add-on is chosen).
@@ -874,6 +914,11 @@ Arguments:
   produce the file at all. That is a recordable answer, not a
   silence, and it goes in the file as one. Put what they described
   in file_note.
+- `saved_sha256` (string, optional): The saved copy's sha256, 64 hexadecimal characters,
+  the same fingerprint submit_evidence takes. On an audit whose
+  replies carry data.evidence_send, the report is sent like every
+  evidence file and checked against it. Call this tool again with
+  the new value if the saved copy changes.
 
 ## `record_questionnaire_answers`
 
@@ -1148,7 +1193,9 @@ Call this in three cases, and no others:
 
 Save what is being shared into ~/Documents/chiaro-soc2/, zip it
 (data.zip_commands), and the user drags the zip onto the page
-(data.open_commands opens it).
+(data.open_commands opens it). On an audit whose replies carry
+data.evidence_send, the files go by its send command instead, and no
+link is made.
 
 The link is single-engagement, time-limited (default 90 days), and revocable.
 Each call creates a NEW link — if you need to re-issue (e.g., the user lost the
@@ -1248,8 +1295,33 @@ Arguments:
 
 - `company_founded_date` (string, optional): When the company was founded (YYYY-MM format, e.g. "2024-06")
 - `has_physical_office` (boolean or null, optional): Does the company have a physical office, data center, or server room?
-- `has_remote_access` (boolean or null, optional)
-- `uses_removable_media` (boolean or null, optional)
+- `has_remote_access` (boolean or null, optional): Does the company have a VPN or other remote network
+  access into its own systems? true for a VPN (a mesh VPN such as
+  Tailscale or WireGuard counts), a zero-trust access tool used in
+  place of one, a bastion or jump host, a cloud provider's shell or
+  tunnel service into its servers (AWS Session Manager, Google IAP,
+  EC2 Instance Connect), or SSH or RDP into a server that runs
+  production, can reach production or holds production keys. false
+  when none of these exists, for example when people reach the
+  company's systems only through ordinary sign-ins to SaaS tools and
+  cloud consoles. Working remotely is not remote access: a team that
+  works from home and signs in only to SaaS tools answers false. It
+  decides whether IAM-02/A2 and NET-02/A4 apply (false makes both
+  not applicable).
+  Change a recorded answer only when the user confirms it is wrong;
+  on a readiness account the checks it decides follow the saved
+  answer at their next judgment kit or save. If the readiness
+  progress then still counts a check its kit withholds, send
+  report_problem naming the check and the answer; the Chiaro team
+  updates the progress.
+- `uses_removable_media` (boolean or null, optional): Do the company's people use removable media (USB
+  drives, external disks, memory cards) for company work? It decides
+  whether END-02/A3 applies (false makes it not applicable). Change a
+  recorded answer only when the user confirms it is wrong; on a
+  readiness account that check follows the saved answer at its next
+  judgment kit or save. If the readiness progress then still counts
+  it while its kit withholds it, send report_problem naming the check
+  and the answer.
 - `governance_body` (string, optional): Who oversees security, as a SHORT noun phrase that
   reads inline in control text (e.g. "the Board of Directors",
   "the leadership team", "the founding team"). Keep it under six
@@ -1518,7 +1590,8 @@ NEVER FABRICATE EVIDENCE.
   A new policy cannot prove past activities or erase a past deficiency.
 
 Readiness evidence stays local. Register its path, hash and compact inspection
-observations. Audit copies travel in the handoff zip. Claim a save only after
+observations. Audit copies travel at the handoff (a zip, or the send command
+where replies carry data.evidence_send). Claim a save only after
 the tool reports success; local working notes alone do not prove a server save.
 
 Arguments:
@@ -1771,12 +1844,16 @@ Arguments:
 
 ## `undo_delegate`
 
-Take back a delegated topic. The delegate's token is revoked
-and the topic returns to your queue.
+Take back a delegated topic; it returns to your own queue.
+
+A teammate who still covers other topics keeps their access for those;
+their access ends once they cover nothing. When several people have the
+topic, give delegate_email to take it back from that person only.
 
 Arguments:
 
 - `topic_key` (string, required): The topic to take back (from get_topic_delegation_status output)
+- `delegate_email` (string, optional): Optional. Take the topic back from this person only; empty takes it back from everyone who has it
 
 ## `update_system_description`
 

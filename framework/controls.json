@@ -2113,13 +2113,13 @@
       ],
       "collection_playbook": {
         "evidence_goals": [
-          "Pull encryption-at-rest configuration for all data stores (databases, object storage, block storage); for a store whose encryption only the provider runs, the provider's SOC 2 report section, published encryption documentation or written answer instead",
+          "Pull encryption-at-rest configuration for all data stores (databases, object storage, block storage); for data the company keeps at a provider to use later, in a store whose encryption only the provider runs, the provider's SOC 2 report section, published encryption documentation or written answer already on file instead",
           "Pull encryption-in-transit configuration (TLS settings, certificate config) for the company's own endpoints and any TLS setting a provider lets it set",
-          "Pull encryption algorithm and key length settings the company can see; where only the provider runs the encryption or never shows them, the provider's statement of them",
-          "Pull key management configuration (where keys are stored, rotation schedule) for keys the company holds; for keys a provider holds inside its own service, the provider's statement of how they are stored and rotated"
+          "Pull encryption algorithm and key length settings the company can see; for data the company keeps at a provider to use later, where only the provider runs the encryption or never shows them, the provider's statement of them",
+          "Pull key management configuration (where keys are stored, rotation schedule) for keys the company holds; for keys a provider holds inside its own service for data the company keeps at a provider to use later, the provider's statement that the data is encrypted at rest, with any key storage or rotation it states"
         ],
-        "what_good_looks_like": "Raw config per data store the company can see or set, showing: encryption enabled, algorithm where the configuration shows it (AES-256, etc.), key source (KMS, managed, etc.), TLS version enforced. Key rotation schedule if configured. For a store, key or fact only the provider runs or never shows (such as an email, HR or phone system's own encryption, or the algorithm behind a provider's default encryption), the provider's SOC 2 report section, published encryption documentation or written answer naming the encryption, algorithm, key storage and rotation.",
-        "what_bad_looks_like": "The company's own statement that encryption is enabled, without per-system config or the provider's own statement. Summary without algorithm or key details. A provider's report cited in place of a setting the company can see on its own database, bucket, disk or key.",
+        "what_good_looks_like": "Raw config per data store the company can see or set, showing: encryption enabled, algorithm where the configuration shows it (AES-256, etc.), key source (KMS, managed, etc.), TLS version enforced. Key rotation schedule if configured. For data the company keeps at a provider to use later, where a store, key or fact is one only the provider runs or never shows (such as an email, HR or phone system's own encryption, or the algorithm behind a provider's default encryption), the provider's SOC 2 report section, published encryption documentation or written answer already on file, stating that the data is encrypted at rest and naming the algorithm and key length. That statement of encryption at rest is enough for the keys the provider holds inside its own service, and any key storage or rotation it states is noted with it. A use that needs no provider statement (a request the company's app sends to a provider for an answer, data that is public by design, a provider's own records of the company as its customer) is left out of the provider research.",
+        "what_bad_looks_like": "The company's own statement that encryption is enabled, without per-system config or the provider's own statement. A summary of the company's own settings without algorithm or key details. A provider's statement that names no algorithm, offered as proof of the algorithm or key length for data the company keeps at a provider to use later. A provider's statement collected for a use that needs none (a request the company's app sends to a provider for an answer, data that is public by design, a provider's own records of the company as its customer). A provider's report cited in place of a setting the company can see on its own database, bucket, disk or key.",
         "red_flags": [
           "Any data store with encryption disabled",
           "TLS version below 1.2 accepted",
@@ -2606,7 +2606,7 @@
     "can_be_na": false,
     "na_trigger": "",
     "collection": {
-      "gating_question": "Does your organization run vulnerability scans on your systems or infrastructure? (Yes/No)",
+      "gating_question": "Does your organization run vulnerability scans on the in-scope code, applications or other scan targets it operates or configures, including code and applications you deploy to managed services? (Yes/No)",
       "absent_reason_template": "Entity does not have vulnerability scanning practices in place. All attributes for this control marked absent. This is a structural gap requiring implementation.",
       "evidence_commands": [
         {
@@ -2646,29 +2646,31 @@
         }
       ],
       "local_save": "vulnerability/",
-      "question": "Do you perform regular vulnerability scans on your infrastructure and applications?",
+      "question": "Do you perform regular vulnerability scans on the in-scope targets your company operates or configures, including code and applications you deploy to managed services?",
       "follow_ups": [
         "What scanning tool do you use and how often do scans run?",
         "What are your SLAs for remediating critical, high, medium, and low vulnerabilities?",
-        "What is your current scan coverage (all production systems, partial)?"
+        "What is your scan coverage of in-scope targets at the layers your company operates or configures, including code and applications you deploy to managed services?"
       ],
       "documents": [
         "Vulnerability Scanner (Qualys / Nessus / etc.)"
       ],
       "collection_playbook": {
         "evidence_goals": [
-          "Pull vulnerability scanning scope configuration showing which systems are scanned",
+          "Pull scanner configuration showing coverage of in-scope targets at the layers the company operates or configures",
           "Pull scan schedule or frequency settings",
-          "Pull most recent scan results or summary (date, findings count, severity breakdown)"
+          "Pull most recent scan results or summary (date, findings count, severity breakdown)",
+          "When repository or project coverage is used for deployed applications or functions, include system evidence showing that relationship, from the scanner or hosting/build settings."
         ],
-        "what_good_looks_like": "Scan config showing all in-scope systems included. Schedule showing regular cadence (weekly, monthly). Recent scan date and high-level results (not asking for full report, just date and severity counts).",
-        "what_bad_looks_like": "Statement that scanning is done without showing scope or schedule. Vendor marketing page instead of actual scan config.",
+        "what_good_looks_like": "Scanner configuration covers every in-scope target at the layers the company operates or configures: its own code and dependencies, the workloads it deploys, and any hosts or devices it manages. Provider-operated underlying infrastructure and shared-service internals sit outside that boundary. A SaaS account or admin setting alone does not make the provider's software a company scan target. A repository, project or workload entry can cover its deployed applications or functions when system evidence, such as the scanner's project list or the hosting platform's build settings, shows those applications or functions are built from that repository or project; this check does not prescribe a separate target entry or scan technology for each URL or function. A container image the company builds remains its own workload target, including its base image and installed packages. Schedule showing regular cadence (weekly, monthly). Recent scan date and high-level results (date and severity counts).",
+        "what_bad_looks_like": "Statement that scanning is done without showing scope or schedule. Vendor marketing page or company-authored responsibility explanation instead of actual scanner evidence.",
         "red_flags": [
-          "In-scope systems excluded from scan scope",
+          "In-scope company-operated or configured targets excluded from scanner coverage",
           "No regular scan schedule (ad-hoc only)",
           "Last scan outside the company's defined scanning interval",
           "Critical findings from recent scans with no remediation timeline",
-          "Scanning tool not configured for all asset types (infra, containers, code)"
+          "Scanning tool not configured for all asset types (infra, containers, code)",
+          "Company-operated or configured targets omitted because the company uses managed services or has no servers"
         ],
         "platform_hints": {
           "crowdstrike": "Pull Spotlight vulnerability assessment config. Pull scan scope and schedule. Pull recent assessment summary.",
@@ -4096,21 +4098,21 @@
       "collection_playbook": {
         "evidence_goals": [
           "Pull the list of vendors whose controls the product depends on (infrastructure, authentication, payments, and similar subservice organizations)",
-          "Pull the current audit reports obtained for those vendors covering the relevant period, or the equivalent certification, or, for a vendor that offers none or whose report the entity has not obtained, the documented alternative assessment",
+          "Pull the current audit reports obtained for those vendors, with each report's period dates and any bridge letter, or the equivalent certification, or, for a vendor that offers none or whose report the entity has not obtained, the documented alternative assessment",
           "Pull the review record showing who reviewed each report, when, the report opinion, and any exceptions or complementary user-entity control responsibilities noted",
           "Pull documentation of the controls those vendors operate on the entity's behalf"
         ],
-        "what_good_looks_like": "For each critical infrastructure vendor, a current audit report on file covering a period that overlaps the audit period, plus a short review note recording the report opinion and the complementary controls the entity itself is responsible for; for a vendor that offers no report or whose report the entity has not obtained, a dated alternative assessment recording its conclusion and the controls the vendor operates for the entity.",
-        "what_bad_looks_like": "Relying only on a vendor's certification claim, with neither its report nor a documented alternative assessment on file, relying on a report whose period has expired, or obtaining reports with no evidence anyone reviewed them or identified the entity's own responsibilities.",
+        "what_good_looks_like": "For each critical infrastructure vendor, a current audit report on file whose period overlaps the audit period or ended in the 12 months up to the examination date (for a Type II, the last day of the audit period), or with a bridge letter covering the time since, plus a short review note recording the report opinion and the complementary controls the entity itself is responsible for; for a vendor that offers no report or whose report the entity has not obtained, a dated alternative assessment recording its conclusion and the controls the vendor operates for the entity.",
+        "what_bad_looks_like": "Relying only on a vendor's certification claim, with neither its report nor a documented alternative assessment on file, relying on a report whose period ended more than 12 months before the examination date (for a Type II, the last day of the audit period) with no bridge letter for the time since, or obtaining reports with no evidence anyone reviewed them or identified the entity's own responsibilities.",
         "red_flags": [
           "Critical infrastructure vendors named with neither an audit report nor a dated alternative assessment",
-          "Audit reports on file but from an expired or non-overlapping period",
+          "Audit reports on file whose period ended more than 12 months before the examination date (for a Type II, the last day of the audit period), with no bridge letter for the time since",
           "Reports obtained but no evidence of review",
           "Complementary user-entity controls not identified or acted on",
           "Vendors that do not provide reports with no alternative assessment"
         ],
         "platform_hints": {
-          "aws": "Obtain the current audit reports from AWS Artifact. Check the report period covers the audit period and note the complementary user-entity controls listed.",
+          "aws": "Obtain the current audit reports from AWS Artifact. Check the report period overlaps the audit period or ended in the 12 months up to the examination date (for a Type II, the last day of the audit period), or that a bridge letter covers the time since, and note the complementary user-entity controls listed.",
           "google_drive": "Pull the folder of collected vendor audit reports and any review memos. Check report dates and reviewer notes.",
           "notion": "Pull the subservice organization list and review notes. Check each vendor has a current report or equivalent with a recorded review, or, where the vendor offers none or its report has not been obtained, a dated alternative assessment recording the relevant risks, the conclusion, the controls the vendor operates and the entity's own responsibilities."
         }

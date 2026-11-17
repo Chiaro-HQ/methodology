@@ -3,12 +3,13 @@
     "title": "HIPAA Security Rule crosswalk",
     "framework": "45 CFR Part 164, Subpart C (Security Rule), text in force August 2026",
     "library": "Chiaro control library (see framework/controls.json)",
-    "method_version": "1.17",
+    "method_version": "1.18",
     "scope_notes": [
       "The mapping covers the Security Rule (Subpart C) only. It excludes the Privacy Rule (Subpart E) and the Breach Notification Rule (Subpart D). Breach response is operationally addressed by INC-01/INC-02 and COM-02, but those obligations are legal duties outside a controls mapping and are deliberately not rows here.",
       "The SOC 2 opinion covers the Trust Services Criteria only. This crosswalk feeds Section 5 of the report (Other Information, unaudited, no opinion expressed) and the prep-phase HIPAA coverage view. It is never a compliance certification.",
       "Verification sources: 45 CFR 164.308, 164.310, 164.312, 164.314, 164.316 via Cornell LII (current text), checked 2026-08-04. The January 2025 NPRM that would eliminate the addressable category is still proposed; HHS moved it to long-term actions with final action anticipated July 2027. This mapping targets the rule in force.",
-      "Row convention: every standard and every implementation specification is a row. Standards whose substance lives in their specifications resolve as roll-ups of the child rows."
+      "Row convention: every standard and every implementation specification is a row. Standards whose substance lives in their specifications resolve as roll-ups of the child rows.",
+      "Two control lists per row. `controls` are the controls that carry the requirement: the prep-phase HIPAA coverage view counts a row covered when every one of them in scope is ready. `related` (on 32 rows) names further controls whose own attributes address the requirement's text; the report's mapping lists them after the row's controls, and the coverage view does not count them."
     ]
   },
   "resolutions": {
@@ -34,7 +35,7 @@
         "EVL-02",
         "POL-01"
       ],
-      "rationale": "Met through the four specifications below; the umbrella process is the risk assessment cycle (RSK-01), risk-based control design (RSK-02), deficiency remediation (EVL-02) and the approved policy suite (POL-01)."
+      "rationale": "Rolls up the four specifications below. The umbrella process is the risk assessment cycle (RSK-01), risk-based control design (RSK-02), deficiency remediation (EVL-02) and the approved policy suite (POL-01)."
     },
     {
       "cite": "164.308(a)(1)(ii)(A)",
@@ -47,7 +48,14 @@
         "RSK-01",
         "AST-01"
       ],
-      "rationale": "RSK-01 A1 to A7 require a formal assessment of threats, vulnerabilities, likelihood and impact within the last 12 months; AST-01 A4 documents data flows.",
+      "related": [
+        "AST-03",
+        "VUL-01",
+        "VUL-02",
+        "CHG-05",
+        "CHG-04"
+      ],
+      "rationale": "RSK-01 A1 to A7 require a formal assessment of threats, vulnerabilities, likelihood and impact within the last 12 months. AST-01 A4 documents data flows and AST-03 A2 records which SaaS tools hold customer data, so the assessment reaches every place ePHI is held. VUL-01 A1/A2/A4 scan every in-scope target on the defined frequency and rate findings by severity, VUL-02 A1/A3/A4 add a periodic penetration test, and CHG-04 A2/A3 monitor dependencies for known vulnerabilities and analyze application code, each identifying technical vulnerabilities. CHG-05 A2 reviews each architecture change for security implications before deployment, keeping the assessment accurate as the system changes.",
       "note": "Gated attribute on RSK-01 tests that the risk analysis explicitly identifies where ePHI is created, received, maintained and transmitted."
     },
     {
@@ -61,7 +69,13 @@
         "RSK-02",
         "EVL-02"
       ],
-      "rationale": "RSK-02 A1/A2 map each significant risk to at least one control; EVL-02 A3/A4 track corrective action plans to completion."
+      "related": [
+        "VUL-01",
+        "VUL-02",
+        "VUL-04",
+        "CHG-04"
+      ],
+      "rationale": "RSK-02 A1/A2 map each significant risk to at least one control; EVL-02 A3/A4 track corrective action plans to completion. VUL-01 A5 and VUL-02 A5 remediate critical and high findings within defined timelines, and VUL-04 A2/A3 address dependency advisories within a severity-based window. CHG-04 A1 to A3 build security requirements, dependency monitoring and code analysis into development, reducing the vulnerabilities that change introduces."
     },
     {
       "cite": "164.308(a)(1)(ii)(C)",
@@ -89,7 +103,13 @@
         "MON-02",
         "IAM-05"
       ],
-      "rationale": "MON-01 collects and retains security event logs; MON-02 A3 evidences triage of alerts within defined timeframes; IAM-05 reviews access reports periodically."
+      "related": [
+        "IAM-08",
+        "IAM-11",
+        "HIP-02",
+        "INC-04"
+      ],
+      "rationale": "MON-01 collects and retains security event logs; MON-02 A3 evidences triage of alerts within defined timeframes; IAM-05 reviews access periodically. IAM-08 A3 reviews service accounts each review period and IAM-11 A3 reviews connected integrations on a defined cadence; HIP-02 A3 logs and reviews each use of emergency access; INC-04 A2 documents a written review of each incident that meets the review threshold (the rule's security incident tracking reports)."
     },
     {
       "cite": "164.308(a)(2)",
@@ -117,7 +137,13 @@
         "PPL-01",
         "IAM-04"
       ],
-      "rationale": "Met through the three specifications below."
+      "related": [
+        "IAM-05",
+        "IAM-06",
+        "PPL-06",
+        "IAM-07"
+      ],
+      "rationale": "Rolls up the three specifications below. IAM-03 and IAM-06 grant only authorized, role-based access, IAM-07 A2 limits privileged access to users with a documented business need, IAM-05 reviews access periodically, IAM-04 removes it at termination, PPL-01 screens personnel, and PPL-06 holds contractors with production or customer data access to the same controls."
     },
     {
       "cite": "164.308(a)(3)(ii)(A)",
@@ -130,7 +156,12 @@
         "IAM-03",
         "IAM-06"
       ],
-      "rationale": "IAM-03 A2/A4 require documented authorization by an authorized approver before access; IAM-06 assigns access by role."
+      "related": [
+        "PPL-06",
+        "IAM-07",
+        "NET-03"
+      ],
+      "rationale": "IAM-03 A2/A4 require documented authorization by an authorized approver before access; IAM-06 assigns access by role; IAM-07 A2 authorizes each privileged user against a documented business need; PPL-06 A2 provisions contractor access through the same onboarding process. NET-03 A1 requires authorization before physical access to facilities is granted (the rule's locations where ePHI might be accessed)."
     },
     {
       "cite": "164.308(a)(3)(ii)(B)",
@@ -142,7 +173,14 @@
       "controls": [
         "PPL-01"
       ],
-      "rationale": "PPL-01 A1 to A5 require background checks for all personnel including contractors prior to or at start, with completion tested for each person."
+      "related": [
+        "IAM-03",
+        "IAM-05",
+        "IAM-06",
+        "PPL-06",
+        "IAM-07"
+      ],
+      "rationale": "PPL-01 A1 to A3 require background checks for all employees and contractors, with criminal history and employment verification, by a deadline the policy sets; A4/A5 test sampled new hires' checks. IAM-03 A2/A5 grant access only as authorized, IAM-06 A3 matches role assignments to job functions, IAM-07 A2 authorizes each privileged user against a documented business need, and IAM-05 A3 to A6 review access periodically, which together determine that each person's access is appropriate. PPL-06 A2/A3 put contractors with production or customer data access through the standard onboarding and the periodic access reviews."
     },
     {
       "cite": "164.308(a)(3)(ii)(C)",
@@ -154,7 +192,10 @@
       "controls": [
         "IAM-04"
       ],
-      "rationale": "IAM-04 A1 to A5: documented offboarding, defined maximum removal timeframe, per-termination evidence that all in-scope access was removed on time."
+      "related": [
+        "PPL-06"
+      ],
+      "rationale": "IAM-04 A1 to A5: documented offboarding, defined maximum removal timeframe, per-termination evidence that all in-scope access was removed on time. PPL-06 A2 revokes contractor access promptly when the engagement ends (the rule's other arrangement with a workforce member)."
     },
     {
       "cite": "164.308(a)(4)(i)",
@@ -168,7 +209,13 @@
         "IAM-05",
         "IAM-06"
       ],
-      "rationale": "Met through the specifications below."
+      "related": [
+        "IAM-07",
+        "IAM-08",
+        "IAM-11",
+        "PPL-06"
+      ],
+      "rationale": "Rolls up the specifications below. IAM-03 authorizes access before it is granted, IAM-06 assigns it by role and IAM-05 reviews it. IAM-07 limits privileged access to a documented business need, IAM-08 documents service accounts and infrastructure credentials with an owner and purpose, IAM-11 limits third-party integrations to the scopes they need, and PPL-06 brings contractors under the same process."
     },
     {
       "cite": "164.308(a)(4)(ii)(A)",
@@ -192,7 +239,13 @@
         "IAM-03",
         "IAM-06"
       ],
-      "rationale": "IAM-03 A1/A2 document the provisioning process with authorization before grant; IAM-06 A1/A2 define roles and assign access through them."
+      "related": [
+        "IAM-07",
+        "IAM-08",
+        "IAM-11",
+        "PPL-06"
+      ],
+      "rationale": "IAM-03 A1/A2 document the provisioning process with authorization before grant; IAM-06 A1/A2 define roles and assign access through them; IAM-07 A2 authorizes each privileged user against a documented business need. IAM-08 A1 documents each service account with an owner and purpose, and IAM-11 A2 grants third-party integrations only the scopes they need (the rule's access through a program or process). PPL-06 A2 provisions contractors through the standard process."
     },
     {
       "cite": "164.308(a)(4)(ii)(C)",
@@ -206,7 +259,14 @@
         "IAM-04",
         "IAM-05"
       ],
-      "rationale": "IAM-03 A5 verifies granted access matches the authorized request; IAM-04 adjusts access on role changes; IAM-05 A3 to A6 review and remediate periodically."
+      "related": [
+        "IAM-06",
+        "IAM-07",
+        "IAM-08",
+        "IAM-11",
+        "PPL-06"
+      ],
+      "rationale": "IAM-03 A5 verifies granted access matches the authorized request; IAM-06 A3 keeps role assignments aligned with job functions; IAM-07 A1 inventories privileged users; IAM-04 adjusts access on role changes; IAM-05 A3 to A6 review access periodically and remediate what they find. IAM-08 A3 reviews service accounts each review period, and IAM-11 A3 reviews connected integrations and removes unused or over-scoped ones. PPL-06 A3 includes contractor accounts in the periodic reviews."
     },
     {
       "cite": "164.308(a)(5)(i)",
@@ -218,7 +278,11 @@
       "controls": [
         "PPL-03"
       ],
-      "rationale": "PPL-03 A1/A2/A4: curriculum exists, timing defined for onboarding and ongoing completion, completion tested for each person within the defined period."
+      "related": [
+        "POL-02",
+        "INC-01"
+      ],
+      "rationale": "PPL-03 A1/A2/A4: a written curriculum, a completion deadline for new personnel and an ongoing frequency, and completion by those deadlines. POL-02 A3 includes where to find relevant policies in the awareness training, and INC-01 A5 trains the incident response team through exercises or drills."
     },
     {
       "cite": "164.308(a)(5)(ii)(A)",
@@ -244,7 +308,10 @@
         "END-01",
         "PPL-03"
       ],
-      "rationale": "END-01 A1/A4/A5 deploy anti-malware protection with automatic updates and evidence threats are remediated.",
+      "related": [
+        "END-02"
+      ],
+      "rationale": "END-01 A1/A4/A5 deploy anti-malware protection with automatic updates and evidence threats are remediated. END-02 A1/A4 restrict installing software on production to authorized personnel through change management, guarding against malicious software reaching production.",
       "note": "Prep guidance: the training curriculum should include malware and phishing awareness (PPL-03 A1 topic list)."
     },
     {
@@ -271,8 +338,12 @@
         "IAM-01",
         "IAM-02"
       ],
-      "rationale": "IAM-01 A3 tiers authentication strength by system sensitivity; IAM-02 enforces MFA on all in-scope systems.",
-      "note": "Addressable spec: SSO and passwordless or MFA-first authentication satisfies it as a stronger equivalent; document that choice in the access control policy."
+      "related": [
+        "IAM-08",
+        "PPL-03"
+      ],
+      "rationale": "IAM-01 A3 tiers authentication strength by system sensitivity; IAM-02 A1 enforces MFA on in-scope sign-ins. IAM-08 A2 rotates service account credentials or gives them a defined expiration, and PPL-03 A1 covers password and authentication practices in the awareness curriculum.",
+      "note": "Addressable spec: SSO and passwordless or MFA-first authentication can serve as an equivalent measure; document that choice in the access control policy."
     },
     {
       "cite": "164.308(a)(6)(i)",
@@ -284,7 +355,15 @@
       "controls": [
         "INC-01"
       ],
-      "rationale": "INC-01 A1 to A3: documented IR plan covering roles, severity, containment through recovery and communication, reviewed within 12 months."
+      "related": [
+        "INC-02",
+        "INC-04",
+        "POL-01",
+        "POL-02",
+        "COM-02",
+        "MON-02"
+      ],
+      "rationale": "INC-01 A1 to A3: documented IR plan covering roles, severity, containment through recovery and communication, reviewed within 12 months; POL-01 A9 requires a written incident response policy. INC-02 carries the plan out for each incident, and INC-04 A1/A2 set which incidents get a written post-incident review. POL-02 A1 documents the incident reporting channels, COM-02 A4 routes external reports to the people responsible, and MON-02 A4 defines when an event is escalated into incident response."
     },
     {
       "cite": "164.308(a)(6)(ii)",
@@ -297,7 +376,14 @@
         "INC-02",
         "MON-02"
       ],
-      "rationale": "INC-02 A2 to A7 evidence containment, root cause, restoration, notification and documentation for each incident; MON-02 A4 defines escalation into incident response."
+      "related": [
+        "INC-01",
+        "INC-04",
+        "COM-02",
+        "POL-02",
+        "END-01"
+      ],
+      "rationale": "INC-02 A2 to A7 evidence containment, root cause, restoration, notification and documentation for each incident; MON-02 A4 defines escalation into incident response; INC-01 A2 sets the communication and breach notification procedures. INC-04 A2/A3 document what happened, the impact and the corrective actions, and track those actions to completion. COM-02 A2/A4 and POL-02 A1 give external parties and personnel documented channels to report security issues, routed to the people responsible; END-01 A5 investigates and remediates each detected threat."
     },
     {
       "cite": "164.308(a)(7)(i)",
@@ -309,7 +395,12 @@
       "controls": [
         "BCP-01"
       ],
-      "rationale": "BCP-01 A1 to A3: documented BCP/DR plan with critical systems, recovery objectives, procedures and responsible personnel. BCP-01 carries CC9.1, so it is in scope for every engagement including Security-only."
+      "related": [
+        "AVL-02",
+        "POL-01",
+        "BCP-02"
+      ],
+      "rationale": "BCP-01 A1 to A3: documented BCP/DR plan with critical systems, recovery objectives, procedures and responsible personnel. BCP-01 carries CC9.1, so it is in scope for every engagement including Security-only. POL-01 A14 requires a written business continuity policy, BCP-02 A5 keeps alternate processing infrastructure or failover available, and AVL-02 A2/A3 alert on outages and degradations and respond to and resolve them (the rule's response to a system failure); the HIPAA add-on requires the Availability category, so AVL-02 is always in scope with it."
     },
     {
       "cite": "164.308(a)(7)(ii)(A)",
@@ -360,7 +451,10 @@
       "controls": [
         "BCP-01"
       ],
-      "rationale": "BCP-01 A5/A6: plan tested within the last 12 months with documented results, and updated based on findings."
+      "related": [
+        "BCP-02"
+      ],
+      "rationale": "BCP-01 A5/A6: plan tested within the last 12 months with documented results, and updated based on findings. BCP-02 A6 tests backup restoration within the last 12 months."
     },
     {
       "cite": "164.308(a)(7)(ii)(E)",
@@ -385,7 +479,13 @@
         "EVL-01",
         "RSK-01"
       ],
-      "rationale": "EVL-01 A2/A3: management security posture review plus an independent evaluation within the last year (the SOC 2 examination itself qualifies); RSK-01 A11/A12 update the assessment on significant change."
+      "related": [
+        "GOV-02",
+        "VUL-02",
+        "CHG-05",
+        "VUL-01"
+      ],
+      "rationale": "EVL-01 A2/A3: management security posture review plus an independent evaluation within the last year (the SOC 2 examination itself qualifies); RSK-01 A11/A12 update the assessment on significant change. GOV-02 A4/A5 record governance reviews covering security, compliance or risk on the defined cycle. VUL-01 A3/A4 scan on the defined frequency and after significant changes, and VUL-02 A1/A3 add a periodic technical test of in-scope systems. CHG-05 A2 reviews each architecture change for security implications before deployment (the rule's evaluation in response to operational changes)."
     },
     {
       "cite": "164.308(b)(1)",
@@ -398,7 +498,10 @@
         "HIP-01",
         "VND-01"
       ],
-      "rationale": "VND-01 A5/A8/A9 put security, confidentiality and data processing terms in vendor contracts, but a business associate agreement is a specific statutory contract with mandated clauses. HIP-01 requires identification of every ePHI counterparty and a signed BAA both upstream and downstream."
+      "related": [
+        "VND-04"
+      ],
+      "rationale": "VND-01 A5/A8/A9 put security, confidentiality and data processing terms in vendor contracts, but a business associate agreement is a specific statutory contract with mandated clauses. HIP-01 requires identification of every ePHI counterparty and a signed BAA both upstream and downstream. VND-04 A2 puts a review step before a new subprocessor handles customer data."
     },
     {
       "cite": "164.308(b)(3)",
@@ -423,7 +526,7 @@
         "NET-03",
         "VND-02"
       ],
-      "rationale": "Met through the four specifications below. For cloud infrastructure the data center layer is the provider's controls, monitored through VND-02; NET-03 covers any entity facilities and is N/A-eligible for fully remote companies."
+      "rationale": "Rolls up the four specifications below. For cloud infrastructure the data center layer is the provider's controls, monitored through VND-02; NET-03 covers any entity facilities and is N/A-eligible for fully remote companies."
     },
     {
       "cite": "164.310(a)(2)(i)",
@@ -462,7 +565,10 @@
         "NET-03",
         "VND-02"
       ],
-      "rationale": "NET-03 A1/A4 authorize access by role and log visitors where premises exist; provider-inherited at the data center layer."
+      "related": [
+        "END-02"
+      ],
+      "rationale": "NET-03 A1/A4 require authorization before physical access is granted and log visitors where premises exist; provider-inherited at the data center layer. END-02 A1 restricts software installation on production to authorized personnel (the rule's control of access to software programs for testing and revision)."
     },
     {
       "cite": "164.310(a)(2)(iv)",
@@ -472,10 +578,9 @@
       "safeguard": "Physical",
       "resolution": "inherited",
       "controls": [
-        "VND-02",
-        "NET-03"
+        "VND-02"
       ],
-      "rationale": "Records of repairs to physical security components are a facility operator function, provider-inherited for cloud and landlord-managed offices; NET-03 A5 gives the periodic entity-side review where applicable. Addressable, so the documented rationale is the compliance artifact."
+      "rationale": "Records of repairs to physical security components are a facility operator function, provider-inherited for cloud and landlord-managed offices (VND-02 A2/A4 review the provider's report). No library control documents repairs to an entity's own facility, so where premises exist this addressable specification rests on the entity's documented rationale."
     },
     {
       "cite": "164.310(b)",
@@ -485,10 +590,12 @@
       "safeguard": "Physical",
       "resolution": "covered",
       "controls": [
-        "POL-01",
-        "END-02"
+        "POL-01"
       ],
-      "rationale": "POL-01 A1 requires an acceptable use policy specifying proper workstation functions; END-02 A3 governs removable media usage."
+      "related": [
+        "DAT-03"
+      ],
+      "rationale": "POL-01 A11 requires a written acceptable use policy; DAT-03 A5 sets the policy on storing ePHI locally on endpoints and removable media."
     },
     {
       "cite": "164.310(c)",
@@ -514,7 +621,7 @@
         "AST-01",
         "DAT-03"
       ],
-      "rationale": "Met through the four specifications below."
+      "rationale": "Rolls up the four specifications below."
     },
     {
       "cite": "164.310(d)(2)(i)",
@@ -526,7 +633,11 @@
       "controls": [
         "DAT-02"
       ],
-      "rationale": "DAT-02 A1 to A3: disposal procedure with wiping and destruction methods, evidence of wipe before each disposal, documented with date, method and asset identification."
+      "related": [
+        "DAT-03",
+        "DAT-05"
+      ],
+      "rationale": "DAT-02 A1 to A3: disposal procedure with wiping and destruction methods, evidence of wipe before each disposal, documented with date, method and asset identification. DAT-03 A4 deletes or anonymizes data when retention periods expire, and DAT-05 A3 evidences an executed deletion within the defined window."
     },
     {
       "cite": "164.310(d)(2)(ii)",
@@ -581,7 +692,23 @@
         "IAM-06",
         "IAM-07"
       ],
-      "rationale": "Met through the four specifications below plus role-based least privilege (IAM-06) and privileged access management (IAM-07)."
+      "related": [
+        "IAM-03",
+        "IAM-04",
+        "IAM-05",
+        "IAM-08",
+        "IAM-11",
+        "NET-01",
+        "NET-02",
+        "CHG-03",
+        "DAT-04",
+        "PPL-06",
+        "END-02",
+        "HIP-02",
+        "AI-04",
+        "INT-04"
+      ],
+      "rationale": "Rolls up the four specifications below (IAM-01 and IAM-02 identify and authenticate each user) and lists the controls that enforce the access rights granted under 164.308(a)(4): IAM-03 grants access as authorized, IAM-06 limits it by role and IAM-07 limits privileged access, IAM-04 removes it and IAM-05 reviews it, and PPL-06 A2 applies the same provisioning and revocation to contractors. IAM-08 and IAM-11 do the same for service accounts and third-party integrations (the rule's software programs). NET-01 and NET-02 restrict access between network segments and at the boundary. CHG-03 A3 restricts access to production, and CHG-03 A2 and DAT-04 govern production data used in non-production environments and require safeguards for it. END-02 A1 limits software installation on production to authorized personnel, HIP-02 A2 restricts and secures the emergency access paths, AI-04 A3 limits AI interaction logs to authorized roles, and, where Processing Integrity is in scope, INT-04 A1 protects processing outputs from unauthorized access."
     },
     {
       "cite": "164.312(a)(2)(i)",
@@ -616,10 +743,9 @@
       "safeguard": "Technical",
       "resolution": "covered_note",
       "controls": [
-        "END-01",
-        "IAM-01"
+        "END-01"
       ],
-      "rationale": "END-01 A3 enforces screen lock on managed endpoints; IAM-01 A3 tiers authentication strength by sensitivity.",
+      "rationale": "END-01 A3 enforces screen lock on managed endpoints (END-03 A3 on founder-managed devices). No library control sets an application session timeout; see the note.",
       "note": "Addressable: enforced screen lock plus SSO session policies is the accepted equivalent; where the product admin plane supports idle session timeout, prep guidance recommends enabling it."
     },
     {
@@ -632,7 +758,10 @@
       "controls": [
         "DAT-01"
       ],
-      "rationale": "DAT-01 A1/A3/A4/A5: encryption at rest on all in-scope systems with current algorithms and managed keys."
+      "related": [
+        "END-01"
+      ],
+      "rationale": "DAT-01 A1/A3/A4/A5: encryption at rest on all in-scope systems with current algorithms and managed keys. END-01 A2 enforces disk encryption on managed endpoints."
     },
     {
       "cite": "164.312(b)",
@@ -645,7 +774,15 @@
         "MON-01",
         "IAM-07"
       ],
-      "rationale": "MON-01 A1 to A4 record and retain authentication, access, configuration and admin activity with tamper protection; IAM-07 A3 logs privileged activity."
+      "related": [
+        "MON-02",
+        "HIP-02",
+        "INT-02",
+        "INT-03",
+        "INT-04",
+        "INT-05"
+      ],
+      "rationale": "MON-01 A1 to A4 record and retain authentication, access, configuration and admin activity with tamper protection; IAM-07 A3 logs privileged activity. MON-02 A1/A3 alert on key threat scenarios and triage each alert (the rule's examination of recorded activity), and HIP-02 A3 logs and reviews each use of emergency access. Where Processing Integrity is in scope, INT-02 A3, INT-03 A3, INT-04 A4 and INT-05 A4 keep timestamped records of inputs, processing, outputs and storage activity."
     },
     {
       "cite": "164.312(c)(1)",
@@ -659,8 +796,12 @@
         "MON-01",
         "BCP-02"
       ],
-      "rationale": "Improper alteration or destruction is constrained by access controls, encryption (DAT-01), logged change activity (MON-01) and retrievable exact copies with tested restores (BCP-02 A6).",
-      "note": "Addressable mechanism below; the standard is met by the combination, documented in the mapped policy."
+      "related": [
+        "INT-05",
+        "INT-04"
+      ],
+      "rationale": "Improper alteration or destruction is constrained by access controls, encryption (DAT-01), logged change activity (MON-01) and retrievable exact copies with tested restores (BCP-02 A6). Where Processing Integrity is in scope, INT-05 A1 protects stored data from unauthorized modification or deletion, and INT-04 A1 protects processing outputs from unauthorized modification.",
+      "note": "The addressable mechanism is the row below; the controls here work in combination, which the data protection policy documents."
     },
     {
       "cite": "164.312(c)(2)",
@@ -673,7 +814,10 @@
         "DAT-01",
         "BCP-02"
       ],
-      "rationale": "TLS integrity protection in transit (DAT-01 A2/A3), managed-database checksumming at rest and successful restoration tests (BCP-02 A6) corroborate that ePHI has not been altered or destroyed in an unauthorized manner.",
+      "related": [
+        "INT-05"
+      ],
+      "rationale": "TLS integrity protection in transit (DAT-01 A2/A3) and successful restoration tests (BCP-02 A6) help corroborate that ePHI has not been altered or destroyed in an unauthorized manner. Where Processing Integrity is in scope, INT-05 A2 runs integrity checks that confirm stored data is complete and accurate.",
       "note": "Addressable: document these mechanisms as the corroboration measure in the data protection policy."
     },
     {
@@ -687,7 +831,11 @@
         "IAM-01",
         "IAM-02"
       ],
-      "rationale": "IAM-01 A2 requires authentication before access; IAM-02 enforces MFA across in-scope systems with enrollment verified across users."
+      "related": [
+        "IAM-08",
+        "PRI-05"
+      ],
+      "rationale": "IAM-01 A2 requires authentication before access; IAM-02 enforces MFA on in-scope sign-ins and tests enrollment for sampled users. IAM-08 A1/A2 document each service account and rotate its credentials or give them a defined expiration, the credentials a non-person entity authenticates with. Where Privacy is in scope, PRI-05 A2 verifies a data subject's identity before giving access to their personal information."
     },
     {
       "cite": "164.312(e)(1)",
@@ -699,7 +847,11 @@
       "controls": [
         "DAT-01"
       ],
-      "rationale": "DAT-01 A2: TLS 1.2 or higher for all in-scope connections."
+      "related": [
+        "NET-01",
+        "NET-02"
+      ],
+      "rationale": "DAT-01 A2: TLS 1.2 or higher for all in-scope connections. NET-02 A1/A2/A4 restrict traffic at the boundary to required ports and protocols and require MFA and an encrypted connection for remote access; NET-01 A3 limits traffic between network segments to least-privilege rules."
     },
     {
       "cite": "164.312(e)(2)(i)",
@@ -723,7 +875,10 @@
       "controls": [
         "DAT-01"
       ],
-      "rationale": "DAT-01 A2 encrypts data in transit for all in-scope connections."
+      "related": [
+        "NET-02"
+      ],
+      "rationale": "DAT-01 A2 encrypts data in transit for all in-scope connections; NET-02 A4 requires an encrypted connection for remote access."
     },
     {
       "cite": "164.314(a)(1)",
@@ -792,7 +947,7 @@
       "controls": [
         "POL-01"
       ],
-      "rationale": "POL-01 A1 to A6: approved policy suite across the required security domains with named owners, periodic review and operational procedures."
+      "rationale": "POL-01 A7 to A14 require written policies across the required security domains, each with a named owner (A2) and reviewed and approved by its due dates (A5); A3 requires at least one documented procedure that puts a policy into practice."
     },
     {
       "cite": "164.316(b)(1)",
@@ -805,8 +960,11 @@
         "POL-01",
         "POL-02"
       ],
-      "rationale": "Policies are maintained in written electronic form (POL-02 A2 accessible storage) with operational procedures documented (POL-01 A3).",
-      "note": "Records of required actions and assessments (risk analyses, reviews, incident records) exist as the evidence corpus each control produces; HIP-03 adds the retention requirement below."
+      "related": [
+        "HIP-03"
+      ],
+      "rationale": "Policies are maintained in written electronic form (POL-02 A2 accessible storage) with operational procedures documented (POL-01 A3). HIP-03 A1/A2 keep the policies and the records of required security activities, with historical versions retrievable.",
+      "note": "Records of required actions and assessments (risk analyses, reviews, incident records) exist as the evidence corpus each control produces; HIP-03 keeps them retrievable and adds the six year retention requirement below."
     },
     {
       "cite": "164.316(b)(2)(i)",
@@ -843,7 +1001,11 @@
         "POL-01",
         "RSK-01"
       ],
-      "rationale": "POL-01 A5 reviews and approves policies on a defined cadence; RSK-01 A11 updates the risk assessment when significant changes occur."
+      "related": [
+        "INC-01",
+        "BCP-01"
+      ],
+      "rationale": "POL-01 A5 reviews and approves policies on a defined cadence; RSK-01 A11 updates the risk assessment when significant changes occur; INC-01 A3 reviews and updates the incident response plan within 12 months, and BCP-01 A5 updates the continuity plan based on test findings."
     }
   ],
   "gated_attributes": [
