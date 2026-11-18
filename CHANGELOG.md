@@ -80,8 +80,8 @@ rules and the HIPAA crosswalk.
   name what carries each. 38 rationales and three notes are reworded: they
   name the related controls, and they describe the checks they cite as
   those checks are written, among them PPL-01, PPL-03, IAM-02, the POL-01
-  attributes and the checks under 164.312(c)(2). The checks themselves do
-  not change. A scope note explains the two lists, and
+  attributes and the checks under 164.312(c)(2). This rewording changes no
+  check. A scope note explains the two lists, and
   `method/hipaa-crosswalk.md` shows the narrower control lists. Rows,
   citations, names and resolutions are unchanged.
 - Sending evidence on an audit: where `get_status` or `complete_step`
